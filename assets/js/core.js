@@ -427,5 +427,29 @@
     gsap.delayedCall(arriving ? 0.35 : 0.05, intro);
   }
 
+  /* ---------- version switcher prompt (once per session) ---------- */
+
+  var toast = $("#switch-toast");
+  if (toast) {
+    var hideToast = function (remember) {
+      if (remember) { try { sessionStorage.setItem("jw-switch-seen", "1"); } catch (e) { /* ignore */ } }
+      gsap.to(toast, { y: 16, opacity: 0, scale: 0.94, duration: reduced ? 0 : 0.35, ease: "power2.in", onComplete: function () { toast.hidden = true; } });
+    };
+    var seenToast = false;
+    try { seenToast = sessionStorage.getItem("jw-switch-seen") === "1"; } catch (e) { /* ignore */ }
+    if (!seenToast) {
+      window.JW.onReady(function () {
+        gsap.delayedCall(reduced ? 0 : 1.6, function () {
+          toast.hidden = false;
+          gsap.fromTo(toast, { y: 24, opacity: 0, scale: 0.9, transformOrigin: "20% 100%" }, { y: 0, opacity: 1, scale: 1, duration: reduced ? 0 : 0.7, ease: E.v });
+          gsap.delayedCall(14, function () { if (!toast.hidden) hideToast(true); });
+        });
+      });
+    }
+    $(".switcher__x", toast).addEventListener("click", function () { hideToast(true); });
+    $(".switcher__go", toast).addEventListener("click", function () { try { sessionStorage.setItem("jw-switch-seen", "1"); } catch (e) { /* ignore */ } });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !toast.hidden) hideToast(true); });
+  }
+
   window.addEventListener("load", function () { ST.refresh(); });
 })();

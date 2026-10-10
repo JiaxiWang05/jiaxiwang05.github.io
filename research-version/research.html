@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research — Jiaxi Wang</title>
+  <meta name="description" content="Research by Jiaxi Wang: cross-embodiment learning, small-data transfer learning for retinal images, EndoWAM, BiliVLA, a teleoperated endoscopy benchmark, Trileg-ESD and motion-to-sound interaction.">
+  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://jiaxiwang05.github.io/research-version/research.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:title" content="Research — Jiaxi Wang">
+  <meta property="og:description" content="Embodied AI, vision–language–action models and medical robotics.">
+  <meta property="og:url" content="https://jiaxiwang05.github.io/research.html">
+  <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../assets/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "name": "EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation",
+    "url": "https://arxiv.org/abs/2608.01221",
+    "sameAs": "https://openreview.net/forum?id=tMKXzwa7tP",
+    "datePublished": "2026-08-02",
+    "author": [
+      {"@type": "Person", "name": "Jinsong Lin"},
+      {"@type": "Person", "name": "Zikang Pan"},
+      {"@type": "Person", "name": "Wanhao Liu"},
+      {"@type": "Person", "name": "Chi Kit Ng"},
+      {"@type": "Person", "name": "Liangjing Shao"},
+      {"@type": "Person", "name": "Zihang Yu"},
+      {"@type": "Person", "name": "Ziyu Wang"},
+      {"@type": "Person", "name": "Yin Wang"},
+      {"@type": "Person", "name": "Jiaxi Wang"},
+      {"@type": "Person", "name": "Jeremy Yuen-Chun Teoh"},
+      {"@type": "Person", "name": "Zhiyong Xiong"},
+      {"@type": "Person", "name": "Huxin Gao"},
+      {"@type": "Person", "name": "Hongliang Ren"}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__brand" href="index.html">
+        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
+        Jiaxi Wang
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="research.html" aria-current="page">Research</a></li>
+        <li><a href="engineering.html">Engineering</a></li>
+        <li><a href="opensource.html">Open source</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <header class="page-head">
+      <div class="wrap">
+        <h1 class="page-head__title">Research</h1>
+        <p class="page-head__lead">Robots that act in deformable, partially observed environments: vision–language–action and world-action models for endoscopy, policies that transfer across embodiments, and learning from small medical datasets.</p>
+        <p class="section__note" style="margin-top: 14px;">Interests: embodied AI, vision–language–action systems, cross-embodiment learning, autonomous surgical robotics, transfer learning under limited data, human–computer interaction.</p>
+      </div>
+    </header>
+
+    <section id="publication" class="section" aria-labelledby="pub-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="pub-title" class="section__title">Publication</h2>
+          <p class="section__note">Under review.</p>
+        </header>
+        <article class="pub">
+          <div class="video" data-video="TT5MsdQ0pKI" data-title="EndoWAM demo: grounded world-action model for endoscopic navigation">
+            <button class="video__preview" type="button" aria-label="Play the EndoWAM demo video">
+              <img class="video__thumb" src="https://i.ytimg.com/vi/TT5MsdQ0pKI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+              <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Play demo</span>
+            </button>
+          </div>
+          <div>
+            <p class="pub__venue"><span class="status">In submission</span> AAAI 2027 and ICLR 2027</p>
+            <h3 class="pub__title"><a href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation</a></h3>
+            <p class="pub__authors">Jinsong Lin, Zikang Pan, Wanhao Liu, Chi Kit Ng, Liangjing Shao, Zihang Yu, Ziyu Wang, Yin Wang, <span class="me">Jiaxi Wang</span>, Jeremy Yuen-Chun Teoh, Zhiyong Xiong, Huxin Gao, Hongliang Ren</p>
+            <p class="pub__abstract">Learned endoscopy policies usually act on the current frame alone, which makes them fragile under tissue deformation, occlusion and fast viewpoint change. EndoWAM is the first world-action model for generalisable robotic endoscopic navigation. It introduces future grounding: a lightweight diffusion transformer predicts task-relevant target regions in future frames from the intermediate denoising features of a video world model, and a discrete action expert shares that predictive representation, so control runs in real time from a single denoising pass. The paper also introduces EndoMotion, a robotic endoscopy dataset spanning ureteroscopy, oesophagoscopy and ERCP. EndoWAM outperforms all baselines and alternative grounding strategies and generalises zero-shot to unseen viewpoints, environments and targets.</p>
+            <p class="links">
+              <a class="link" href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">arXiv:2608.01221</a>
+              <a class="link" href="https://openreview.net/forum?id=tMKXzwa7tP" target="_blank" rel="noopener noreferrer">OpenReview</a>
+              <a class="link" href="https://www.youtube.com/watch?v=TT5MsdQ0pKI" target="_blank" rel="noopener noreferrer">Video on YouTube</a>
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="current" class="section" aria-labelledby="current-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="current-title" class="section__title">Current projects</h2>
+          <p class="section__note">Durham University, 2026–27.</p>
+        </header>
+        <div>
+          <article id="embodied" class="study study--text">
+            <div class="study__body">
+              <p class="study__meta">Student researcher, ongoing <span class="status">Early stage</span></p>
+              <h3 class="study__title">Cross-embodiment learning and vision–language–action systems</h3>
+              <p class="study__people">Supervised by Dr Amir Atapour-Abarghouei and Dr Chris Chen</p>
+              <p class="study__desc">Robot policies are usually trained for a single platform. This project studies what lets a policy or a learned representation carry over from one robot to another.</p>
+              <ul class="study__list">
+                <li>How policies and learned representations generalise across different robotic platforms.</li>
+                <li>How vision–language-conditioned information can be integrated with action and state information.</li>
+                <li>Transferable action representations and multimodal robot policies.</li>
+                <li>Predictive representations for control, building on the world-action modelling in EndoWAM.</li>
+              </ul>
+              <p class="study__keys"><b>Keywords</b> embodied AI, VLA, cross-embodiment learning, action representations, world models</p>
+            </div>
+          </article>
+
+          <article id="dissertation" class="study study--text">
+            <div class="study__body">
+              <p class="study__meta">BEng Research and Development Project, 2026–27</p>
+              <h3 class="study__title">Small data, large models: transfer learning for medical image classification</h3>
+              <p class="study__people">Supervised by Dr Raheleh Kafieh</p>
+              <p class="study__desc">Clinical datasets are small. This project measures which pre-trained image encoder gives the most useful retinal representations when labelled data are scarce, and whether an eye-specific foundation model is worth it compared with general-purpose ones. Every encoder is frozen and used only as a feature extractor; the experiments are simple classifiers trained on the extracted features.</p>
+              <ul class="study__list">
+                <li><b>Encoders.</b> RETFound, a retinal foundation model, against general-purpose and biomedical encoders: DINOv2, DINOv3, BiomedCLIP, ImageNet ResNet-50 and SwinV2-tiny.</li>
+                <li><b>Glaucoma detection on PAPILA.</b> Patient-level splits, since PAPILA includes both eyes of each patient, with PAPILA's clinical measurements as a non-image baseline.</li>
+                <li><b>Data-efficiency curve.</b> 25, 50, 100 and 200 training images, ten random draws at each size, accuracy with error bars for every encoder.</li>
+                <li><b>External validation.</b> Classifiers trained on PAPILA are applied without retraining to Chákṣu, captured on three cameras in a different population, and the drop is reported per camera.</li>
+                <li><b>If time allows.</b> AIROGS-light to extend the curve to a few thousand images, and saliency maps to check that the models attend to the optic disc rather than artefacts.</li>
+              </ul>
+              <p class="callout"><b>Planned outputs:</b> a model comparison table, the data-efficiency figure and an external-validation table.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cuhk" class="section" aria-labelledby="cuhk-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="cuhk-title" class="section__title">Medical Robotics Group, CUHK</h2>
+          <p class="section__note">Summer Undergraduate Research Intern, Jun–Aug 2026. Hong Kong SAR. Supervisor: Prof. Hongliang Ren.</p>
+        </header>
+        <div>
+          <article id="bilivla" class="study">
+            <div class="video" data-video="ht9N5xxEOZo" data-title="BiliVLA: scene-aware vision-language-action model for autonomous ERCP navigation">
+              <button class="video__preview" type="button" aria-label="Play the BiliVLA demo video">
+                <img class="video__thumb" src="https://i.ytimg.com/vi/ht9N5xxEOZo/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Play demo</span>
+              </button>
+            </div>
+            <div class="study__body">
+              <p class="study__meta">Supervised by Jinsong Lin</p>
+              <h3 class="study__title">BiliVLA: scene-aware VLA for autonomous ERCP navigation</h3>
+              <p class="study__desc">A vision–language–action system for navigating the bile duct during ERCP, where the scene deforms and the target is easy to lose.</p>
+              <dl class="metrics" aria-label="Results in ERCP phantom experiments">
+                <div><dt>mIoU</dt><dd>96.25%</dd></div>
+                <div><dt>Action precision</dt><dd>91.96%</dd></div>
+                <div><dt>Navigation success</dt><dd>84.85%</dd></div>
+              </dl>
+              <ul class="study__list">
+                <li>Supported a two-stage pipeline: grounding-enhanced supervised fine-tuning followed by GRPO reinforcement optimisation, with scene-aware grounding and safety-aware recovery.</li>
+                <li>Integrated the hardware, multimodal trajectories and 3-DoF actions used for closed-loop control in phantom experiments.</li>
+              </ul>
+              <p class="links"><a class="link" href="https://www.youtube.com/watch?v=ht9N5xxEOZo" target="_blank" rel="noopener noreferrer">Video on YouTube</a></p>
+            </div>
+          </article>
+
+          <article id="benchmark" class="study study--text">
+            <div class="study__body">
+              <p class="study__meta">Supervised by Jinsong Lin</p>
+              <h3 class="study__title">Teleoperated flexible endoscopy benchmark</h3>
+              <p class="study__desc">A reproducible multimodal benchmark for learning endoscope navigation from teleoperation.</p>
+              <dl class="metrics" aria-label="Benchmark scale">
+                <div><dt>Synchronised video and robot-state segments</dt><dd>150</dd></div>
+                <div><dt>Image–action trajectory frames</dt><dd>224 × 224</dd></div>
+                <div><dt>VLA navigation baseline</dt><dd>π0.5</dd></div>
+              </dl>
+              <ul class="study__list">
+                <li>Collected 150 synchronised endoscopic video and robot-state segments, and resolved timestamp alignment across video, high-frequency robot states and PDT hardware parameters.</li>
+                <li>Built the cleaning, frame-extraction, YOLO region-of-interest cropping and image–action trajectory workflows.</li>
+                <li>Deployed the open-source π0.5 policy as a VLA navigation baseline.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article id="trileg" class="study">
+            <div class="video" data-video="w_X_qKwpm0w" data-title="Trileg-ESD: vision-guided magnetic soft robot lifting mucosa">
+              <button class="video__preview" type="button" aria-label="Play the Trileg-ESD demo video">
+                <img class="video__thumb" src="https://i.ytimg.com/vi/w_X_qKwpm0w/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Play demo</span>
+              </button>
+            </div>
+            <div class="study__body">
+              <p class="study__meta">Supervised by Chi Kit Ng</p>
+              <h3 class="study__title">Trileg-ESD: vision-guided magnetic soft robot</h3>
+              <p class="study__desc">A miniature three-legged magnetic soft robot that assists tissue manipulation during endoscopic submucosal dissection, with a cooperative VLA algorithm for two soft robots.</p>
+              <ul class="study__list">
+                <li>Structured controllable motion around primitives: squatting, leg lifting, rotation, crawling and stance recovery.</li>
+                <li>Investigated a vision–language controller that maps current and recent endoscopic frames plus a motion instruction to voltage commands for three electromagnetic coils.</li>
+              </ul>
+              <p class="links"><a class="link" href="https://www.youtube.com/watch?v=w_X_qKwpm0w" target="_blank" rel="noopener noreferrer">Mucosa-lifting demo on YouTube</a></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mcgill" class="section" aria-labelledby="mcgill-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="mcgill-title" class="section__title">CIRMMT, McGill University</h2>
+          <p class="section__note">MITACS Globalink Research Intern, Jun–Aug 2025. Montréal. Supervisor: Prof. Suresh Krishna.</p>
+        </header>
+        <div>
+          <article id="motion" class="study">
+            <div class="video" data-video="aJl4vnLZrYE" data-title="Markerless motion-to-sound workflow demonstration">
+              <button class="video__preview" type="button" aria-label="Play the motion-to-sound demo video">
+                <img class="video__thumb" src="https://i.ytimg.com/vi/aJl4vnLZrYE/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Play demo</span>
+              </button>
+            </div>
+            <div class="study__body">
+              <h3 class="study__title">Markerless motion-to-sound interaction</h3>
+              <p class="study__desc">Gesture-controlled music generation from markerless, AI-assisted motion capture.</p>
+              <ul class="study__list">
+                <li>Built and evaluated a low-latency Python workflow using Google MediaPipe that maps body movement to sound.</li>
+                <li>Contributed to experimental design, coding, analysis and reporting across engineering, neuroscience, psychology and human–computer interaction.</li>
+              </ul>
+              <p class="links">
+                <a class="link" href="https://github.com/JiaxiWang05/gesturecap_mapping" target="_blank" rel="noopener noreferrer">gesturecap_mapping on GitHub</a>
+                <a class="link" href="https://www.youtube.com/watch?v=aJl4vnLZrYE" target="_blank" rel="noopener noreferrer">Video on YouTube</a>
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__text">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
+          <span class="footer__logo"><img src="../assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div>
+          <p class="footer__heading">Work</p>
+          <ul class="footer__list">
+            <li><a href="research.html">Research</a></li>
+            <li><a href="engineering.html">Engineering</a></li>
+            <li><a href="opensource.html">Open source</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">About</p>
+          <ul class="footer__list">
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="certificates.html">Certificates</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Beyond the lab</p>
+          <ul class="footer__list">
+            <li><a href="art.html">Art</a></li>
+            <li><a href="sport.html">Sport</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__base">
+        <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
+        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="version-switch" href="../research.html" aria-label="Switch to the immersive version of this page">
+    <span class="version-switch__dot" aria-hidden="true"></span>Immersive version
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

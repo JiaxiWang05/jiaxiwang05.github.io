@@ -66,6 +66,21 @@
   </nav>
   <div class="colorbar" aria-hidden="true"><div class="colorbar__fill"></div></div>
   <div class="grain" aria-hidden="true"></div>
+  <div class="switcher">
+    <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" hidden>
+      <p id="switch-title" class="switcher__t">Here for the research?</p>
+      <p class="switcher__d">Switch to the research version: the same content on a clean, text-first page that is quick to read.</p>
+      <div class="switcher__acts">
+        <a class="switcher__go" href="research-version/">Switch version</a>
+        <button class="switcher__x" type="button">Stay here</button>
+      </div>
+    </div>
+    <a class="switcher__btn" href="research-version/" data-magnetic aria-label="Switch to the research version of this page">
+      <span class="switcher__glow" aria-hidden="true"></span>
+      <span class="switcher__label">Research version<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+      <span class="switcher__hint">Clean and text-first</span>
+    </a>
+  </div>
 
   <main id="main">
 
