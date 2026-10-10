@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art — Jiaxi Wang</title>
   <meta name="description" content="Art by Jiaxi Wang: two-time finalist in the Durham University Annual Art Competition, with a digital portfolio on ArtStation.">
-  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://jiaxiwang05.github.io/art.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
@@ -19,24 +18,28 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+  <link rel="stylesheet" href="assets/css/site.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Primary">
-      <a class="nav__brand" href="index.html">
-        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
-        Jiaxi Wang
-      </a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
-        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-      <ul class="nav__links" id="nav-links">
+  <div class="loader" aria-hidden="true">
+    <div class="loader__badge">
+      <svg viewBox="0 0 200 200"><defs><path id="loader-ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#loader-ring">Jiaxi Wang · Embodied AI · Medical robotics · Durham · </textPath></text></svg>
+      <div class="loader__eye"><i></i></div>
+    </div>
+    <p class="loader__pct">0%</p>
+    <p class="loader__name">Jiaxi Wang<br>Research 2026</p>
+  </div>
+
+  <header class="nav">
+    <a class="nav__brand" href="index.html"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg>Jiaxi Wang</a>
+    <nav aria-label="Primary">
+      <ul class="nav__links">
         <li><a href="research.html">Research</a></li>
         <li><a href="engineering.html">Engineering</a></li>
         <li><a href="opensource.html">Open source</a></li>
@@ -44,60 +47,66 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
+    <span class="nav__count" aria-hidden="true"></span>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </header>
+  <nav class="menu" id="menu" aria-label="Menu">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="opensource.html">Open source</a>
+    <a href="cv.html">CV</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="colorbar" aria-hidden="true"><div class="colorbar__fill"></div></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <main id="main">
 
-    <header class="page-head">
-      <div class="wrap">
-        <h1 class="page-head__title">Art</h1>
-        <p class="page-head__lead">Two-time finalist in the Durham University Annual Art Competition, 2023 and 2024. My digital work is on ArtStation.</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="https://www.artstation.com/alison-jiaxi-wang" target="_blank" rel="noopener noreferrer">ArtStation portfolio</a>
-        </div>
+    <header class="page-head" data-field="ppix_magenta" data-chapter="Art">
+      <span class="ghost" data-ghost aria-hidden="true">Colour</span>
+      
+      <div class="page-head__inner">
+        <h1 class="page-head__title" data-split="chars">A<em>rt</em></h1>
+        <p class="page-head__lead" data-reveal="blur" data-delay=".3">Two-time finalist in the Durham University Annual Art Competition, 2023 and 2024. My digital work is on ArtStation.</p>
+        <div class="pills" style="margin-top: 32px;" data-reveal="up" data-delay=".5"><a class="pill pill--solid" href="https://www.artstation.com/alison-jiaxi-wang" target="_blank" rel="noopener noreferrer" data-magnetic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>ArtStation portfolio</a></div>
       </div>
     </header>
-
-    <section class="section" aria-labelledby="evidence-title">
-      <div class="wrap section__grid">
-        <header class="section__head">
-          <h2 id="evidence-title" class="section__title">Competition records</h2>
-          <p class="section__note">Public pages from Durham University and University College.</p>
-        </header>
-        <div class="cards">
-          <a class="card" href="https://stories.durham.ac.uk/SAP24/25/" target="_blank" rel="noopener noreferrer">
-            <span class="card__source">Durham University Stories</span>
-            <span class="card__title">Student Art Prize 2024 feature</span>
-            <span class="card__desc">Featured in the 2024 Student Art Prize coverage.</span>
-            <span class="card__cta">Open feature</span>
-          </a>
-          <a class="card" href="https://stories.durham.ac.uk/StudentArtPrize24/" target="_blank" rel="noopener noreferrer">
-            <span class="card__source">Durham University Stories</span>
-            <span class="card__title">Student Art Prize 2024</span>
-            <span class="card__desc">The official Student Art Prize 2024 page.</span>
-            <span class="card__cta">Open page</span>
-          </a>
-          <a class="card" href="https://www.facebook.com/universitycollegeofficial/posts/were-proud-to-share-that-at-least-two-castle-students-are-featured-in-this-years/1252202340027503/" target="_blank" rel="noopener noreferrer">
-            <span class="card__source">University College, Durham</span>
-            <span class="card__title">College announcement</span>
-            <span class="card__desc">University College's announcement of the featured Castle students.</span>
-            <span class="card__cta">Open post</span>
-          </a>
+    <section class="chapter" data-field="lumen" data-chapter="Marquee" style="padding-top: 72px; padding-bottom: 72px;">
+      <div class="marquee" data-marquee="22" aria-hidden="true"><div class="marquee__track"><span>Finalist 2023</span><span>Finalist 2024</span><span>Durham Student Art Prize</span><span>University College</span><span>ArtStation</span><span>Digital painting</span><span>Colour</span></div></div>
+    </section>
+    <section class="chapter" data-field="disc_amber" data-chapter="Records">
+      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">Prize</span>
+      <div class="wrap">
+        <div class="block">
+          <div class="block__aside">
+            <p class="block__k">Public pages from Durham University and University College</p>
+            <h2 class="block__t" data-split="words">Competition <em>records</em></h2>
+          </div>
+          <div class="block__body">
+            <div class="cards">
+              <a class="card" href="https://stories.durham.ac.uk/SAP24/25/" target="_blank" rel="noopener noreferrer" data-tilt data-reveal="up"><span class="card__k">Durham University Stories</span><span class="card__t">Student Art Prize 2024 feature</span><span class="card__d">Featured in the 2024 Student Art Prize coverage.</span><span class="card__go">Open feature</span></a>
+              <a class="card" href="https://stories.durham.ac.uk/StudentArtPrize24/" target="_blank" rel="noopener noreferrer" data-tilt data-reveal="up" data-delay=".1"><span class="card__k">Durham University Stories</span><span class="card__t">Student Art Prize 2024</span><span class="card__d">The official Student Art Prize 2024 page.</span><span class="card__go">Open page</span></a>
+              <a class="card" href="https://www.facebook.com/universitycollegeofficial/posts/were-proud-to-share-that-at-least-two-castle-students-are-featured-in-this-years/1252202340027503/" target="_blank" rel="noopener noreferrer" data-tilt data-reveal="up" data-delay=".2"><span class="card__k">University College, Durham</span><span class="card__t">College announcement</span><span class="card__d">University College's announcement of the featured Castle students.</span><span class="card__go">Open post</span></a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer" data-chapter="Contact">
     <div class="wrap">
+      <p class="footer__cta" data-split="words">Let's talk <em>research.</em></p>
+      <p style="margin-top: 28px;"><a class="big-email" href="mailto:tggq61@durham.ac.uk" style="color: #fff;">tggq61@durham.ac.uk</a></p>
       <div class="footer__grid">
         <div>
           <p class="footer__name">Jiaxi Wang</p>
-          <p class="footer__text">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
+          <p class="footer__txt">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
           <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
         </div>
         <div>
-          <p class="footer__heading">Work</p>
+          <p class="footer__h">Work</p>
           <ul class="footer__list">
             <li><a href="research.html">Research</a></li>
             <li><a href="engineering.html">Engineering</a></li>
@@ -105,7 +114,7 @@
           </ul>
         </div>
         <div>
-          <p class="footer__heading">About</p>
+          <p class="footer__h">About</p>
           <ul class="footer__list">
             <li><a href="cv.html">CV</a></li>
             <li><a href="certificates.html">Certificates</a></li>
@@ -113,20 +122,32 @@
           </ul>
         </div>
         <div>
-          <p class="footer__heading">Beyond the lab</p>
+          <p class="footer__h">Beyond the lab</p>
           <ul class="footer__list">
             <li><a href="art.html">Art</a></li>
             <li><a href="sport.html">Sport</a></li>
+            <li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           </ul>
         </div>
       </div>
+      <div class="footer__legend" aria-hidden="true"></div>
+      <div class="footer__legend-labels" aria-hidden="true"><span>Coil</span><span>NBI</span><span>ICG</span><span>Disc</span><span>Fundus</span><span>Mucosa</span><span>PpIX</span></div>
       <div class="footer__base">
         <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
-        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
+        <p>Colours from endoscopic imaging, fluorescence and fundus photography.</p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/pages/inner.js"></script>
 </body>
 </html>

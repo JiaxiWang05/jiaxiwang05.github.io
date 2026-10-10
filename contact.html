@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — Jiaxi Wang</title>
   <meta name="description" content="Contact Jiaxi Wang, undergraduate researcher in embodied AI and medical robotics at Durham University.">
-  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://jiaxiwang05.github.io/contact.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
@@ -19,24 +18,28 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+  <link rel="stylesheet" href="assets/css/site.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Primary">
-      <a class="nav__brand" href="index.html">
-        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
-        Jiaxi Wang
-      </a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
-        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-      <ul class="nav__links" id="nav-links">
+  <div class="loader" aria-hidden="true">
+    <div class="loader__badge">
+      <svg viewBox="0 0 200 200"><defs><path id="loader-ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#loader-ring">Jiaxi Wang · Embodied AI · Medical robotics · Durham · </textPath></text></svg>
+      <div class="loader__eye"><i></i></div>
+    </div>
+    <p class="loader__pct">0%</p>
+    <p class="loader__name">Jiaxi Wang<br>Research 2026</p>
+  </div>
+
+  <header class="nav">
+    <a class="nav__brand" href="index.html"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg>Jiaxi Wang</a>
+    <nav aria-label="Primary">
+      <ul class="nav__links">
         <li><a href="research.html">Research</a></li>
         <li><a href="engineering.html">Engineering</a></li>
         <li><a href="opensource.html">Open source</a></li>
@@ -44,49 +47,68 @@
         <li><a href="contact.html" aria-current="page">Contact</a></li>
       </ul>
     </nav>
+    <span class="nav__count" aria-hidden="true"></span>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </header>
+  <nav class="menu" id="menu" aria-label="Menu">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="opensource.html">Open source</a>
+    <a href="cv.html">CV</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="colorbar" aria-hidden="true"><div class="colorbar__fill"></div></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <main id="main">
 
-    <header class="page-head">
-      <div class="wrap">
-        <h1 class="page-head__title">Contact</h1>
-        <p class="page-head__lead">For research collaboration, PhD opportunities or academic correspondence, email is the fastest way to reach me.</p>
-        <a class="contact-email" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a>
-        <div class="hero__actions">
-          <button class="btn btn--primary" type="button" data-copy="tggq61@durham.ac.uk">Copy email address</button>
-          <a class="btn" href="cv.html">View CV</a>
-          <a class="btn" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <header class="page-head" data-field="lumen" data-chapter="Contact">
+      <span class="ghost" data-ghost aria-hidden="true">Hello</span>
+      
+      <div class="page-head__inner">
+        <h1 class="page-head__title" data-split="chars">Con<em>tact</em></h1>
+        <p class="page-head__lead" data-reveal="blur" data-delay=".3">For research collaboration, PhD opportunities or academic correspondence, email is the fastest way to reach me.</p>
+        <p style="margin-top: 36px;" data-reveal="up" data-delay=".4"><a class="big-email" href="mailto:tggq61@durham.ac.uk" style="color: var(--cyan);">tggq61@durham.ac.uk</a></p>
+        <div class="pills" style="margin-top: 32px;" data-reveal="up" data-delay=".6">
+          <button class="pill pill--solid" type="button" data-copy="tggq61@durham.ac.uk" data-magnetic>Copy email address</button>
+          <a class="pill" href="cv.html" data-magnetic>View CV</a>
+          <a class="pill" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer" data-magnetic>GitHub</a>
+          <a class="pill" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer" data-magnetic>LinkedIn</a>
         </div>
-        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+        <p class="status-line" id="copy-status" role="status" aria-live="polite"></p>
       </div>
     </header>
-
-    <section class="section" aria-labelledby="about-title">
-      <div class="wrap section__grid">
-        <header class="section__head">
-          <h2 id="about-title" class="section__title">Profile</h2>
-        </header>
-        <div class="prose">
-          <p>Final-year BEng Electronics Engineering student at Durham University (University College), with a study abroad year at the University of Notre Dame. Research experience at the CUHK Medical Robotics Group, McGill University (MITACS Globalink) and EPCC at the University of Edinburgh; Google Summer of Code mentor with INCF.</p>
-          <p>Currently working on cross-embodiment learning and vision–language–action systems with Dr Amir Atapour-Abarghouei and Dr Chris Chen, and on a dissertation about transfer learning from small medical image datasets with Dr Raheleh Kafieh.</p>
-          <p class="links"><a class="link" href="research.html">Research</a> <a class="link" href="cv.pdf">CV (PDF)</a></p>
+    <section class="chapter" data-field="coil_cobalt" data-chapter="Profile">
+      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">Durham</span>
+      <div class="wrap">
+        <div class="block">
+          <div class="block__aside">
+            <p class="block__k">Profile</p>
+            <h2 class="block__t" data-split="words">A short <em>profile</em></h2>
+          </div>
+          <div class="block__body">
+            <p class="t-body" data-reveal="up">Final-year BEng Electronics Engineering student at Durham University (University College), with a study abroad year at the University of Notre Dame. Research experience at the CUHK Medical Robotics Group, McGill University (MITACS Globalink) and EPCC at the University of Edinburgh; Google Summer of Code mentor with INCF.</p>
+            <p class="t-body" data-reveal="up">Currently working on cross-embodiment learning and vision–language–action systems with Dr Amir Atapour-Abarghouei and Dr Chris Chen, and on a dissertation about transfer learning from small medical image datasets with Dr Raheleh Kafieh.</p>
+            <p class="links"><a class="link" href="research.html">Research</a><a class="link" href="cv.pdf">CV (PDF)</a></p>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer" data-chapter="Contact">
     <div class="wrap">
+      <p class="footer__cta" data-split="words">Let's talk <em>research.</em></p>
+      <p style="margin-top: 28px;"><a class="big-email" href="mailto:tggq61@durham.ac.uk" style="color: #fff;">tggq61@durham.ac.uk</a></p>
       <div class="footer__grid">
         <div>
           <p class="footer__name">Jiaxi Wang</p>
-          <p class="footer__text">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
+          <p class="footer__txt">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
           <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
         </div>
         <div>
-          <p class="footer__heading">Work</p>
+          <p class="footer__h">Work</p>
           <ul class="footer__list">
             <li><a href="research.html">Research</a></li>
             <li><a href="engineering.html">Engineering</a></li>
@@ -94,7 +116,7 @@
           </ul>
         </div>
         <div>
-          <p class="footer__heading">About</p>
+          <p class="footer__h">About</p>
           <ul class="footer__list">
             <li><a href="cv.html">CV</a></li>
             <li><a href="certificates.html">Certificates</a></li>
@@ -102,20 +124,32 @@
           </ul>
         </div>
         <div>
-          <p class="footer__heading">Beyond the lab</p>
+          <p class="footer__h">Beyond the lab</p>
           <ul class="footer__list">
             <li><a href="art.html">Art</a></li>
             <li><a href="sport.html">Sport</a></li>
+            <li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           </ul>
         </div>
       </div>
+      <div class="footer__legend" aria-hidden="true"></div>
+      <div class="footer__legend-labels" aria-hidden="true"><span>Coil</span><span>NBI</span><span>ICG</span><span>Disc</span><span>Fundus</span><span>Mucosa</span><span>PpIX</span></div>
       <div class="footer__base">
         <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
-        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
+        <p>Colours from endoscopic imaging, fluorescence and fundus photography.</p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/pages/inner.js"></script>
 </body>
 </html>

@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Engineering — Jiaxi Wang</title>
   <meta name="description" content="Engineering projects by Jiaxi Wang: an autonomous material mover, the Durham Total Artificial Heart, the IMechE Repeatable Vehicle Challenge and high-performance computing.">
-  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://jiaxiwang05.github.io/engineering.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
   <meta property="og:title" content="Engineering — Jiaxi Wang">
-  <meta property="og:description" content="Autonomous vehicles, medical devices and power electronics, from concept to prototype.">
+  <meta property="og:description" content="Engineering projects by Jiaxi Wang: an autonomous material mover, the Durham Total Artificial Heart, the IMechE Repeatable Vehicle Challenge and high-performance computing.">
   <meta property="og:url" content="https://jiaxiwang05.github.io/engineering.html">
   <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -19,24 +18,28 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+  <link rel="stylesheet" href="assets/css/site.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Primary">
-      <a class="nav__brand" href="index.html">
-        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
-        Jiaxi Wang
-      </a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
-        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-      <ul class="nav__links" id="nav-links">
+  <div class="loader" aria-hidden="true">
+    <div class="loader__badge">
+      <svg viewBox="0 0 200 200"><defs><path id="loader-ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#loader-ring">Jiaxi Wang · Embodied AI · Medical robotics · Durham · </textPath></text></svg>
+      <div class="loader__eye"><i></i></div>
+    </div>
+    <p class="loader__pct">0%</p>
+    <p class="loader__name">Jiaxi Wang<br>Research 2026</p>
+  </div>
+
+  <header class="nav">
+    <a class="nav__brand" href="index.html"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg>Jiaxi Wang</a>
+    <nav aria-label="Primary">
+      <ul class="nav__links">
         <li><a href="research.html">Research</a></li>
         <li><a href="engineering.html" aria-current="page">Engineering</a></li>
         <li><a href="opensource.html">Open source</a></li>
@@ -44,104 +47,115 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
+    <span class="nav__count" aria-hidden="true"></span>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </header>
+  <nav class="menu" id="menu" aria-label="Menu">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="engineering.html">Engineering</a>
+    <a href="opensource.html">Open source</a>
+    <a href="cv.html">CV</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="colorbar" aria-hidden="true"><div class="colorbar__fill"></div></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <main id="main">
 
-    <header class="page-head">
-      <div class="wrap">
-        <h1 class="page-head__title">Engineering</h1>
-        <p class="page-head__lead">Hardware projects from Durham University: an autonomous forklift, a wireless-powered artificial heart, a repeatable autonomous vehicle, and training in high-performance computing.</p>
+    <header class="page-head" data-field="coil_cobalt" data-chapter="Engineering">
+      <span class="ghost" data-ghost aria-hidden="true">Build</span>
+      
+      <div class="page-head__inner">
+        <h1 class="page-head__title" data-split="chars">Engine<em>ering</em></h1>
+        <p class="page-head__lead" data-reveal="blur" data-delay=".3">Hardware projects from Durham University: an autonomous forklift, a wireless-powered artificial heart, a repeatable autonomous vehicle, and training in high-performance computing.</p>
       </div>
     </header>
-
-    <section id="material-mover" class="section" aria-labelledby="amm-title">
-      <div class="wrap section__grid">
-        <header class="section__head">
-          <h2 id="amm-title" class="section__title">Automated Material Mover</h2>
-          <p class="section__note">2024–2025. Group 19-AIBM4. Supervisors: Dr Aissa Ikhlef, Mr Bill Maxwell.</p>
-        </header>
-        <article class="study">
-          <a class="doc-thumb" href="assets/pdfs/automated-material-mover-report.pdf" style="aspect-ratio: 3 / 4; max-width: 360px;">
-            <img src="assets/thumbs/material-mover.jpg" alt="First page of the Automated Material Mover feasibility report" loading="lazy" width="596" height="842">
-          </a>
-          <div class="study__body">
-            <h3 class="study__title">A three-wheeled autonomous forklift for factory material handling</h3>
-            <p class="study__desc">Co-designed and prototyped an automated guided vehicle that moves materials around a factory without a driver, and tested whether it is technically and financially feasible.</p>
-            <ul class="study__list">
-              <li><b>Mechanism.</b> Three wheels with differential steering around a central axle, chosen for manoeuvrability in factory aisles.</li>
-              <li><b>Navigation.</b> Tape-guided sensing for precise, repeatable paths.</li>
-              <li><b>Validation.</b> Structural calculations, cost evaluation against manual forklifts, and a risk assessment, with the design checked against ISO 3691-4 for driverless industrial trucks.</li>
-              <li><b>Sustainability.</b> Recyclable steel body and forks, and airless tyres for durability.</li>
-            </ul>
+    <section class="chapter" id="material-mover" data-field="lumen" data-chapter="Material mover">
+      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">AGV</span>
+      <div class="wrap">
+        <div class="block">
+          <div class="block__aside">
+            <p class="block__k">2024–2025. Group 19-AIBM4. Supervisors: Dr Aissa Ikhlef, Mr Bill Maxwell</p>
+            <h2 class="block__t" data-split="words">Automated Material Mover</h2><svg class="plate__specimen" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="2" data-draw aria-hidden="true" style="color: var(--ink); margin-top: 40px;">
+              <path d="M40 330H360" stroke-dasharray="10 8"/><path d="M90 300V170h120l30 40v90"/><path d="M240 210h70v90"/><path d="M310 120v180"/><path d="M310 250h60"/><path d="M310 290h60"/>
+              <circle cx="120" cy="310" r="20"/><circle cx="210" cy="310" r="20"/><circle cx="290" cy="316" r="14"/><path d="M110 170v-40h80v40"/><path d="M60 360c60-30 220-30 300 0"/></svg>
+          </div>
+          <div class="block__body">
+            <p class="t-body" data-reveal="up">Co-designed and prototyped an automated guided vehicle that moves materials around a factory without a driver, and tested whether it is technically and financially feasible.</p>
+            <ul class="entry__x" data-reveal="up"><li><b>Mechanism.</b> Three wheels with differential steering around a central axle, chosen for manoeuvrability in factory aisles.</li><li><b>Navigation.</b> Tape-guided sensing for precise, repeatable paths.</li><li><b>Validation.</b> Structural calculations, cost evaluation against manual forklifts, and a risk assessment, with the design checked against ISO 3691-4 for driverless industrial trucks.</li><li><b>Sustainability.</b> Recyclable steel body and forks, and airless tyres for durability.</li></ul>
+            <a class="doc" href="assets/pdfs/automated-material-mover-report.pdf" data-tilt data-cursor="Open" style="max-width: 320px; aspect-ratio: 3 / 4;"><img src="assets/thumbs/material-mover.jpg" alt="First page of the Automated Material Mover feasibility report" loading="lazy" width="596" height="842"></a>
             <p class="links"><a class="link" href="assets/pdfs/automated-material-mover-report.pdf">Feasibility report (PDF, 15 pages)</a></p>
           </div>
-        </article>
+        </div>
       </div>
     </section>
-
-    <section id="artificial-heart" class="section" aria-labelledby="tah-title">
-      <div class="wrap section__grid">
-        <header class="section__head">
-          <h2 id="tah-title" class="section__title">Durham Total Artificial Heart</h2>
-          <p class="section__note">2024–2025. Supervisor: Prof. Ashraf W. Khir.</p>
-        </header>
-        <article class="study study--text">
-          <div class="study__body">
-            <h3 class="study__title">Wireless power and control electronics for an artificial heart</h3>
-            <p class="study__desc">An interdisciplinary medical-engineering project that turned clinical needs for cardiovascular support into implementable engineering requirements.</p>
-            <ul class="study__list">
-              <li>Defined system requirements and partitioned the wireless powering solution into subsystems.</li>
-              <li>Coordinated development of high-efficiency power-transfer circuits, custom motors designed in ANSYS, and the control electronics.</li>
-            </ul>
-            <p class="study__keys"><b>Tools</b> LTspice, KiCad, ANSYS</p>
+    <section class="chapter" id="artificial-heart" data-field="mucosa_coral" data-chapter="Artificial heart">
+      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">Heart</span>
+      <div class="wrap">
+        <div class="block">
+          <div class="block__aside">
+            <p class="block__k">2024–2025. Supervisor: Prof. Ashraf W. Khir</p>
+            <h2 class="block__t" data-split="words">Durham Total Artificial Heart</h2><svg class="plate__specimen" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="2" data-draw aria-hidden="true" style="color: var(--ink); margin-top: 40px;">
+              <path d="M200 330C120 270 70 220 70 160c0-40 30-70 66-70 28 0 50 16 64 40 14-24 36-40 64-40 36 0 66 30 66 70 0 60-50 110-130 170z"/>
+              <circle cx="200" cy="190" r="34"/><circle cx="200" cy="190" r="54" stroke-dasharray="4 6"/><path d="M40 60c20 0 20 20 40 20s20-20 40-20 20 20 40 20"/><path d="M240 60c20 0 20 20 40 20s20-20 40-20 20 20 40 20"/>
+              <path d="M200 120V96M200 284v-40M146 190h-30M284 190h-30"/></svg>
           </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="imeche" class="section" aria-labelledby="imeche-title">
-      <div class="wrap section__grid">
-        <header class="section__head">
-          <h2 id="imeche-title" class="section__title">IMechE Repeatable Vehicle Challenge</h2>
-          <p class="section__note">2023–2024.</p>
-        </header>
-        <article class="study study--text">
-          <div class="study__body">
-            <h3 class="study__title">A self-contained vehicle that does the same task every time</h3>
-            <p class="study__desc">Engineered, fabricated, calibrated and repeatedly tested an autonomous vehicle that travels a set distance, interacts with a target and returns to a repeatable stopping position, with no external control.</p>
+          <div class="block__body">
+            <p class="t-body" data-reveal="up">Wireless power and control electronics for an artificial heart: an interdisciplinary medical-engineering project that turned clinical needs for cardiovascular support into implementable engineering requirements.</p>
+            <ul class="entry__x" data-reveal="up"><li>Defined system requirements and partitioned the wireless powering solution into subsystems.</li><li>Coordinated development of high-efficiency power-transfer circuits, custom motors designed in ANSYS, and the control electronics.</li></ul>
+            <p class="t-cap t-ink2" data-reveal="up">Tools: LTspice, KiCad, ANSYS</p>
           </div>
-        </article>
+        </div>
       </div>
     </section>
-
-    <section id="hpc" class="section" aria-labelledby="hpc-title">
-      <div class="wrap section__grid">
-        <header class="section__head">
-          <h2 id="hpc-title" class="section__title">High-performance computing</h2>
-          <p class="section__note">Jun–Jul 2024. EPCC, University of Edinburgh.</p>
-        </header>
-        <article class="study study--text">
-          <div class="study__body">
-            <h3 class="study__title">HPC Summer School</h3>
-            <p class="study__desc">Intensive training in HPC systems and architectures, including parallel programming with OpenMP and MPI and GPU acceleration, then applied to engineering problems in parallel computing, large-scale data processing and scientific computing.</p>
+    <section class="chapter" id="imeche" data-field="disc_amber" data-chapter="IMechE">
+      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">Repeat</span>
+      <div class="wrap">
+        <div class="block">
+          <div class="block__aside">
+            <p class="block__k">2023–2024</p>
+            <h2 class="block__t" data-split="words">IMechE Repeatable Vehicle Challenge</h2><svg class="plate__specimen" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="2" data-draw aria-hidden="true" style="color: var(--ink); margin-top: 40px;">
+              <path d="M40 300H360"/><path d="M40 290v20M360 290v20M200 292v16"/><path d="M60 260h70l20-30h60l20 30h30v30H60z"/><circle cx="95" cy="292" r="16"/><circle cx="215" cy="292" r="16"/>
+              <path d="M330 270h30v30h-30z"/><path d="M60 200C140 120 260 120 340 200" stroke-dasharray="6 8"/><path d="M330 190l10 10-14 4"/></svg>
+          </div>
+          <div class="block__body">
+            <p class="t-body" data-reveal="up">Engineered, fabricated, calibrated and repeatedly tested an autonomous vehicle that travels a set distance, interacts with a target and returns to a repeatable stopping position, with no external control.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="chapter" id="hpc" data-field="nbi_cyan" data-chapter="HPC">
+      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">MPI</span>
+      <div class="wrap">
+        <div class="block">
+          <div class="block__aside">
+            <p class="block__k">Jun–Jul 2024. EPCC, University of Edinburgh</p>
+            <h2 class="block__t" data-split="words">High-performance computing</h2><svg class="plate__specimen" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="2" data-draw aria-hidden="true" style="color: var(--ink); margin-top: 40px;">
+              <rect x="60" y="60" width="120" height="120"/><rect x="220" y="60" width="120" height="120"/><rect x="60" y="220" width="120" height="120"/><rect x="220" y="220" width="120" height="120"/>
+              <path d="M180 120h40M180 280h40M120 180v40M280 180v40"/><path d="M90 90h60v60H90zM250 90h60v60h-60zM90 250h60v60H90zM250 250h60v60h-60z"/><path d="M200 20v40M200 340v40M20 200h40M340 200h40"/></svg>
+          </div>
+          <div class="block__body">
+            <p class="t-body" data-reveal="up">HPC Summer School: intensive training in HPC systems and architectures, including parallel programming with OpenMP and MPI and GPU acceleration, then applied to engineering problems in parallel computing, large-scale data processing and scientific computing.</p>
             <p class="links"><a class="link" href="certificates.html">Completion certificate</a></p>
           </div>
-        </article>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer" data-chapter="Contact">
     <div class="wrap">
+      <p class="footer__cta" data-split="words">Let's talk <em>research.</em></p>
+      <p style="margin-top: 28px;"><a class="big-email" href="mailto:tggq61@durham.ac.uk" style="color: #fff;">tggq61@durham.ac.uk</a></p>
       <div class="footer__grid">
         <div>
           <p class="footer__name">Jiaxi Wang</p>
-          <p class="footer__text">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
+          <p class="footer__txt">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
           <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
         </div>
         <div>
-          <p class="footer__heading">Work</p>
+          <p class="footer__h">Work</p>
           <ul class="footer__list">
             <li><a href="research.html">Research</a></li>
             <li><a href="engineering.html">Engineering</a></li>
@@ -149,7 +163,7 @@
           </ul>
         </div>
         <div>
-          <p class="footer__heading">About</p>
+          <p class="footer__h">About</p>
           <ul class="footer__list">
             <li><a href="cv.html">CV</a></li>
             <li><a href="certificates.html">Certificates</a></li>
@@ -157,20 +171,32 @@
           </ul>
         </div>
         <div>
-          <p class="footer__heading">Beyond the lab</p>
+          <p class="footer__h">Beyond the lab</p>
           <ul class="footer__list">
             <li><a href="art.html">Art</a></li>
             <li><a href="sport.html">Sport</a></li>
+            <li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
           </ul>
         </div>
       </div>
+      <div class="footer__legend" aria-hidden="true"></div>
+      <div class="footer__legend-labels" aria-hidden="true"><span>Coil</span><span>NBI</span><span>ICG</span><span>Disc</span><span>Fundus</span><span>Mucosa</span><span>PpIX</span></div>
       <div class="footer__base">
         <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
-        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
+        <p>Colours from endoscopic imaging, fluorescence and fundus photography.</p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/pages/inner.js"></script>
 </body>
 </html>
