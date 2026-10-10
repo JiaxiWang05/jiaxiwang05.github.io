@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engineering Projects — Jiaxi Wang</title>
-  <meta name="description" content="Engineering projects by Jiaxi Wang — Automated Material Mover, an autonomous forklift feasibility study for industrial material transport (Group 19-AIBM4, Durham University, 2026).">
-  <meta name="theme-color" content="#f4f2ec">
+  <title>Engineering — Jiaxi Wang</title>
+  <meta name="description" content="Engineering projects by Jiaxi Wang: an autonomous material mover, the Durham Total Artificial Heart, the IMechE Repeatable Vehicle Challenge and high-performance computing.">
+  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://jiaxiwang05.github.io/engineering.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
-  <meta property="og:title" content="Engineering Projects — Jiaxi Wang">
-  <meta property="og:description" content="Automated Material Mover — autonomous forklift feasibility study and design.">
+  <meta property="og:title" content="Engineering — Jiaxi Wang">
+  <meta property="og:description" content="Autonomous vehicles, medical devices and power electronics, from concept to prototype.">
   <meta property="og:url" content="https://jiaxiwang05.github.io/engineering.html">
   <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -26,165 +28,145 @@
 
   <header class="site-header">
     <nav class="nav" aria-label="Primary">
-      <a class="nav__brand" href="index.html">Jiaxi Wang<em>.</em></a>
-      <ul class="nav__links" id="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="engineering.html" class="is-active" aria-current="page">Engineering</a></li>
-        <li><a href="opensource.html">Open Source</a></li>
-          <li><a href="certificates.html">Certificates</a></li>
-          <li><a href="art.html">Art</a></li>
-          <li><a href="sport.html">Sport</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
+      <a class="nav__brand" href="index.html">
+        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
+        Jiaxi Wang
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="research.html">Research</a></li>
+        <li><a href="engineering.html" aria-current="page">Engineering</a></li>
+        <li><a href="opensource.html">Open source</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
   <main id="main">
 
-    <!-- ============ CASE HERO ============ -->
-    <section class="hero-home" aria-labelledby="case-title">
-      <div class="hero-home__inner">
-        <div>
-          <p class="eyebrow hero-home__eyebrow">Engineering Projects</p>
-          <h1 id="case-title" class="hero-home__name">Build<span class="dot">.</span></h1>
-          <p class="hero-home__identity">Autonomous systems, mechanical design, electronics, and sensing — from feasibility to prototype.</p>
-          <div class="hero-home__actions">
-            <a class="btn btn--solid" href="#case">Read the case study</a>
-            <a class="btn" href="assets/pdfs/automated-material-mover-report.pdf">Report (PDF)<span class="ext" aria-hidden="true">↗</span></a>
+    <header class="page-head">
+      <div class="wrap">
+        <h1 class="page-head__title">Engineering</h1>
+        <p class="page-head__lead">Hardware projects from Durham University: an autonomous forklift, a wireless-powered artificial heart, a repeatable autonomous vehicle, and training in high-performance computing.</p>
+      </div>
+    </header>
+
+    <section id="material-mover" class="section" aria-labelledby="amm-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="amm-title" class="section__title">Automated Material Mover</h2>
+          <p class="section__note">2024–2025. Group 19-AIBM4. Supervisors: Dr Aissa Ikhlef, Mr Bill Maxwell.</p>
+        </header>
+        <article class="study">
+          <a class="doc-thumb" href="assets/pdfs/automated-material-mover-report.pdf" style="aspect-ratio: 3 / 4; max-width: 360px;">
+            <img src="assets/thumbs/material-mover.jpg" alt="First page of the Automated Material Mover feasibility report" loading="lazy" width="596" height="842">
+          </a>
+          <div class="study__body">
+            <h3 class="study__title">A three-wheeled autonomous forklift for factory material handling</h3>
+            <p class="study__desc">Co-designed and prototyped an automated guided vehicle that moves materials around a factory without a driver, and tested whether it is technically and financially feasible.</p>
+            <ul class="study__list">
+              <li><b>Mechanism.</b> Three wheels with differential steering around a central axle, chosen for manoeuvrability in factory aisles.</li>
+              <li><b>Navigation.</b> Tape-guided sensing for precise, repeatable paths.</li>
+              <li><b>Validation.</b> Structural calculations, cost evaluation against manual forklifts, and a risk assessment, with the design checked against ISO 3691-4 for driverless industrial trucks.</li>
+              <li><b>Sustainability.</b> Recyclable steel body and forks, and airless tyres for durability.</li>
+            </ul>
+            <p class="links"><a class="link" href="assets/pdfs/automated-material-mover-report.pdf">Feasibility report (PDF, 15 pages)</a></p>
           </div>
-        </div>
-        <ul class="ledger" aria-label="Case study contents">
-          <li class="ledger__row"><a href="#objective"><span class="ledger__num">01</span><span class="ledger__label">Objective</span><span class="ledger__arrow">→</span></a></li>
-          <li class="ledger__row"><a href="#design"><span class="ledger__num">02</span><span class="ledger__label">Design &amp; mechanism</span><span class="ledger__arrow">→</span></a></li>
-          <li class="ledger__row"><a href="#sensing"><span class="ledger__num">03</span><span class="ledger__label">Sensing &amp; autonomy</span><span class="ledger__arrow">→</span></a></li>
-          <li class="ledger__row"><a href="#mechanical"><span class="ledger__num">04</span><span class="ledger__label">Mechanical design</span><span class="ledger__arrow">→</span></a></li>
-          <li class="ledger__row"><a href="#validation"><span class="ledger__num">05</span><span class="ledger__label">Validation &amp; standards</span><span class="ledger__arrow">→</span></a></li>
-          <li class="ledger__row"><a href="#cost"><span class="ledger__num">06</span><span class="ledger__label">Cost &amp; viability</span><span class="ledger__arrow">→</span></a></li>
-        </ul>
+        </article>
       </div>
     </section>
 
-    <!-- ============ CASE STUDY ============ -->
-    <section id="case" class="section section--tint" aria-labelledby="case-study-title">
-      <div class="wrap">
-        <div class="section__head" data-reveal>
-          <p class="eyebrow">01 — Case study</p>
-          <h2 id="case-study-title" class="section__title">Automated Material Mover</h2>
-          <p class="section__lead">Co-designed and prototyped an autonomous forklift system for industrial material transport under strict hardware constraints — integrating mechanical design, electronics, sensing, and iterative reliability testing.</p>
-        </div>
-
-        <div class="case-layout">
-          <div>
-            <div id="objective" class="case__block" data-reveal>
-              <span class="case__num">01</span>
-              <div>
-                <h3 class="case__title">Project objective</h3>
-                <p class="case__text">Design an autonomous material mover (AIBM4) that transports materials within a factory environment — removing manual handling, improving productivity, and supporting a safer, more sustainable workplace.</p>
-              </div>
-            </div>
-            <div id="design" class="case__block" data-reveal>
-              <span class="case__num">02</span>
-              <div>
-                <h3 class="case__title">Design &amp; mechanism</h3>
-                <p class="case__text">An iterative design process converged on a three-wheeled automated forklift with differential steering around a central axle, chosen for maximum manoeuvrability within factory aisles.</p>
-              </div>
-            </div>
-            <div id="sensing" class="case__block" data-reveal>
-              <span class="case__num">03</span>
-              <div>
-                <h3 class="case__title">Sensing &amp; autonomy</h3>
-                <p class="case__text">Tape-sensing technology enables precise, repeatable movement within the factory environment, giving the autonomous workflow a reliable basis for navigation without manual forklift operation.</p>
-              </div>
-            </div>
-            <div id="mechanical" class="case__block" data-reveal>
-              <span class="case__num">04</span>
-              <div>
-                <h3 class="case__title">Mechanical design</h3>
-                <p class="case__text">Steel body and forks for strength and sustainability, with airless tyres chosen to improve durability and reduce waste over the system's lifetime.</p>
-              </div>
-            </div>
-            <div id="validation" class="case__block" data-reveal>
-              <span class="case__num">05</span>
-              <div>
-                <h3 class="case__title">Validation &amp; standards</h3>
-                <p class="case__text">Engineering calculations validate the design's structural integrity and feasibility, with the design targeting compliance with ISO 3691-4 for driverless industrial trucks.</p>
-              </div>
-            </div>
-            <div id="cost" class="case__block" data-reveal>
-              <span class="case__num">06</span>
-              <div>
-                <h3 class="case__title">Cost &amp; viability</h3>
-                <p class="case__text">An in-depth cost analysis demonstrates that automated guided vehicles are financially viable against conventional manual forklifts, driven by savings in labour and operating costs over time.</p>
-              </div>
-            </div>
-            <div class="case__block" data-reveal>
-              <span class="case__num">07</span>
-              <div>
-                <h3 class="case__title">Risk &amp; reliability</h3>
-                <p class="case__text">A structured risk assessment mitigates operational hazards, supported by an iterative design process and repeated reliability testing of the prototype cycle.</p>
-              </div>
-            </div>
-            <div class="case__block" data-reveal>
-              <span class="case__num">08</span>
-              <div>
-                <h3 class="case__title">Outcome</h3>
-                <p class="case__text">A validated feasibility study and design blueprint for an autonomous material mover, documented in a 15-page report co-authored by Group 19-AIBM4 at Durham University (July 2026).</p>
-              </div>
-            </div>
+    <section id="artificial-heart" class="section" aria-labelledby="tah-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="tah-title" class="section__title">Durham Total Artificial Heart</h2>
+          <p class="section__note">2024–2025. Supervisor: Prof. Ashraf W. Khir.</p>
+        </header>
+        <article class="study study--text">
+          <div class="study__body">
+            <h3 class="study__title">Wireless power and control electronics for an artificial heart</h3>
+            <p class="study__desc">An interdisciplinary medical-engineering project that turned clinical needs for cardiovascular support into implementable engineering requirements.</p>
+            <ul class="study__list">
+              <li>Defined system requirements and partitioned the wireless powering solution into subsystems.</li>
+              <li>Coordinated development of high-efficiency power-transfer circuits, custom motors designed in ANSYS, and the control electronics.</li>
+            </ul>
+            <p class="study__keys"><b>Tools</b> LTspice, KiCad, ANSYS</p>
           </div>
-
-          <aside class="case__rail" data-reveal>
-            <a class="img-frame" href="assets/pdfs/automated-material-mover-report.pdf" style="aspect-ratio: 4 / 3; border-radius: 0;">
-              <img src="assets/thumbs/material-mover.jpg" alt="First page of the Automated Material Mover feasibility report" loading="lazy">
-            </a>
-            <div class="case__rail-body">
-              <p class="case__rail-meta">Feasibility report — Group 19-AIBM4 · Durham University · July 2026</p>
-              <h3 class="case__rail-title">Autonomous Material Mover</h3>
-              <p class="case__rail-desc">15 pages · 6 co-authors. Full design, validation, cost analysis, risk assessment, and project schedule.</p>
-              <a class="btn btn--solid" href="assets/pdfs/automated-material-mover-report.pdf">Read the report<span class="ext" aria-hidden="true">↗</span></a>
-            </div>
-          </aside>
-        </div>
+        </article>
       </div>
     </section>
 
-    <!-- ============ HPC NOTE ============ -->
-    <section class="section" aria-labelledby="hpc-title">
-      <div class="wrap">
-        <div class="section__head" data-reveal>
-          <p class="eyebrow">02 — Computing</p>
+    <section id="imeche" class="section" aria-labelledby="imeche-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="imeche-title" class="section__title">IMechE Repeatable Vehicle Challenge</h2>
+          <p class="section__note">2023–2024.</p>
+        </header>
+        <article class="study study--text">
+          <div class="study__body">
+            <h3 class="study__title">A self-contained vehicle that does the same task every time</h3>
+            <p class="study__desc">Engineered, fabricated, calibrated and repeatedly tested an autonomous vehicle that travels a set distance, interacts with a target and returns to a repeatable stopping position, with no external control.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="hpc" class="section" aria-labelledby="hpc-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
           <h2 id="hpc-title" class="section__title">High-performance computing</h2>
-          <p class="section__lead">HPC Summer Research Student at EPCC, University of Edinburgh (2024), with a completion certificate for the EPCC HPC Summer School.</p>
-        </div>
-        <p data-reveal><a class="link-arrow" href="certificates.html">View the certificate</a></p>
+          <p class="section__note">Jun–Jul 2024. EPCC, University of Edinburgh.</p>
+        </header>
+        <article class="study study--text">
+          <div class="study__body">
+            <h3 class="study__title">HPC Summer School</h3>
+            <p class="study__desc">Intensive training in HPC systems and architectures, including parallel programming with OpenMP and MPI and GPU acceleration, then applied to engineering problems in parallel computing, large-scale data processing and scientific computing.</p>
+            <p class="links"><a class="link" href="certificates.html">Completion certificate</a></p>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <div class="site-footer__top">
-        <p class="site-footer__name">Jiaxi Wang<em>.</em></p>
-        <ul class="site-footer__links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="engineering.html">Engineering</a></li>
-        <li><a href="opensource.html">Open Source</a></li>
-          <li><a href="certificates.html">Certificates</a></li>
-          <li><a href="art.html">Art</a></li>
-          <li><a href="sport.html">Sport</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <div class="footer__grid">
+        <div>
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__text">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
+          <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div>
+          <p class="footer__heading">Work</p>
+          <ul class="footer__list">
+            <li><a href="research.html">Research</a></li>
+            <li><a href="engineering.html">Engineering</a></li>
+            <li><a href="opensource.html">Open source</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">About</p>
+          <ul class="footer__list">
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="certificates.html">Certificates</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Beyond the lab</p>
+          <ul class="footer__list">
+            <li><a href="art.html">Art</a></li>
+            <li><a href="sport.html">Sport</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="site-footer__bottom">
-        <p>© <span id="year">2026</span> Jiaxi Wang — AI research · medical robotics · engineering</p>
-        <p><a href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a> · <a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="cv.pdf">CV</a></p>
+      <div class="footer__base">
+        <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
+        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
       </div>
     </div>
   </footer>

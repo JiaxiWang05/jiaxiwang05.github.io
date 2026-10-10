@@ -4,20 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — Jiaxi Wang</title>
-  <meta name="description" content="Contact Jiaxi Wang — undergraduate researcher in AI, medical robotics, and engineering at Durham University. Email, GitHub, and curriculum vitae.">
-  <meta name="theme-color" content="#f4f2ec">
+  <meta name="description" content="Contact Jiaxi Wang, undergraduate researcher in embodied AI and medical robotics at Durham University.">
+  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://jiaxiwang05.github.io/contact.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
   <meta property="og:title" content="Contact — Jiaxi Wang">
-  <meta property="og:description" content="For research collaboration, robotics opportunities, or academic correspondence.">
+  <meta property="og:description" content="Contact Jiaxi Wang, undergraduate researcher in embodied AI and medical robotics at Durham University.">
   <meta property="og:url" content="https://jiaxiwang05.github.io/contact.html">
   <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -26,88 +28,50 @@
 
   <header class="site-header">
     <nav class="nav" aria-label="Primary">
-      <a class="nav__brand" href="index.html">Jiaxi Wang<em>.</em></a>
-      <ul class="nav__links" id="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="engineering.html">Engineering</a></li>
-        <li><a href="opensource.html">Open Source</a></li>
-          <li><a href="certificates.html">Certificates</a></li>
-          <li><a href="art.html">Art</a></li>
-          <li><a href="sport.html">Sport</a></li>
-          <li><a href="contact.html" class="is-active" aria-current="page">Contact</a></li>
-        </ul>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
+      <a class="nav__brand" href="index.html">
+        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
+        Jiaxi Wang
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="research.html">Research</a></li>
+        <li><a href="engineering.html">Engineering</a></li>
+        <li><a href="opensource.html">Open source</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
   <main id="main">
 
-    <!-- ============ CONTACT HERO ============ -->
-    <section class="contact-hero" aria-labelledby="contact-title">
+    <header class="page-head">
       <div class="wrap">
-        <p class="eyebrow section__head--center" data-reveal style="justify-content:center;">Contact &amp; Résumé</p>
-        <h1 id="contact-title" class="contact-hero__title" data-reveal>Let's build what's next.</h1>
-        <p data-reveal><a class="contact-hero__email" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
-        <p class="contact-hero__note" id="copy-status" role="status" aria-live="polite" data-reveal>For research collaboration, robotics opportunities, or academic correspondence.</p>
-        <div class="contact-actions" data-reveal>
-          <button class="btn btn--solid" type="button" data-copy="tggq61@durham.ac.uk" data-label="Copied ✓">Copy email</button>
-          <a class="btn" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub<span class="ext" aria-hidden="true">↗</span></a>
-          <a class="btn" href="cv.pdf">Download CV</a>
-          <a class="btn" href="research.html">View research</a>
+        <h1 class="page-head__title">Contact</h1>
+        <p class="page-head__lead">For research collaboration, PhD opportunities or academic correspondence, email is the fastest way to reach me.</p>
+        <a class="contact-email" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a>
+        <div class="hero__actions">
+          <button class="btn btn--primary" type="button" data-copy="tggq61@durham.ac.uk">Copy email address</button>
+          <a class="btn" href="cv.html">View CV</a>
+          <a class="btn" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
       </div>
-    </section>
+    </header>
 
-    <!-- ============ ABOUT ============ -->
-    <section class="section section--tint" aria-labelledby="about-title">
-      <div class="wrap">
-        <div class="section__head" data-reveal>
-          <p class="eyebrow">01 — About</p>
-          <h2 id="about-title" class="section__title">A short profile</h2>
-        </div>
-        <div class="feature" data-reveal>
-          <div class="feature__body">
-            <p class="feature__desc" style="margin-bottom: 20px;">Undergraduate researcher (BEng Electronics Engineering, Durham University) with research experience at the CUHK Medical Robotics Group, McGill University (MITACS Globalink), and EPCC at the University of Edinburgh.</p>
-            <p class="feature__desc" style="margin-bottom: 20px;">Two-time finalist in the Durham University Annual Art Competition (2023, 2024) and a registered USA Ultimate college player.</p>
-            <ul class="tags" aria-label="Profile areas">
-              <li>Autonomous Surgical Robotics</li>
-              <li>Vision–Language–Action</li>
-              <li>Robot Learning</li>
-              <li>Engineering</li>
-              <li>Visual Art</li>
-              <li>Athletics</li>
-            </ul>
-          </div>
-          <aside class="actions-panel">
-            <p class="actions-panel__label">Quick access</p>
-            <ul class="actions-panel__list">
-              <li><a href="cv.pdf">Curriculum vitae (PDF)</a></li>
-              <li><a href="research.html">Research &amp; publications</a></li>
-              <li><a href="engineering.html">Engineering projects</a></li>
-              <li><a href="certificates.html">Certificates</a></li>
-              <li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub<span class="ext" aria-hidden="true">↗</span></a></li>
-            </ul>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CV ============ -->
-    <section id="cv" class="section" aria-labelledby="cv-title">
-      <div class="wrap">
-        <div class="section__head" data-reveal>
-          <p class="eyebrow">02 — Curriculum vitae</p>
-          <h2 id="cv-title" class="section__title">CV</h2>
-          <p class="section__lead">Full research CV — medical robotics, embodied AI, and electronics engineering. Last updated July 2026.</p>
-        </div>
-        <div data-reveal>
-          <iframe class="pdf-frame" src="cv.pdf" title="Curriculum vitae of Jiaxi Wang (PDF viewer)" loading="lazy"></iframe>
-          <p style="margin-top: 16px;"><a class="btn btn--solid" href="cv.pdf" download>Download CV (PDF)<span class="ext" aria-hidden="true">↗</span></a></p>
+    <section class="section" aria-labelledby="about-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="about-title" class="section__title">Profile</h2>
+        </header>
+        <div class="prose">
+          <p>Final-year BEng Electronics Engineering student at Durham University (University College), with a study abroad year at the University of Notre Dame. Research experience at the CUHK Medical Robotics Group, McGill University (MITACS Globalink) and EPCC at the University of Edinburgh; Google Summer of Code mentor with INCF.</p>
+          <p>Currently working on cross-embodiment learning and vision–language–action systems with Dr Amir Atapour-Abarghouei and Dr Chris Chen, and on a dissertation about transfer learning from small medical image datasets with Dr Raheleh Kafieh.</p>
+          <p class="links"><a class="link" href="research.html">Research</a> <a class="link" href="cv.pdf">CV (PDF)</a></p>
         </div>
       </div>
     </section>
@@ -115,22 +79,39 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <div class="site-footer__top">
-        <p class="site-footer__name">Jiaxi Wang<em>.</em></p>
-        <ul class="site-footer__links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="engineering.html">Engineering</a></li>
-        <li><a href="opensource.html">Open Source</a></li>
-          <li><a href="certificates.html">Certificates</a></li>
-          <li><a href="art.html">Art</a></li>
-          <li><a href="sport.html">Sport</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <div class="footer__grid">
+        <div>
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__text">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
+          <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div>
+          <p class="footer__heading">Work</p>
+          <ul class="footer__list">
+            <li><a href="research.html">Research</a></li>
+            <li><a href="engineering.html">Engineering</a></li>
+            <li><a href="opensource.html">Open source</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">About</p>
+          <ul class="footer__list">
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="certificates.html">Certificates</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Beyond the lab</p>
+          <ul class="footer__list">
+            <li><a href="art.html">Art</a></li>
+            <li><a href="sport.html">Sport</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="site-footer__bottom">
-        <p>© <span id="year">2026</span> Jiaxi Wang — AI research · medical robotics · engineering</p>
-        <p><a href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a> · <a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="cv.pdf">CV</a></p>
+      <div class="footer__base">
+        <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
+        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
       </div>
     </div>
   </footer>

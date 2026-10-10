@@ -1,5 +1,5 @@
-/* Jiaxi Wang — interdisciplinary portfolio
-   Vanilla JS: header state, mobile nav, scroll reveal, copy-email. */
+/* Jiaxi Wang — research site
+   Header state, mobile menu, click-to-play videos, copy email, footer year. */
 
 (function () {
   "use strict";
@@ -7,23 +7,22 @@
   var header = document.querySelector(".site-header");
   var nav = document.querySelector(".nav");
   var navToggle = document.querySelector(".nav__toggle");
-  var navLinks = document.querySelectorAll(".nav__links a");
 
-  /* ---------- header state ---------- */
+  /* ---------- header border on scroll ---------- */
 
   function onScroll() {
-    if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 4);
   }
-
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---------- mobile navigation ---------- */
+  /* ---------- mobile menu ---------- */
 
   function setNavOpen(open) {
     if (!nav || !navToggle) return;
     nav.classList.toggle("nav--open", open);
     navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
   }
 
   if (navToggle) {
@@ -32,60 +31,52 @@
     });
   }
 
-  navLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      setNavOpen(false);
-    });
+  document.querySelectorAll(".nav__links a").forEach(function (link) {
+    link.addEventListener("click", function () { setNavOpen(false); });
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") setNavOpen(false);
+    if (event.key === "Escape" && nav && nav.classList.contains("nav--open")) {
+      setNavOpen(false);
+      navToggle.focus();
+    }
   });
 
   window.addEventListener("resize", function () {
     if (window.innerWidth > 760) setNavOpen(false);
   });
 
-  /* ---------- scroll reveal ---------- */
+  /* ---------- click-to-play videos ---------- */
 
-  var revealItems = document.querySelectorAll("[data-reveal]");
+  document.querySelectorAll("[data-video]").forEach(function (wrap) {
+    var videoId = wrap.getAttribute("data-video");
+    var title = wrap.getAttribute("data-title") || "Video";
+    var preview = wrap.querySelector(".video__preview");
+    if (!preview || !videoId) return;
 
-  function revealAll() {
-    revealItems.forEach(function (item) {
-      item.classList.add("is-visible");
+    preview.addEventListener("click", function () {
+      var frame = document.createElement("div");
+      frame.className = "video__frame";
+      var iframe = document.createElement("iframe");
+      iframe.src = "https://www.youtube-nocookie.com/embed/" + videoId + "?autoplay=1&rel=0";
+      iframe.title = title;
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      frame.appendChild(iframe);
+      preview.remove();
+      wrap.appendChild(frame);
+      iframe.focus();
     });
-  }
-
-  if ("IntersectionObserver" in window && revealItems.length) {
-    var revealObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -5% 0px" }
-    );
-    revealItems.forEach(function (item) {
-      revealObserver.observe(item);
-    });
-  } else {
-    revealAll();
-  }
+  });
 
   /* ---------- copy email ---------- */
 
-  var copyButtons = document.querySelectorAll("[data-copy]");
+  var status = document.getElementById("copy-status");
 
   function showStatus(message) {
-    var status = document.getElementById("copy-status");
     if (!status) return;
     status.textContent = message;
-    window.setTimeout(function () {
-      status.textContent = "";
-    }, 2600);
   }
 
   function fallbackCopy(text) {
@@ -97,30 +88,24 @@
     document.body.appendChild(helper);
     helper.select();
     var ok = false;
-    try {
-      ok = document.execCommand("copy");
-    } catch (err) {
-      ok = false;
-    }
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
     document.body.removeChild(helper);
     return ok;
   }
 
-  copyButtons.forEach(function (button) {
+  document.querySelectorAll("[data-copy]").forEach(function (button) {
+    var label = button.textContent;
     button.addEventListener("click", function () {
       var address = button.getAttribute("data-copy") || "";
       if (!address) return;
 
       function done(ok) {
         if (ok) {
-          var label = button.getAttribute("data-label") || "Copied";
-          button.textContent = label;
-          showStatus("Email address copied to clipboard");
-          window.setTimeout(function () {
-            button.textContent = "Copy";
-          }, 2600);
+          button.textContent = "Copied";
+          showStatus("Email address copied.");
+          window.setTimeout(function () { button.textContent = label; }, 2400);
         } else {
-          showStatus("Copy failed — select the address above manually");
+          showStatus("Copy failed. Select the address above and copy it manually.");
         }
       }
 
@@ -133,33 +118,6 @@
         done(fallbackCopy(address));
       }
     });
-  });
-
-  /* ---------- click-to-play video previews ---------- */
-
-  var videos = document.querySelectorAll("[data-video]");
-
-  videos.forEach(function (wrap) {
-    var videoId = wrap.getAttribute("data-video");
-    var title = wrap.getAttribute("data-title") || "Video";
-    var preview = wrap.querySelector(".video__preview");
-    if (!preview || !videoId) return;
-
-    function play() {
-      var frame = document.createElement("div");
-      frame.className = "frame video__frame";
-      var iframe = document.createElement("iframe");
-      iframe.src = "https://www.youtube-nocookie.com/embed/" + videoId + "?autoplay=1&rel=0";
-      iframe.title = title;
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-      iframe.referrerPolicy = "strict-origin-when-cross-origin";
-      frame.appendChild(iframe);
-      preview.remove();
-      wrap.appendChild(frame);
-    }
-
-    preview.addEventListener("click", play);
   });
 
   /* ---------- footer year ---------- */

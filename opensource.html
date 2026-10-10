@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open Source — Jiaxi Wang</title>
-  <meta name="description" content="Open source and research code by Jiaxi Wang — Google Summer of Code mentor at INCF, and MITACS Globalink research intern at McGill University with gesture-based music control patches.">
-  <meta name="theme-color" content="#f4f2ec">
+  <title>Open source — Jiaxi Wang</title>
+  <meta name="description" content="Open-source work by Jiaxi Wang: Google Summer of Code mentoring with INCF and research code from McGill University.">
+  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://jiaxiwang05.github.io/opensource.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
-  <meta property="og:title" content="Open Source — Jiaxi Wang">
-  <meta property="og:description" content="GSoC mentoring at INCF and open-source gesture-based music control patches.">
+  <meta property="og:title" content="Open source — Jiaxi Wang">
+  <meta property="og:description" content="Open-source work by Jiaxi Wang: Google Summer of Code mentoring with INCF and research code from McGill University.">
   <meta property="og:url" content="https://jiaxiwang05.github.io/opensource.html">
   <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -26,97 +28,115 @@
 
   <header class="site-header">
     <nav class="nav" aria-label="Primary">
-      <a class="nav__brand" href="index.html">Jiaxi Wang<em>.</em></a>
+      <a class="nav__brand" href="index.html">
+        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
+        Jiaxi Wang
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
       <ul class="nav__links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
         <li><a href="research.html">Research</a></li>
         <li><a href="engineering.html">Engineering</a></li>
-        <li><a href="opensource.html" class="is-active" aria-current="page">Open Source</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="art.html">Art</a></li>
-        <li><a href="sport.html">Sport</a></li>
+        <li><a href="opensource.html" aria-current="page">Open source</a></li>
+        <li><a href="cv.html">CV</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-        <span class="nav__toggle-bar" aria-hidden="true"></span>
-      </button>
     </nav>
   </header>
 
   <main id="main">
 
-    <!-- ============ PAGE HEADER ============ -->
-    <section class="hero-home" aria-labelledby="page-title">
-      <div class="hero-home__inner">
-        <div>
-          <p class="eyebrow hero-home__eyebrow">Open Source</p>
-          <h1 id="page-title" class="hero-home__name">Open source<span class="dot">.</span></h1>
-          <p class="hero-home__identity">Mentoring scientific software and publishing research code.</p>
-          <p class="hero-home__statement">From mentoring contributors in computational neuroscience to releasing gesture-based music control patches, open source is where research becomes reproducible.</p>
-        </div>
+    <header class="page-head">
+      <div class="wrap">
+        <h1 class="page-head__title">Open source</h1>
+        <p class="page-head__lead">Mentoring scientific software and releasing research code.</p>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="gsoc-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="gsoc-title" class="section__title">Google Summer of Code</h2>
+          <p class="section__note">2026. Remote.</p>
+        </header>
+        <ol class="entries">
+          <li class="entry">
+            <p class="entry__when">2026</p>
+            <div>
+              <h3 class="entry__title">Mentor, International Neuroinformatics Coordinating Facility (INCF)</h3>
+              <p class="entry__org">Expressive gesture-to-sound mapping framework for GestureCap</p>
+              <p class="entry__text">Mentoring contributors on open-source neuroinformatics and computational-neuroscience software, building on the motion-to-sound work from McGill.</p>
+              <p class="links">
+                <a class="link" href="https://summerofcode.withgoogle.com/programs/2026/projects/mgRMtTYS" target="_blank" rel="noopener noreferrer">GSoC project 1</a>
+                <a class="link" href="https://summerofcode.withgoogle.com/programs/2026/projects/exG2wYXK" target="_blank" rel="noopener noreferrer">GSoC project 2</a>
+              </p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <!-- ============ ENTRIES ============ -->
-    <section class="section section--tint" aria-labelledby="os-title">
-      <div class="wrap">
-        <div class="section__head" data-reveal>
-          <p class="eyebrow">01 — Contributions</p>
-          <h2 id="os-title" class="section__title">Mentoring &amp; research code</h2>
-        </div>
-
-        <div class="catalog">
-          <article class="catalog__row" data-reveal>
-            <span class="catalog__num">2026</span>
-            <span class="catalog__cat">Service</span>
+    <section class="section" aria-labelledby="code-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="code-title" class="section__title">Research code</h2>
+        </header>
+        <ol class="entries">
+          <li class="entry">
+            <p class="entry__when">2025</p>
             <div>
-              <h3 class="catalog__title">Google Summer of Code Mentor</h3>
-              <p class="catalog__desc">Official GSoC mentor with the International Neuroinformatics Coordinating Facility (INCF), mentoring contributors in scientific software, computational neuroscience, and reproducible workflows.</p>
+              <h3 class="entry__title">gesturecap_mapping</h3>
+              <p class="entry__org">MITACS Globalink, CIRMMT, McGill University</p>
+              <p class="entry__text">Max/MSP patches for landmark-based gesture control and OSC integration, used for gesture-controlled music generation from MediaPipe motion capture.</p>
+              <p class="links">
+                <a class="link" href="https://github.com/JiaxiWang05/gesturecap_mapping" target="_blank" rel="noopener noreferrer">Repository on GitHub</a>
+                <a class="link" href="https://www.youtube.com/watch?v=aJl4vnLZrYE" target="_blank" rel="noopener noreferrer">Demo video</a>
+                <a class="link" href="research.html#motion">Project details</a>
+              </p>
             </div>
-            <div class="catalog__actions">
-              <a class="link-arrow" href="https://summerofcode.withgoogle.com/programs/2026/projects/mgRMtTYS" target="_blank" rel="noopener noreferrer">GSoC Project 1<span class="ext" aria-hidden="true">↗</span></a>
-              <a class="link-arrow" href="https://summerofcode.withgoogle.com/programs/2026/projects/exG2wYXK" target="_blank" rel="noopener noreferrer">GSoC Project 2<span class="ext" aria-hidden="true">↗</span></a>
-            </div>
-          </article>
-
-          <article class="catalog__row" data-reveal>
-            <span class="catalog__num">2025</span>
-            <span class="catalog__cat">Research</span>
-            <div>
-              <h3 class="catalog__title">MITACS Globalink Research Intern</h3>
-              <p class="catalog__desc">McGill University — gesture-controlled music generation from markerless motion capture (MediaPipe), with Max/MSP patches for landmark control and OSC integration released as open source.</p>
-            </div>
-            <div class="catalog__actions">
-              <a class="link-arrow" href="https://github.com/JiaxiWang05/gesturecap_mapping" target="_blank" rel="noopener noreferrer">GitHub — gesturecap_mapping<span class="ext" aria-hidden="true">↗</span></a>
-              <a class="link-arrow" href="https://www.youtube.com/watch?v=aJl4vnLZrYE" target="_blank" rel="noopener noreferrer">Watch demo<span class="ext" aria-hidden="true">↗</span></a>
-              <a class="link-arrow" href="certificates.html">Certificate</a>
-            </div>
-          </article>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <div class="site-footer__top">
-        <p class="site-footer__name">Jiaxi Wang<em>.</em></p>
-        <ul class="site-footer__links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="engineering.html">Engineering</a></li>
-          <li><a href="opensource.html">Open Source</a></li>
-          <li><a href="certificates.html">Certificates</a></li>
-          <li><a href="art.html">Art</a></li>
-          <li><a href="sport.html">Sport</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <div class="footer__grid">
+        <div>
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__text">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
+          <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div>
+          <p class="footer__heading">Work</p>
+          <ul class="footer__list">
+            <li><a href="research.html">Research</a></li>
+            <li><a href="engineering.html">Engineering</a></li>
+            <li><a href="opensource.html">Open source</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">About</p>
+          <ul class="footer__list">
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="certificates.html">Certificates</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Beyond the lab</p>
+          <ul class="footer__list">
+            <li><a href="art.html">Art</a></li>
+            <li><a href="sport.html">Sport</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="site-footer__bottom">
-        <p>© <span id="year">2026</span> Jiaxi Wang — AI research · medical robotics · engineering</p>
-        <p><a href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a> · <a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="cv.pdf">CV</a></p>
+      <div class="footer__base">
+        <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
+        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
       </div>
     </div>
   </footer>
