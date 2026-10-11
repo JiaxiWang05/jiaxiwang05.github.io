@@ -961,3 +961,38 @@ a.card:hover { border-color: var(--ink); }
   background: conic-gradient(#1F3DFF, #00C6DE, #14E0A0, #FFC21A, #FF7A12, #FF5545, #FF2E8B, #1F3DFF);
 }
 @media print { .version-switch { display: none; } }
+
+/* ---------- language switch (English / 中文), grouped with the version switch ---------- */
+
+.site-switches {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.site-switches .version-switch { position: static; }
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(16, 26, 31, .18);
+  transition: transform .2s ease;
+}
+.lang-switch:hover { transform: translateY(-2px); }
+.lang-switch:lang(zh) { font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", var(--font-sans); }
+/* keep the last footer line clear of the fixed switches when scrolled to the bottom */
+.site-footer { padding-bottom: 92px; }
+@media print { .site-switches { display: none; } }

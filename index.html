@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="night" data-force-theme="night" class="theme-forced">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Jiaxi Wang — Embodied AI and Medical Robotics</title>
   <meta name="description" content="Jiaxi Wang is an undergraduate researcher at Durham University working on embodied AI, vision–language–action models and medical robotics.">
-  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#05050A">
+  <script>(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'day':'night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
+  <script>(function(d){try{if(sessionStorage.getItem('jw-seen'))d.classList.add('jw-seen')}catch(e){}addEventListener('load',function(){setTimeout(function(){if(!window.JW)d.classList.remove('js')},0)})})(document.documentElement)</script>
   <link rel="canonical" href="https://jiaxiwang05.github.io/">
+  <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/">
+  <link rel="alternate" hreflang="zh-CN" href="https://jiaxiwang05.github.io/research-version/zh/">
+  <link rel="alternate" hreflang="x-default" href="https://jiaxiwang05.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="Jiaxi Wang — Embodied AI and Medical Robotics">
   <meta property="og:description" content="Jiaxi Wang is an undergraduate researcher at Durham University working on embodied AI, vision–language–action models and medical robotics.">
   <meta property="og:url" content="https://jiaxiwang05.github.io/">
@@ -18,11 +26,12 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&amp;text=%E4%B8%AD%E6%96%87&amp;display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
   <link rel="stylesheet" href="assets/css/site.css">
-  <script>document.documentElement.classList.add('js');</script>
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "Person", "name": "Jiaxi Wang", "url": "https://jiaxiwang05.github.io/",
    "email": "mailto:tggq61@durham.ac.uk", "sameAs": ["https://github.com/JiaxiWang05", "https://www.linkedin.com/in/-jiaxi-wang/"],
@@ -32,6 +41,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="field-backdrop" aria-hidden="true"><div class="grain"></div></div>
 
   <div class="loader" aria-hidden="true">
     <div class="loader__badge">
@@ -43,331 +53,527 @@
   </div>
 
   <header class="nav">
-    <a class="nav__brand" href="index.html" aria-current="page"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg>Jiaxi Wang</a>
-    <nav aria-label="Primary">
+    <a class="nav__brand" href="index.html" aria-current="page"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg><span>Jiaxi Wang</span></a>
+    <nav class="nav__primary" aria-label="Primary">
       <ul class="nav__links">
-        <li><a href="research.html">Research</a></li>
-        <li><a href="engineering.html">Engineering</a></li>
-        <li><a href="opensource.html">Open source</a></li>
-        <li><a href="cv.html">CV</a></li>
-        <li><a href="contact.html">Contact</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="engineering.html">Engineering</a></li>
+          <li><a href="opensource.html">Open source</a></li>
+          <li><a href="cv.html">CV</a></li>
+          <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <span class="nav__count" aria-hidden="true"></span>
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <div class="nav__tools">
+      <span class="nav__count" aria-hidden="true"></span>
+      <div class="lang" role="group" aria-label="Language"><span class="lang__opt" aria-current="true">EN</span><span class="lang__sep" aria-hidden="true">/</span><a class="lang__opt" href="research-version/zh/" hreflang="zh-CN" aria-label="Switch to the Chinese version of this page"><span lang="zh-CN">中文</span></a></div>
+      <button class="theme-toggle" type="button" data-theme-toggle data-magnetic aria-label="Switch between day and night theme">
+        <svg class="tt" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="tt-sun"><path d="M0 0H24L0 24Z"/></clipPath>
+            <clipPath id="tt-moon"><path d="M24 0V24H0Z"/></clipPath>
+            <mask id="tt-cres" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <rect width="24" height="24" fill="#fff"/><circle cx="10.66" cy="10.66" r="6" fill="#000"/>
+            </mask>
+          </defs>
+          <circle class="tt__corona" cx="12" cy="12" r="9.2"/>
+          <g class="tt__dial">
+            <g clip-path="url(#tt-sun)">
+              <circle class="tt__sun" cx="12" cy="12" r="6.5"/>
+              <g class="tt__rays">
+                <path pathLength="1" style="--i:0" d="M4.06 15.29 2.21 16.06"/>
+                <path pathLength="1" style="--i:1" d="M3.57 10.32 1.6 9.93"/>
+                <path pathLength="1" style="--i:2" d="M5.92 5.92 4.5 4.5"/>
+                <path pathLength="1" style="--i:3" d="M10.32 3.57 9.93 1.6"/>
+                <path pathLength="1" style="--i:4" d="M15.29 4.06 16.06 2.21"/>
+              </g>
+            </g>
+            <g clip-path="url(#tt-moon)">
+              <circle class="tt__moon" cx="12" cy="12" r="6.5" mask="url(#tt-cres)"/>
+              <circle class="tt__star" cx="19.4" cy="17.2" r=".7"/>
+              <circle class="tt__star" cx="16.6" cy="20.2" r=".5"/>
+            </g>
+            <path class="tt__term" d="M6.6 17.4 17.4 6.6"/>
+          </g>
+        </svg>
+        <span class="tt__tip" aria-hidden="true"></span>
+      </button>
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+    <div class="nav__progress" aria-hidden="true"><i></i></div>
   </header>
-  <nav class="menu" id="menu" aria-label="Menu">
-    <a href="index.html">Home</a>
-    <a href="research.html">Research</a>
-    <a href="engineering.html">Engineering</a>
-    <a href="opensource.html">Open source</a>
-    <a href="cv.html">CV</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <div class="colorbar" aria-hidden="true"><div class="colorbar__fill"></div></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="switcher">
-    <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" hidden>
-      <p id="switch-title" class="switcher__t">Here for the research?</p>
-      <p class="switcher__d">Switch to the research version: the same content on a clean, text-first page that is quick to read.</p>
+
+  <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" aria-describedby="switch-desc" hidden>
+    <div class="switcher__toast-in">
+      <div class="switcher__txt">
+        <p id="switch-title" class="switcher__t">Here for the research?</p>
+        <p id="switch-desc" class="switcher__d">Switch to the research version: the same content on a clean, text-first page that is quick to read.</p>
+      </div>
       <div class="switcher__acts">
-        <a class="switcher__go" href="research-version/">Switch version</a>
-        <button class="switcher__x" type="button">Stay here</button>
+        <a class="btn btn--solid btn--sm switcher__go" href="research-version/">Switch version</a>
+        <button class="btn btn--sm switcher__x" type="button"><span class="switcher__x-label">Stay here</span><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
       </div>
     </div>
-    <a class="switcher__btn" href="research-version/" data-magnetic aria-label="Switch to the research version of this page">
-      <span class="switcher__glow" aria-hidden="true"></span>
-      <span class="switcher__label">Research version<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-      <span class="switcher__hint">Clean and text-first</span>
+  </div>
+
+  <nav class="menu" id="menu" aria-label="Menu" data-hue="mucosa">
+    <ol class="menu__list">
+      <li style="--i:0"><a href="index.html" aria-current="page"><span class="menu__n" aria-hidden="true">01</span>Home</a></li>
+      <li style="--i:1"><a href="research.html"><span class="menu__n" aria-hidden="true">02</span>Research</a></li>
+      <li style="--i:2"><a href="engineering.html"><span class="menu__n" aria-hidden="true">03</span>Engineering</a></li>
+      <li style="--i:3"><a href="opensource.html"><span class="menu__n" aria-hidden="true">04</span>Open source</a></li>
+      <li style="--i:4"><a href="cv.html"><span class="menu__n" aria-hidden="true">05</span>CV</a></li>
+      <li style="--i:5"><a href="contact.html"><span class="menu__n" aria-hidden="true">06</span>Contact</a></li>
+    </ol>
+    <div class="menu__foot">
+      <div class="lang" role="group" aria-label="Language"><span class="lang__opt" aria-current="true">EN</span><span class="lang__sep" aria-hidden="true">/</span><a class="lang__opt" href="research-version/zh/" hreflang="zh-CN" aria-label="Switch to the Chinese version of this page"><span lang="zh-CN">中文</span></a></div>
+      <a class="tlink menu__rv" href="research-version/">Research version<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+    </div>
+  </nav>
+
+  <div class="switcher">
+    <a class="switcher__btn" href="research-version/" aria-label="Switch to the research version of this page">
+      <span class="switcher__label">Research version<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span><span class="switcher__hint">Clean and text-first</span>
     </a>
   </div>
 
   <main id="main">
 
-    <section class="hero" data-field="lumen" data-chapter="Intro" aria-labelledby="hero-name">
-      <div class="burst" aria-hidden="true"></div>
+    <section class="hero" data-hue="mucosa" data-pool="none" data-chapter="Intro" aria-labelledby="hero-name">
       <div class="hero__grid">
         <div class="hero__text">
-          <a class="hero__logo" href="https://www.durham.ac.uk/departments/academic/engineering/" target="_blank" rel="noopener noreferrer"><img src="assets/durham-university-logo.png" alt="Durham University, Department of Engineering" width="640" height="264"></a>
-          <h1 id="hero-name" class="hero__name t-display" data-split="chars" data-split-manual>Jiaxi <span class="line2">Wang</span></h1>
-          <p class="hero__role t-sub">Embodied AI and medical robotics.</p>
-          <div class="pills">
-            <a class="pill pill--solid" href="cv.pdf" data-magnetic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download CV</a>
-            <a class="pill" href="mailto:tggq61@durham.ac.uk" data-magnetic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1"/><path d="m3 6 9 7 9-7"/></svg>Email</a>
-            <a class="pill" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer" data-magnetic>GitHub</a>
-            <a class="pill" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer" data-magnetic>LinkedIn</a>
+          <p class="hero__aff"><a class="logo-plate" href="https://www.durham.ac.uk/departments/academic/engineering/" target="_blank" rel="noopener noreferrer"><img src="assets/durham-university-logo.png" alt="Durham University, Department of Engineering" width="640" height="264"></a><span>Department of Engineering</span></p>
+          <h1 id="hero-name" class="hero__name" data-split="chars" data-split-manual>Jiaxi <span class="line2">Wang</span></h1>
+          <p class="hero__role t-subtitle">Embodied AI and medical robotics.</p>
+          <p class="hero__fact t-lead">Final-year BEng Electronics Engineering, Durham University. Department of Engineering.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--solid" href="cv.pdf" data-magnetic><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download CV</a>
+            <a class="btn" href="mailto:tggq61@durham.ac.uk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3 6 9 7 9-7"/></svg>Email</a>
+            <a class="tlink" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+            <a class="tlink" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
           </div>
-          <p class="hero__type t-cap" data-type data-type-manual>Final-year BEng Electronics Engineering, Durham University. Department of Engineering.</p>
         </div>
-        <div class="scope" role="img" aria-label="Schematic endoscopic view: tissue folds converge on the lumen; a predicted action path runs to a bracketed future target region, the idea behind EndoWAM.">
-          <div class="scope__lens"></div>
-          <svg class="scope__hud" viewBox="-34 -34 628 628" aria-hidden="true">
-              <circle class="ring" cx="280" cy="280" r="282"/>
-              <circle class="ring" cx="280" cy="280" r="300" stroke-dasharray="2 10"/>
-              <path class="tick" d="M280 -6v-22M280 566v22M-6 280h-22M566 280h22"/>
-              <path class="path" d="M258 520C232 400 330 330 342 246"/>
-              <circle class="wp" cx="252" cy="484" r="7"/><circle class="wp" cx="262" cy="410" r="6"/><circle class="wp" cx="292" cy="348" r="5"/><circle class="wp" cx="324" cy="296" r="4"/><circle class="wp" cx="338" cy="262" r="3"/>
-              <path class="bracket" d="M306 214v-16h16M362 198h16v16M378 262v16h-16M322 278h-16v-16"/>
-              <g class="note"><path class="leader" d="M378 198L452 70h110"/><text x="456" y="60">Future target</text><text class="dim" x="456" y="92">region at t + k</text></g>
-              <g class="note"><path class="leader" d="M246 494L120 572H-20"/><text x="-20" y="562">Predicted actions</text><text class="dim" x="-20" y="594">from the frame at t</text></g>
+        <figure class="scope fig" data-explain data-explain-pos="scope" data-hue="icg">
+          <div class="scope__stage" tabindex="0" role="group" aria-roledescription="interactive figure"
+               aria-label="Schematic endoscopic view: tissue folds converge on the lumen; a predicted action path runs to a bracketed future target region, the idea behind EndoWAM."
+               aria-describedby="ex-scope" data-cursor="">
+            <div class="scope__halo" aria-hidden="true"></div>
+            <div class="scope__lens" data-scope="hero"></div>
+            <svg class="scope__hud" viewBox="-34 -34 628 628" aria-hidden="true">
+              <circle class="hud-ring" cx="280" cy="280" r="282"/>
+              <circle class="hud-ring hud-ring--dash" cx="280" cy="280" r="300"/>
+              <circle class="hud-hold" cx="280" cy="280" r="291" transform="rotate(-90 280 280)"/>
+              <path class="hud-tick" d="M280 -6v-22M280 566v22M-6 280h-22M566 280h22"/>
+              <g class="hud-plan">
+                <path class="hud-case" d="M258 520C232 400 330 330 342 246"/>
+                <path class="hud-path" d="M258 520C232 400 330 330 342 246"/>
+                <circle class="wp" cx="252" cy="484" r="7"/><circle class="wp" cx="262" cy="410" r="6"/><circle class="wp" cx="292" cy="348" r="5"/><circle class="wp" cx="324" cy="296" r="4"/><circle class="wp" cx="338" cy="262" r="3"/>
+              </g>
+              <g class="hud-target" transform="translate(342 238)">
+                <path class="hud-case" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/>
+                <path class="hud-bracket" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/>
+              </g>
+              <g class="note note--target"><path class="leader" d="M378 198L452 70h110"/><text x="456" y="58">Future target</text><text class="dim" x="456" y="90">region at t + k</text></g>
+              <g class="note note--plan"><path class="leader" d="M246 494L120 572H-20"/><text x="-20" y="560">Predicted actions</text><text class="dim" x="-20" y="592">from the frame at t</text></g>
             </svg>
-        </div>
+            <span class="scope__handle" aria-hidden="true"></span>
+          </div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-scope"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain explain--scope" id="ex-scope">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Future target grounding in EndoWAM</p>
+            <p class="explain__d">A video world model predicts where the task-relevant target region will appear in future frames (t + k), marked by the green bracket. An action expert plans the endoscope's navigation actions from the current frame (t) toward it, drawn as the cyan path.</p>
+            <ul class="explain__legend"><li class="lg-target">Future target region at t + k</li><li class="lg-path">Predicted actions from the frame at t</li></ul>
+            <p class="explain__try"><span class="explain__try--fine">Drag the bracket or click the lumen to move the target · Hold to advance · Arrow keys work too</span><span class="explain__try--coarse">Drag the bracket to move the target · Press and hold to advance</span></p>
+            <p class="explain__n">A stylised schematic, not real footage or model output.</p>
+            <p class="explain__more"><a class="tlink" href="#publication">Read the paper</a></p>
+          </figcaption>
+          <ul class="scope__legend" aria-hidden="true"><li class="lg-path">Predicted actions from the frame at t</li><li class="lg-target">Future target region at t + k</li></ul>
+          <p class="scope__hint t-meta" aria-hidden="true"><span class="explain__try--fine">Click (i) to explain · Drag the target · Hold to advance</span><span class="explain__try--coarse">Tap (i) to explain · Drag the target · Press and hold</span></p>
+        </figure>
       </div>
-      <p class="hero__scroll" aria-hidden="true">Scroll into the lumen<i></i></p>
     </section>
 
-    <section class="chapter" data-field="coil_cobalt" data-chapter="Currently" aria-labelledby="now-title">
-      <span class="ghost" data-ghost aria-hidden="true" style="left: -2vw; top: 6%;">Now</span>
+    <section class="statement-stage" data-hue="coil" data-chapter="Profile" aria-label="Profile">
+      <div class="statement-stage__pin"><div class="wrap">
+        <p class="statement" data-illuminate>I study how robots can see, reason and act in places that are hard to model, such as <em data-hue="icg">the inside of the body</em>, using vision–language–action and world-action models.</p>
+      </div></div>
+      <div class="wrap"><p class="statement__follow t-lead" data-reveal="up">At Durham I work with Dr Amir Atapour-Abarghouei and Dr Chris Chen on how robot policies and learned representations transfer across embodiments. Before that I worked in Prof. Hongliang Ren's Medical Robotics Group at CUHK on autonomous endoscopic navigation.</p></div>
+    </section>
+
+    <section class="chapter now" data-hue="coil" data-chapter="Currently" aria-labelledby="now-title">
       <div class="wrap">
-        <p class="statement" data-split="lines">I study how robots can see, reason and act in places that are hard to model, such as <em>the inside of the body</em>, using vision–language–action and world-action models.</p>
-        <p class="t-body t-ink2" data-reveal="blur" style="margin-top: 36px;">At Durham I work with Dr Amir Atapour-Abarghouei and Dr Chris Chen on how robot policies and learned representations transfer across embodiments. Before that I worked in Prof. Hongliang Ren's Medical Robotics Group at CUHK on autonomous endoscopic navigation.</p>
-        <h2 id="now-title" class="t-heading" data-split="chars" style="margin: clamp(80px, 12vh, 160px) 0 40px;">Currently</h2>
+        <h2 id="now-title" class="t-display" data-split="lines">Currently</h2>
         <div class="index-list">
-          <a class="index-item" href="research.html#embodied" data-reveal="up">
-            <span class="index-item__when"><span class="dot"></span> Ongoing</span>
-            <span class="index-item__title">Cross-embodiment learning and vision–language–action systems</span>
-            <span class="index-item__go">Questions</span>
-            <span class="index-item__meta">Durham University, with Dr Amir Atapour-Abarghouei and Dr Chris Chen</span>
-          </a>
-          <a class="index-item" href="research.html#dissertation" data-reveal="up">
-            <span class="index-item__when">2026–27</span>
-            <span class="index-item__title">Dissertation: Small data, large models</span>
-            <span class="index-item__go">Plan</span>
-            <span class="index-item__meta">Durham University, supervised by Dr Raheleh Kafieh</span>
-          </a>
-          <a class="index-item" href="#publication" data-reveal="up">
-            <span class="index-item__when">In submission</span>
-            <span class="index-item__title">EndoWAM, a grounded world-action model for endoscopic navigation</span>
-            <span class="index-item__go">Paper</span>
-            <span class="index-item__meta">AAAI 2027 and ICLR 2027</span>
-          </a>
-          <a class="index-item" href="opensource.html" data-reveal="up">
-            <span class="index-item__when">2026</span>
-            <span class="index-item__title">Google Summer of Code mentor</span>
-            <span class="index-item__go">Open source</span>
-            <span class="index-item__meta">International Neuroinformatics Coordinating Facility (INCF): an expressive gesture-to-sound mapping framework for GestureCap</span>
-          </a>
+        <a class="index-item" href="research.html#embodied" data-hue="disc" data-peek="embodiment" data-reveal="up">
+          <span class="index-item__when t-meta"><span class="live-dot" aria-hidden="true"></span>Ongoing</span>
+          <span class="index-item__title">Cross-embodiment learning and vision–language–action systems</span>
+          <span class="index-item__meta t-small">Durham University, with Dr Amir Atapour-Abarghouei and Dr Chris Chen</span>
+          <span class="index-item__go">Research<span aria-hidden="true"> →</span></span>
+        </a>
+        <a class="index-item" href="research.html#dissertation" data-hue="fundus" data-peek="fundus" data-reveal="up">
+          <span class="index-item__when t-meta">2026–27</span>
+          <span class="index-item__title">Dissertation: Small data, large models</span>
+          <span class="index-item__meta t-small">Durham University, supervised by Dr Raheleh Kafieh</span>
+          <span class="index-item__go">Dissertation<span aria-hidden="true"> →</span></span>
+        </a>
+        <a class="index-item" href="#publication" data-hue="icg" data-peek="lens" data-reveal="up">
+          <span class="index-item__when t-meta"><span class="live-dot" aria-hidden="true"></span>In submission</span>
+          <span class="index-item__title">EndoWAM, a grounded world-action model for endoscopic navigation</span>
+          <span class="index-item__meta t-small">AAAI 2027 and ICLR 2027</span>
+          <span class="index-item__go">Paper<span aria-hidden="true"> →</span></span>
+        </a>
+        <a class="index-item" href="opensource.html" data-hue="ppix" data-peek="pose" data-reveal="up">
+          <span class="index-item__when t-meta">2026</span>
+          <span class="index-item__title">Google Summer of Code mentor</span>
+          <span class="index-item__meta t-small">International Neuroinformatics Coordinating Facility (INCF): an expressive gesture-to-sound mapping framework for GestureCap</span>
+          <span class="index-item__go">Open source<span aria-hidden="true"> →</span></span>
+        </a>
         </div>
       </div>
     </section>
 
-    <section id="publication" class="chapter" data-field="paper" data-chapter="Publication" aria-labelledby="pub-title">
-      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">EndoWAM</span>
-      <div class="wrap">
-        <p class="eyebrow"><b>Publication</b> Under review</p>
-        <div class="pub">
-          <div>
-            <p class="pub__venue"><span class="chip"><span class="dot"></span>In submission</span><span>AAAI 2027 and ICLR 2027</span><span data-scramble>arXiv:2608.01221</span></p>
-            <h2 id="pub-title" class="pub__title t-heading" style="font-size: clamp(38px, 5vw, 80px);" data-split="words"><a href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation</a></h2>
-            <p class="pub__authors" data-reveal="up">Jinsong Lin, Zikang Pan, Wanhao Liu, Chi Kit Ng, Liangjing Shao, Zihang Yu, Ziyu Wang, Yin Wang, <b>Jiaxi Wang</b>, Jeremy Yuen-Chun Teoh, Zhiyong Xiong, Huxin Gao, Hongliang Ren</p>
-            <p class="pub__abstract t-body" data-reveal="up">A video world model predicts where task-relevant target regions will appear in future frames, and a lightweight action expert shares that predictive representation to choose navigation actions in a single denoising pass. Trained on EndoMotion, a robotic endoscopy dataset spanning ureteroscopy, oesophagoscopy and ERCP, it generalises zero-shot to unseen viewpoints, environments and targets.</p>
-            <p class="links">
-              <a class="link" href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">arXiv:2608.01221</a>
-              <a class="link" href="https://openreview.net/forum?id=tMKXzwa7tP" target="_blank" rel="noopener noreferrer">OpenReview</a>
-              <a class="link" href="https://www.youtube.com/watch?v=TT5MsdQ0pKI" target="_blank" rel="noopener noreferrer">Video on YouTube</a>
-            </p>
-          </div>
-          <div data-pop>
-            <div class="video" data-video="TT5MsdQ0pKI" data-title="EndoWAM demo: grounded world-action model for endoscopic navigation" data-cursor="Play">
-              <button class="video__btn" type="button" aria-label="Play video: EndoWAM demo: grounded world-action model for endoscopic navigation">
-                <img src="https://i.ytimg.com/vi/TT5MsdQ0pKI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
-                <span class="video__label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Play demo</span>
-              </button>
+    <section id="publication" class="chapter pubstage" data-hue="icg" data-chapter="Publication" aria-labelledby="pub-title">
+      <div class="wrap pubstage__grid">
+        <div class="pubstage__text">
+          <p class="eyebrow t-meta"><b>Publication</b> Under review</p>
+          <p class="pub__venue t-meta"><span class="chip chip--live"><span class="live-dot" aria-hidden="true"></span>In submission</span><span>AAAI 2027 and ICLR 2027</span><span data-scramble>arXiv:2608.01221</span></p>
+          <h2 id="pub-title" class="pub__title t-title" data-split="lines"><a href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation</a></h2>
+          <p class="pub__authors t-small" data-reveal="up">Jinsong Lin, Zikang Pan, Wanhao Liu, Chi Kit Ng, Liangjing Shao, Zihang Yu, Ziyu Wang, Yin Wang, <b>Jiaxi Wang</b>, Jeremy Yuen-Chun Teoh, Zhiyong Xiong, Huxin Gao, Hongliang Ren</p>
+          <p class="pub__abstract t-body" data-reveal="up">A video world model predicts where task-relevant target regions will appear in future frames, and a lightweight action expert shares that predictive representation to choose navigation actions in a single denoising pass. Trained on EndoMotion, a robotic endoscopy dataset spanning ureteroscopy, oesophagoscopy and ERCP, it generalises zero-shot to unseen viewpoints, environments and targets.</p>
+          <p class="links"><a class="tlink" href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">arXiv:2608.01221<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://openreview.net/forum?id=tMKXzwa7tP" target="_blank" rel="noopener noreferrer">OpenReview<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://www.youtube.com/watch?v=TT5MsdQ0pKI" target="_blank" rel="noopener noreferrer">Video on YouTube<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
+          <div data-reveal="mask"><div class="video" data-video="TT5MsdQ0pKI" data-title="EndoWAM demo: grounded world-action model for endoscopic navigation" data-cursor=""><button class="video__btn" type="button" aria-label="Play video: EndoWAM demo: grounded world-action model for endoscopic navigation"><img src="https://i.ytimg.com/vi/TT5MsdQ0pKI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="video__label"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z"/></svg>Play demo</span></button></div></div>
+        </div>
+        <div class="pubstage__sticky">
+          <figure class="monitor fig" data-explain data-hue="icg">
+            <div class="monitor__screen">
+              <div class="monitor__lens scope__lens" data-scope="monitor"></div>
+              <svg class="monitor__hud" viewBox="0 0 640 360" aria-hidden="true">
+                <circle class="hud-ring" cx="320" cy="180" r="166"/>
+                <path class="hud-tick" d="M320 6v10M320 344v10M146 180h10M484 180h10"/>
+                <g class="mon-ghost" data-k="0" transform="translate(296 236) scale(.62)"><path class="hud-bracket" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/></g>
+                <g class="mon-ghost" data-k="0.5" transform="translate(326 196) scale(.8)"><path class="hud-bracket" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/></g>
+                <path class="hud-case mon-path" d="M304 338C296 286 340 240 352 158"/>
+                <path class="hud-path mon-path" d="M304 338C296 286 340 240 352 158"/>
+                <g class="mon-live" transform="translate(352 150)"><path class="hud-case" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/><path class="hud-bracket" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/></g>
+                <text class="mon-tag" x="24" y="34">Frame t</text>
+                <text class="mon-tag" x="616" y="34" text-anchor="end">Horizon t + k</text>
+              </svg>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="plates" data-chapter="Research" aria-labelledby="plates-title">
-      <h2 id="plates-title" class="vh">Research projects</h2>
-      <div class="plates__counter" aria-hidden="true"><span><span class="roll"><b>01</b><b>02</b><b>03</b><b>04</b><b>05</b><b>06</b></span><small>/ 06</small></span></div>
-
-      <article class="plate" data-field="icg_green" id="home-embodied">
-        <span class="ghost" data-ghost aria-hidden="true">Embodied</span>
-        <div class="plate__grid">
-          <div>
-            <p class="plate__n"><span>01</span><span>Durham University, ongoing</span></p>
-            <h3 class="plate__title" data-split="words">Cross-embodiment learning and transferable action representations</h3>
-            <p class="plate__desc" data-reveal="up">With Dr Amir Atapour-Abarghouei and Dr Chris Chen: how robot policies and learned representations carry over between platforms, and how vision–language conditioning combines with action and state.</p>
-            <p class="links"><a class="link" href="research.html#embodied">Read more on the research page</a></p>
-          </div>
-          <div class="plate__specimen" data-specimen="embodiment" style="color: var(--ink);"></div>
-        </div>
-      </article>
-      <article class="plate" data-field="fundus_orange" id="home-dissertation">
-        <span class="ghost" data-ghost aria-hidden="true">Retina</span>
-        <div class="plate__grid">
-          <div>
-            <p class="plate__n"><span>02</span><span>Dissertation, 2026–27</span></p>
-            <h3 class="plate__title" data-split="words">Small data, large models</h3>
-            <p class="plate__desc" data-reveal="up">With Dr Raheleh Kafieh: frozen features from RETFound and general-purpose encoders, compared on glaucoma detection with 25 to 200 training images and tested on unseen cameras.</p>
-            <p class="links"><a class="link" href="research.html#dissertation">Read more on the research page</a></p>
-          </div>
-          <div class="plate__specimen" data-specimen="fundus" style="color: var(--ink);"></div>
-        </div>
-      </article>
-      <article class="plate" data-field="mucosa_coral" id="home-bilivla">
-        <span class="ghost" data-ghost aria-hidden="true">ERCP</span>
-        <div class="plate__grid">
-          <div>
-            <p class="plate__n"><span>03</span><span>CUHK Medical Robotics Group, 2026</span></p>
-            <h3 class="plate__title" data-split="words">BiliVLA: scene-aware VLA for autonomous ERCP navigation</h3>
-            <p class="plate__desc" data-reveal="up">Vision–language–action navigation of the bile duct, reported in ERCP phantom experiments.</p>
-            <div class="metrics" aria-label="Results in ERCP phantom experiments">
-              <div><p class="metric__v"><span data-count="96.25">96.25</span><small>%</small></p><p class="metric__l">mIoU</p></div>
-              <div><p class="metric__v"><span data-count="91.96">91.96</span><small>%</small></p><p class="metric__l">Action precision</p></div>
-              <div><p class="metric__v"><span data-count="84.85">84.85</span><small>%</small></p><p class="metric__l">Navigation success</p></div>
+            <div class="monitor__bar">
+              <span class="monitor__readout t-meta">t + 1.00k</span>
+              <div class="monitor__scrub" role="group" aria-label="Jump along the prediction horizon">
+                <span class="monitor__track" aria-hidden="true"><i class="monitor__fill"></i></span>
+                <button type="button" class="monitor__tick" data-k="0">t</button>
+                <button type="button" class="monitor__tick" data-k="0.5">t + k/2</button>
+                <button type="button" class="monitor__tick" data-k="1">t + k</button>
+              </div>
             </div>
-            <p class="links"><a class="link" href="research.html#bilivla">Read more on the research page</a></p>
-          </div>
-          <div class="plate__specimen" data-specimen="lumen" style="color: var(--ink);"></div>
-        </div>
-      </article>
-      <article class="plate" data-field="nbi_cyan" id="home-benchmark">
-        <span class="ghost" data-ghost aria-hidden="true">Data</span>
-        <div class="plate__grid">
-          <div>
-            <p class="plate__n"><span>04</span><span>CUHK Medical Robotics Group, 2026</span></p>
-            <h3 class="plate__title" data-split="words">Teleoperated flexible endoscopy benchmark</h3>
-            <p class="plate__desc" data-reveal="up">150 synchronised video and robot-state segments, a 224 × 224 image–action trajectory pipeline, and a π0.5 VLA navigation baseline.</p>
-            <p class="links"><a class="link" href="research.html#benchmark">Read more on the research page</a></p>
-          </div>
-          <div class="plate__specimen" data-specimen="grid" style="color: var(--ink);"></div>
-        </div>
-      </article>
-      <article class="plate" data-field="coil_cobalt" id="home-trileg">
-        <span class="ghost" data-ghost aria-hidden="true">Coils</span>
-        <div class="plate__grid">
-          <div>
-            <p class="plate__n"><span>05</span><span>CUHK Medical Robotics Group, 2026</span></p>
-            <h3 class="plate__title" data-split="words">Trileg-ESD: vision-guided magnetic soft robot</h3>
-            <p class="plate__desc" data-reveal="up">A three-legged magnetic soft robot for tissue manipulation, driven by a vision–language controller over three electromagnetic coils.</p>
-            <p class="links"><a class="link" href="research.html#trileg">Read more on the research page</a></p>
-          </div>
-          <div class="plate__specimen" data-specimen="coils" style="color: var(--ink);"></div>
-        </div>
-      </article>
-      <article class="plate" data-field="ppix_magenta" id="home-motion">
-        <span class="ghost" data-ghost aria-hidden="true">Sound</span>
-        <div class="plate__grid">
-          <div>
-            <p class="plate__n"><span>06</span><span>McGill University, MITACS Globalink, 2025</span></p>
-            <h3 class="plate__title" data-split="words">Markerless motion-to-sound interaction</h3>
-            <p class="plate__desc" data-reveal="up">A low-latency Python and MediaPipe pipeline that turns body movement into music in real time.</p>
-            <p class="links"><a class="link" href="research.html#motion">Read more on the research page</a></p>
-          </div>
-          <div class="plate__specimen" data-specimen="pose" style="color: var(--ink);"></div>
-        </div>
-      </article>
-    </section>
-
-    <section class="chapter flash" data-field="disc_amber" data-chapter="Experience" aria-labelledby="exp-flash">
-      <div>
-        <h2 id="exp-flash" class="flash__word" data-split="chars">Experi<em>ence</em></h2>
-        <div class="marquee" data-marquee="26" aria-hidden="true" style="margin-top: 48px; --rule: rgba(28,19,0,.3);">
-          <div class="marquee__track"><span style="color: var(--ink)">Durham</span><span style="color: var(--ink)">CUHK</span><span style="color: var(--ink)">McGill</span><span style="color: var(--ink)">Edinburgh</span><span style="color: var(--ink)">Notre Dame</span><span style="color: var(--ink)">INCF</span></div>
+            <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-monitor"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+            <figcaption class="explain" id="ex-monitor">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Scrubbing the prediction horizon</p>
+            <p class="explain__d">Scrolling moves time from the current frame t to t + k. The bracket marks where the target region is predicted to appear at each step; the path is the action plan computed from frame t.</p>
+            <p class="explain__try"><span class="explain__try--fine">Scroll, or jump with the t · t + k/2 · t + k buttons.</span><span class="explain__try--coarse">Use the t · t + k/2 · t + k buttons.</span></p>
+            <p class="explain__n">A stylised schematic, not real footage or model output.</p>
+          </figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <section class="chapter" data-field="lumen" aria-labelledby="exp-title">
+    <section class="gallery" data-chapter="Research" aria-labelledby="gallery-title">
+      <div class="wrap gallery__head"><p class="eyebrow t-meta">Research · 06</p><h2 id="gallery-title" class="t-display" data-split="lines">Research projects</h2></div>
+      <div class="gallery__viewport"><div class="gallery__track">
+    <article class="slide" id="home-embodied" data-hue="disc" aria-labelledby="home-embodied-t">
+      <span class="slide__num" aria-hidden="true">01</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">01 · Durham University, ongoing</p>
+        <h3 id="home-embodied-t" class="slide__title t-title">Cross-embodiment learning and transferable action representations</h3>
+        <p class="slide__desc t-body">With Dr Amir Atapour-Abarghouei and Dr Chris Chen: how robot policies and learned representations carry over between platforms, and how vision–language conditioning combines with action and state.</p>
+        <a class="tlink" href="research.html#embodied">Read more on the research page<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="disc">
+          <div class="fig__stage" data-specimen="embodiment" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-embodiment"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-embodiment">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Three robots, one target</p>
+            <p class="explain__d">Three different kinematic chains reach for the same moving target in a shared action space: the question of whether a policy or learned representation can carry over between embodiments.</p>
+            <p class="explain__try"><span class="explain__try--fine">Move the pointer over the figure to set the shared target.</span><span class="explain__try--coarse">Tap the figure to set the target.</span></p>
+            <p class="explain__n">Schematic, not a trained policy.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-dissertation" data-hue="fundus" aria-labelledby="home-dissertation-t">
+      <span class="slide__num" aria-hidden="true">02</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">02 · Dissertation, 2026–27</p>
+        <h3 id="home-dissertation-t" class="slide__title t-title">Small data, large models</h3>
+        <p class="slide__desc t-body">With Dr Raheleh Kafieh: frozen features from RETFound and general-purpose encoders, compared on glaucoma detection with 25 to 200 training images and tested on unseen cameras.</p>
+        <a class="tlink" href="research.html#dissertation">Read more on the research page<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="fundus">
+          <div class="fig__stage" data-specimen="fundus" data-cursor=""></div>
+          <div class="fig__controls" role="group" aria-label="Training images"><button type="button" data-step="25" aria-pressed="false">25</button><button type="button" data-step="50" aria-pressed="false">50</button><button type="button" data-step="100" aria-pressed="false">100</button><button type="button" data-step="200" aria-pressed="true">200</button></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-fundus"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-fundus">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Retina under scarce labels</p>
+            <p class="explain__d">A retinal fundus with its optic disc and vessel tree. The dots fill in the four training-set sizes of the data-efficiency curve (25, 50, 100 and 200 images); the three rings stand for the three cameras of the external test set.</p>
+            <p class="explain__try"><span class="explain__try--fine">Use the step buttons or scroll to change the training-set size.</span><span class="explain__try--coarse">Tap a step.</span></p>
+            <p class="explain__n">Schematic. The study has no results yet.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-bilivla" data-hue="mucosa" aria-labelledby="home-bilivla-t">
+      <span class="slide__num" aria-hidden="true">03</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">03 · CUHK Medical Robotics Group, 2026</p>
+        <h3 id="home-bilivla-t" class="slide__title t-title">BiliVLA: scene-aware VLA for autonomous ERCP navigation</h3>
+        <p class="slide__desc t-body">Vision–language–action navigation of the bile duct, reported in ERCP phantom experiments.</p>
+        <a class="tlink" href="research.html#bilivla">Read more on the research page<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="mucosa">
+          <div class="fig__stage" data-specimen="lumen" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-lumen"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-lumen">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Grounding in the bile duct</p>
+            <p class="explain__d">A bile-duct lumen in an ERCP phantom. The bracket is a grounding box on the duct opening and the dotted line is the planned path.</p>
+            <p class="explain__try"><span class="explain__try--fine">Move the pointer to shift the scene; the box keeps the opening.</span><span class="explain__try--coarse">Drag the scene.</span></p>
+            <p class="explain__n">Schematic, not BiliVLA output.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-benchmark" data-hue="nbi" aria-labelledby="home-benchmark-t">
+      <span class="slide__num" aria-hidden="true">04</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">04 · CUHK Medical Robotics Group, 2026</p>
+        <h3 id="home-benchmark-t" class="slide__title t-title">Teleoperated flexible endoscopy benchmark</h3>
+        <p class="slide__desc t-body">150 synchronised video and robot-state segments, a 224 × 224 image–action trajectory pipeline, and a <span class="sym">π</span>0.5 VLA navigation baseline.</p>
+        <a class="tlink" href="research.html#benchmark">Read more on the research page<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="nbi">
+          <div class="fig__stage" data-specimen="grid" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-grid"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-grid">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">150 synchronised segments</p>
+            <p class="explain__d">One tile per synchronised endoscopic video and robot-state segment in the benchmark; frames are cropped to 224 × 224 for the image–action trajectories.</p>
+            <p class="explain__try"><span class="explain__try--fine">Hover a tile to read its index.</span><span class="explain__try--coarse">Tap a tile.</span></p>
+            <p class="explain__n">Schematic of the dataset size, not the data itself.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-trileg" data-hue="coil" aria-labelledby="home-trileg-t">
+      <span class="slide__num" aria-hidden="true">05</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">05 · CUHK Medical Robotics Group, 2026</p>
+        <h3 id="home-trileg-t" class="slide__title t-title">Trileg-ESD: vision-guided magnetic soft robot</h3>
+        <p class="slide__desc t-body">A three-legged magnetic soft robot for tissue manipulation, driven by a vision–language controller over three electromagnetic coils.</p>
+        <a class="tlink" href="research.html#trileg">Read more on the research page<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="coil">
+          <div class="fig__stage" data-specimen="coils" data-cursor="" tabindex="0" role="group" aria-label="Trileg-ESD schematic. Arrow keys move the robot." aria-describedby="ex-coils"></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-coils"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-coils">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Three coils, one soft robot</p>
+            <p class="explain__d">Three electromagnetic coils set 120° apart drive a three-legged magnetic soft robot; the dashed field lines show which coil is active.</p>
+            <p class="explain__try"><span class="explain__try--fine">Drag the robot; the nearest coil takes over.</span><span class="explain__try--coarse">Drag the robot.</span></p>
+            <p class="explain__n">Schematic, not a field simulation.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-motion" data-hue="ppix" aria-labelledby="home-motion-t">
+      <span class="slide__num" aria-hidden="true">06</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">06 · McGill University, MITACS Globalink, 2025</p>
+        <h3 id="home-motion-t" class="slide__title t-title">Markerless motion-to-sound interaction</h3>
+        <p class="slide__desc t-body">A low-latency Python and MediaPipe pipeline that turns body movement into music in real time.</p>
+        <a class="tlink" href="research.html#motion">Read more on the research page<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="ppix">
+          <div class="fig__stage" data-specimen="pose" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-pose"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-pose">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Movement into sound</p>
+            <p class="explain__d">Body landmarks of the kind MediaPipe tracks; arm movement drives a waveform, as in the markerless motion-to-sound pipeline.</p>
+            <p class="explain__try"><span class="explain__try--fine">Move the pointer to raise the arm; faster movement, larger wave.</span><span class="explain__try--coarse">Drag across the figure.</span></p>
+            <p class="explain__n">Visual only, no audio.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+      </div></div>
+      <div class="gallery__ruler" aria-hidden="true">
+        <span class="gallery__ticks"><i data-hue="disc"></i><i data-hue="fundus"></i><i data-hue="mucosa"></i><i data-hue="nbi"></i><i data-hue="coil"></i><i data-hue="ppix"></i></span>
+        <span class="gallery__count"><span class="roll"><b>01</b><b>02</b><b>03</b><b>04</b><b>05</b><b>06</b></span><small>/ 06</small></span>
+      </div>
+    </section>
+
+    <section class="chapter numbers" data-hue="mucosa" data-chapter="Numbers" aria-labelledby="num-title">
       <div class="wrap">
-        <h2 id="exp-title" class="t-heading" data-split="words">Research experience <em>and education</em></h2>
-        <div class="timeline">
+        <h2 id="num-title" class="t-display" data-split="lines">Research in numbers</h2>
+        <p class="numbers__k t-meta">BiliVLA, results in ERCP phantom experiments</p>
+        <div class="gauges">
+        <figure class="gauge" data-gauge="96.25" data-hue="mucosa" aria-label="mIoU: 96.25%">
+          <svg class="gauge__svg" viewBox="0 0 120 120" aria-hidden="true"><circle class="gauge__track" cx="60" cy="60" r="52"/><circle class="gauge__arc" cx="60" cy="60" r="52" pathLength="100" style="stroke-dasharray:96.25 100"/></svg>
+          <p class="gauge__v"><span class="odo" data-odo="96.25">96.25</span><small>%</small></p>
+          <figcaption class="gauge__l">mIoU<span>BiliVLA</span></figcaption>
+        </figure>
+        <figure class="gauge" data-gauge="91.96" data-hue="mucosa" aria-label="Action precision: 91.96%">
+          <svg class="gauge__svg" viewBox="0 0 120 120" aria-hidden="true"><circle class="gauge__track" cx="60" cy="60" r="52"/><circle class="gauge__arc" cx="60" cy="60" r="52" pathLength="100" style="stroke-dasharray:91.96 100"/></svg>
+          <p class="gauge__v"><span class="odo" data-odo="91.96">91.96</span><small>%</small></p>
+          <figcaption class="gauge__l">Action precision<span>BiliVLA</span></figcaption>
+        </figure>
+        <figure class="gauge" data-gauge="84.85" data-hue="mucosa" aria-label="Navigation success: 84.85%">
+          <svg class="gauge__svg" viewBox="0 0 120 120" aria-hidden="true"><circle class="gauge__track" cx="60" cy="60" r="52"/><circle class="gauge__arc" cx="60" cy="60" r="52" pathLength="100" style="stroke-dasharray:84.85 100"/></svg>
+          <p class="gauge__v"><span class="odo" data-odo="84.85">84.85</span><small>%</small></p>
+          <figcaption class="gauge__l">Navigation success<span>BiliVLA</span></figcaption>
+        </figure>
+        </div>
+        <div class="tallies">
+        <div class="tally" data-hue="nbi"><p class="tally__v"><span class="odo" data-odo="150">150</span></p><p class="tally__l">Synchronised video and robot-state segments<span>Teleoperated flexible endoscopy benchmark</span></p></div>
+        <div class="tally" data-hue="nbi"><p class="tally__v"><svg class="tally__frame" viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38"/></svg>224 × 224</p><p class="tally__l">Image–action trajectory frames<span>Benchmark</span></p></div>
+        <div class="tally" data-hue="nbi"><p class="tally__v"><span class="sym">π</span>0.5</p><p class="tally__l">VLA navigation baseline<span>Benchmark</span></p></div>
+        <div class="tally" data-hue="fundus"><p class="tally__v">25–200</p><p class="tally__l">Training images in the data-efficiency curve (25, 50, 100, 200)<span>Dissertation</span></p></div>
+        <div class="tally" data-hue="fundus"><p class="tally__v">3</p><p class="tally__l">Cameras in the external validation set (Chákṣu)<span>Dissertation</span></p></div>
+        <div class="tally" data-hue="coil"><p class="tally__v">3</p><p class="tally__l">Electromagnetic coils driving the soft robot<span>Trileg-ESD</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="xp" data-hue="disc" data-chapter="Experience" aria-labelledby="xp-title">
+      <div class="xp__stage"><div class="xp__pin">
+        <svg class="xp__word" viewBox="0 0 1600 360" aria-hidden="true">
+          <defs><clipPath id="xp-clip"><text class="xp__glyphs" x="800" y="292" text-anchor="middle">Experience</text></clipPath></defs>
+          <g clip-path="url(#xp-clip)"><rect class="xp__base" width="1600" height="360"/><image class="xp__img" x="-200" y="-420" width="2000" height="1200" preserveAspectRatio="xMidYMid slice" href=""/></g>
+        </svg>
+        <div class="marquee" data-marquee="50" aria-hidden="true"><div class="marquee__track"><span>Durham</span><span>CUHK</span><span>McGill</span><span>Edinburgh</span><span>Notre Dame</span><span>INCF</span></div></div>
+        <div class="xp__head"><h2 id="xp-title" class="xp__title t-display">Experience</h2><p class="xp__sub t-subtitle">Research experience and education</p></div>
+      </div></div>
+      <div class="wrap"><div class="timeline">
           <div class="timeline__rail" aria-hidden="true"><i></i></div>
-          <div class="tl" style="--c: var(--green)"><p class="tl__when">Ongoing</p><div><h3 class="tl__role">Student researcher, embodied AI and VLA systems</h3><p class="tl__org">Durham University. Supervisors: Dr Amir Atapour-Abarghouei, Dr Chris Chen</p></div></div>
-          <div class="tl" style="--c: var(--coral)"><p class="tl__when">Jun–Aug 2026</p><div><h3 class="tl__role">Summer Undergraduate Research Intern</h3><p class="tl__org">Medical Robotics Group, The Chinese University of Hong Kong. Supervisor: Prof. Hongliang Ren. BiliVLA, a teleoperated flexible endoscopy benchmark, and Trileg-ESD.</p></div></div>
-          <div class="tl" style="--c: var(--cyan)"><p class="tl__when">2026</p><div><h3 class="tl__role">Google Summer of Code mentor</h3><p class="tl__org">International Neuroinformatics Coordinating Facility, remote</p></div></div>
-          <div class="tl" style="--c: var(--magenta)"><p class="tl__when">Jun–Aug 2025</p><div><h3 class="tl__role">MITACS Globalink Research Intern</h3><p class="tl__org">CIRMMT, McGill University, Montréal. Supervisor: Prof. Suresh Krishna</p></div></div>
-          <div class="tl" style="--c: #7C8FFF"><p class="tl__when">Jun–Jul 2024</p><div><h3 class="tl__role">HPC Summer School</h3><p class="tl__org">EPCC, University of Edinburgh</p></div></div>
-          <div class="tl" style="--c: var(--amber)"><p class="tl__when">2023–2027</p><div><h3 class="tl__role">BEng Electronics Engineering, First Class Honours</h3><p class="tl__org">Durham University, University College</p></div></div>
-          <div class="tl" style="--c: var(--orange)"><p class="tl__when">2025–2026</p><div><h3 class="tl__role">Study abroad year</h3><p class="tl__org">University of Notre Dame, Indiana, USA</p></div></div>
-        </div>
-      </div>
+          <div class="tl" data-hue="disc"><p class="tl__when t-meta">Ongoing</p><div class="tl__body"><h3 class="tl__role t-subtitle">Student researcher, embodied AI and VLA systems</h3><p class="tl__org">Durham University</p><p class="tl__sup t-meta">Supervisors: Dr Amir Atapour-Abarghouei, Dr Chris Chen</p></div></div>
+          <div class="tl" data-hue="mucosa"><p class="tl__when t-meta">Jun–Aug 2026</p><div class="tl__body"><h3 class="tl__role t-subtitle">Summer Undergraduate Research Intern</h3><p class="tl__org">Medical Robotics Group, The Chinese University of Hong Kong</p><p class="tl__sup t-meta">Supervisor: Prof. Hongliang Ren</p><p class="tl__note t-small">BiliVLA, a teleoperated flexible endoscopy benchmark, and Trileg-ESD.</p></div></div>
+          <div class="tl" data-hue="ppix"><p class="tl__when t-meta">2026</p><div class="tl__body"><h3 class="tl__role t-subtitle">Google Summer of Code mentor</h3><p class="tl__org">International Neuroinformatics Coordinating Facility, remote</p></div></div>
+          <div class="tl" data-hue="fundus"><p class="tl__when t-meta">2025–2026</p><div class="tl__body"><h3 class="tl__role t-subtitle">Study abroad year</h3><p class="tl__org">University of Notre Dame, Indiana, USA</p></div></div>
+          <div class="tl" data-hue="nbi"><p class="tl__when t-meta">Jun–Aug 2025</p><div class="tl__body"><h3 class="tl__role t-subtitle">MITACS Globalink Research Intern</h3><p class="tl__org">CIRMMT, McGill University, Montréal</p><p class="tl__sup t-meta">Supervisor: Prof. Suresh Krishna</p></div></div>
+          <div class="tl" data-hue="coil"><p class="tl__when t-meta">Jun–Jul 2024</p><div class="tl__body"><h3 class="tl__role t-subtitle">HPC Summer School</h3><p class="tl__org">EPCC, University of Edinburgh</p></div></div>
+          <div class="tl" data-hue="icg"><p class="tl__when t-meta">2023–2027</p><div class="tl__body"><h3 class="tl__role t-subtitle">BEng Electronics Engineering, First Class Honours</h3><p class="tl__org">Durham University, University College</p></div></div>
+        </div></div>
     </section>
 
-    <section class="triptych" data-chapter="Beyond" aria-label="Beyond the lab">
-      <a class="pane" data-field="coil_cobalt" href="cv.html#leadership">
-        <span class="ghost" aria-hidden="true">Lead</span>
-        <p class="pane__k">Leadership</p>
-        <h3 class="pane__t" data-split="words">Head of Design, DurHack</h3>
-        <p class="pane__d">Durham University's annual hackathon, 2024–25. Also Co-President of college ultimate frisbee, President of Castle Pride, and student representative on the Engineering EDI committee.</p>
-        <span class="pane__go">Leadership and service</span>
-      </a>
-      <a class="pane" data-field="ppix_magenta" href="art.html">
-        <span class="ghost" aria-hidden="true">Art</span>
-        <p class="pane__k">Art</p>
-        <h3 class="pane__t" data-split="words">Two-time finalist, Durham University Annual Art Competition</h3>
-        <p class="pane__d">Shortlisted in 2023 and 2024.</p>
-        <span class="pane__go">Art and portfolio</span>
-      </a>
-      <a class="pane" data-field="fundus_orange" href="sport.html">
-        <span class="ghost" aria-hidden="true">Disc</span>
-        <p class="pane__k">Sport</p>
-        <h3 class="pane__t" data-split="words">Registered USA Ultimate college player</h3>
-        <p class="pane__d">Played for the University of Notre Dame during the study abroad year.</p>
-        <span class="pane__go">Athletics</span>
-      </a>
+    <section class="beyond" data-chapter="Beyond" aria-labelledby="beyond-title">
+      <div class="wrap"><h2 id="beyond-title" class="t-display" data-split="lines">Beyond the lab</h2></div>
+      <div class="beyond__row">
+    <a class="pane" href="cv.html#leadership" data-hue="coil">
+      <span class="pane__spot" aria-hidden="true"></span>
+      <div class="pane__inner">
+        <span class="pane__k t-meta">Leadership</span>
+        <h3 class="pane__t t-subtitle">Head of Design, DurHack</h3>
+        <span class="pane__d t-small">Durham University's annual hackathon, 2024–25. Also Co-President of college ultimate frisbee, President of Castle Pride, and student representative on the Engineering EDI committee.</span>
+        <span class="pane__go">Leadership and service<span aria-hidden="true"> →</span></span>
+      </div>
+    </a>
+    <a class="pane" href="art.html" data-hue="ppix">
+      <span class="pane__spot" aria-hidden="true"></span>
+      <div class="pane__inner">
+        <span class="pane__k t-meta">Art</span>
+        <h3 class="pane__t t-subtitle">Two-time finalist, Durham University Annual Art Competition</h3>
+        <span class="pane__d t-small">Shortlisted in 2024 and 2025.</span>
+        <span class="pane__go">Art and portfolio<span aria-hidden="true"> →</span></span>
+      </div>
+    </a>
+    <a class="pane" href="sport.html" data-hue="fundus">
+      <span class="pane__spot" aria-hidden="true"></span>
+      <div class="pane__inner">
+        <span class="pane__k t-meta">Sport</span>
+        <h3 class="pane__t t-subtitle">Registered USA Ultimate college player</h3>
+        <span class="pane__d t-small">Played for the University of Notre Dame during the study abroad year.</span>
+        <span class="pane__go">Athletics<span aria-hidden="true"> →</span></span>
+      </div>
+    </a>
+      </div>
     </section>
 
   </main>
 
-  <footer class="footer" data-chapter="Contact">
+  <footer class="footer" data-chapter="Contact" data-hue="nbi">
     <div class="wrap">
-      <p class="footer__cta" data-split="words">Let's talk <em>research.</em></p>
-      <p style="margin-top: 28px;"><a class="big-email" href="mailto:tggq61@durham.ac.uk" style="color: #fff;">tggq61@durham.ac.uk</a></p>
+      <div class="finale" data-copy-scope>
+        <div class="finale__scope" aria-hidden="true"><div class="scope__halo"></div><div class="scope__lens" data-scope="finale"></div></div>
+        <p class="finale__cta t-cover" style="--w:6.2" data-split="lines">Let's talk <em>research.</em></p>
+        <div class="finale__mail lockable">
+          <a class="finale__email" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a>
+          <svg class="lock" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22V0h18M82 0h18v22M100 78v22H82M18 100H0V78"/></svg>
+        </div>
+        <div class="finale__acts">
+          <button class="btn btn--sm" type="button" data-copy="tggq61@durham.ac.uk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 8.5V5.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg>Copy</button>
+          <p class="status-line t-meta" role="status" aria-live="polite" data-copy-status></p>
+        </div>
+      </div>
       <div class="footer__grid">
-        <div>
+        <div class="footer__id">
           <p class="footer__name">Jiaxi Wang</p>
           <p class="footer__txt">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
-          <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
+          <span class="logo-plate"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
         </div>
-        <div>
-          <p class="footer__h">Work</p>
-          <ul class="footer__list">
-            <li><a href="research.html">Research</a></li>
-            <li><a href="engineering.html">Engineering</a></li>
-            <li><a href="opensource.html">Open source</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">Work</p>
+          <ul class="footer__list"><li><a href="research.html">Research</a></li><li><a href="engineering.html">Engineering</a></li><li><a href="opensource.html">Open source</a></li></ul>
         </div>
-        <div>
-          <p class="footer__h">About</p>
-          <ul class="footer__list">
-            <li><a href="cv.html">CV</a></li>
-            <li><a href="certificates.html">Certificates</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">About</p>
+          <ul class="footer__list"><li><a href="cv.html">CV</a></li><li><a href="certificates.html">Certificates</a></li><li><a href="contact.html">Contact</a></li></ul>
         </div>
-        <div>
-          <p class="footer__h">Beyond the lab</p>
-          <ul class="footer__list">
-            <li><a href="art.html">Art</a></li>
-            <li><a href="sport.html">Sport</a></li>
-            <li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">Beyond the lab</p>
+          <ul class="footer__list"><li><a href="art.html">Art</a></li><li><a href="sport.html">Sport</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul>
         </div>
       </div>
-      <div class="footer__legend" aria-hidden="true"></div>
-      <div class="footer__legend-labels" aria-hidden="true"><span>Coil</span><span>NBI</span><span>ICG</span><span>Disc</span><span>Fundus</span><span>Mucosa</span><span>PpIX</span></div>
-      <div class="footer__base">
-        <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
-        <p>Colours from endoscopic imaging, fluorescence and fundus photography.</p>
-      </div>
+      <div class="spectrum" aria-hidden="true"><span style="--c:var(--c-coil)">Coil</span><span style="--c:var(--c-nbi)">NBI</span><span style="--c:var(--c-icg)">ICG</span><span style="--c:var(--c-disc)">Disc</span><span style="--c:var(--c-fundus)">Fundus</span><span style="--c:var(--c-mucosa)">Mucosa</span><span style="--c:var(--c-ppix)">PpIX</span></div>
+      <div class="footer__base t-meta"><p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p><p>Colours from endoscopic imaging, fluorescence and fundus photography.</p></div>
     </div>
   </footer>
 
+  <script id="jw-i18n" type="application/json">{"theme.switch":"Switch between day and night theme","theme.toDay":"Switch to day theme (white light)","theme.toNight":"Switch to night theme (fluorescence)","theme.day":"Day · White light","theme.night":"Night · Fluorescence","menu.open":"Open menu","menu.close":"Close menu","copy.done":"Copied","copy.status":"Email address copied.","copy.fail":"Copy failed. Select the address above and copy it manually.","explain.show":"What this shows","explain.hide":"Close explanation","cursor.play":"Play","cursor.open":"Open","cursor.drag":"Drag","cursor.steer":"Steer","cursor.hold":"Hold","video.title":"Video","gallery.of":"{n} of {total}"}</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
-  <script src="assets/js/specimens.js"></script>
+  <script src="assets/js/theme.js"></script>
   <script src="assets/js/hero-gl.js"></script>
+  <script src="assets/js/specimens.js"></script>
   <script src="assets/js/core.js"></script>
+  <script src="assets/js/night-fx.js"></script>
   <script src="assets/js/pages/home.js"></script>
 </body>
 </html>

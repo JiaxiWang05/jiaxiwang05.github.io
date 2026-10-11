@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="night" data-force-theme="night" class="theme-forced">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Engineering — Jiaxi Wang</title>
   <meta name="description" content="Engineering projects by Jiaxi Wang: an autonomous material mover, the Durham Total Artificial Heart, the IMechE Repeatable Vehicle Challenge and high-performance computing.">
-  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#05050A">
+  <script>(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'day':'night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
+  <script>(function(d){try{if(sessionStorage.getItem('jw-seen'))d.classList.add('jw-seen')}catch(e){}addEventListener('load',function(){setTimeout(function(){if(!window.JW)d.classList.remove('js')},0)})})(document.documentElement)</script>
   <link rel="canonical" href="https://jiaxiwang05.github.io/engineering.html">
+  <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/engineering.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jiaxiwang05.github.io/research-version/zh/engineering.html">
+  <link rel="alternate" hreflang="x-default" href="https://jiaxiwang05.github.io/engineering.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="Engineering — Jiaxi Wang">
   <meta property="og:description" content="Engineering projects by Jiaxi Wang: an autonomous material mover, the Durham Total Artificial Heart, the IMechE Repeatable Vehicle Challenge and high-performance computing.">
   <meta property="og:url" content="https://jiaxiwang05.github.io/engineering.html">
@@ -18,14 +26,16 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&amp;text=%E4%B8%AD%E6%96%87&amp;display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
   <link rel="stylesheet" href="assets/css/site.css">
-  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="field-backdrop" aria-hidden="true"><div class="grain"></div></div>
 
   <div class="loader" aria-hidden="true">
     <div class="loader__badge">
@@ -37,181 +47,251 @@
   </div>
 
   <header class="nav">
-    <a class="nav__brand" href="index.html"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg>Jiaxi Wang</a>
-    <nav aria-label="Primary">
+    <a class="nav__brand" href="index.html"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg><span>Jiaxi Wang</span></a>
+    <nav class="nav__primary" aria-label="Primary">
       <ul class="nav__links">
-        <li><a href="research.html">Research</a></li>
-        <li><a href="engineering.html" aria-current="page">Engineering</a></li>
-        <li><a href="opensource.html">Open source</a></li>
-        <li><a href="cv.html">CV</a></li>
-        <li><a href="contact.html">Contact</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="engineering.html" aria-current="page">Engineering</a></li>
+          <li><a href="opensource.html">Open source</a></li>
+          <li><a href="cv.html">CV</a></li>
+          <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <span class="nav__count" aria-hidden="true"></span>
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <div class="nav__tools">
+      <span class="nav__count" aria-hidden="true"></span>
+      <div class="lang" role="group" aria-label="Language"><span class="lang__opt" aria-current="true">EN</span><span class="lang__sep" aria-hidden="true">/</span><a class="lang__opt" href="research-version/zh/engineering.html" hreflang="zh-CN" aria-label="Switch to the Chinese version of this page"><span lang="zh-CN">中文</span></a></div>
+      <button class="theme-toggle" type="button" data-theme-toggle data-magnetic aria-label="Switch between day and night theme">
+        <svg class="tt" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="tt-sun"><path d="M0 0H24L0 24Z"/></clipPath>
+            <clipPath id="tt-moon"><path d="M24 0V24H0Z"/></clipPath>
+            <mask id="tt-cres" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <rect width="24" height="24" fill="#fff"/><circle cx="10.66" cy="10.66" r="6" fill="#000"/>
+            </mask>
+          </defs>
+          <circle class="tt__corona" cx="12" cy="12" r="9.2"/>
+          <g class="tt__dial">
+            <g clip-path="url(#tt-sun)">
+              <circle class="tt__sun" cx="12" cy="12" r="6.5"/>
+              <g class="tt__rays">
+                <path pathLength="1" style="--i:0" d="M4.06 15.29 2.21 16.06"/>
+                <path pathLength="1" style="--i:1" d="M3.57 10.32 1.6 9.93"/>
+                <path pathLength="1" style="--i:2" d="M5.92 5.92 4.5 4.5"/>
+                <path pathLength="1" style="--i:3" d="M10.32 3.57 9.93 1.6"/>
+                <path pathLength="1" style="--i:4" d="M15.29 4.06 16.06 2.21"/>
+              </g>
+            </g>
+            <g clip-path="url(#tt-moon)">
+              <circle class="tt__moon" cx="12" cy="12" r="6.5" mask="url(#tt-cres)"/>
+              <circle class="tt__star" cx="19.4" cy="17.2" r=".7"/>
+              <circle class="tt__star" cx="16.6" cy="20.2" r=".5"/>
+            </g>
+            <path class="tt__term" d="M6.6 17.4 17.4 6.6"/>
+          </g>
+        </svg>
+        <span class="tt__tip" aria-hidden="true"></span>
+      </button>
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+    <div class="nav__progress" aria-hidden="true"><i></i></div>
   </header>
-  <nav class="menu" id="menu" aria-label="Menu">
-    <a href="index.html">Home</a>
-    <a href="research.html">Research</a>
-    <a href="engineering.html">Engineering</a>
-    <a href="opensource.html">Open source</a>
-    <a href="cv.html">CV</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <div class="colorbar" aria-hidden="true"><div class="colorbar__fill"></div></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="switcher">
-    <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" hidden>
-      <p id="switch-title" class="switcher__t">Here for the research?</p>
-      <p class="switcher__d">Switch to the research version: the same content on a clean, text-first page that is quick to read.</p>
+
+  <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" aria-describedby="switch-desc" hidden>
+    <div class="switcher__toast-in">
+      <div class="switcher__txt">
+        <p id="switch-title" class="switcher__t">Here for the research?</p>
+        <p id="switch-desc" class="switcher__d">Switch to the research version: the same content on a clean, text-first page that is quick to read.</p>
+      </div>
       <div class="switcher__acts">
-        <a class="switcher__go" href="research-version/engineering.html">Switch version</a>
-        <button class="switcher__x" type="button">Stay here</button>
+        <a class="btn btn--solid btn--sm switcher__go" href="research-version/engineering.html">Switch version</a>
+        <button class="btn btn--sm switcher__x" type="button"><span class="switcher__x-label">Stay here</span><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
       </div>
     </div>
-    <a class="switcher__btn" href="research-version/engineering.html" data-magnetic aria-label="Switch to the research version of this page">
-      <span class="switcher__glow" aria-hidden="true"></span>
-      <span class="switcher__label">Research version<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-      <span class="switcher__hint">Clean and text-first</span>
+  </div>
+
+  <nav class="menu" id="menu" aria-label="Menu" data-hue="coil">
+    <ol class="menu__list">
+      <li style="--i:0"><a href="index.html"><span class="menu__n" aria-hidden="true">01</span>Home</a></li>
+      <li style="--i:1"><a href="research.html"><span class="menu__n" aria-hidden="true">02</span>Research</a></li>
+      <li style="--i:2"><a href="engineering.html" aria-current="page"><span class="menu__n" aria-hidden="true">03</span>Engineering</a></li>
+      <li style="--i:3"><a href="opensource.html"><span class="menu__n" aria-hidden="true">04</span>Open source</a></li>
+      <li style="--i:4"><a href="cv.html"><span class="menu__n" aria-hidden="true">05</span>CV</a></li>
+      <li style="--i:5"><a href="contact.html"><span class="menu__n" aria-hidden="true">06</span>Contact</a></li>
+    </ol>
+    <div class="menu__foot">
+      <div class="lang" role="group" aria-label="Language"><span class="lang__opt" aria-current="true">EN</span><span class="lang__sep" aria-hidden="true">/</span><a class="lang__opt" href="research-version/zh/engineering.html" hreflang="zh-CN" aria-label="Switch to the Chinese version of this page"><span lang="zh-CN">中文</span></a></div>
+      <a class="tlink menu__rv" href="research-version/engineering.html">Research version<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+    </div>
+  </nav>
+
+  <div class="switcher">
+    <a class="switcher__btn" href="research-version/engineering.html" aria-label="Switch to the research version of this page">
+      <span class="switcher__label">Research version<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span><span class="switcher__hint">Clean and text-first</span>
     </a>
   </div>
 
   <main id="main">
 
-    <header class="page-head" data-field="coil_cobalt" data-chapter="Engineering">
-      <span class="ghost" data-ghost aria-hidden="true">Build</span>
-      
+    <header class="page-head" data-hue="coil" data-chapter="Engineering">
+      <span class="ghost" aria-hidden="true">Build</span>
       <div class="page-head__inner">
-        <h1 class="page-head__title" data-split="chars">Engine<em>ering</em></h1>
-        <p class="page-head__lead" data-reveal="blur" data-delay=".3">Hardware projects from Durham University: an autonomous forklift, a wireless-powered artificial heart, a repeatable autonomous vehicle, and training in high-performance computing.</p>
+        <h1 class="page-head__title t-cover" style="--w:6.16" data-split="chars">Engineering</h1>
+        <p class="page-head__lead t-lead" data-reveal="up">Hardware projects from Durham University: an autonomous forklift, a wireless-powered artificial heart, a repeatable autonomous vehicle, and training in high-performance computing.</p>
       </div>
+      <div class="page-head__art" aria-hidden="true"><svg class="schem schem--head" viewBox="0 0 400 400" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-draw="enter"><g class="sp-soft" data-speed=".06"><path d="M40 330H360" stroke-dasharray="10 8"/><path d="M60 360c60-30 220-30 300 0"/></g><g class="sp-acc sp-glow" data-speed=".12"><path d="M90 300V170h120l30 40v90"/><path d="M240 210h70v90"/><path d="M310 120v180"/><path d="M310 250h60"/><path d="M310 290h60"/><circle cx="120" cy="310" r="20"/><circle cx="210" cy="310" r="20"/><circle cx="290" cy="316" r="14"/><path d="M110 170v-40h80v40"/></g></svg></div>
     </header>
-    <section class="chapter" id="material-mover" data-field="lumen" data-chapter="Material mover">
-      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">AGV</span>
-      <div class="wrap">
-        <div class="block">
-          <div class="block__aside">
-            <p class="block__k">2024–2025. Group 19-AIBM4. Supervisors: Dr Aissa Ikhlef, Mr Bill Maxwell</p>
-            <h2 class="block__t" data-split="words">Automated Material Mover</h2><svg class="plate__specimen" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="2" data-draw aria-hidden="true" style="color: var(--ink); margin-top: 40px;">
-              <path d="M40 330H360" stroke-dasharray="10 8"/><path d="M90 300V170h120l30 40v90"/><path d="M240 210h70v90"/><path d="M310 120v180"/><path d="M310 250h60"/><path d="M310 290h60"/>
-              <circle cx="120" cy="310" r="20"/><circle cx="210" cy="310" r="20"/><circle cx="290" cy="316" r="14"/><path d="M110 170v-40h80v40"/><path d="M60 360c60-30 220-30 300 0"/></svg>
-          </div>
-          <div class="block__body">
-            <p class="t-body" data-reveal="up">Co-designed and prototyped an automated guided vehicle that moves materials around a factory without a driver, and tested whether it is technically and financially feasible.</p>
-            <ul class="entry__x" data-reveal="up"><li><b>Mechanism.</b> Three wheels with differential steering around a central axle, chosen for manoeuvrability in factory aisles.</li><li><b>Navigation.</b> Tape-guided sensing for precise, repeatable paths.</li><li><b>Validation.</b> Structural calculations, cost evaluation against manual forklifts, and a risk assessment, with the design checked against ISO 3691-4 for driverless industrial trucks.</li><li><b>Sustainability.</b> Recyclable steel body and forks, and airless tyres for durability.</li></ul>
-            <a class="doc" href="assets/pdfs/automated-material-mover-report.pdf" data-tilt data-cursor="Open" style="max-width: 320px; aspect-ratio: 3 / 4;"><img src="assets/thumbs/material-mover.jpg" alt="First page of the Automated Material Mover feasibility report" loading="lazy" width="596" height="842"></a>
-            <p class="links"><a class="link" href="assets/pdfs/automated-material-mover-report.pdf">Feasibility report (PDF, 15 pages)</a></p>
-          </div>
+
+    <div class="reader reader--single">
+      <div class="reader__main">
+      <section class="rs" id="material-mover" data-hue="disc" data-chapter="Material mover" aria-labelledby="rs-material-mover">
+        <div class="rs__text">
+            <dl class="meta-row" data-reveal="up"><div><dt>Dates</dt><dd>2024–2025</dd></div><div><dt>Group</dt><dd>19-AIBM4</dd></div><div><dt>Supervisors</dt><dd>Dr Aissa Ikhlef, Mr Bill Maxwell</dd></div></dl>
+            <h2 id="rs-material-mover" class="rs__title t-title" data-split="lines">Automated Material Mover</h2>
+            <p class="t-lead" data-reveal="up">Co-designed and prototyped an automated guided vehicle that moves materials around a factory without a driver, and tested whether it is technically and financially feasible.</p>
+            <dl class="spec-sheet" data-reveal="up"><dt>Mechanism</dt><dd>Three wheels with differential steering around a central axle, chosen for manoeuvrability in factory aisles.</dd><dt>Navigation</dt><dd>Tape-guided sensing for precise, repeatable paths.</dd><dt>Validation</dt><dd>Structural calculations, cost evaluation against manual forklifts, and a risk assessment, with the design checked against ISO 3691-4 for driverless industrial trucks.</dd><dt>Sustainability</dt><dd>Recyclable steel body and forks, and airless tyres for durability.</dd></dl>
+            <div data-reveal="figure"><a class="doc" href="assets/pdfs/automated-material-mover-report.pdf" data-tilt data-cursor="" style="max-width: 320px; aspect-ratio: 3 / 4;"><img src="assets/thumbs/material-mover.jpg" alt="First page of the Automated Material Mover feasibility report" loading="lazy" width="596" height="842"></a></div>
+            <p class="links" data-reveal="up"><a class="tlink" href="assets/pdfs/automated-material-mover-report.pdf">Feasibility report (PDF, 15 pages)<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
         </div>
-      </div>
-    </section>
-    <section class="chapter" id="artificial-heart" data-field="mucosa_coral" data-chapter="Artificial heart">
-      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">Heart</span>
-      <div class="wrap">
-        <div class="block">
-          <div class="block__aside">
-            <p class="block__k">2024–2025. Supervisor: Prof. Ashraf W. Khir</p>
-            <h2 class="block__t" data-split="words">Durham Total Artificial Heart</h2><svg class="plate__specimen" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="2" data-draw aria-hidden="true" style="color: var(--ink); margin-top: 40px;">
-              <path d="M200 330C120 270 70 220 70 160c0-40 30-70 66-70 28 0 50 16 64 40 14-24 36-40 64-40 36 0 66 30 66 70 0 60-50 110-130 170z"/>
-              <circle cx="200" cy="190" r="34"/><circle cx="200" cy="190" r="54" stroke-dasharray="4 6"/><path d="M40 60c20 0 20 20 40 20s20-20 40-20 20 20 40 20"/><path d="M240 60c20 0 20 20 40 20s20-20 40-20 20 20 40 20"/>
-              <path d="M200 120V96M200 284v-40M146 190h-30M284 190h-30"/></svg>
-          </div>
-          <div class="block__body">
-            <p class="t-body" data-reveal="up">Wireless power and control electronics for an artificial heart: an interdisciplinary medical-engineering project that turned clinical needs for cardiovascular support into implementable engineering requirements.</p>
-            <ul class="entry__x" data-reveal="up"><li>Defined system requirements and partitioned the wireless powering solution into subsystems.</li><li>Coordinated development of high-efficiency power-transfer circuits, custom motors designed in ANSYS, and the control electronics.</li></ul>
-            <p class="t-cap t-ink2" data-reveal="up">Tools: LTspice, KiCad, ANSYS</p>
-          </div>
+        <div class="rs__fig" data-reveal="figure">
+        <figure class="fig fig--schem" data-explain data-hue="disc">
+          <div class="fig__stage"><svg class="schem" viewBox="0 0 400 400" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-draw aria-hidden="true"><g class="sp-soft"><path d="M40 330H360" stroke-dasharray="10 8"/><path d="M60 360c60-30 220-30 300 0"/></g><g class="sp-acc sp-glow"><path d="M90 300V170h120l30 40v90"/><path d="M240 210h70v90"/><path d="M310 120v180"/><path d="M310 250h60"/><path d="M310 290h60"/><circle cx="120" cy="310" r="20"/><circle cx="210" cy="310" r="20"/><circle cx="290" cy="316" r="14"/><path d="M110 170v-40h80v40"/></g></svg></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-agv"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-agv">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Three wheels, one guide tape</p>
+            <p class="explain__d">Three-wheel AGV with differential steering, following a guide tape (dashed).</p>
+            <p class="explain__n">Schematic.</p>
+          </figcaption>
+        </figure>
         </div>
-      </div>
-    </section>
-    <section class="chapter" id="imeche" data-field="disc_amber" data-chapter="IMechE">
-      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">Repeat</span>
-      <div class="wrap">
-        <div class="block">
-          <div class="block__aside">
-            <p class="block__k">2023–2024</p>
-            <h2 class="block__t" data-split="words">IMechE Repeatable Vehicle Challenge</h2><svg class="plate__specimen" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="2" data-draw aria-hidden="true" style="color: var(--ink); margin-top: 40px;">
-              <path d="M40 300H360"/><path d="M40 290v20M360 290v20M200 292v16"/><path d="M60 260h70l20-30h60l20 30h30v30H60z"/><circle cx="95" cy="292" r="16"/><circle cx="215" cy="292" r="16"/>
-              <path d="M330 270h30v30h-30z"/><path d="M60 200C140 120 260 120 340 200" stroke-dasharray="6 8"/><path d="M330 190l10 10-14 4"/></svg>
-          </div>
-          <div class="block__body">
-            <p class="t-body" data-reveal="up">Engineered, fabricated, calibrated and repeatedly tested an autonomous vehicle that travels a set distance, interacts with a target and returns to a repeatable stopping position, with no external control.</p>
-          </div>
+      </section>
+
+      <section class="rs" id="artificial-heart" data-hue="mucosa" data-chapter="Artificial heart" aria-labelledby="rs-artificial-heart">
+        <div class="rs__text">
+            <dl class="meta-row" data-reveal="up"><div><dt>Dates</dt><dd>2024–2025</dd></div><div><dt>Supervisor</dt><dd>Prof. Ashraf W. Khir</dd></div></dl>
+            <h2 id="rs-artificial-heart" class="rs__title t-title" data-split="lines">Durham Total Artificial Heart</h2>
+            <p class="t-lead" data-reveal="up">Wireless power and control electronics for an artificial heart: an interdisciplinary medical-engineering project that turned clinical needs for cardiovascular support into implementable engineering requirements.</p>
+            <ul class="bullets" data-reveal="up"><li>Defined system requirements and partitioned the wireless powering solution into subsystems.</li><li>Coordinated development of high-efficiency power-transfer circuits, custom motors designed in ANSYS, and the control electronics.</li></ul>
+            <p class="t-meta" data-reveal="up">Tools: LTspice, KiCad, ANSYS</p>
         </div>
-      </div>
-    </section>
-    <section class="chapter" id="hpc" data-field="nbi_cyan" data-chapter="HPC">
-      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">MPI</span>
-      <div class="wrap">
-        <div class="block">
-          <div class="block__aside">
-            <p class="block__k">Jun–Jul 2024. EPCC, University of Edinburgh</p>
-            <h2 class="block__t" data-split="words">High-performance computing</h2><svg class="plate__specimen" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width="2" data-draw aria-hidden="true" style="color: var(--ink); margin-top: 40px;">
-              <rect x="60" y="60" width="120" height="120"/><rect x="220" y="60" width="120" height="120"/><rect x="60" y="220" width="120" height="120"/><rect x="220" y="220" width="120" height="120"/>
-              <path d="M180 120h40M180 280h40M120 180v40M280 180v40"/><path d="M90 90h60v60H90zM250 90h60v60h-60zM90 250h60v60H90zM250 250h60v60h-60z"/><path d="M200 20v40M200 340v40M20 200h40M340 200h40"/></svg>
-          </div>
-          <div class="block__body">
-            <p class="t-body" data-reveal="up">HPC Summer School: intensive training in HPC systems and architectures, including parallel programming with OpenMP and MPI and GPU acceleration, then applied to engineering problems in parallel computing, large-scale data processing and scientific computing.</p>
-            <p class="links"><a class="link" href="certificates.html">Completion certificate</a></p>
-          </div>
+        <div class="rs__fig" data-reveal="figure">
+        <figure class="fig fig--schem" data-explain data-hue="mucosa">
+          <div class="fig__stage"><svg class="schem" viewBox="0 0 400 400" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-draw aria-hidden="true"><g class="sp-soft"><path d="M40 60c20 0 20 20 40 20s20-20 40-20 20 20 40 20"/><path d="M240 60c20 0 20 20 40 20s20-20 40-20 20 20 40 20"/><path d="M200 120V96M200 284v-40M146 190h-30M284 190h-30"/></g><g class="sp-acc sp-glow"><path d="M200 330C120 270 70 220 70 160c0-40 30-70 66-70 28 0 50 16 64 40 14-24 36-40 64-40 36 0 66 30 66 70 0 60-50 110-130 170z"/><circle cx="200" cy="190" r="34"/><circle cx="200" cy="190" r="54" stroke-dasharray="4 6"/></g></svg></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-heart"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-heart">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Wireless power for an artificial heart</p>
+            <p class="explain__d">Artificial heart with a wireless power link; the dashed ring marks the transfer coil.</p>
+            <p class="explain__n">Schematic.</p>
+          </figcaption>
+        </figure>
         </div>
+      </section>
+
+      <section class="rs" id="imeche" data-hue="fundus" data-chapter="IMechE" aria-labelledby="rs-imeche">
+        <div class="rs__text">
+            <dl class="meta-row" data-reveal="up"><div><dt>Dates</dt><dd>2023–2024</dd></div></dl>
+            <h2 id="rs-imeche" class="rs__title t-title" data-split="lines">IMechE Repeatable Vehicle Challenge</h2>
+            <p class="t-lead" data-reveal="up">Engineered, fabricated, calibrated and repeatedly tested an autonomous vehicle that travels a set distance, interacts with a target and returns to a repeatable stopping position, with no external control.</p>
+        </div>
+        <div class="rs__fig" data-reveal="figure">
+        <figure class="fig fig--schem" data-explain data-hue="fundus">
+          <div class="fig__stage"><svg class="schem" viewBox="0 0 400 400" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-draw aria-hidden="true"><g class="sp-soft"><path d="M40 300H360"/><path d="M40 290v20M360 290v20M200 292v16"/><path d="M60 200C140 120 260 120 340 200" stroke-dasharray="6 8"/><path d="M330 190l10 10-14 4"/></g><g class="sp-acc sp-glow"><path d="M60 260h70l20-30h60l20 30h30v30H60z"/><circle cx="95" cy="292" r="16"/><circle cx="215" cy="292" r="16"/><path d="M330 270h30v30h-30z"/></g></svg></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-track"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-track">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Out, interact, return</p>
+            <p class="explain__d">The vehicle runs a set distance, interacts with a target and returns to a repeatable stop.</p>
+            <p class="explain__n">Schematic.</p>
+          </figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="rs" id="hpc" data-hue="nbi" data-chapter="HPC" aria-labelledby="rs-hpc">
+        <div class="rs__text">
+            <dl class="meta-row" data-reveal="up"><div><dt>Dates</dt><dd>Jun–Jul 2024</dd></div><div><dt>Venue</dt><dd>EPCC, University of Edinburgh</dd></div></dl>
+            <h2 id="rs-hpc" class="rs__title t-title" data-split="lines">High-performance computing</h2>
+            <p class="t-lead" data-reveal="up">HPC Summer School: intensive training in HPC systems and architectures, including parallel programming with OpenMP and MPI and GPU acceleration, then applied to engineering problems in parallel computing, large-scale data processing and scientific computing.</p>
+            <p class="links" data-reveal="up"><a class="tlink" href="certificates.html">Completion certificate<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
+        </div>
+        <div class="rs__fig" data-reveal="figure">
+        <figure class="fig fig--schem" data-explain data-hue="nbi">
+          <div class="fig__stage"><svg class="schem" viewBox="0 0 400 400" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-draw aria-hidden="true"><g class="sp-soft"><path d="M90 90h60v60H90zM250 90h60v60h-60zM90 250h60v60H90zM250 250h60v60h-60z"/><path d="M200 20v40M200 340v40M20 200h40M340 200h40"/></g><g class="sp-acc sp-glow"><rect x="60" y="60" width="120" height="120"/><rect x="220" y="60" width="120" height="120"/><rect x="60" y="220" width="120" height="120"/><rect x="220" y="220" width="120" height="120"/><path d="M180 120h40M180 280h40M120 180v40M280 180v40"/></g></svg></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-hpc"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
+          <figcaption class="explain" id="ex-hpc">
+            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">What this shows</p>
+            <p class="explain__t">Message passing between nodes</p>
+            <p class="explain__d">Four compute nodes exchanging data, as in MPI.</p>
+            <p class="explain__n">Schematic.</p>
+          </figcaption>
+        </figure>
+        </div>
+      </section>
+
       </div>
-    </section>
+    </div>
+
   </main>
 
-  <footer class="footer" data-chapter="Contact">
+  <footer class="footer" data-chapter="Contact" data-hue="nbi">
     <div class="wrap">
-      <p class="footer__cta" data-split="words">Let's talk <em>research.</em></p>
-      <p style="margin-top: 28px;"><a class="big-email" href="mailto:tggq61@durham.ac.uk" style="color: #fff;">tggq61@durham.ac.uk</a></p>
+      <div class="finale" data-copy-scope>
+        <div class="finale__scope" aria-hidden="true"><div class="scope__halo"></div><div class="scope__lens" data-scope="finale"></div></div>
+        <p class="finale__cta t-cover" style="--w:6.2" data-split="lines">Let's talk <em>research.</em></p>
+        <div class="finale__mail lockable">
+          <a class="finale__email" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a>
+          <svg class="lock" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22V0h18M82 0h18v22M100 78v22H82M18 100H0V78"/></svg>
+        </div>
+        <div class="finale__acts">
+          <button class="btn btn--sm" type="button" data-copy="tggq61@durham.ac.uk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 8.5V5.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg>Copy</button>
+          <p class="status-line t-meta" role="status" aria-live="polite" data-copy-status></p>
+        </div>
+      </div>
       <div class="footer__grid">
-        <div>
+        <div class="footer__id">
           <p class="footer__name">Jiaxi Wang</p>
           <p class="footer__txt">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
-          <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
+          <span class="logo-plate"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
         </div>
-        <div>
-          <p class="footer__h">Work</p>
-          <ul class="footer__list">
-            <li><a href="research.html">Research</a></li>
-            <li><a href="engineering.html">Engineering</a></li>
-            <li><a href="opensource.html">Open source</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">Work</p>
+          <ul class="footer__list"><li><a href="research.html">Research</a></li><li><a href="engineering.html">Engineering</a></li><li><a href="opensource.html">Open source</a></li></ul>
         </div>
-        <div>
-          <p class="footer__h">About</p>
-          <ul class="footer__list">
-            <li><a href="cv.html">CV</a></li>
-            <li><a href="certificates.html">Certificates</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">About</p>
+          <ul class="footer__list"><li><a href="cv.html">CV</a></li><li><a href="certificates.html">Certificates</a></li><li><a href="contact.html">Contact</a></li></ul>
         </div>
-        <div>
-          <p class="footer__h">Beyond the lab</p>
-          <ul class="footer__list">
-            <li><a href="art.html">Art</a></li>
-            <li><a href="sport.html">Sport</a></li>
-            <li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">Beyond the lab</p>
+          <ul class="footer__list"><li><a href="art.html">Art</a></li><li><a href="sport.html">Sport</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul>
         </div>
       </div>
-      <div class="footer__legend" aria-hidden="true"></div>
-      <div class="footer__legend-labels" aria-hidden="true"><span>Coil</span><span>NBI</span><span>ICG</span><span>Disc</span><span>Fundus</span><span>Mucosa</span><span>PpIX</span></div>
-      <div class="footer__base">
-        <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
-        <p>Colours from endoscopic imaging, fluorescence and fundus photography.</p>
-      </div>
+      <div class="spectrum" aria-hidden="true"><span style="--c:var(--c-coil)">Coil</span><span style="--c:var(--c-nbi)">NBI</span><span style="--c:var(--c-icg)">ICG</span><span style="--c:var(--c-disc)">Disc</span><span style="--c:var(--c-fundus)">Fundus</span><span style="--c:var(--c-mucosa)">Mucosa</span><span style="--c:var(--c-ppix)">PpIX</span></div>
+      <div class="footer__base t-meta"><p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p><p>Colours from endoscopic imaging, fluorescence and fundus photography.</p></div>
     </div>
   </footer>
 
+  <script id="jw-i18n" type="application/json">{"theme.switch":"Switch between day and night theme","theme.toDay":"Switch to day theme (white light)","theme.toNight":"Switch to night theme (fluorescence)","theme.day":"Day · White light","theme.night":"Night · Fluorescence","menu.open":"Open menu","menu.close":"Close menu","copy.done":"Copied","copy.status":"Email address copied.","copy.fail":"Copy failed. Select the address above and copy it manually.","explain.show":"What this shows","explain.hide":"Close explanation","cursor.play":"Play","cursor.open":"Open","cursor.drag":"Drag","cursor.steer":"Steer","cursor.hold":"Hold","video.title":"Video","gallery.of":"{n} of {total}"}</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/hero-gl.js"></script>
+  <script src="assets/js/specimens.js"></script>
   <script src="assets/js/core.js"></script>
+  <script src="assets/js/night-fx.js"></script>
   <script src="assets/js/pages/inner.js"></script>
 </body>
 </html>

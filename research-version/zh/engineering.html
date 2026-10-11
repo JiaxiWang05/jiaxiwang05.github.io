@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工程 — Jiaxi Wang</title>
+  <meta name="description" content="Jiaxi Wang的工程项目：自主物料搬运车、杜伦全人工心脏项目、IMechE可重复性车辆挑战赛，以及高性能计算。">
+  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://jiaxiwang05.github.io/research-version/zh/engineering.html">
+  <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/research-version/engineering.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jiaxiwang05.github.io/research-version/zh/engineering.html">
+  <link rel="alternate" hreflang="x-default" href="https://jiaxiwang05.github.io/research-version/engineering.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:title" content="工程 — Jiaxi Wang">
+  <meta property="og:description" content="自主车辆、医疗器械与电力电子，从概念到原型。">
+  <meta property="og:url" content="https://jiaxiwang05.github.io/zh/engineering.html">
+  <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../../assets/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+SC:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    :root {
+      --font-sans: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-serif: "Source Serif 4", "Noto Sans SC", "Iowan Old Style", Georgia, "PingFang SC", "Microsoft YaHei", serif;
+    }
+  </style>
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至正文</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <a class="nav__brand" href="index.html">
+        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
+        Jiaxi Wang
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="打开菜单">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="research.html">研究</a></li>
+        <li><a href="engineering.html" aria-current="page">工程</a></li>
+        <li><a href="opensource.html">开源</a></li>
+        <li><a href="cv.html">简历</a></li>
+        <li><a href="contact.html">联系</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <header class="page-head">
+      <div class="wrap">
+        <h1 class="page-head__title">工程</h1>
+        <p class="page-head__lead">杜伦大学期间的硬件项目：自主叉车、无线供电的人工心脏、可重复执行任务的自主车辆，以及高性能计算培训。</p>
+      </div>
+    </header>
+
+    <section id="material-mover" class="section" aria-labelledby="amm-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="amm-title" class="section__title">自动化物料搬运车</h2>
+          <p class="section__note">2024–2025。小组编号19-AIBM4。导师：Aissa Ikhlef博士、Bill Maxwell先生。</p>
+        </header>
+        <article class="study">
+          <a class="doc-thumb" href="../../assets/pdfs/automated-material-mover-report.pdf" style="aspect-ratio: 3 / 4; max-width: 360px;">
+            <img src="../../assets/thumbs/material-mover.jpg" alt="自动化物料搬运车可行性报告首页" loading="lazy" width="596" height="842">
+          </a>
+          <div class="study__body">
+            <h3 class="study__title">用于工厂物料搬运的三轮自主叉车</h3>
+            <p class="study__desc">合作设计并制作了一台无需驾驶员即可在工厂内搬运物料的自动导引车原型，并检验其在技术与经济上是否可行。</p>
+            <ul class="study__list">
+              <li><b>机构设计。</b>采用三轮结构，围绕中心轴实现差速转向，以保证在工厂通道内的机动性。</li>
+              <li><b>导航。</b>采用导引带传感，实现精确、可重复的行驶路径。</li>
+              <li><b>验证。</b>开展结构计算、与人工叉车的成本对比评估及风险评估，并依据ISO 3691-4（无人驾驶工业车辆）标准对设计进行核查。</li>
+              <li><b>可持续性。</b>采用可回收钢制车身与货叉，并使用免充气轮胎以提高耐用性。</li>
+            </ul>
+            <p class="links"><a class="link" href="../../assets/pdfs/automated-material-mover-report.pdf">可行性报告（PDF，15页）</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="artificial-heart" class="section" aria-labelledby="tah-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="tah-title" class="section__title">杜伦全人工心脏项目</h2>
+          <p class="section__note">2024–2025。导师：Ashraf W. Khir教授。</p>
+        </header>
+        <article class="study study--text">
+          <div class="study__body">
+            <h3 class="study__title">人工心脏的无线供电与控制电子系统</h3>
+            <p class="study__desc">一项跨学科医学工程项目，将心血管支持的临床需求转化为可实施的工程需求。</p>
+            <ul class="study__list">
+              <li>确定系统需求，并将无线供电方案划分为若干子系统。</li>
+              <li>协调高效率电能传输电路、使用ANSYS设计的定制电机以及控制电子系统的开发。</li>
+            </ul>
+            <p class="study__keys"><b>工具</b> LTspice、KiCad、ANSYS</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="imeche" class="section" aria-labelledby="imeche-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="imeche-title" class="section__title">IMechE可重复性车辆挑战赛</h2>
+          <p class="section__note">2023–2024。</p>
+        </header>
+        <article class="study study--text">
+          <div class="study__body">
+            <h3 class="study__title">每次执行相同任务的独立运行车辆</h3>
+            <p class="study__desc">设计、制造、标定并反复测试一台自主车辆；该车辆在无外部控制的条件下行驶设定距离、与目标交互，并返回可重复的停止位置。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="hpc" class="section" aria-labelledby="hpc-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="hpc-title" class="section__title">高性能计算</h2>
+          <p class="section__note">2024年6月–7月。爱丁堡大学EPCC。</p>
+        </header>
+        <article class="study study--text">
+          <div class="study__body">
+            <h3 class="study__title">HPC暑期学校</h3>
+            <p class="study__desc">接受HPC系统与体系结构的强化培训，内容包括基于OpenMP与MPI的并行编程以及GPU加速，随后将其应用于并行计算、大规模数据处理与科学计算方面的工程问题。</p>
+            <p class="links"><a class="link" href="certificates.html">结业证书</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__text">杜伦大学工程系。具身智能、视觉-语言-动作模型与医疗机器人。</p>
+          <span class="footer__logo"><img src="../../assets/durham-university-logo.png" alt="杜伦大学" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div>
+          <p class="footer__heading">工作</p>
+          <ul class="footer__list">
+            <li><a href="research.html">研究</a></li>
+            <li><a href="engineering.html">工程</a></li>
+            <li><a href="opensource.html">开源</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">关于</p>
+          <ul class="footer__list">
+            <li><a href="cv.html">简历</a></li>
+            <li><a href="certificates.html">证书</a></li>
+            <li><a href="contact.html">联系</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">实验室之外</p>
+          <ul class="footer__list">
+            <li><a href="art.html">艺术</a></li>
+            <li><a href="sport.html">运动</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__base">
+        <p>© <span id="year">2026</span> Jiaxi Wang。更新于2026年10月。</p>
+        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="site-switches">
+    <a class="version-switch" href="../../engineering.html" aria-label="切换至本页的沉浸版">
+      <span class="version-switch__dot" aria-hidden="true"></span>沉浸版
+    </a>
+    <a class="lang-switch" href="../engineering.html" lang="en" hreflang="en" aria-label="Switch to the English version of this page">English</a>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>

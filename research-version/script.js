@@ -4,6 +4,15 @@
 (function () {
   "use strict";
 
+  var isZh = /^zh\b/i.test(document.documentElement.lang || "");
+  var text = isZh ? {
+    openMenu: "打开菜单", closeMenu: "关闭菜单", video: "视频", copied: "已复制",
+    copyOk: "邮箱地址已复制。", copyFail: "复制失败，请选中上方地址后手动复制。"
+  } : {
+    openMenu: "Open menu", closeMenu: "Close menu", video: "Video", copied: "Copied",
+    copyOk: "Email address copied.", copyFail: "Copy failed. Select the address above and copy it manually."
+  };
+
   var header = document.querySelector(".site-header");
   var nav = document.querySelector(".nav");
   var navToggle = document.querySelector(".nav__toggle");
@@ -22,7 +31,7 @@
     if (!nav || !navToggle) return;
     nav.classList.toggle("nav--open", open);
     navToggle.setAttribute("aria-expanded", String(open));
-    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    navToggle.setAttribute("aria-label", open ? text.closeMenu : text.openMenu);
   }
 
   if (navToggle) {
@@ -50,7 +59,7 @@
 
   document.querySelectorAll("[data-video]").forEach(function (wrap) {
     var videoId = wrap.getAttribute("data-video");
-    var title = wrap.getAttribute("data-title") || "Video";
+    var title = wrap.getAttribute("data-title") || text.video;
     var preview = wrap.querySelector(".video__preview");
     if (!preview || !videoId) return;
 
@@ -101,11 +110,11 @@
 
       function done(ok) {
         if (ok) {
-          button.textContent = "Copied";
-          showStatus("Email address copied.");
+          button.textContent = text.copied;
+          showStatus(text.copyOk);
           window.setTimeout(function () { button.textContent = label; }, 2400);
         } else {
-          showStatus("Copy failed. Select the address above and copy it manually.");
+          showStatus(text.copyFail);
         }
       }
 

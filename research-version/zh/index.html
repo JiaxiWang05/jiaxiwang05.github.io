@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jiaxi Wang — 具身智能与医疗机器人</title>
+  <meta name="description" content="Jiaxi Wang，杜伦大学本科生研究者，研究方向为具身智能、视觉-语言-动作模型与医疗机器人。">
+  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://jiaxiwang05.github.io/research-version/zh/">
+  <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/research-version/">
+  <link rel="alternate" hreflang="zh-CN" href="https://jiaxiwang05.github.io/research-version/zh/">
+  <link rel="alternate" hreflang="x-default" href="https://jiaxiwang05.github.io/research-version/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:title" content="Jiaxi Wang — 具身智能与医疗机器人">
+  <meta property="og:description" content="杜伦大学本科生研究者，研究方向为视觉-语言-动作模型、跨具身学习与医疗机器人。">
+  <meta property="og:url" content="https://jiaxiwang05.github.io/research-version/zh/">
+  <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jiaxi Wang — 具身智能与医疗机器人">
+  <meta name="twitter:description" content="杜伦大学本科生研究者，研究方向为视觉-语言-动作模型、跨具身学习与医疗机器人。">
+  <meta name="twitter:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../../assets/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+SC:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    :root {
+      --font-sans: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-serif: "Source Serif 4", "Noto Sans SC", "Iowan Old Style", Georgia, "PingFang SC", "Microsoft YaHei", serif;
+    }
+  </style>
+  <script>document.documentElement.classList.add('js');</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jiaxi Wang",
+    "url": "https://jiaxiwang05.github.io/research-version/zh/",
+    "email": "mailto:tggq61@durham.ac.uk",
+    "sameAs": ["https://github.com/JiaxiWang05", "https://www.linkedin.com/in/-jiaxi-wang/"],
+    "jobTitle": "本科生研究者",
+    "description": "本科生研究者，研究方向为具身智能、视觉-语言-动作模型与医疗机器人。",
+    "knowsAbout": ["具身智能", "视觉-语言-动作模型", "跨具身学习", "医疗机器人", "自主手术机器人", "迁移学习"],
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "杜伦大学" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至正文</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <a class="nav__brand" href="index.html" aria-current="page">
+        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
+        Jiaxi Wang
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="打开菜单">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="research.html">研究</a></li>
+        <li><a href="engineering.html">工程</a></li>
+        <li><a href="opensource.html">开源</a></li>
+        <li><a href="cv.html">简历</a></li>
+        <li><a href="contact.html">联系</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero__grid">
+        <div>
+          <h1 id="hero-title" class="hero__name">Jiaxi Wang</h1>
+          <p class="hero__role">具身智能与医疗机器人。</p>
+          <a class="affil" href="https://www.durham.ac.uk/departments/academic/engineering/" target="_blank" rel="noopener noreferrer">
+            <img class="affil__logo" src="../../assets/durham-university-logo.png" alt="杜伦大学" width="640" height="264">
+            <span class="affil__text">工程系</span>
+          </a>
+          <p class="hero__bio">我是杜伦大学电子工程专业（BEng）毕业年级本科生。我借助视觉-语言-动作模型与世界-动作模型，研究机器人如何在人体内部等难以建模的环境中感知、推理与行动。</p>
+          <p class="hero__bio">在杜伦大学，我与Amir Atapour-Abarghouei博士、Chris Chen博士合作，研究机器人策略与习得表征如何跨具身形态迁移。此前，我在香港中文大学Hongliang Ren教授的医疗机器人课题组从事自主内镜导航研究。</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="../../cv.pdf">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+              下载简历
+            </a>
+            <a class="btn" href="mailto:tggq61@durham.ac.uk">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              电子邮件
+            </a>
+            <a class="icon-btn" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer" aria-label="GitHub主页">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            </a>
+            <a class="icon-btn" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn主页">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13Zm1.78 13.02H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <figure class="hero__figure">
+          <svg viewBox="0 0 560 560" role="img" aria-labelledby="fig1-title">
+            <title id="fig1-title">内镜视野示意图。组织褶皱向管腔汇聚；一条预测的动作路径从当前视野延伸至方框标出的未来目标区域。</title>
+            <defs>
+              <radialGradient id="fig-depth" cx="334" cy="226" r="300" gradientUnits="userSpaceOnUse">
+                <stop offset="0" style="stop-color:var(--lumen)"/>
+                <stop offset=".05" style="stop-color:var(--lumen)"/>
+                <stop offset=".15" style="stop-color:var(--tissue);stop-opacity:.5"/>
+                <stop offset=".5" style="stop-color:var(--tissue-soft);stop-opacity:.5"/>
+                <stop offset="1" style="stop-color:var(--fig-bg)"/>
+              </radialGradient>
+              <clipPath id="fig-clip"><circle cx="280" cy="280" r="250"/></clipPath>
+            </defs>
+            <circle class="fig-aperture" cx="280" cy="280" r="250"/>
+            <g clip-path="url(#fig-clip)">
+              <path class="fig-ring" style="--i:0;--o:0.28" pathLength="1" d="M516 280C519 294 522 308 521 323C521 337 520 352 515 366C511 379 505 393 497 405C489 417 479 428 469 438C458 448 446 457 435 464C423 472 411 479 398 485C386 491 373 496 360 501C347 505 334 508 321 510C307 512 293 513 280 513C267 512 253 510 240 507C227 504 214 499 202 494C190 489 178 483 166 477C155 471 143 464 132 457C121 449 109 441 99 432C89 422 79 412 71 401C63 389 56 377 51 363C46 350 43 336 42 322C41 308 42 294 44 280C46 266 49 253 53 240C57 227 61 215 66 202C70 189 75 177 80 165C86 153 92 140 99 128C107 117 115 105 125 95C135 85 146 76 158 68C170 61 183 55 197 51C210 46 224 44 238 42C252 40 266 40 280 41C294 41 308 43 321 46C335 48 348 52 361 57C374 62 386 68 398 76C409 84 419 93 429 103C438 113 446 124 453 135C460 146 466 158 472 169C478 181 483 192 488 204C493 216 499 228 503 241C508 253 513 266 516 280Z"/>
+              <path class="fig-ring" style="--i:1;--o:0.32" pathLength="1" d="M505 273C506 285 507 298 507 311C506 324 504 337 500 349C496 362 491 374 484 385C477 396 467 406 457 414C448 423 436 430 425 436C414 442 402 446 391 451C380 455 368 459 357 462C346 466 335 470 323 472C311 475 300 478 287 480C275 481 263 482 250 481C238 480 226 477 214 473C202 469 191 464 180 457C170 451 160 443 151 435C141 426 133 417 125 408C117 398 110 389 103 378C97 368 91 357 86 345C82 334 78 322 76 310C74 297 73 285 74 273C74 260 77 248 80 236C83 224 87 213 91 202C96 190 101 179 106 168C111 158 117 147 124 136C130 126 137 115 146 105C155 96 164 86 175 79C186 72 198 66 210 62C223 58 236 56 249 56C262 56 275 58 287 60C300 62 312 66 323 70C335 74 346 78 357 83C368 88 378 93 389 98C399 104 409 110 419 117C429 124 438 132 446 140C454 149 462 159 468 169C475 179 480 190 485 201C490 212 494 224 497 236C500 248 503 260 505 273Z"/>
+              <path class="fig-ring" style="--i:2;--o:0.37" pathLength="1" d="M491 267C490 279 488 290 486 301C484 312 480 323 476 333C472 344 467 354 461 364C456 373 449 382 441 390C433 398 424 405 415 412C406 418 396 423 386 427C376 431 366 435 355 438C345 441 335 444 324 446C314 448 303 451 293 452C282 453 270 454 259 454C248 454 236 452 225 449C214 446 204 442 194 436C184 430 175 422 168 414C160 406 153 397 147 388C141 378 136 369 132 359C127 349 123 340 119 330C115 320 111 310 108 300C105 289 102 278 101 267C100 257 100 245 101 234C102 223 105 212 108 201C112 191 117 181 123 171C129 161 135 152 143 143C150 135 158 127 166 119C175 112 184 105 194 99C204 93 214 88 225 85C236 81 247 79 259 78C270 78 282 79 293 81C303 83 314 86 324 90C334 94 344 98 354 102C363 107 372 111 382 116C391 120 400 125 410 130C419 135 429 141 438 148C446 154 455 162 462 171C469 180 476 190 480 200C485 211 488 222 490 233C491 244 491 256 491 267Z"/>
+              <path class="fig-ring" style="--i:3;--o:0.41" pathLength="1" d="M475 263C473 273 470 283 467 292C463 302 459 310 454 319C450 328 445 336 440 344C435 352 430 360 424 368C419 375 412 383 405 389C398 396 390 402 382 407C374 412 365 416 355 420C346 423 336 425 326 426C317 428 307 428 297 428C287 428 277 428 268 426C258 425 248 423 238 420C229 418 219 414 211 409C202 404 194 398 187 392C179 385 173 377 167 369C162 362 157 353 153 344C149 336 146 327 143 318C139 309 136 300 134 291C131 282 128 273 126 263C125 253 123 243 123 233C124 223 125 212 128 203C130 193 135 183 141 175C146 166 153 158 161 151C169 144 177 139 186 133C195 128 204 124 213 120C222 116 231 113 240 110C249 108 259 105 268 104C278 102 287 102 297 102C307 102 316 103 325 105C335 107 344 110 353 113C362 116 370 120 379 124C387 129 396 133 404 138C412 144 421 149 428 155C436 162 444 168 450 176C457 184 463 193 467 202C471 212 474 222 476 232C477 242 476 253 475 263Z"/>
+              <path class="fig-ring" style="--i:4;--o:0.46" pathLength="1" d="M455 259C454 268 452 276 450 284C447 292 443 300 439 308C435 315 431 322 426 329C422 336 417 343 412 349C407 356 402 363 396 369C390 375 384 381 377 387C370 392 362 396 354 400C346 403 337 405 328 406C319 407 310 407 301 406C292 405 284 403 275 400C267 398 259 395 251 392C243 389 236 385 228 382C221 378 213 373 206 369C199 364 193 358 187 352C181 346 175 339 171 332C166 325 162 317 159 309C156 301 154 293 152 284C150 276 149 268 148 259C148 250 147 241 148 233C149 224 150 215 153 206C155 198 159 189 164 182C169 175 175 168 182 162C189 156 197 151 205 147C212 143 221 140 229 137C237 135 245 133 253 131C261 129 269 127 277 125C285 123 293 121 301 120C309 119 318 118 327 118C335 118 344 119 353 121C361 123 370 126 378 130C385 134 393 139 400 145C407 150 413 156 419 163C425 169 430 176 435 184C440 191 444 199 447 207C451 215 453 224 455 233C456 241 456 250 455 259Z"/>
+              <path class="fig-ring" style="--i:5;--o:0.50" pathLength="1" d="M435 255C435 262 435 270 434 277C433 284 430 291 428 298C425 305 421 312 417 318C413 324 409 330 404 335C399 341 394 346 388 351C383 356 377 360 370 365C364 369 357 373 350 375C343 378 336 381 328 382C321 383 313 383 305 382C297 382 290 380 283 377C275 375 269 372 262 369C255 366 249 363 243 359C236 356 230 352 224 348C217 345 211 341 205 336C199 331 193 326 188 320C183 314 179 307 176 300C172 293 170 286 169 278C168 271 168 263 169 255C169 247 171 240 173 233C175 225 177 218 181 211C184 205 187 198 191 192C195 186 200 180 205 174C211 169 216 164 223 160C229 156 235 153 242 150C249 147 256 145 263 143C270 141 277 140 284 138C291 137 298 135 305 134C312 133 320 132 328 131C335 131 343 131 351 133C359 134 367 136 374 140C381 143 388 148 394 153C400 158 405 164 409 171C413 177 417 184 420 191C423 198 425 205 427 212C429 219 431 226 432 233C434 241 435 248 435 255Z"/>
+              <path class="fig-ring" style="--i:6;--o:0.55" pathLength="1" d="M418 251C418 258 419 264 419 270C418 276 418 283 416 289C414 295 412 301 409 307C405 312 401 318 397 322C392 327 387 331 381 334C376 338 370 341 364 343C358 346 352 348 346 350C340 352 334 354 328 355C321 356 315 357 309 357C302 358 296 357 289 356C283 355 277 353 271 351C265 349 259 346 253 343C248 340 242 337 237 333C232 329 226 326 222 321C217 317 212 313 207 307C203 302 199 297 196 291C193 285 191 278 190 271C189 265 190 258 191 251C192 245 194 238 196 232C199 226 202 221 206 216C209 210 213 205 216 200C220 195 223 191 227 186C231 181 235 177 239 173C244 168 249 164 254 161C259 157 265 154 271 152C277 149 283 148 289 146C296 145 302 144 309 144C315 144 322 144 328 144C335 145 342 146 348 147C355 149 361 151 367 154C373 157 379 161 384 165C389 169 394 174 398 180C401 185 404 191 407 197C409 203 411 209 412 215C414 221 415 227 415 233C416 239 417 245 418 251Z"/>
+              <path class="fig-ring" style="--i:7;--o:0.59" pathLength="1" d="M406 248C406 253 406 258 405 263C405 269 404 274 403 279C401 284 399 290 397 294C394 299 391 304 387 308C383 311 378 315 374 318C369 320 364 323 359 324C354 326 348 328 343 329C338 330 333 331 328 332C323 333 317 334 312 335C307 335 301 336 296 336C290 336 284 336 279 334C273 333 268 331 263 329C258 327 253 323 249 320C244 316 240 312 237 308C233 304 230 299 227 295C224 290 222 285 220 280C218 275 216 269 215 264C215 259 215 253 215 248C216 243 217 237 219 232C221 227 224 223 226 218C229 214 232 210 235 206C238 202 241 198 244 194C247 190 250 186 254 182C257 178 261 174 265 171C269 167 274 164 279 161C284 159 289 156 295 155C300 154 306 154 312 154C318 154 324 155 329 156C335 158 340 160 345 162C350 164 355 166 360 169C365 172 369 175 374 178C378 182 382 185 386 189C389 193 392 198 395 202C398 207 400 212 401 217C403 222 404 227 404 232C405 238 406 243 406 248Z"/>
+              <path class="fig-ring" style="--i:8;--o:0.63" pathLength="1" d="M396 245C395 249 394 253 393 257C392 262 391 266 389 270C387 274 385 278 383 281C381 285 378 289 375 292C373 295 369 298 366 301C362 303 358 306 354 308C350 309 346 311 342 312C337 313 333 314 329 315C324 316 320 316 315 317C311 317 306 318 302 318C297 318 292 318 287 317C283 316 278 315 273 313C269 311 265 309 261 306C257 303 254 299 252 295C249 291 247 287 246 283C244 278 243 274 242 270C241 265 240 261 240 257C240 253 239 249 239 245C239 240 240 236 240 232C241 228 242 224 244 220C245 216 247 212 249 209C252 205 254 202 257 198C260 195 263 192 266 189C269 186 272 183 276 180C280 177 284 175 288 173C292 171 297 169 301 168C306 167 311 166 315 166C320 167 325 168 330 169C334 170 339 172 343 174C347 176 350 179 354 181C358 184 361 186 365 189C368 192 372 195 375 198C378 201 381 204 384 207C387 211 389 215 391 219C393 223 394 227 395 231C396 236 396 240 396 245Z"/>
+              <path class="fig-ring" style="--i:9;--o:0.68" pathLength="1" d="M385 241C384 245 383 248 382 252C381 255 379 258 377 261C376 264 373 267 371 270C369 272 367 275 365 278C363 280 361 283 358 285C356 288 353 290 350 292C347 294 344 296 341 297C337 299 334 300 330 301C326 301 323 302 319 302C315 302 311 302 307 302C304 301 300 301 296 300C292 299 289 297 285 296C282 294 278 292 275 289C273 287 270 284 268 281C266 278 264 275 263 271C262 268 261 264 261 261C260 258 260 254 260 251C259 248 259 245 259 241C259 238 259 235 259 231C259 228 259 225 260 221C261 218 262 214 263 211C265 208 267 205 269 202C271 199 274 197 277 195C280 192 283 190 286 189C290 187 293 186 297 185C300 183 304 182 308 182C311 181 315 180 319 180C323 180 326 181 330 181C334 182 337 183 341 185C344 186 347 188 350 190C353 192 356 194 359 196C362 199 364 201 367 203C369 206 372 209 374 211C376 214 379 217 380 220C382 223 383 227 384 230C385 234 385 238 385 241Z"/>
+              <path class="fig-ring" style="--i:10;--o:0.72" pathLength="1" d="M372 238C372 241 372 243 371 246C370 249 369 251 368 253C366 256 365 258 363 260C362 262 360 264 358 266C356 268 355 270 353 272C351 274 349 276 347 278C345 280 342 282 340 283C337 284 334 286 331 286C328 287 325 288 322 288C319 287 316 287 313 286C310 285 307 284 304 283C302 282 299 280 297 279C294 277 292 275 290 274C288 272 286 270 284 268C282 266 281 263 279 261C278 259 277 256 276 253C276 251 275 248 275 246C275 243 274 241 274 238C274 235 274 233 274 230C275 228 275 225 275 222C276 220 277 217 278 214C279 212 280 209 282 207C284 205 286 203 288 201C291 199 294 198 296 197C299 196 302 195 305 194C308 194 311 193 313 193C316 193 319 193 322 193C325 192 328 192 331 193C333 193 336 193 339 194C342 195 345 196 347 197C350 198 353 200 355 202C357 204 359 206 361 208C363 210 364 212 366 215C367 217 368 220 369 222C370 225 371 227 372 230C372 233 373 235 372 238Z"/>
+              <path class="fig-ring" style="--i:11;--o:0.77" pathLength="1" d="M361 235C361 237 361 239 361 241C361 243 360 245 360 247C359 248 358 250 357 252C356 254 355 255 354 257C352 258 351 260 349 261C348 263 346 264 344 265C342 267 341 268 338 269C336 270 334 271 332 271C330 272 327 272 325 272C323 272 320 272 318 271C316 270 314 269 312 268C310 267 308 266 307 264C305 263 303 262 302 260C300 259 299 258 298 256C296 255 295 253 294 252C292 250 291 248 290 247C289 245 289 243 288 241C288 239 287 237 287 235C287 233 288 231 288 229C288 227 289 225 290 223C290 221 291 219 292 217C293 216 294 214 296 212C297 210 298 209 300 208C302 206 304 205 306 204C308 203 310 203 312 202C314 202 316 201 319 201C321 201 323 201 325 201C327 201 329 201 332 201C334 201 336 201 338 202C340 202 343 203 345 204C347 205 349 206 350 207C352 208 354 210 355 212C356 213 357 215 358 217C359 219 359 221 360 223C360 225 361 227 361 229C361 231 361 233 361 235Z"/>
+              <path class="fig-ring" style="--i:12;--o:0.81" pathLength="1" d="M353 232C353 233 354 235 353 236C353 237 353 239 353 240C353 242 353 243 352 245C351 246 351 247 350 249C349 250 348 251 346 252C345 253 344 254 342 254C341 255 339 256 338 256C336 257 335 257 333 257C331 257 330 257 328 257C326 257 325 257 323 257C322 256 320 256 319 255C317 255 316 254 315 253C314 252 313 251 311 250C310 249 309 248 308 247C307 246 306 245 306 244C305 243 304 242 303 240C302 239 301 238 301 236C300 235 300 233 300 232C300 230 300 229 300 227C301 226 302 225 302 223C303 222 304 221 305 220C306 218 307 217 308 216C309 215 310 214 311 213C312 212 313 211 315 210C316 210 317 209 319 208C320 208 322 207 323 207C325 207 327 207 328 207C330 207 331 207 333 207C334 207 336 208 338 208C339 209 341 209 342 210C343 211 345 211 346 212C347 213 349 214 349 216C350 217 351 218 352 219C352 221 353 222 353 224C353 225 353 226 353 228C353 229 353 231 353 232Z"/>
+              <path class="fig-ring" style="--i:13;--o:0.86" pathLength="1" d="M349 229C349 230 349 231 349 232C349 233 349 234 349 235C349 236 348 237 348 238C348 239 347 240 346 241C346 241 345 242 344 243C343 244 342 244 341 245C340 245 339 245 338 245C337 246 335 246 334 246C333 246 332 246 331 246C330 245 329 245 328 245C327 245 326 245 325 245C324 244 323 244 322 243C321 243 320 242 319 242C318 241 318 240 317 240C316 239 316 238 315 237C314 236 314 236 314 235C313 234 313 233 312 232C312 231 312 230 312 229C312 228 312 227 312 226C312 225 313 224 313 223C314 222 314 221 315 220C316 220 316 219 317 218C318 218 319 217 319 216C320 216 321 215 322 214C323 214 324 213 325 213C326 212 327 212 328 211C329 211 330 211 331 211C332 211 333 211 334 211C336 212 337 212 338 213C339 213 340 214 340 214C341 215 342 215 343 216C344 217 344 217 345 218C346 219 346 220 347 221C347 221 348 222 348 223C349 224 349 225 349 226C349 227 349 228 349 229Z"/>
+              <path class="fig-ring" style="--i:14;--o:0.90" pathLength="1" d="M348 226C348 227 348 227 348 228C348 229 348 230 348 230C347 231 347 232 347 233C346 233 346 234 345 234C345 235 344 236 343 236C343 237 342 237 341 237C340 238 340 238 339 238C338 238 337 238 336 238C336 238 335 238 334 238C333 238 332 238 332 238C331 238 330 238 329 237C329 237 328 237 327 237C326 237 326 236 325 236C324 235 324 235 323 234C322 234 322 233 322 232C321 232 321 231 321 230C321 230 320 229 320 228C320 227 320 227 320 226C320 225 320 225 320 224C320 223 321 222 321 222C321 221 321 220 322 220C322 219 323 218 323 218C324 217 324 217 325 216C326 216 326 215 327 215C328 215 328 214 329 214C330 214 331 213 331 213C332 213 333 213 334 213C335 213 336 213 337 213C337 213 338 214 339 214C340 214 340 215 341 215C341 216 342 216 342 217C343 217 344 218 344 218C345 219 345 219 345 220C346 221 346 221 347 222C347 222 348 223 348 224C348 225 348 225 348 226Z"/>
+            </g>
+            <path class="fig-tick" d="M280 22V8M280 538v14M22 280H8M538 280h14"/>
+            <path class="fig-cross" d="M272 280h16M280 272v16"/>
+            <path class="fig-path" pathLength="1" d="M258 486C238 388 322 330 334 240"/>
+            <circle class="fig-pt" style="--i:0" cx="255.1" cy="463.2" r="6.5"/>
+            <circle class="fig-pt" style="--i:1" cx="263.3" cy="406.7" r="5.5"/>
+            <circle class="fig-pt" style="--i:2" cx="286.4" cy="355.4" r="4.5"/>
+            <circle class="fig-pt" style="--i:3" cx="313.1" cy="305" r="3.5"/>
+            <circle class="fig-pt" style="--i:4" cx="330.5" cy="258.5" r="2.5"/>
+            <path class="fig-box" d="M300 206v-12h12M356 194h12v12M368 246v12h-12M312 258h-12v-12"/>
+            <g class="fig-note">
+              <path class="fig-leader" d="M368 194L432 64h96"/>
+              <text class="fig-label" x="436" y="56">未来目标区域</text>
+              <text class="fig-label fig-label--muted" x="436" y="88">t + k时刻</text>
+              <path class="fig-leader" d="M247 466L128 528H24"/>
+              <text class="fig-label" x="24" y="520">预测的动作</text>
+              <text class="fig-label fig-label--muted" x="24" y="550">基于t时刻的帧</text>
+            </g>
+          </svg>
+          <figcaption>图1　未来目标定位，即EndoWAM的基本思路：预测目标区域将在后续帧中出现的位置，再朝该区域行动。（示意图）</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="now-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="now-title" class="section__title">当前工作</h2>
+        </header>
+        <ol class="entries">
+          <li class="entry">
+            <p class="entry__when">进行中</p>
+            <div>
+              <h3 class="entry__title">跨具身学习与视觉-语言-动作系统</h3>
+              <p class="entry__org">杜伦大学，与Amir Atapour-Abarghouei博士、Chris Chen博士合作</p>
+              <p class="entry__text">机器人策略与习得表征如何在不同机器人平台间泛化，以及视觉-语言条件化如何与动作和状态信息相结合。</p>
+              <p class="links"><a class="link" href="research.html#embodied">研究问题</a></p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">2026–27</p>
+            <div>
+              <h3 class="entry__title">毕业论文：小数据，大模型</h3>
+              <p class="entry__org">杜伦大学，指导：Raheleh Kafieh博士</p>
+              <p class="entry__text">在标注数据稀缺时，哪种预训练图像编码器能提供最有用的视网膜表征，以及这一优势在更换相机与人群后能否保持。</p>
+              <p class="links"><a class="link" href="research.html#dissertation">项目计划</a></p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">投稿中</p>
+            <div>
+              <h3 class="entry__title">EndoWAM：具备定位能力的内镜导航世界-动作模型</h3>
+              <p class="entry__org">AAAI 2027与ICLR 2027</p>
+              <p class="links"><a class="link" href="#publication">论文详情</a></p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">2026</p>
+            <div>
+              <h3 class="entry__title">Google编程之夏导师</h3>
+              <p class="entry__org">国际神经信息学协调机构（INCF）</p>
+              <p class="entry__text">指导GestureCap中具表现力的手势-声音映射框架的开发。</p>
+              <p class="links"><a class="link" href="opensource.html">开源工作</a></p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="publication" class="section" aria-labelledby="pub-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="pub-title" class="section__title">论文</h2>
+          <p class="section__note">审稿中。</p>
+        </header>
+        <article class="pub">
+          <div class="video" data-video="TT5MsdQ0pKI" data-title="EndoWAM演示：具备定位能力的内镜导航世界-动作模型">
+            <button class="video__preview" type="button" aria-label="播放EndoWAM演示视频">
+              <img class="video__thumb" src="https://i.ytimg.com/vi/TT5MsdQ0pKI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+              <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>播放演示</span>
+            </button>
+          </div>
+          <div>
+            <p class="pub__venue"><span class="status">投稿中</span> AAAI 2027与ICLR 2027</p>
+            <h3 class="pub__title"><a href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation</a></h3>
+            <p class="pub__authors">Jinsong Lin, Zikang Pan, Wanhao Liu, Chi Kit Ng, Liangjing Shao, Zihang Yu, Ziyu Wang, Yin Wang, <span class="me">Jiaxi Wang</span>, Jeremy Yuen-Chun Teoh, Zhiyong Xiong, Huxin Gao, Hongliang Ren</p>
+            <p class="pub__abstract">视频世界模型预测任务相关目标区域将在未来帧中出现的位置，轻量级动作专家共享这一预测性表征，在单次去噪中选择导航动作。该模型在EndoMotion（涵盖输尿管镜检查、食管镜检查与ERCP的机器人内镜数据集）上训练，可零样本泛化至未见过的视角、环境与目标。</p>
+            <p class="links">
+              <a class="link" href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">arXiv:2608.01221</a>
+              <a class="link" href="https://openreview.net/forum?id=tMKXzwa7tP" target="_blank" rel="noopener noreferrer">OpenReview</a>
+              <a class="link" href="https://www.youtube.com/watch?v=TT5MsdQ0pKI" target="_blank" rel="noopener noreferrer">YouTube视频</a>
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="research-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="research-title" class="section__title">研究</h2>
+          <p class="section__note">2025年至今的项目。</p>
+        </header>
+        <div>
+          <div class="work">
+            <article class="work__item">
+              <p class="work__meta">杜伦大学，进行中</p>
+              <h3 class="work__title"><a href="research.html#embodied">跨具身学习与可迁移的动作表征</a></h3>
+              <p class="work__desc">可在不同机器人之间迁移的多模态机器人策略与面向控制的预测性表征。</p>
+            </article>
+            <article class="work__item">
+              <p class="work__meta">杜伦大学，毕业论文，2026–27</p>
+              <h3 class="work__title"><a href="research.html#dissertation">小数据，大模型：面向医学图像分类的迁移学习</a></h3>
+              <p class="work__desc">以25至200张训练图像，在青光眼检测任务上比较RETFound与通用编码器的冻结特征，并在未见过的相机上测试。</p>
+            </article>
+            <article class="work__item">
+              <p class="work__meta">香港中文大学医疗机器人课题组，2026</p>
+              <h3 class="work__title"><a href="research.html#bilivla">BiliVLA：面向自主ERCP导航的场景感知VLA</a></h3>
+              <p class="work__desc">在ERCP体模实验中，mIoU为96.25%，动作精确率为91.96%，导航成功率为84.85%。</p>
+            </article>
+            <article class="work__item">
+              <p class="work__meta">香港中文大学医疗机器人课题组，2026</p>
+              <h3 class="work__title"><a href="research.html#benchmark">遥操作柔性内镜基准</a></h3>
+              <p class="work__desc">150段同步视频与机器人状态片段、一套图像-动作轨迹处理流程，以及π0.5 VLA导航基线。</p>
+            </article>
+            <article class="work__item">
+              <p class="work__meta">香港中文大学医疗机器人课题组，2026</p>
+              <h3 class="work__title"><a href="research.html#trileg">Trileg-ESD：视觉引导的磁控软体机器人</a></h3>
+              <p class="work__desc">用于组织操作的三足磁控软体机器人，由视觉-语言控制器通过三个电磁线圈驱动。</p>
+            </article>
+            <article class="work__item">
+              <p class="work__meta">麦吉尔大学，MITACS Globalink，2025</p>
+              <h3 class="work__title"><a href="research.html#motion">无标记动作-声音交互</a></h3>
+              <p class="work__desc">基于Python与MediaPipe的低延迟流程，可将身体动作实时转化为音乐。</p>
+            </article>
+          </div>
+          <p class="section__more"><a class="link" href="research.html">完整研究页面</a> <span aria-hidden="true">&nbsp;&nbsp;</span> <a class="link" href="engineering.html">工程项目</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="exp-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="exp-title" class="section__title">经历</h2>
+        </header>
+        <ol class="entries">
+          <li class="entry">
+            <p class="entry__when">进行中</p>
+            <div>
+              <h3 class="entry__title">学生研究者，具身智能与VLA系统</h3>
+              <p class="entry__org">杜伦大学。导师：Amir Atapour-Abarghouei博士、Chris Chen博士</p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">2026年6月–8月</p>
+            <div>
+              <h3 class="entry__title">本科生暑期科研实习生</h3>
+              <p class="entry__org">香港中文大学医疗机器人课题组。导师：Hongliang Ren教授</p>
+              <p class="entry__text">BiliVLA、遥操作柔性内镜基准与Trileg-ESD。</p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">2026</p>
+            <div>
+              <h3 class="entry__title">Google编程之夏导师</h3>
+              <p class="entry__org">国际神经信息学协调机构，远程</p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">2025年6月–8月</p>
+            <div>
+              <h3 class="entry__title">MITACS Globalink科研实习生</h3>
+              <p class="entry__org">麦吉尔大学CIRMMT，蒙特利尔。导师：Suresh Krishna教授</p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">2024年6月–7月</p>
+            <div>
+              <h3 class="entry__title">HPC暑期学校</h3>
+              <p class="entry__org">爱丁堡大学EPCC</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="edu-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="edu-title" class="section__title">教育背景</h2>
+        </header>
+        <ol class="entries">
+          <li class="entry">
+            <p class="entry__when">2023–2027</p>
+            <div>
+              <h3 class="entry__title">电子工程工学学士（BEng），一等荣誉学位</h3>
+              <p class="entry__org">杜伦大学大学学院（University College）</p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">2025–2026</p>
+            <div>
+              <h3 class="entry__title">海外交换学年</h3>
+              <p class="entry__org">圣母大学，美国印第安纳州</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="beyond-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="beyond-title" class="section__title">实验室之外</h2>
+        </header>
+        <ol class="entries">
+          <li class="entry">
+            <p class="entry__when">领导经历</p>
+            <div>
+              <h3 class="entry__title">DurHack设计负责人</h3>
+              <p class="entry__text">杜伦大学年度黑客马拉松，2024–25。此外担任大学极限飞盘社联合会长、Castle Pride会长，以及工程系平等、多元与包容（EDI）委员会学生代表。</p>
+              <p class="links"><a class="link" href="cv.html#leadership">领导与服务</a></p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">艺术</p>
+            <div>
+              <h3 class="entry__title">杜伦大学年度艺术比赛两度入围决赛</h3>
+              <p class="entry__text">2024年、2025年两度入围。</p>
+              <p class="links"><a class="link" href="art.html">艺术与作品集</a></p>
+            </div>
+          </li>
+          <li class="entry">
+            <p class="entry__when">运动</p>
+            <div>
+              <h3 class="entry__title">USA Ultimate大学组注册球员</h3>
+              <p class="entry__text">海外交换学年期间代表圣母大学参赛。</p>
+              <p class="links"><a class="link" href="sport.html">体育</a></p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__text">杜伦大学工程系。具身智能、视觉-语言-动作模型与医疗机器人。</p>
+          <span class="footer__logo"><img src="../../assets/durham-university-logo.png" alt="杜伦大学" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div>
+          <p class="footer__heading">工作</p>
+          <ul class="footer__list">
+            <li><a href="research.html">研究</a></li>
+            <li><a href="engineering.html">工程</a></li>
+            <li><a href="opensource.html">开源</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">关于</p>
+          <ul class="footer__list">
+            <li><a href="cv.html">简历</a></li>
+            <li><a href="certificates.html">证书</a></li>
+            <li><a href="contact.html">联系</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">实验室之外</p>
+          <ul class="footer__list">
+            <li><a href="art.html">艺术</a></li>
+            <li><a href="sport.html">运动</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__base">
+        <p>© <span id="year">2026</span> Jiaxi Wang。更新于2026年10月。</p>
+        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="site-switches">
+    <a class="version-switch" href="../../" aria-label="切换至本页的沉浸版">
+      <span class="version-switch__dot" aria-hidden="true"></span>沉浸版
+    </a>
+    <a class="lang-switch" href="../" lang="en" hreflang="en" aria-label="Switch to the English version of this page">English</a>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>

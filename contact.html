@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="night" data-force-theme="night" class="theme-forced">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Contact — Jiaxi Wang</title>
   <meta name="description" content="Contact Jiaxi Wang, undergraduate researcher in embodied AI and medical robotics at Durham University.">
-  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#05050A">
+  <script>(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'day':'night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
+  <script>(function(d){try{if(sessionStorage.getItem('jw-seen'))d.classList.add('jw-seen')}catch(e){}addEventListener('load',function(){setTimeout(function(){if(!window.JW)d.classList.remove('js')},0)})})(document.documentElement)</script>
   <link rel="canonical" href="https://jiaxiwang05.github.io/contact.html">
+  <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/contact.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jiaxiwang05.github.io/research-version/zh/contact.html">
+  <link rel="alternate" hreflang="x-default" href="https://jiaxiwang05.github.io/contact.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="Contact — Jiaxi Wang">
   <meta property="og:description" content="Contact Jiaxi Wang, undergraduate researcher in embodied AI and medical robotics at Durham University.">
   <meta property="og:url" content="https://jiaxiwang05.github.io/contact.html">
@@ -18,14 +26,16 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&amp;text=%E4%B8%AD%E6%96%87&amp;display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
   <link rel="stylesheet" href="assets/css/site.css">
-  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="field-backdrop" aria-hidden="true"><div class="grain"></div></div>
 
   <div class="loader" aria-hidden="true">
     <div class="loader__badge">
@@ -37,134 +47,158 @@
   </div>
 
   <header class="nav">
-    <a class="nav__brand" href="index.html"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg>Jiaxi Wang</a>
-    <nav aria-label="Primary">
+    <a class="nav__brand" href="index.html"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg><span>Jiaxi Wang</span></a>
+    <nav class="nav__primary" aria-label="Primary">
       <ul class="nav__links">
-        <li><a href="research.html">Research</a></li>
-        <li><a href="engineering.html">Engineering</a></li>
-        <li><a href="opensource.html">Open source</a></li>
-        <li><a href="cv.html">CV</a></li>
-        <li><a href="contact.html" aria-current="page">Contact</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="engineering.html">Engineering</a></li>
+          <li><a href="opensource.html">Open source</a></li>
+          <li><a href="cv.html">CV</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
       </ul>
     </nav>
-    <span class="nav__count" aria-hidden="true"></span>
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <div class="nav__tools">
+      <span class="nav__count" aria-hidden="true"></span>
+      <div class="lang" role="group" aria-label="Language"><span class="lang__opt" aria-current="true">EN</span><span class="lang__sep" aria-hidden="true">/</span><a class="lang__opt" href="research-version/zh/contact.html" hreflang="zh-CN" aria-label="Switch to the Chinese version of this page"><span lang="zh-CN">中文</span></a></div>
+      <button class="theme-toggle" type="button" data-theme-toggle data-magnetic aria-label="Switch between day and night theme">
+        <svg class="tt" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="tt-sun"><path d="M0 0H24L0 24Z"/></clipPath>
+            <clipPath id="tt-moon"><path d="M24 0V24H0Z"/></clipPath>
+            <mask id="tt-cres" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <rect width="24" height="24" fill="#fff"/><circle cx="10.66" cy="10.66" r="6" fill="#000"/>
+            </mask>
+          </defs>
+          <circle class="tt__corona" cx="12" cy="12" r="9.2"/>
+          <g class="tt__dial">
+            <g clip-path="url(#tt-sun)">
+              <circle class="tt__sun" cx="12" cy="12" r="6.5"/>
+              <g class="tt__rays">
+                <path pathLength="1" style="--i:0" d="M4.06 15.29 2.21 16.06"/>
+                <path pathLength="1" style="--i:1" d="M3.57 10.32 1.6 9.93"/>
+                <path pathLength="1" style="--i:2" d="M5.92 5.92 4.5 4.5"/>
+                <path pathLength="1" style="--i:3" d="M10.32 3.57 9.93 1.6"/>
+                <path pathLength="1" style="--i:4" d="M15.29 4.06 16.06 2.21"/>
+              </g>
+            </g>
+            <g clip-path="url(#tt-moon)">
+              <circle class="tt__moon" cx="12" cy="12" r="6.5" mask="url(#tt-cres)"/>
+              <circle class="tt__star" cx="19.4" cy="17.2" r=".7"/>
+              <circle class="tt__star" cx="16.6" cy="20.2" r=".5"/>
+            </g>
+            <path class="tt__term" d="M6.6 17.4 17.4 6.6"/>
+          </g>
+        </svg>
+        <span class="tt__tip" aria-hidden="true"></span>
+      </button>
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
+    </div>
+    <div class="nav__progress" aria-hidden="true"><i></i></div>
   </header>
-  <nav class="menu" id="menu" aria-label="Menu">
-    <a href="index.html">Home</a>
-    <a href="research.html">Research</a>
-    <a href="engineering.html">Engineering</a>
-    <a href="opensource.html">Open source</a>
-    <a href="cv.html">CV</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <div class="colorbar" aria-hidden="true"><div class="colorbar__fill"></div></div>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="switcher">
-    <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" hidden>
-      <p id="switch-title" class="switcher__t">Here for the research?</p>
-      <p class="switcher__d">Switch to the research version: the same content on a clean, text-first page that is quick to read.</p>
+
+  <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" aria-describedby="switch-desc" hidden>
+    <div class="switcher__toast-in">
+      <div class="switcher__txt">
+        <p id="switch-title" class="switcher__t">Here for the research?</p>
+        <p id="switch-desc" class="switcher__d">Switch to the research version: the same content on a clean, text-first page that is quick to read.</p>
+      </div>
       <div class="switcher__acts">
-        <a class="switcher__go" href="research-version/contact.html">Switch version</a>
-        <button class="switcher__x" type="button">Stay here</button>
+        <a class="btn btn--solid btn--sm switcher__go" href="research-version/contact.html">Switch version</a>
+        <button class="btn btn--sm switcher__x" type="button"><span class="switcher__x-label">Stay here</span><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
       </div>
     </div>
-    <a class="switcher__btn" href="research-version/contact.html" data-magnetic aria-label="Switch to the research version of this page">
-      <span class="switcher__glow" aria-hidden="true"></span>
-      <span class="switcher__label">Research version<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-      <span class="switcher__hint">Clean and text-first</span>
+  </div>
+
+  <nav class="menu" id="menu" aria-label="Menu" data-hue="nbi">
+    <ol class="menu__list">
+      <li style="--i:0"><a href="index.html"><span class="menu__n" aria-hidden="true">01</span>Home</a></li>
+      <li style="--i:1"><a href="research.html"><span class="menu__n" aria-hidden="true">02</span>Research</a></li>
+      <li style="--i:2"><a href="engineering.html"><span class="menu__n" aria-hidden="true">03</span>Engineering</a></li>
+      <li style="--i:3"><a href="opensource.html"><span class="menu__n" aria-hidden="true">04</span>Open source</a></li>
+      <li style="--i:4"><a href="cv.html"><span class="menu__n" aria-hidden="true">05</span>CV</a></li>
+      <li style="--i:5"><a href="contact.html" aria-current="page"><span class="menu__n" aria-hidden="true">06</span>Contact</a></li>
+    </ol>
+    <div class="menu__foot">
+      <div class="lang" role="group" aria-label="Language"><span class="lang__opt" aria-current="true">EN</span><span class="lang__sep" aria-hidden="true">/</span><a class="lang__opt" href="research-version/zh/contact.html" hreflang="zh-CN" aria-label="Switch to the Chinese version of this page"><span lang="zh-CN">中文</span></a></div>
+      <a class="tlink menu__rv" href="research-version/contact.html">Research version<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+    </div>
+  </nav>
+
+  <div class="switcher">
+    <a class="switcher__btn" href="research-version/contact.html" aria-label="Switch to the research version of this page">
+      <span class="switcher__label">Research version<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span><span class="switcher__hint">Clean and text-first</span>
     </a>
   </div>
 
   <main id="main">
 
-    <header class="page-head" data-field="lumen" data-chapter="Contact">
-      <span class="ghost" data-ghost aria-hidden="true">Hello</span>
-      
+    <header class="page-head" data-hue="nbi" data-chapter="Contact">
+      <span class="ghost" aria-hidden="true">Hello</span>
       <div class="page-head__inner">
-        <h1 class="page-head__title" data-split="chars">Con<em>tact</em></h1>
-        <p class="page-head__lead" data-reveal="blur" data-delay=".3">For research collaboration, PhD opportunities or academic correspondence, email is the fastest way to reach me.</p>
-        <p style="margin-top: 36px;" data-reveal="up" data-delay=".4"><a class="big-email" href="mailto:tggq61@durham.ac.uk" style="color: var(--cyan);">tggq61@durham.ac.uk</a></p>
-        <div class="pills" style="margin-top: 32px;" data-reveal="up" data-delay=".6">
-          <button class="pill pill--solid" type="button" data-copy="tggq61@durham.ac.uk" data-magnetic>Copy email address</button>
-          <a class="pill" href="cv.html" data-magnetic>View CV</a>
-          <a class="pill" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer" data-magnetic>GitHub</a>
-          <a class="pill" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer" data-magnetic>LinkedIn</a>
+        <h1 class="page-head__title t-cover" style="--w:3.92" data-split="chars">Contact</h1>
+        <p class="page-head__lead t-lead" data-reveal="up">For research collaboration, PhD opportunities or academic correspondence, email is the fastest way to reach me.</p>
+        <div class="lockable contact-mail" data-copy-scope data-reveal="up">
+          <a class="finale__email" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a><svg class="lock" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22V0h18M82 0h18v22M100 78v22H82M18 100H0V78"/></svg>
+          <div class="pills"><button class="btn btn--solid" type="button" data-copy="tggq61@durham.ac.uk" data-magnetic><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 8.5V5.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg>Copy email address</button><a class="btn" href="cv.html">View CV</a><a class="btn" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a><a class="btn" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+          <p class="status-line t-meta" id="copy-status" role="status" aria-live="polite" data-copy-status></p>
         </div>
-        <p class="status-line" id="copy-status" role="status" aria-live="polite"></p>
       </div>
     </header>
-    <section class="chapter" data-field="coil_cobalt" data-chapter="Profile">
-      <span class="ghost" data-ghost aria-hidden="true" style="right: -4vw; top: 4%;">Durham</span>
+
+    <section class="chapter profile" data-hue="coil" data-chapter="Profile" aria-labelledby="profile-title">
       <div class="wrap">
-        <div class="block">
-          <div class="block__aside">
-            <p class="block__k">Profile</p>
-            <h2 class="block__t" data-split="words">A short <em>profile</em></h2>
-          </div>
-          <div class="block__body">
+        <p class="eyebrow t-meta">Profile</p>
+        <h2 id="profile-title" class="t-display" data-split="lines">A short <em>profile</em></h2>
             <p class="t-body" data-reveal="up">Final-year BEng Electronics Engineering student at Durham University (University College), with a study abroad year at the University of Notre Dame. Research experience at the CUHK Medical Robotics Group, McGill University (MITACS Globalink) and EPCC at the University of Edinburgh; Google Summer of Code mentor with INCF.</p>
             <p class="t-body" data-reveal="up">Currently working on cross-embodiment learning and vision–language–action systems with Dr Amir Atapour-Abarghouei and Dr Chris Chen, and on a dissertation about transfer learning from small medical image datasets with Dr Raheleh Kafieh.</p>
-            <p class="links"><a class="link" href="research.html">Research</a><a class="link" href="cv.pdf">CV (PDF)</a></p>
-          </div>
-        </div>
+            <p class="links" data-reveal="up"><a class="tlink" href="research.html">Research<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="cv.pdf">CV (PDF)<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
       </div>
     </section>
+
   </main>
 
-  <footer class="footer" data-chapter="Contact">
+  <footer class="footer footer--plain" data-chapter="Contact" data-hue="nbi">
     <div class="wrap">
-      <p class="footer__cta" data-split="words">Let's talk <em>research.</em></p>
-      <p style="margin-top: 28px;"><a class="big-email" href="mailto:tggq61@durham.ac.uk" style="color: #fff;">tggq61@durham.ac.uk</a></p>
       <div class="footer__grid">
-        <div>
+        <div class="footer__id">
           <p class="footer__name">Jiaxi Wang</p>
           <p class="footer__txt">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
-          <span class="footer__logo"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
+          <span class="logo-plate"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
         </div>
-        <div>
-          <p class="footer__h">Work</p>
-          <ul class="footer__list">
-            <li><a href="research.html">Research</a></li>
-            <li><a href="engineering.html">Engineering</a></li>
-            <li><a href="opensource.html">Open source</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">Work</p>
+          <ul class="footer__list"><li><a href="research.html">Research</a></li><li><a href="engineering.html">Engineering</a></li><li><a href="opensource.html">Open source</a></li></ul>
         </div>
-        <div>
-          <p class="footer__h">About</p>
-          <ul class="footer__list">
-            <li><a href="cv.html">CV</a></li>
-            <li><a href="certificates.html">Certificates</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">About</p>
+          <ul class="footer__list"><li><a href="cv.html">CV</a></li><li><a href="certificates.html">Certificates</a></li><li><a href="contact.html">Contact</a></li></ul>
         </div>
-        <div>
-          <p class="footer__h">Beyond the lab</p>
-          <ul class="footer__list">
-            <li><a href="art.html">Art</a></li>
-            <li><a href="sport.html">Sport</a></li>
-            <li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          </ul>
+        <div class="footer__col">
+          <p class="footer__h t-meta">Beyond the lab</p>
+          <ul class="footer__list"><li><a href="art.html">Art</a></li><li><a href="sport.html">Sport</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul>
         </div>
       </div>
-      <div class="footer__legend" aria-hidden="true"></div>
-      <div class="footer__legend-labels" aria-hidden="true"><span>Coil</span><span>NBI</span><span>ICG</span><span>Disc</span><span>Fundus</span><span>Mucosa</span><span>PpIX</span></div>
-      <div class="footer__base">
-        <p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p>
-        <p>Colours from endoscopic imaging, fluorescence and fundus photography.</p>
-      </div>
+      <div class="spectrum" aria-hidden="true"><span style="--c:var(--c-coil)">Coil</span><span style="--c:var(--c-nbi)">NBI</span><span style="--c:var(--c-icg)">ICG</span><span style="--c:var(--c-disc)">Disc</span><span style="--c:var(--c-fundus)">Fundus</span><span style="--c:var(--c-mucosa)">Mucosa</span><span style="--c:var(--c-ppix)">PpIX</span></div>
+      <div class="footer__base t-meta"><p>© <span id="year">2026</span> Jiaxi Wang. Updated October 2026.</p><p>Colours from endoscopic imaging, fluorescence and fundus photography.</p></div>
     </div>
   </footer>
 
+  <script id="jw-i18n" type="application/json">{"theme.switch":"Switch between day and night theme","theme.toDay":"Switch to day theme (white light)","theme.toNight":"Switch to night theme (fluorescence)","theme.day":"Day · White light","theme.night":"Night · Fluorescence","menu.open":"Open menu","menu.close":"Close menu","copy.done":"Copied","copy.status":"Email address copied.","copy.fail":"Copy failed. Select the address above and copy it manually.","explain.show":"What this shows","explain.hide":"Close explanation","cursor.play":"Play","cursor.open":"Open","cursor.drag":"Drag","cursor.steer":"Steer","cursor.hold":"Hold","video.title":"Video","gallery.of":"{n} of {total}"}</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/hero-gl.js"></script>
+  <script src="assets/js/specimens.js"></script>
   <script src="assets/js/core.js"></script>
+  <script src="assets/js/night-fx.js"></script>
   <script src="assets/js/pages/inner.js"></script>
 </body>
 </html>

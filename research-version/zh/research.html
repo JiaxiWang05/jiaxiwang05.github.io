@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>研究 — Jiaxi Wang</title>
+  <meta name="description" content="Jiaxi Wang的研究：跨具身学习、面向视网膜图像的小数据迁移学习、EndoWAM、BiliVLA、遥操作内镜基准、Trileg-ESD与动作-声音交互。">
+  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://jiaxiwang05.github.io/research-version/zh/research.html">
+  <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/research-version/research.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jiaxiwang05.github.io/research-version/zh/research.html">
+  <link rel="alternate" hreflang="x-default" href="https://jiaxiwang05.github.io/research-version/research.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:title" content="研究 — Jiaxi Wang">
+  <meta property="og:description" content="具身智能、视觉-语言-动作模型与医疗机器人。">
+  <meta property="og:url" content="https://jiaxiwang05.github.io/zh/research.html">
+  <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../../assets/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Noto+Sans+SC:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    :root {
+      --font-sans: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-serif: "Source Serif 4", "Noto Sans SC", "Iowan Old Style", Georgia, "PingFang SC", "Microsoft YaHei", serif;
+    }
+  </style>
+  <script>document.documentElement.classList.add('js');</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "name": "EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation",
+    "url": "https://arxiv.org/abs/2608.01221",
+    "sameAs": "https://openreview.net/forum?id=tMKXzwa7tP",
+    "datePublished": "2026-08-02",
+    "author": [
+      {"@type": "Person", "name": "Jinsong Lin"},
+      {"@type": "Person", "name": "Zikang Pan"},
+      {"@type": "Person", "name": "Wanhao Liu"},
+      {"@type": "Person", "name": "Chi Kit Ng"},
+      {"@type": "Person", "name": "Liangjing Shao"},
+      {"@type": "Person", "name": "Zihang Yu"},
+      {"@type": "Person", "name": "Ziyu Wang"},
+      {"@type": "Person", "name": "Yin Wang"},
+      {"@type": "Person", "name": "Jiaxi Wang"},
+      {"@type": "Person", "name": "Jeremy Yuen-Chun Teoh"},
+      {"@type": "Person", "name": "Zhiyong Xiong"},
+      {"@type": "Person", "name": "Huxin Gao"},
+      {"@type": "Person", "name": "Hongliang Ren"}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至正文</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <a class="nav__brand" href="index.html">
+        <svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="13.6" cy="10.4" r="5.4"/><circle cx="14.6" cy="9.4" r="1.7" fill="currentColor" stroke="none"/></svg>
+        Jiaxi Wang
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="打开菜单">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="research.html" aria-current="page">研究</a></li>
+        <li><a href="engineering.html">工程</a></li>
+        <li><a href="opensource.html">开源</a></li>
+        <li><a href="cv.html">简历</a></li>
+        <li><a href="contact.html">联系</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <header class="page-head">
+      <div class="wrap">
+        <h1 class="page-head__title">研究</h1>
+        <p class="page-head__lead">在可形变、部分可观测环境中行动的机器人：面向内镜的视觉-语言-动作模型与世界-动作模型、可跨具身形态迁移的策略，以及基于小规模医学数据集的学习。</p>
+        <p class="section__note" style="margin-top: 14px;">研究兴趣：具身智能、视觉-语言-动作系统、跨具身学习、自主手术机器人、有限数据下的迁移学习、人机交互。</p>
+      </div>
+    </header>
+
+    <section id="publication" class="section" aria-labelledby="pub-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="pub-title" class="section__title">论文</h2>
+          <p class="section__note">审稿中。</p>
+        </header>
+        <article class="pub">
+          <div class="video" data-video="TT5MsdQ0pKI" data-title="EndoWAM演示：具备定位能力的内镜导航世界-动作模型">
+            <button class="video__preview" type="button" aria-label="播放EndoWAM演示视频">
+              <img class="video__thumb" src="https://i.ytimg.com/vi/TT5MsdQ0pKI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+              <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>播放演示</span>
+            </button>
+          </div>
+          <div>
+            <p class="pub__venue"><span class="status">投稿中</span> AAAI 2027与ICLR 2027</p>
+            <h3 class="pub__title"><a href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation</a></h3>
+            <p class="pub__authors">Jinsong Lin, Zikang Pan, Wanhao Liu, Chi Kit Ng, Liangjing Shao, Zihang Yu, Ziyu Wang, Yin Wang, <span class="me">Jiaxi Wang</span>, Jeremy Yuen-Chun Teoh, Zhiyong Xiong, Huxin Gao, Hongliang Ren</p>
+            <p class="pub__abstract">基于学习的内镜策略通常仅依据当前帧采取动作，因而在组织形变、遮挡和视角快速变化时较为脆弱。EndoWAM是首个面向可泛化机器人内镜导航的世界-动作模型。该模型提出未来定位：轻量级扩散Transformer根据视频世界模型的中间去噪特征，预测任务相关目标区域在未来帧中的位置；离散动作专家共享这一预测性表征，因此仅需单次去噪即可实现实时控制。论文还提出了EndoMotion，一个涵盖输尿管镜检查、食管镜检查与ERCP的机器人内镜数据集。EndoWAM优于所有基线方法及其他定位策略，并可零样本泛化至未见过的视角、环境与目标。</p>
+            <p class="links">
+              <a class="link" href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">arXiv:2608.01221</a>
+              <a class="link" href="https://openreview.net/forum?id=tMKXzwa7tP" target="_blank" rel="noopener noreferrer">OpenReview</a>
+              <a class="link" href="https://www.youtube.com/watch?v=TT5MsdQ0pKI" target="_blank" rel="noopener noreferrer">YouTube视频</a>
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="current" class="section" aria-labelledby="current-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="current-title" class="section__title">当前项目</h2>
+          <p class="section__note">杜伦大学，2026–27学年。</p>
+        </header>
+        <div>
+          <article id="embodied" class="study study--text">
+            <div class="study__body">
+              <p class="study__meta">学生研究者，进行中 <span class="status">初期阶段</span></p>
+              <h3 class="study__title">跨具身学习与视觉-语言-动作系统</h3>
+              <p class="study__people">指导：Amir Atapour-Abarghouei博士、Chris Chen博士</p>
+              <p class="study__desc">机器人策略通常针对单一平台训练。本项目研究哪些因素使策略或习得表征能够从一个机器人迁移到另一个机器人。</p>
+              <ul class="study__list">
+                <li>策略与习得表征如何在不同机器人平台间泛化。</li>
+                <li>视觉-语言条件信息如何与动作和状态信息相融合。</li>
+                <li>可迁移的动作表征与多模态机器人策略。</li>
+                <li>面向控制的预测性表征，以EndoWAM中的世界-动作建模为基础。</li>
+              </ul>
+              <p class="study__keys"><b>关键词</b> 具身智能、VLA、跨具身学习、动作表征、世界模型</p>
+            </div>
+          </article>
+
+          <article id="dissertation" class="study study--text">
+            <div class="study__body">
+              <p class="study__meta">工学学士毕业研发项目，2026–27</p>
+              <h3 class="study__title">小数据，大模型：面向医学图像分类的迁移学习</h3>
+              <p class="study__people">指导：Raheleh Kafieh博士</p>
+              <p class="study__desc">临床数据集规模较小。本项目衡量在标注数据稀缺时，哪种预训练图像编码器能提供最有用的视网膜表征，以及与通用模型相比，眼科专用基础模型是否值得采用。所有编码器参数均冻结，仅用作特征提取器；实验采用在所提取特征上训练的简单分类器。</p>
+              <ul class="study__list">
+                <li><b>编码器。</b>将视网膜基础模型RETFound与通用及生物医学编码器进行比较：DINOv2、DINOv3、BiomedCLIP、ImageNet ResNet-50与SwinV2-tiny。</li>
+                <li><b>基于PAPILA的青光眼检测。</b>由于PAPILA包含每位患者的双眼图像，采用患者层面的数据划分，并以PAPILA的临床测量指标作为非图像基线。</li>
+                <li><b>数据效率曲线。</b>训练图像数量为25、50、100和200张，每种规模进行十次随机抽样，并给出每个编码器带误差棒的准确率。</li>
+                <li><b>外部验证。</b>将在PAPILA上训练的分类器无需重新训练直接应用于Chákṣu（由三种相机在另一人群中采集），并按相机报告性能下降幅度。</li>
+                <li><b>时间允许时：</b>使用AIROGS-light将曲线扩展至数千张图像，并通过显著性图检查模型关注的是视盘而非伪影。</li>
+              </ul>
+              <p class="callout"><b>预期成果：</b>模型对比表、数据效率图与外部验证结果表。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cuhk" class="section" aria-labelledby="cuhk-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="cuhk-title" class="section__title">香港中文大学医疗机器人课题组</h2>
+          <p class="section__note">本科生暑期科研实习生，2026年6月–8月。香港特别行政区。导师：Hongliang Ren教授。</p>
+        </header>
+        <div>
+          <article id="bilivla" class="study">
+            <div class="video" data-video="ht9N5xxEOZo" data-title="BiliVLA：面向自主ERCP导航的场景感知视觉-语言-动作模型">
+              <button class="video__preview" type="button" aria-label="播放BiliVLA演示视频">
+                <img class="video__thumb" src="https://i.ytimg.com/vi/ht9N5xxEOZo/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>播放演示</span>
+              </button>
+            </div>
+            <div class="study__body">
+              <p class="study__meta">指导：Jinsong Lin</p>
+              <h3 class="study__title">BiliVLA：面向自主ERCP导航的场景感知VLA</h3>
+              <p class="study__desc">用于ERCP术中胆管导航的视觉-语言-动作系统；该场景会发生形变，目标容易丢失。</p>
+              <dl class="metrics" aria-label="ERCP体模实验结果">
+                <div><dt>mIoU</dt><dd>96.25%</dd></div>
+                <div><dt>动作精确率</dt><dd>91.96%</dd></div>
+                <div><dt>导航成功率</dt><dd>84.85%</dd></div>
+              </dl>
+              <ul class="study__list">
+                <li>协助构建两阶段流程：先进行定位增强的监督微调，再进行基于GRPO的强化优化，并结合场景感知定位与安全感知恢复。</li>
+                <li>整合了体模实验中用于闭环控制的硬件、多模态轨迹与三自由度动作。</li>
+              </ul>
+              <p class="links"><a class="link" href="https://www.youtube.com/watch?v=ht9N5xxEOZo" target="_blank" rel="noopener noreferrer">YouTube视频</a></p>
+            </div>
+          </article>
+
+          <article id="benchmark" class="study study--text">
+            <div class="study__body">
+              <p class="study__meta">指导：Jinsong Lin</p>
+              <h3 class="study__title">遥操作柔性内镜基准</h3>
+              <p class="study__desc">用于从遥操作中学习内镜导航的可复现多模态基准。</p>
+              <dl class="metrics" aria-label="基准规模">
+                <div><dt>同步视频与机器人状态片段</dt><dd>150</dd></div>
+                <div><dt>图像-动作轨迹帧</dt><dd>224 × 224</dd></div>
+                <div><dt>VLA导航基线</dt><dd>π0.5</dd></div>
+              </dl>
+              <ul class="study__list">
+                <li>采集了150段同步的内镜视频与机器人状态片段，并解决了视频、高频机器人状态与PDT硬件参数之间的时间戳对齐问题。</li>
+                <li>构建了数据清洗、帧提取、YOLO感兴趣区域（ROI）裁剪及图像-动作轨迹的工作流程。</li>
+                <li>部署开源π0.5策略作为VLA导航基线。</li>
+              </ul>
+            </div>
+          </article>
+
+          <article id="trileg" class="study">
+            <div class="video" data-video="w_X_qKwpm0w" data-title="Trileg-ESD：视觉引导的磁控软体机器人进行黏膜抬举">
+              <button class="video__preview" type="button" aria-label="播放Trileg-ESD演示视频">
+                <img class="video__thumb" src="https://i.ytimg.com/vi/w_X_qKwpm0w/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>播放演示</span>
+              </button>
+            </div>
+            <div class="study__body">
+              <p class="study__meta">指导：Chi Kit Ng</p>
+              <h3 class="study__title">Trileg-ESD：视觉引导的磁控软体机器人</h3>
+              <p class="study__desc">一种微型三足磁控软体机器人，用于在内镜黏膜下剥离术（ESD）中辅助组织操作，并配有面向两台软体机器人的协同VLA算法。</p>
+              <ul class="study__list">
+                <li>围绕运动基元构建可控运动：下蹲、抬腿、旋转、爬行与姿态恢复。</li>
+                <li>研究了一种视觉-语言控制器，可将当前及近期内镜帧与运动指令映射为三个电磁线圈的电压指令。</li>
+              </ul>
+              <p class="links"><a class="link" href="https://www.youtube.com/watch?v=w_X_qKwpm0w" target="_blank" rel="noopener noreferrer">YouTube上的黏膜抬举演示</a></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mcgill" class="section" aria-labelledby="mcgill-title">
+      <div class="wrap section__grid">
+        <header class="section__head">
+          <h2 id="mcgill-title" class="section__title">麦吉尔大学CIRMMT</h2>
+          <p class="section__note">MITACS Globalink科研实习生，2025年6月–8月。蒙特利尔。导师：Suresh Krishna教授。</p>
+        </header>
+        <div>
+          <article id="motion" class="study">
+            <div class="video" data-video="aJl4vnLZrYE" data-title="无标记动作-声音工作流程演示">
+              <button class="video__preview" type="button" aria-label="播放动作-声音演示视频">
+                <img class="video__thumb" src="https://i.ytimg.com/vi/aJl4vnLZrYE/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>播放演示</span>
+              </button>
+            </div>
+            <div class="study__body">
+              <h3 class="study__title">无标记动作-声音交互</h3>
+              <p class="study__desc">基于无标记、AI辅助动作捕捉的手势控制音乐生成。</p>
+              <ul class="study__list">
+                <li>构建并评估了基于Google MediaPipe的低延迟Python工作流程，将身体动作映射为声音。</li>
+                <li>参与跨工程、神经科学、心理学与人机交互领域的实验设计、编程、分析与报告撰写。</li>
+              </ul>
+              <p class="links">
+                <a class="link" href="https://github.com/JiaxiWang05/gesturecap_mapping" target="_blank" rel="noopener noreferrer">GitHub上的gesturecap_mapping</a>
+                <a class="link" href="https://www.youtube.com/watch?v=aJl4vnLZrYE" target="_blank" rel="noopener noreferrer">YouTube视频</a>
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__text">杜伦大学工程系。具身智能、视觉-语言-动作模型与医疗机器人。</p>
+          <span class="footer__logo"><img src="../../assets/durham-university-logo.png" alt="杜伦大学" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div>
+          <p class="footer__heading">工作</p>
+          <ul class="footer__list">
+            <li><a href="research.html">研究</a></li>
+            <li><a href="engineering.html">工程</a></li>
+            <li><a href="opensource.html">开源</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">关于</p>
+          <ul class="footer__list">
+            <li><a href="cv.html">简历</a></li>
+            <li><a href="certificates.html">证书</a></li>
+            <li><a href="contact.html">联系</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">实验室之外</p>
+          <ul class="footer__list">
+            <li><a href="art.html">艺术</a></li>
+            <li><a href="sport.html">运动</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__base">
+        <p>© <span id="year">2026</span> Jiaxi Wang。更新于2026年10月。</p>
+        <p><a class="link" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="site-switches">
+    <a class="version-switch" href="../../research.html" aria-label="切换至本页的沉浸版">
+      <span class="version-switch__dot" aria-hidden="true"></span>沉浸版
+    </a>
+    <a class="lang-switch" href="../research.html" lang="en" hreflang="en" aria-label="Switch to the English version of this page">English</a>
+  </div>
+
+  <script src="../script.js"></script>
+</body>
+</html>
