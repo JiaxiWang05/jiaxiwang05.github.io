@@ -86,22 +86,26 @@
     else put(sessionStorage, POS, "0");
   });
 
+  // the loader's "Enter" button (core.js) starts the music inside the click, so the browser allows sound
+  document.addEventListener("jw:music-start", function () { put(localStorage, PREF, "on"); disarm(); play(true); });
+  document.addEventListener("jw:music-silent", function () { disarm(); setUI(false); });
+
   setUI(false);
   if (get(localStorage, PREF) === "off") return;
 
   // try immediately (works when the browser allows autoplay), otherwise on the first gesture
   var armed = false;
   function onGesture(e) {
-    if (e && e.target && e.target.closest && e.target.closest(".music-btn, .video, .video__btn")) return;
+    if (e && e.target && e.target.closest && e.target.closest(".music-btn, .video, .video__btn, .loader__gate")) return;
     disarm();
     if (audio.paused && get(localStorage, PREF) !== "off") play(true);
   }
   function arm() {
     if (armed) return; armed = true;
-    ["pointerdown", "keydown", "touchstart"].forEach(function (t) { window.addEventListener(t, onGesture, { passive: true }); });
+    ["pointerdown", "pointerup", "click", "keydown", "touchend"].forEach(function (t) { window.addEventListener(t, onGesture, { passive: true }); });
   }
   function disarm() {
-    ["pointerdown", "keydown", "touchstart"].forEach(function (t) { window.removeEventListener(t, onGesture); });
+    ["pointerdown", "pointerup", "click", "keydown", "touchend"].forEach(function (t) { window.removeEventListener(t, onGesture); });
   }
   play("auto").then(function (ok) { if (!ok) arm(); });
 })();

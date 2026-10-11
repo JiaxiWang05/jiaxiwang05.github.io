@@ -1122,6 +1122,64 @@
     tl.fromTo(loader, { clipPath: "circle(150% at 50% 50%)" }, { clipPath: "circle(0% at 50% 50%)", duration: 0.9, ease: E.l }, 0.25);
     tl.add(function () { startIntro(0); }, 0.45);
   }
+  /* Music gate: browsers only allow sound after a click, so the first visit ends the loader with an
+     "Enter" button that starts the nocturne. Auto-enters silently after 8 s (music then starts on the
+     first click anywhere). Skipped when the visitor has paused the music before. */
+  function musicGate(next) {
+    var audio = doc.getElementById("jw-music");
+    var pref = null; try { pref = localStorage.getItem("jw-music"); } catch (e) { pref = null; }
+    if (!audio || pref === "off" || !loader) return next();
+    var zh = (doc.documentElement.getAttribute("lang") || "").indexOf("zh") === 0;
+    if (!doc.getElementById("jw-gate-css")) {
+      var st = doc.createElement("style"); st.id = "jw-gate-css";
+      st.textContent = ".loader__gate{position:absolute;left:50%;top:calc(50% + 120px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:14px;z-index:3}"
+        + ".loader__enter{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:4px;padding:16px 34px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;font:500 18px/1.1 var(--f-body,system-ui);letter-spacing:.04em;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .3s,border-color .3s,transform .3s}"
+        + ".loader__enter:hover,.loader__enter:focus-visible{background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-2px)}"
+        + ".loader__enter:focus-visible{outline:2px solid #2BFFB2;outline-offset:4px}"
+        + ".loader__enter-s{font:450 11px/1.2 var(--f-mono,monospace);letter-spacing:.08em;color:rgba(255,255,255,.72)}"
+        + ".loader__enter-ring{position:absolute;inset:-7px;border-radius:999px;pointer-events:none;background:conic-gradient(#1FE6FF,#2BFFB2,#FFD34D,#FF8A3D,#FF6A5C,#FF55CD,#1FE6FF);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;padding:1.5px;opacity:.85;animation:jwGateSpin 4s linear infinite}"
+        + ".loader__enter::after{content:'';position:absolute;inset:-18px;border-radius:999px;background:radial-gradient(closest-side,rgba(255,85,205,.35),transparent);filter:blur(10px);z-index:-1;animation:jwGatePulse 2.4s ease-in-out infinite}"
+        + ".loader__silent{background:none;border:0;color:rgba(255,255,255,.6);font:450 12px/1.2 var(--f-mono,monospace);letter-spacing:.06em;cursor:pointer;text-decoration:underline;text-underline-offset:3px}"
+        + ".loader__silent:hover,.loader__silent:focus-visible{color:#fff}"
+        + ".loader__count{width:120px;height:2px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden}.loader__count i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#1FE6FF,#FF55CD);transform-origin:left}"
+        + "@keyframes jwGateSpin{to{transform:rotate(360deg)}}@keyframes jwGatePulse{50%{opacity:.4}}"
+        + "@media (max-width:760px){.loader__gate{top:calc(50% + 100px)}}";
+      doc.head.appendChild(st);
+    }
+    var g = doc.createElement("div");
+    g.className = "loader__gate";
+    g.setAttribute("role", "group");
+    g.setAttribute("aria-label", zh ? "进入网站" : "Enter the site");
+    g.innerHTML = '<button type="button" class="loader__enter"><span class="loader__enter-ring" aria-hidden="true"></span>'
+      + '<span class="loader__enter-t">' + (zh ? "进入 ♪" : "Enter ♪") + '</span>'
+      + '<span class="loader__enter-s">' + (zh ? "伴随肖邦《降E大调夜曲》" : "with Chopin, Nocturne Op. 9 No. 2") + '</span></button>'
+      + '<span class="loader__count" aria-hidden="true"><i></i></span>'
+      + '<button type="button" class="loader__silent">' + (zh ? "静音进入" : "Enter without sound") + '</button>';
+    loader.appendChild(g);
+    loader.setAttribute("aria-hidden", "false");
+    var pct = $(".loader__pct", loader);
+    if (pct) gsap.to(pct, { opacity: 0.25, duration: 0.4 });
+    gsap.from(g, { opacity: 0, y: 24, duration: 0.7, ease: E.s });
+    var enter = $(".loader__enter", g);
+    try { enter.focus({ preventScroll: true }); } catch (e) { enter.focus(); }
+    var done = false;
+    var bar = $(".loader__count i", g);
+    var auto = bar ? gsap.fromTo(bar, { scaleX: 1 }, { scaleX: 0, duration: 8, ease: "none", onComplete: function () { go("auto"); } }) : gsap.delayedCall(8, function () { go("auto"); });
+    function go(mode) {
+      if (done) return;
+      done = true;
+      if (auto) auto.kill();
+      if (mode === "sound") doc.dispatchEvent(new CustomEvent("jw:music-start"));
+      else if (mode === "silent") doc.dispatchEvent(new CustomEvent("jw:music-silent"));
+      gsap.to(g, { opacity: 0, y: -10, duration: 0.3, onComplete: function () {
+        if (g.parentNode) g.parentNode.removeChild(g);
+        loader.setAttribute("aria-hidden", "true");
+        next();
+      } });
+    }
+    enter.addEventListener("click", function () { go("sound"); });
+    $(".loader__silent", g).addEventListener("click", function () { go("silent"); });
+  }
   function runLoader() {
     if (lenis) lenis.stop();
     var pct = $(".loader__pct", loader);
@@ -1134,7 +1192,7 @@
     var finish = function () {
       if (finished) return;
       finished = true;
-      gsap.to(shown, { v: 100, duration: 0.22, ease: "power1.out", onUpdate: write, onComplete: finishLoader });
+      gsap.to(shown, { v: 100, duration: 0.22, ease: "power1.out", onUpdate: write, onComplete: function () { musicGate(finishLoader); } });
     };
     var check = function () {
       if (finished || target < 100) return;
