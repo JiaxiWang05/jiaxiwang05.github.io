@@ -100,7 +100,7 @@
     var b = e.target.closest && e.target.closest("[data-theme-toggle]");
     if (b && !FORCE_THEME) set(get() === "day" ? "night" : "day", { from: b });
   });
-  var onSystem = function () { if (!FORCE_THEME && !stored()) set(mqLight.matches ? "day" : "night", { persist: false }); };
+  var onSystem = function () { /* first visit defaults to night; the system setting is not followed */ };
   if (mqLight.addEventListener) mqLight.addEventListener("change", onSystem); else if (mqLight.addListener) mqLight.addListener(onSystem);
   window.addEventListener("storage", function (e) {
     if (!FORCE_THEME && e.key === KEY && (e.newValue === "day" || e.newValue === "night")) set(e.newValue, { persist: false, animate: false });
