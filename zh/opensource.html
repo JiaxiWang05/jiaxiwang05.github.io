@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>开源 — Jiaxi Wang</title>
+  <meta name="description" content="Jiaxi Wang的开源工作：在INCF担任Google编程之夏导师，以及在麦吉尔大学完成的研究代码。">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#05050A">
+  <script>(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t='night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
+  <script>(function(d){try{if(sessionStorage.getItem('jw-seen'))d.classList.add('jw-seen')}catch(e){}addEventListener('load',function(){setTimeout(function(){if(!window.JW)d.classList.remove('js')},0)})})(document.documentElement)</script>
+  <link rel="canonical" href="https://jiaxiwang05.github.io/zh/opensource.html">
+  <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/opensource.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://jiaxiwang05.github.io/zh/opensource.html">
+  <link rel="alternate" hreflang="x-default" href="https://jiaxiwang05.github.io/opensource.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:title" content="开源 — Jiaxi Wang">
+  <meta property="og:description" content="Jiaxi Wang的开源工作：在INCF担任Google编程之夏导师，以及在麦吉尔大学完成的研究代码。">
+  <meta property="og:url" content="https://jiaxiwang05.github.io/zh/opensource.html">
+  <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../assets/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;family=Noto+Serif+SC:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至正文</a>
+  <div class="field-backdrop" aria-hidden="true"><div class="grain"></div></div>
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader__badge">
+      <svg viewBox="0 0 200 200"><defs><path id="loader-ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#loader-ring">Jiaxi Wang · 具身智能 · 医疗机器人 · 杜伦 · </textPath></text></svg>
+      <div class="loader__eye"><i></i></div>
+    </div>
+    <p class="loader__pct">0%</p>
+    <p class="loader__name">Jiaxi Wang<br>科研 2026</p>
+  </div>
+
+  <header class="nav">
+    <a class="nav__brand" href="index.html"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg><span>Jiaxi Wang</span></a>
+    <nav class="nav__primary" aria-label="主导航">
+      <ul class="nav__links">
+          <li><a href="research.html">研究</a></li>
+          <li><a href="engineering.html">工程</a></li>
+          <li><a href="opensource.html" aria-current="page">开源</a></li>
+          <li><a href="cv.html">简历</a></li>
+          <li><a href="contact.html">联系</a></li>
+      </ul>
+    </nav>
+    <div class="nav__tools">
+      <span class="nav__count" aria-hidden="true"></span>
+      <div class="lang" role="group" aria-label="语言"><a class="lang__opt" href="../opensource.html" hreflang="en" aria-label="切换至本页的英文版"><span lang="en">EN</span></a><span class="lang__sep" aria-hidden="true">/</span><span class="lang__opt" aria-current="true">中文</span></div>
+      <button class="music-btn" type="button" aria-pressed="false" aria-label="播放音乐：肖邦《降E大调夜曲》作品9第2号" title="播放音乐：肖邦《降E大调夜曲》作品9第2号" data-label-play="播放音乐：肖邦《降E大调夜曲》作品9第2号" data-label-pause="暂停音乐"><span class="music-btn__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>
+      <button class="theme-toggle" type="button" data-theme-toggle data-magnetic aria-label="切换日间与夜间主题">
+        <svg class="tt" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="tt-sun"><path d="M0 0H24L0 24Z"/></clipPath>
+            <clipPath id="tt-moon"><path d="M24 0V24H0Z"/></clipPath>
+            <mask id="tt-cres" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <rect width="24" height="24" fill="#fff"/><circle cx="10.66" cy="10.66" r="6" fill="#000"/>
+            </mask>
+          </defs>
+          <circle class="tt__corona" cx="12" cy="12" r="9.2"/>
+          <g class="tt__dial">
+            <g clip-path="url(#tt-sun)">
+              <circle class="tt__sun" cx="12" cy="12" r="6.5"/>
+              <g class="tt__rays">
+                <path pathLength="1" style="--i:0" d="M4.06 15.29 2.21 16.06"/>
+                <path pathLength="1" style="--i:1" d="M3.57 10.32 1.6 9.93"/>
+                <path pathLength="1" style="--i:2" d="M5.92 5.92 4.5 4.5"/>
+                <path pathLength="1" style="--i:3" d="M10.32 3.57 9.93 1.6"/>
+                <path pathLength="1" style="--i:4" d="M15.29 4.06 16.06 2.21"/>
+              </g>
+            </g>
+            <g clip-path="url(#tt-moon)">
+              <circle class="tt__moon" cx="12" cy="12" r="6.5" mask="url(#tt-cres)"/>
+              <circle class="tt__star" cx="19.4" cy="17.2" r=".7"/>
+              <circle class="tt__star" cx="16.6" cy="20.2" r=".5"/>
+            </g>
+            <path class="tt__term" d="M6.6 17.4 17.4 6.6"/>
+          </g>
+        </svg>
+        <span class="tt__tip" aria-hidden="true"></span>
+      </button>
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="打开菜单"><span></span><span></span></button>
+    </div>
+    <div class="nav__progress" aria-hidden="true"><i></i></div>
+  </header>
+  <audio id="jw-music" src="../assets/audio/chopin-nocturne-op9-no2.mp3" preload="none" loop></audio>
+  <p class="music-note" role="status" aria-live="polite" hidden><span class="music-note__bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="music-note__t">肖邦 · 降E大调夜曲，作品9第2号</span></p>
+
+  <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" aria-describedby="switch-desc" hidden>
+    <div class="switcher__toast-in">
+      <div class="switcher__txt">
+        <p id="switch-title" class="switcher__t">是来看研究的吗？</p>
+        <p id="switch-desc" class="switcher__d">切换到研究版：同样的内容，简洁、以文字为主，便于快速阅读。</p>
+      </div>
+      <div class="switcher__acts">
+        <a class="btn btn--solid btn--sm switcher__go" href="../research-version/zh/opensource.html">切换版本</a>
+        <button class="btn btn--sm switcher__x" type="button"><span class="switcher__x-label">留在此页</span><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="menu" id="menu" aria-label="菜单" data-hue="icg">
+    <ol class="menu__list">
+      <li style="--i:0"><a href="index.html"><span class="menu__n" aria-hidden="true">01</span>首页</a></li>
+      <li style="--i:1"><a href="research.html"><span class="menu__n" aria-hidden="true">02</span>研究</a></li>
+      <li style="--i:2"><a href="engineering.html"><span class="menu__n" aria-hidden="true">03</span>工程</a></li>
+      <li style="--i:3"><a href="opensource.html" aria-current="page"><span class="menu__n" aria-hidden="true">04</span>开源</a></li>
+      <li style="--i:4"><a href="cv.html"><span class="menu__n" aria-hidden="true">05</span>简历</a></li>
+      <li style="--i:5"><a href="contact.html"><span class="menu__n" aria-hidden="true">06</span>联系</a></li>
+    </ol>
+    <div class="menu__foot">
+      <div class="lang" role="group" aria-label="语言"><a class="lang__opt" href="../opensource.html" hreflang="en" aria-label="切换至本页的英文版"><span lang="en">EN</span></a><span class="lang__sep" aria-hidden="true">/</span><span class="lang__opt" aria-current="true">中文</span></div>
+      <a class="tlink menu__rv" href="../research-version/zh/opensource.html">研究版<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+    </div>
+  </nav>
+
+  <div class="switcher">
+    <a class="switcher__btn" href="../research-version/zh/opensource.html" aria-label="切换至本页的研究版">
+      <span class="switcher__label">研究版<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span><span class="switcher__hint">简洁 · 以文字为主</span>
+    </a>
+  </div>
+
+  <main id="main">
+
+    <header class="page-head" data-hue="icg" data-chapter="开源">
+      <span class="ghost" aria-hidden="true">代码</span>
+      <div class="page-head__inner">
+        <h1 class="page-head__title t-cover" style="--w:2" data-split="chars">开<em>源</em></h1>
+        <p class="page-head__lead t-lead" data-reveal="up">指导科学软件开发，并公开研究代码。</p>
+      </div>
+      <div class="page-head__art" aria-hidden="true"><div class="fig__stage" data-specimen="pose"></div></div>
+    </header>
+
+    <div class="reader reader--single">
+      <div class="reader__main">
+      <section class="rs" id="gsoc" data-hue="ppix" data-chapter="GSoC" aria-labelledby="rs-gsoc">
+        <div class="rs__text">
+            <dl class="meta-row" data-reveal="up"><div><dt>项目</dt><dd>Google编程之夏</dd></div><div><dt>年份</dt><dd>2026</dd></div><div><dt>地点</dt><dd>远程</dd></div></dl>
+            <h2 id="rs-gsoc" class="rs__title t-title" data-split="lines">INCF导师</h2>
+            <p class="t-lead" data-reveal="up">担任国际神经信息学协调机构（INCF）导师，负责面向GestureCap的具表现力的手势-声音映射框架：以在麦吉尔大学开展的动作-声音工作为基础，指导贡献者开发开源的神经信息学与计算神经科学软件。</p>
+            <p class="links" data-reveal="up"><a class="tlink" href="https://summerofcode.withgoogle.com/programs/2026/projects/mgRMtTYS" target="_blank" rel="noopener noreferrer">GSoC项目1<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://summerofcode.withgoogle.com/programs/2026/projects/exG2wYXK" target="_blank" rel="noopener noreferrer">GSoC项目2<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
+        </div>
+        <div class="rs__fig" data-reveal="figure">
+        <figure class="fig" data-explain data-hue="ppix">
+          <div class="fig__stage" data-specimen="pose" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-pose-gsoc"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+          <figcaption class="explain" id="ex-pose-gsoc">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">从动作到声音</p>
+            <p class="explain__d">图中是MediaPipe所追踪的那类身体关键点；手臂动作驱动波形，与无标记动作-声音流程中的做法相同。</p>
+            <p class="explain__try"><span class="explain__try--fine">移动指针以抬起手臂；动作越快，波形越大。</span><span class="explain__try--coarse">在图上拖动。</span></p>
+            <p class="explain__n">仅为视觉演示，无声音。</p>
+          </figcaption>
+        </figure>
+        </div>
+      </section>
+
+      <section class="rs" id="gesturecap-mapping" data-hue="ppix" data-chapter="研究代码" aria-labelledby="rs-gesturecap-mapping">
+        <div class="rs__text">
+            <dl class="meta-row" data-reveal="up"><div><dt>项目</dt><dd>MITACS Globalink</dd></div><div><dt>单位</dt><dd>麦吉尔大学CIRMMT</dd></div><div><dt>年份</dt><dd>2025</dd></div></dl>
+            <h2 id="rs-gesturecap-mapping" class="rs__title t-title" data-split="lines">gesturecap_mapping</h2>
+            <p class="t-lead" data-reveal="up">用于基于关键点的手势控制与OSC集成的Max/MSP patch，应用于基于MediaPipe动作捕捉的手势控制音乐生成。</p>
+            <p class="links" data-reveal="up"><a class="tlink" href="https://github.com/JiaxiWang05/gesturecap_mapping" target="_blank" rel="noopener noreferrer">GitHub代码仓库<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://www.youtube.com/watch?v=aJl4vnLZrYE" target="_blank" rel="noopener noreferrer">演示视频<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="research.html#motion">项目详情<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
+        </div>
+        <div class="rs__fig">
+          <div data-reveal="mask"><div class="video" data-video="aJl4vnLZrYE" data-title="无标记动作-声音工作流程演示" data-cursor=""><button class="video__btn" type="button" aria-label="播放视频：无标记动作-声音工作流程演示"><img src="https://i.ytimg.com/vi/aJl4vnLZrYE/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="video__label"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z"/></svg>播放演示</span></button></div></div>
+        </div>
+      </section>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer" data-chapter="联系" data-hue="nbi">
+    <div class="wrap">
+      <div class="finale" data-copy-scope>
+        <div class="finale__scope" aria-hidden="true"><div class="scope__halo"></div><div class="scope__lens" data-scope="finale"></div></div>
+        <p class="finale__cta t-cover" style="--w:5.2" data-split="lines">聊聊<em>研究</em>。</p>
+        <div class="finale__mail lockable">
+          <a class="finale__email" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a>
+          <svg class="lock" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22V0h18M82 0h18v22M100 78v22H82M18 100H0V78"/></svg>
+        </div>
+        <div class="finale__acts">
+          <button class="btn btn--sm" type="button" data-copy="tggq61@durham.ac.uk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 8.5V5.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg>复制</button>
+          <p class="status-line t-meta" role="status" aria-live="polite" data-copy-status></p>
+        </div>
+      </div>
+      <div class="footer__grid">
+        <div class="footer__id">
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__txt">杜伦大学工程系。具身智能、视觉-语言-动作模型与医疗机器人。</p>
+          <span class="logo-plate"><img src="../assets/durham-university-logo.png" alt="杜伦大学" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h t-meta">工作</p>
+          <ul class="footer__list"><li><a href="research.html">研究</a></li><li><a href="engineering.html">工程</a></li><li><a href="opensource.html">开源</a></li></ul>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h t-meta">关于</p>
+          <ul class="footer__list"><li><a href="cv.html">简历</a></li><li><a href="certificates.html">证书</a></li><li><a href="contact.html">联系</a></li></ul>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h t-meta">实验室之外</p>
+          <ul class="footer__list"><li><a href="art.html">艺术</a></li><li><a href="sport.html">运动</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul>
+        </div>
+      </div>
+      <div class="spectrum" aria-hidden="true"><span style="--c:var(--c-coil)">线圈</span><span style="--c:var(--c-nbi)">NBI</span><span style="--c:var(--c-icg)">ICG</span><span style="--c:var(--c-disc)">视盘</span><span style="--c:var(--c-fundus)">眼底</span><span style="--c:var(--c-mucosa)">黏膜</span><span style="--c:var(--c-ppix)">PpIX</span></div>
+      <div class="footer__base t-meta"><p>© <span id="year">2026</span> Jiaxi Wang。更新于2026年10月。</p><p>配色取自内镜成像、荧光成像与眼底摄影。</p><p>音乐：肖邦《降E大调夜曲》作品9第2号，Frank Levy演奏（Musopen，公有领域）。</p></div>
+    </div>
+  </footer>
+
+  <script id="jw-i18n" type="application/json">{"theme.switch":"切换日间与夜间主题","theme.toDay":"切换到日间主题（白光）","theme.toNight":"切换到夜间主题（荧光）","theme.day":"日间 · 白光","theme.night":"夜间 · 荧光","menu.open":"打开菜单","menu.close":"关闭菜单","copy.done":"已复制","copy.status":"邮箱地址已复制。","copy.fail":"复制失败，请选中上方地址后手动复制。","explain.show":"图示说明","explain.hide":"关闭说明","cursor.play":"播放","cursor.open":"打开","cursor.drag":"拖动","cursor.steer":"操控","cursor.hold":"按住","video.title":"视频","gallery.of":"第{n}项，共{total}项"}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/hero-gl.js"></script>
+  <script src="../assets/js/specimens.js"></script>
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/night-fx.js"></script>
+  <script src="../assets/js/music.js"></script>
+  <script src="../assets/js/pages/inner.js"></script>
+</body>
+</html>

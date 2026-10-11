@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Jiaxi Wang — 具身智能与医疗机器人</title>
+  <meta name="description" content="Jiaxi Wang，杜伦大学本科生研究者，研究方向为具身智能、视觉-语言-动作模型与医疗机器人。">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#05050A">
+  <script>(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t='night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
+  <script>(function(d){try{if(sessionStorage.getItem('jw-seen'))d.classList.add('jw-seen')}catch(e){}addEventListener('load',function(){setTimeout(function(){if(!window.JW)d.classList.remove('js')},0)})})(document.documentElement)</script>
+  <link rel="canonical" href="https://jiaxiwang05.github.io/zh/">
+  <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/">
+  <link rel="alternate" hreflang="zh-CN" href="https://jiaxiwang05.github.io/zh/">
+  <link rel="alternate" hreflang="x-default" href="https://jiaxiwang05.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jiaxi Wang">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:title" content="Jiaxi Wang — 具身智能与医疗机器人">
+  <meta property="og:description" content="Jiaxi Wang，杜伦大学本科生研究者，研究方向为具身智能、视觉-语言-动作模型与医疗机器人。">
+  <meta property="og:url" content="https://jiaxiwang05.github.io/zh/">
+  <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="apple-touch-icon" href="../assets/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;family=Noto+Serif+SC:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "Person", "name": "Jiaxi Wang", "url": "https://jiaxiwang05.github.io/",
+   "email": "mailto:tggq61@durham.ac.uk", "sameAs": ["https://github.com/JiaxiWang05", "https://www.linkedin.com/in/-jiaxi-wang/"],
+   "jobTitle": "本科生研究者", "affiliation": {"@type": "CollegeOrUniversity", "name": "杜伦大学"},
+   "knowsAbout": ["具身智能", "视觉-语言-动作模型", "跨具身学习", "医疗机器人", "迁移学习"]}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至正文</a>
+  <div class="field-backdrop" aria-hidden="true"><div class="grain"></div></div>
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader__badge">
+      <svg viewBox="0 0 200 200"><defs><path id="loader-ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#loader-ring">Jiaxi Wang · 具身智能 · 医疗机器人 · 杜伦 · </textPath></text></svg>
+      <div class="loader__eye"><i></i></div>
+    </div>
+    <p class="loader__pct">0%</p>
+    <p class="loader__name">Jiaxi Wang<br>科研 2026</p>
+  </div>
+
+  <header class="nav">
+    <a class="nav__brand" href="index.html" aria-current="page"><svg class="nav__mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><circle cx="12" cy="12" r="10.5"/><circle cx="13.6" cy="10.4" r="5.6"/><circle cx="14.8" cy="9.2" r="1.9" fill="currentColor" stroke="none"/></svg><span>Jiaxi Wang</span></a>
+    <nav class="nav__primary" aria-label="主导航">
+      <ul class="nav__links">
+          <li><a href="research.html">研究</a></li>
+          <li><a href="engineering.html">工程</a></li>
+          <li><a href="opensource.html">开源</a></li>
+          <li><a href="cv.html">简历</a></li>
+          <li><a href="contact.html">联系</a></li>
+      </ul>
+    </nav>
+    <div class="nav__tools">
+      <span class="nav__count" aria-hidden="true"></span>
+      <div class="lang" role="group" aria-label="语言"><a class="lang__opt" href="../index.html" hreflang="en" aria-label="切换至本页的英文版"><span lang="en">EN</span></a><span class="lang__sep" aria-hidden="true">/</span><span class="lang__opt" aria-current="true">中文</span></div>
+      <button class="music-btn" type="button" aria-pressed="false" aria-label="播放音乐：肖邦《降E大调夜曲》作品9第2号" title="播放音乐：肖邦《降E大调夜曲》作品9第2号" data-label-play="播放音乐：肖邦《降E大调夜曲》作品9第2号" data-label-pause="暂停音乐"><span class="music-btn__bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>
+      <button class="theme-toggle" type="button" data-theme-toggle data-magnetic aria-label="切换日间与夜间主题">
+        <svg class="tt" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="tt-sun"><path d="M0 0H24L0 24Z"/></clipPath>
+            <clipPath id="tt-moon"><path d="M24 0V24H0Z"/></clipPath>
+            <mask id="tt-cres" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+              <rect width="24" height="24" fill="#fff"/><circle cx="10.66" cy="10.66" r="6" fill="#000"/>
+            </mask>
+          </defs>
+          <circle class="tt__corona" cx="12" cy="12" r="9.2"/>
+          <g class="tt__dial">
+            <g clip-path="url(#tt-sun)">
+              <circle class="tt__sun" cx="12" cy="12" r="6.5"/>
+              <g class="tt__rays">
+                <path pathLength="1" style="--i:0" d="M4.06 15.29 2.21 16.06"/>
+                <path pathLength="1" style="--i:1" d="M3.57 10.32 1.6 9.93"/>
+                <path pathLength="1" style="--i:2" d="M5.92 5.92 4.5 4.5"/>
+                <path pathLength="1" style="--i:3" d="M10.32 3.57 9.93 1.6"/>
+                <path pathLength="1" style="--i:4" d="M15.29 4.06 16.06 2.21"/>
+              </g>
+            </g>
+            <g clip-path="url(#tt-moon)">
+              <circle class="tt__moon" cx="12" cy="12" r="6.5" mask="url(#tt-cres)"/>
+              <circle class="tt__star" cx="19.4" cy="17.2" r=".7"/>
+              <circle class="tt__star" cx="16.6" cy="20.2" r=".5"/>
+            </g>
+            <path class="tt__term" d="M6.6 17.4 17.4 6.6"/>
+          </g>
+        </svg>
+        <span class="tt__tip" aria-hidden="true"></span>
+      </button>
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="打开菜单"><span></span><span></span></button>
+    </div>
+    <div class="nav__progress" aria-hidden="true"><i></i></div>
+  </header>
+  <audio id="jw-music" src="../assets/audio/chopin-nocturne-op9-no2.mp3" preload="none" loop></audio>
+  <p class="music-note" role="status" aria-live="polite" hidden><span class="music-note__bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="music-note__t">肖邦 · 降E大调夜曲，作品9第2号</span></p>
+
+  <div class="switcher__toast" id="switch-toast" role="dialog" aria-labelledby="switch-title" aria-describedby="switch-desc" hidden>
+    <div class="switcher__toast-in">
+      <div class="switcher__txt">
+        <p id="switch-title" class="switcher__t">是来看研究的吗？</p>
+        <p id="switch-desc" class="switcher__d">切换到研究版：同样的内容，简洁、以文字为主，便于快速阅读。</p>
+      </div>
+      <div class="switcher__acts">
+        <a class="btn btn--solid btn--sm switcher__go" href="../research-version/zh/">切换版本</a>
+        <button class="btn btn--sm switcher__x" type="button"><span class="switcher__x-label">留在此页</span><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="menu" id="menu" aria-label="菜单" data-hue="mucosa">
+    <ol class="menu__list">
+      <li style="--i:0"><a href="index.html" aria-current="page"><span class="menu__n" aria-hidden="true">01</span>首页</a></li>
+      <li style="--i:1"><a href="research.html"><span class="menu__n" aria-hidden="true">02</span>研究</a></li>
+      <li style="--i:2"><a href="engineering.html"><span class="menu__n" aria-hidden="true">03</span>工程</a></li>
+      <li style="--i:3"><a href="opensource.html"><span class="menu__n" aria-hidden="true">04</span>开源</a></li>
+      <li style="--i:4"><a href="cv.html"><span class="menu__n" aria-hidden="true">05</span>简历</a></li>
+      <li style="--i:5"><a href="contact.html"><span class="menu__n" aria-hidden="true">06</span>联系</a></li>
+    </ol>
+    <div class="menu__foot">
+      <div class="lang" role="group" aria-label="语言"><a class="lang__opt" href="../index.html" hreflang="en" aria-label="切换至本页的英文版"><span lang="en">EN</span></a><span class="lang__sep" aria-hidden="true">/</span><span class="lang__opt" aria-current="true">中文</span></div>
+      <a class="tlink menu__rv" href="../research-version/zh/">研究版<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+    </div>
+  </nav>
+
+  <div class="switcher">
+    <a class="switcher__btn" href="../research-version/zh/" aria-label="切换至本页的研究版">
+      <span class="switcher__label">研究版<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span><span class="switcher__hint">简洁 · 以文字为主</span>
+    </a>
+  </div>
+
+  <main id="main">
+
+    <section class="hero" data-hue="mucosa" data-pool="none" data-chapter="开篇" aria-labelledby="hero-name">
+      <div class="hero__grid">
+        <div class="hero__text">
+          <p class="hero__aff"><a class="logo-plate" href="https://www.durham.ac.uk/departments/academic/engineering/" target="_blank" rel="noopener noreferrer"><img src="../assets/durham-university-logo.png" alt="杜伦大学工程系" width="640" height="264"></a><span>工程系</span></p>
+          <h1 id="hero-name" class="hero__name" data-split="chars" data-split-manual>Jiaxi <span class="line2">Wang</span></h1>
+          <p class="hero__role t-subtitle">具身智能与医疗机器人。</p>
+          <p class="hero__fact t-lead">杜伦大学工程系，电子工程专业（BEng）毕业年级本科生。</p>
+          <div class="hero__ctas">
+            <a class="btn btn--solid" href="../cv.pdf" data-magnetic><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>下载简历</a>
+            <a class="btn" href="mailto:tggq61@durham.ac.uk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3 6 9 7 9-7"/></svg>电子邮件</a>
+            <a class="tlink" href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+            <a class="tlink" href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+        <figure class="scope fig" data-explain data-explain-pos="scope" data-hue="icg">
+          <div class="scope__stage" tabindex="0" role="group" aria-roledescription="交互式图示"
+               aria-label="内镜视野示意图：组织褶皱向管腔汇聚；一条预测动作路径延伸至以方括号标出的未来目标区域，即EndoWAM的基本思路。"
+               aria-describedby="ex-scope" data-cursor="">
+            <div class="scope__halo" aria-hidden="true"></div>
+            <div class="scope__lens" data-scope="hero"></div>
+            <svg class="scope__hud" viewBox="-34 -34 628 628" aria-hidden="true">
+              <circle class="hud-ring" cx="280" cy="280" r="282"/>
+              <circle class="hud-ring hud-ring--dash" cx="280" cy="280" r="300"/>
+              <circle class="hud-hold" cx="280" cy="280" r="291" transform="rotate(-90 280 280)"/>
+              <path class="hud-tick" d="M280 -6v-22M280 566v22M-6 280h-22M566 280h22"/>
+              <g class="hud-plan">
+                <path class="hud-case" d="M258 520C232 400 330 330 342 246"/>
+                <path class="hud-path" d="M258 520C232 400 330 330 342 246"/>
+                <circle class="wp" cx="252" cy="484" r="7"/><circle class="wp" cx="262" cy="410" r="6"/><circle class="wp" cx="292" cy="348" r="5"/><circle class="wp" cx="324" cy="296" r="4"/><circle class="wp" cx="338" cy="262" r="3"/>
+              </g>
+              <g class="hud-target" transform="translate(342 238)">
+                <path class="hud-case" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/>
+                <path class="hud-bracket" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/>
+              </g>
+              <g class="note note--target"><path class="leader" d="M378 198L452 70h110"/><text x="456" y="58">未来目标区域</text><text class="dim" x="456" y="90">t + k时刻</text></g>
+              <g class="note note--plan"><path class="leader" d="M246 494L120 572H-20"/><text x="-20" y="560">预测动作</text><text class="dim" x="-20" y="592">基于t时刻帧</text></g>
+            </svg>
+            <span class="scope__handle" aria-hidden="true"></span>
+          </div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-scope"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+          <figcaption class="explain explain--scope" id="ex-scope">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">EndoWAM中的未来目标定位</p>
+            <p class="explain__d">视频世界模型预测任务相关目标区域将在未来帧（t + k）中出现的位置，以绿色方括号标出。动作专家依据当前帧（t）规划内镜朝该区域的导航动作，以青色路径表示。</p>
+            <ul class="explain__legend"><li class="lg-target">t + k时刻的未来目标区域</li><li class="lg-path">基于t时刻帧预测的动作</li></ul>
+            <p class="explain__try"><span class="explain__try--fine">拖动方括号或点击管腔可移动目标 · 按住可前进 · 也可使用方向键</span><span class="explain__try--coarse">拖动方括号可移动目标 · 长按可前进</span></p>
+            <p class="explain__n">风格化示意图，并非真实影像或模型输出。</p>
+            <p class="explain__more"><a class="tlink" href="#publication">阅读论文</a></p>
+          </figcaption>
+          <ul class="scope__legend" aria-hidden="true"><li class="lg-path">基于t时刻帧预测的动作</li><li class="lg-target">t + k时刻的未来目标区域</li></ul>
+          <p class="scope__hint t-meta" aria-hidden="true"><span class="explain__try--fine">点击(i)查看说明 · 拖动目标 · 按住前进</span><span class="explain__try--coarse">轻触(i)查看说明 · 拖动目标 · 长按前进</span></p>
+        </figure>
+      </div>
+    </section>
+
+    <section class="statement-stage" data-hue="coil" data-chapter="个人简介" aria-label="个人简介">
+      <div class="statement-stage__pin"><div class="wrap">
+        <p class="statement" data-illuminate>我借助视觉-语言-动作模型与世界-动作模型，研究机器人如何在<em data-hue="icg">人体内部</em>等难以建模的环境中感知、推理与行动。</p>
+      </div></div>
+      <div class="wrap"><p class="statement__follow t-lead" data-reveal="up">在杜伦大学，我与Amir Atapour-Abarghouei博士、Chris Chen博士合作，研究机器人策略与习得表征如何跨具身形态迁移。此前，我在香港中文大学Hongliang Ren教授的医疗机器人课题组从事自主内镜导航研究。</p></div>
+    </section>
+
+    <section class="chapter now" data-hue="coil" data-chapter="当前工作" aria-labelledby="now-title">
+      <div class="wrap">
+        <h2 id="now-title" class="t-display" data-split="lines">当前工作</h2>
+        <div class="index-list">
+        <a class="index-item" href="research.html#embodied" data-hue="disc" data-peek="embodiment" data-reveal="up">
+          <span class="index-item__when t-meta"><span class="live-dot" aria-hidden="true"></span>进行中</span>
+          <span class="index-item__title">跨具身学习与视觉-语言-动作系统</span>
+          <span class="index-item__meta t-small">杜伦大学，与Amir Atapour-Abarghouei博士、Chris Chen博士合作</span>
+          <span class="index-item__go">研究<span aria-hidden="true"> →</span></span>
+        </a>
+        <a class="index-item" href="research.html#dissertation" data-hue="fundus" data-peek="fundus" data-reveal="up">
+          <span class="index-item__when t-meta">2026–27</span>
+          <span class="index-item__title">毕业论文：小数据，大模型</span>
+          <span class="index-item__meta t-small">杜伦大学，指导：Raheleh Kafieh博士</span>
+          <span class="index-item__go">毕业论文<span aria-hidden="true"> →</span></span>
+        </a>
+        <a class="index-item" href="#publication" data-hue="icg" data-peek="lens" data-reveal="up">
+          <span class="index-item__when t-meta"><span class="live-dot" aria-hidden="true"></span>投稿中</span>
+          <span class="index-item__title">EndoWAM：具备定位能力的内镜导航世界-动作模型</span>
+          <span class="index-item__meta t-small">AAAI 2027与ICLR 2027</span>
+          <span class="index-item__go">论文<span aria-hidden="true"> →</span></span>
+        </a>
+        <a class="index-item" href="opensource.html" data-hue="ppix" data-peek="pose" data-reveal="up">
+          <span class="index-item__when t-meta">2026</span>
+          <span class="index-item__title">Google编程之夏导师</span>
+          <span class="index-item__meta t-small">国际神经信息学协调机构（INCF）：GestureCap中具表现力的手势-声音映射框架</span>
+          <span class="index-item__go">开源<span aria-hidden="true"> →</span></span>
+        </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="publication" class="chapter pubstage" data-hue="icg" data-chapter="论文" aria-labelledby="pub-title">
+      <div class="wrap pubstage__grid">
+        <div class="pubstage__text">
+          <p class="eyebrow t-meta"><b>论文</b> 审稿中</p>
+          <p class="pub__venue t-meta"><span class="chip chip--live"><span class="live-dot" aria-hidden="true"></span>投稿中</span><span>AAAI 2027与ICLR 2027</span><span data-scramble>arXiv:2608.01221</span></p>
+          <h2 id="pub-title" class="pub__title t-title" data-split="lines"><a href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">EndoWAM: A Grounded World-Action Model for Generalizable Endoscopic Navigation</a></h2>
+          <p class="pub__authors t-small" data-reveal="up">Jinsong Lin, Zikang Pan, Wanhao Liu, Chi Kit Ng, Liangjing Shao, Zihang Yu, Ziyu Wang, Yin Wang, <b>Jiaxi Wang</b>, Jeremy Yuen-Chun Teoh, Zhiyong Xiong, Huxin Gao, Hongliang Ren</p>
+          <p class="pub__abstract t-body" data-reveal="up">视频世界模型预测任务相关目标区域将在未来帧中出现的位置，轻量级动作专家共享这一预测性表征，在单次去噪中选择导航动作。该模型在EndoMotion（涵盖输尿管镜检查、食管镜检查与ERCP的机器人内镜数据集）上训练，可零样本泛化至未见过的视角、环境与目标。</p>
+          <p class="links"><a class="tlink" href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">arXiv:2608.01221<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://openreview.net/forum?id=tMKXzwa7tP" target="_blank" rel="noopener noreferrer">OpenReview<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://www.youtube.com/watch?v=TT5MsdQ0pKI" target="_blank" rel="noopener noreferrer">YouTube视频<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
+          <div data-reveal="mask"><div class="video" data-video="TT5MsdQ0pKI" data-title="EndoWAM演示：具备定位能力的内镜导航世界-动作模型" data-cursor=""><button class="video__btn" type="button" aria-label="播放视频：EndoWAM演示：具备定位能力的内镜导航世界-动作模型"><img src="https://i.ytimg.com/vi/TT5MsdQ0pKI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="video__label"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z"/></svg>播放演示</span></button></div></div>
+        </div>
+        <div class="pubstage__sticky">
+          <figure class="monitor fig" data-explain data-hue="icg">
+            <div class="monitor__screen">
+              <div class="monitor__lens scope__lens" data-scope="monitor"></div>
+              <svg class="monitor__hud" viewBox="0 0 640 360" aria-hidden="true">
+                <circle class="hud-ring" cx="320" cy="180" r="166"/>
+                <path class="hud-tick" d="M320 6v10M320 344v10M146 180h10M484 180h10"/>
+                <g class="mon-ghost" data-k="0" transform="translate(296 236) scale(.62)"><path class="hud-bracket" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/></g>
+                <g class="mon-ghost" data-k="0.5" transform="translate(326 196) scale(.8)"><path class="hud-bracket" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/></g>
+                <path class="hud-case mon-path" d="M304 338C296 286 340 240 352 158"/>
+                <path class="hud-path mon-path" d="M304 338C296 286 340 240 352 158"/>
+                <g class="mon-live" transform="translate(352 150)"><path class="hud-case" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/><path class="hud-bracket" d="M-36 -24v-16h16M20 -40h16v16M36 24v16h-16M-20 40h-16v-16"/></g>
+                <text class="mon-tag" x="24" y="34">t时刻帧</text>
+                <text class="mon-tag" x="616" y="34" text-anchor="end">预测时域t + k</text>
+              </svg>
+            </div>
+            <div class="monitor__bar">
+              <span class="monitor__readout t-meta">t + 1.00k</span>
+              <div class="monitor__scrub" role="group" aria-label="沿预测时域跳转">
+                <span class="monitor__track" aria-hidden="true"><i class="monitor__fill"></i></span>
+                <button type="button" class="monitor__tick" data-k="0">t</button>
+                <button type="button" class="monitor__tick" data-k="0.5">t + k/2</button>
+                <button type="button" class="monitor__tick" data-k="1">t + k</button>
+              </div>
+            </div>
+            <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-monitor"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+            <figcaption class="explain" id="ex-monitor">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">浏览预测时域</p>
+            <p class="explain__d">滚动页面时，时间从当前帧t推进至t + k。方括号标出每一步预测的目标区域出现位置；路径为基于t时刻帧计算的动作规划。</p>
+            <p class="explain__try"><span class="explain__try--fine">滚动页面，或使用t · t + k/2 · t + k按钮跳转。</span><span class="explain__try--coarse">使用t · t + k/2 · t + k按钮。</span></p>
+            <p class="explain__n">风格化示意图，并非真实影像或模型输出。</p>
+          </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" data-chapter="研究" aria-labelledby="gallery-title">
+      <div class="wrap gallery__head"><p class="eyebrow t-meta">研究 · 06</p><h2 id="gallery-title" class="t-display" data-split="lines">研究项目</h2></div>
+      <div class="gallery__viewport"><div class="gallery__track">
+    <article class="slide" id="home-embodied" data-hue="disc" aria-labelledby="home-embodied-t">
+      <span class="slide__num" aria-hidden="true">01</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">01 · 杜伦大学，进行中</p>
+        <h3 id="home-embodied-t" class="slide__title t-title">跨具身学习与可迁移的动作表征</h3>
+        <p class="slide__desc t-body">与Amir Atapour-Abarghouei博士、Chris Chen博士合作：机器人策略与习得表征如何在不同机器人平台间迁移，以及视觉-语言条件化如何与动作和状态信息相结合。</p>
+        <a class="tlink" href="research.html#embodied">在研究页面阅读详情<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="disc">
+          <div class="fig__stage" data-specimen="embodiment" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-embodiment"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+          <figcaption class="explain" id="ex-embodiment">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">三台机器人，同一目标</p>
+            <p class="explain__d">三条不同的运动链在共享动作空间中伸向同一个移动目标，对应的问题是：策略或习得表征能否在不同具身形态之间迁移。</p>
+            <p class="explain__try"><span class="explain__try--fine">在图上移动指针，设定共享目标。</span><span class="explain__try--coarse">轻触图示以设定目标。</span></p>
+            <p class="explain__n">示意图，并非训练所得的策略。</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-dissertation" data-hue="fundus" aria-labelledby="home-dissertation-t">
+      <span class="slide__num" aria-hidden="true">02</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">02 · 毕业论文，2026–27</p>
+        <h3 id="home-dissertation-t" class="slide__title t-title">小数据，大模型</h3>
+        <p class="slide__desc t-body">与Raheleh Kafieh博士合作：以25至200张训练图像，在青光眼检测任务上比较RETFound与通用编码器的冻结特征，并在未见过的相机上测试。</p>
+        <a class="tlink" href="research.html#dissertation">在研究页面阅读详情<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="fundus">
+          <div class="fig__stage" data-specimen="fundus" data-cursor=""></div>
+          <div class="fig__controls" role="group" aria-label="训练图像数量"><button type="button" data-step="25" aria-pressed="false">25</button><button type="button" data-step="50" aria-pressed="false">50</button><button type="button" data-step="100" aria-pressed="false">100</button><button type="button" data-step="200" aria-pressed="true">200</button></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-fundus"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+          <figcaption class="explain" id="ex-fundus">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">标注稀缺下的视网膜</p>
+            <p class="explain__d">视网膜眼底图像，含视盘与血管树。圆点依次填充数据效率曲线的四种训练集规模（25、50、100和200张图像）；三个圆环代表外部测试集的三种相机。</p>
+            <p class="explain__try"><span class="explain__try--fine">使用步进按钮或滚动页面，改变训练集规模。</span><span class="explain__try--coarse">轻触任一档位。</span></p>
+            <p class="explain__n">示意图。该研究尚无结果。</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-bilivla" data-hue="mucosa" aria-labelledby="home-bilivla-t">
+      <span class="slide__num" aria-hidden="true">03</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">03 · 香港中文大学医疗机器人课题组，2026</p>
+        <h3 id="home-bilivla-t" class="slide__title t-title">BiliVLA：面向自主ERCP导航的场景感知VLA</h3>
+        <p class="slide__desc t-body">胆管内的视觉-语言-动作导航，结果来自ERCP体模实验。</p>
+        <a class="tlink" href="research.html#bilivla">在研究页面阅读详情<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="mucosa">
+          <div class="fig__stage" data-specimen="lumen" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-lumen"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+          <figcaption class="explain" id="ex-lumen">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">胆管中的定位</p>
+            <p class="explain__d">ERCP体模中的胆管管腔。方括号是标注胆管开口的定位框，虚线为规划路径。</p>
+            <p class="explain__try"><span class="explain__try--fine">移动指针可平移场景，定位框始终锁定开口。</span><span class="explain__try--coarse">拖动场景。</span></p>
+            <p class="explain__n">示意图，并非BiliVLA的输出。</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-benchmark" data-hue="nbi" aria-labelledby="home-benchmark-t">
+      <span class="slide__num" aria-hidden="true">04</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">04 · 香港中文大学医疗机器人课题组，2026</p>
+        <h3 id="home-benchmark-t" class="slide__title t-title">遥操作柔性内镜基准</h3>
+        <p class="slide__desc t-body">150段同步视频与机器人状态片段、一套224 × 224图像-动作轨迹处理流程，以及<span class="sym">π</span>0.5 VLA导航基线。</p>
+        <a class="tlink" href="research.html#benchmark">在研究页面阅读详情<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="nbi">
+          <div class="fig__stage" data-specimen="grid" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-grid"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+          <figcaption class="explain" id="ex-grid">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">150段同步片段</p>
+            <p class="explain__d">每个方块对应基准中的一段同步内镜视频与机器人状态片段；为构建图像-动作轨迹，帧被裁剪为224 × 224。</p>
+            <p class="explain__try"><span class="explain__try--fine">将指针悬停在方块上可查看其编号。</span><span class="explain__try--coarse">轻触任一方块。</span></p>
+            <p class="explain__n">仅示意数据集规模，并非数据本身。</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-trileg" data-hue="coil" aria-labelledby="home-trileg-t">
+      <span class="slide__num" aria-hidden="true">05</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">05 · 香港中文大学医疗机器人课题组，2026</p>
+        <h3 id="home-trileg-t" class="slide__title t-title">Trileg-ESD：视觉引导的磁控软体机器人</h3>
+        <p class="slide__desc t-body">用于组织操作的三足磁控软体机器人，由视觉-语言控制器通过三个电磁线圈驱动。</p>
+        <a class="tlink" href="research.html#trileg">在研究页面阅读详情<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="coil">
+          <div class="fig__stage" data-specimen="coils" data-cursor="" tabindex="0" role="group" aria-label="Trileg-ESD示意图。可用方向键移动机器人。" aria-describedby="ex-coils"></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-coils"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+          <figcaption class="explain" id="ex-coils">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">三个线圈，一台软体机器人</p>
+            <p class="explain__d">三个相隔120°布置的电磁线圈驱动一台三足磁控软体机器人；虚线磁力线表示当前激活的线圈。</p>
+            <p class="explain__try"><span class="explain__try--fine">拖动机器人，距离最近的线圈将接管驱动。</span><span class="explain__try--coarse">拖动机器人。</span></p>
+            <p class="explain__n">示意图，并非磁场仿真。</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+    <article class="slide" id="home-motion" data-hue="ppix" aria-labelledby="home-motion-t">
+      <span class="slide__num" aria-hidden="true">06</span>
+      <div class="slide__card">
+        <p class="slide__meta t-meta">06 · 麦吉尔大学，MITACS Globalink，2025</p>
+        <h3 id="home-motion-t" class="slide__title t-title">无标记动作-声音交互</h3>
+        <p class="slide__desc t-body">基于Python与MediaPipe的低延迟流程，可将身体动作实时转化为音乐。</p>
+        <a class="tlink" href="research.html#motion">在研究页面阅读详情<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+      </div>
+      <div class="slide__fig">
+        <figure class="fig" data-explain data-hue="ppix">
+          <div class="fig__stage" data-specimen="pose" data-cursor=""></div>
+          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-pose"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">图示说明</span></button>
+          <figcaption class="explain" id="ex-pose">
+            <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+            <p class="explain__k">图示说明</p>
+            <p class="explain__t">从动作到声音</p>
+            <p class="explain__d">图中是MediaPipe所追踪的那类身体关键点；手臂动作驱动波形，与无标记动作-声音流程中的做法相同。</p>
+            <p class="explain__try"><span class="explain__try--fine">移动指针以抬起手臂；动作越快，波形越大。</span><span class="explain__try--coarse">在图上拖动。</span></p>
+            <p class="explain__n">仅为视觉演示，无声音。</p>
+          </figcaption>
+        </figure>
+      </div>
+    </article>
+      </div></div>
+      <div class="gallery__ruler" aria-hidden="true">
+        <span class="gallery__ticks"><i data-hue="disc"></i><i data-hue="fundus"></i><i data-hue="mucosa"></i><i data-hue="nbi"></i><i data-hue="coil"></i><i data-hue="ppix"></i></span>
+        <span class="gallery__count"><span class="roll"><b>01</b><b>02</b><b>03</b><b>04</b><b>05</b><b>06</b></span><small>/ 06</small></span>
+      </div>
+    </section>
+
+    <section class="chapter numbers" data-hue="mucosa" data-chapter="数据" aria-labelledby="num-title">
+      <div class="wrap">
+        <h2 id="num-title" class="t-display" data-split="lines">研究数据</h2>
+        <p class="numbers__k t-meta">BiliVLA，ERCP体模实验结果</p>
+        <div class="gauges">
+        <figure class="gauge" data-gauge="96.25" data-hue="mucosa" aria-label="mIoU：96.25%">
+          <svg class="gauge__svg" viewBox="0 0 120 120" aria-hidden="true"><circle class="gauge__track" cx="60" cy="60" r="52"/><circle class="gauge__arc" cx="60" cy="60" r="52" pathLength="100" style="stroke-dasharray:96.25 100"/></svg>
+          <p class="gauge__v"><span class="odo" data-odo="96.25">96.25</span><small>%</small></p>
+          <figcaption class="gauge__l">mIoU<span>BiliVLA</span></figcaption>
+        </figure>
+        <figure class="gauge" data-gauge="91.96" data-hue="mucosa" aria-label="动作精确率：91.96%">
+          <svg class="gauge__svg" viewBox="0 0 120 120" aria-hidden="true"><circle class="gauge__track" cx="60" cy="60" r="52"/><circle class="gauge__arc" cx="60" cy="60" r="52" pathLength="100" style="stroke-dasharray:91.96 100"/></svg>
+          <p class="gauge__v"><span class="odo" data-odo="91.96">91.96</span><small>%</small></p>
+          <figcaption class="gauge__l">动作精确率<span>BiliVLA</span></figcaption>
+        </figure>
+        <figure class="gauge" data-gauge="84.85" data-hue="mucosa" aria-label="导航成功率：84.85%">
+          <svg class="gauge__svg" viewBox="0 0 120 120" aria-hidden="true"><circle class="gauge__track" cx="60" cy="60" r="52"/><circle class="gauge__arc" cx="60" cy="60" r="52" pathLength="100" style="stroke-dasharray:84.85 100"/></svg>
+          <p class="gauge__v"><span class="odo" data-odo="84.85">84.85</span><small>%</small></p>
+          <figcaption class="gauge__l">导航成功率<span>BiliVLA</span></figcaption>
+        </figure>
+        </div>
+        <div class="tallies">
+        <div class="tally" data-hue="nbi"><p class="tally__v"><span class="odo" data-odo="150">150</span></p><p class="tally__l">同步视频与机器人状态片段<span>遥操作柔性内镜基准</span></p></div>
+        <div class="tally" data-hue="nbi"><p class="tally__v"><svg class="tally__frame" viewBox="0 0 40 40" aria-hidden="true"><rect x="1" y="1" width="38" height="38"/></svg>224 × 224</p><p class="tally__l">图像-动作轨迹帧<span>基准</span></p></div>
+        <div class="tally" data-hue="nbi"><p class="tally__v"><span class="sym">π</span>0.5</p><p class="tally__l">VLA导航基线<span>基准</span></p></div>
+        <div class="tally" data-hue="fundus"><p class="tally__v">25–200</p><p class="tally__l">数据效率曲线中的训练图像数量（25、50、100、200张）<span>毕业论文</span></p></div>
+        <div class="tally" data-hue="fundus"><p class="tally__v">3</p><p class="tally__l">外部验证集（Chákṣu）中的相机数量<span>毕业论文</span></p></div>
+        <div class="tally" data-hue="coil"><p class="tally__v">3</p><p class="tally__l">驱动软体机器人的电磁线圈<span>Trileg-ESD</span></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="xp" data-hue="disc" data-chapter="经历" aria-labelledby="xp-title">
+      <div class="xp__stage"><div class="xp__pin">
+        <svg class="xp__word" viewBox="0 0 1600 360" aria-hidden="true">
+          <defs><clipPath id="xp-clip"><text class="xp__glyphs" x="800" y="292" text-anchor="middle">经历</text></clipPath></defs>
+          <g clip-path="url(#xp-clip)"><rect class="xp__base" width="1600" height="360"/><image class="xp__img" x="-200" y="-420" width="2000" height="1200" preserveAspectRatio="xMidYMid slice" href=""/></g>
+        </svg>
+        <div class="marquee" data-marquee="50" aria-hidden="true"><div class="marquee__track"><span>杜伦</span><span>香港中文大学</span><span>麦吉尔</span><span>爱丁堡</span><span>圣母大学</span><span>INCF</span></div></div>
+        <div class="xp__head"><h2 id="xp-title" class="xp__title t-display">经历</h2><p class="xp__sub t-subtitle">科研经历与教育背景</p></div>
+      </div></div>
+      <div class="wrap"><div class="timeline">
+          <div class="timeline__rail" aria-hidden="true"><i></i></div>
+          <div class="tl" data-hue="disc"><p class="tl__when t-meta">进行中</p><div class="tl__body"><h3 class="tl__role t-subtitle">学生研究者，具身智能与VLA系统</h3><p class="tl__org">杜伦大学</p><p class="tl__sup t-meta">导师：Amir Atapour-Abarghouei博士、Chris Chen博士</p></div></div>
+          <div class="tl" data-hue="mucosa"><p class="tl__when t-meta">2026年6月–8月</p><div class="tl__body"><h3 class="tl__role t-subtitle">本科生暑期科研实习生</h3><p class="tl__org">香港中文大学医疗机器人课题组</p><p class="tl__sup t-meta">导师：Hongliang Ren教授</p><p class="tl__note t-small">BiliVLA、遥操作柔性内镜基准与Trileg-ESD。</p></div></div>
+          <div class="tl" data-hue="ppix"><p class="tl__when t-meta">2026</p><div class="tl__body"><h3 class="tl__role t-subtitle">Google编程之夏导师</h3><p class="tl__org">国际神经信息学协调机构，远程</p></div></div>
+          <div class="tl" data-hue="fundus"><p class="tl__when t-meta">2025–2026</p><div class="tl__body"><h3 class="tl__role t-subtitle">海外交换学年</h3><p class="tl__org">圣母大学，美国印第安纳州</p></div></div>
+          <div class="tl" data-hue="nbi"><p class="tl__when t-meta">2025年6月–8月</p><div class="tl__body"><h3 class="tl__role t-subtitle">MITACS Globalink科研实习生</h3><p class="tl__org">麦吉尔大学CIRMMT，蒙特利尔</p><p class="tl__sup t-meta">导师：Suresh Krishna教授</p></div></div>
+          <div class="tl" data-hue="coil"><p class="tl__when t-meta">2024年6月–7月</p><div class="tl__body"><h3 class="tl__role t-subtitle">HPC暑期学校</h3><p class="tl__org">爱丁堡大学EPCC</p></div></div>
+          <div class="tl" data-hue="icg"><p class="tl__when t-meta">2023–2027</p><div class="tl__body"><h3 class="tl__role t-subtitle">电子工程工学学士（BEng），一等荣誉学位</h3><p class="tl__org">杜伦大学大学学院（University College）</p></div></div>
+        </div></div>
+    </section>
+
+    <section class="beyond" data-chapter="实验室之外" aria-labelledby="beyond-title">
+      <div class="wrap"><h2 id="beyond-title" class="t-display" data-split="lines">实验室之外</h2></div>
+      <div class="beyond__row">
+    <a class="pane" href="cv.html#leadership" data-hue="coil">
+      <span class="pane__spot" aria-hidden="true"></span>
+      <div class="pane__inner">
+        <span class="pane__k t-meta">领导经历</span>
+        <h3 class="pane__t t-subtitle">DurHack设计负责人</h3>
+        <span class="pane__d t-small">杜伦大学年度黑客马拉松，2024–25。此外担任大学极限飞盘社联合会长、Castle Pride会长，以及工程系平等、多元与包容（EDI）委员会学生代表。</span>
+        <span class="pane__go">领导与服务<span aria-hidden="true"> →</span></span>
+      </div>
+    </a>
+    <a class="pane" href="art.html" data-hue="ppix">
+      <span class="pane__spot" aria-hidden="true"></span>
+      <div class="pane__inner">
+        <span class="pane__k t-meta">艺术</span>
+        <h3 class="pane__t t-subtitle">杜伦大学年度艺术比赛两度入围决赛</h3>
+        <span class="pane__d t-small">2024年、2025年两度入围。</span>
+        <span class="pane__go">艺术与作品集<span aria-hidden="true"> →</span></span>
+      </div>
+    </a>
+    <a class="pane" href="sport.html" data-hue="fundus">
+      <span class="pane__spot" aria-hidden="true"></span>
+      <div class="pane__inner">
+        <span class="pane__k t-meta">运动</span>
+        <h3 class="pane__t t-subtitle">USA Ultimate大学组注册球员</h3>
+        <span class="pane__d t-small">海外交换学年期间代表圣母大学参赛。</span>
+        <span class="pane__go">体育<span aria-hidden="true"> →</span></span>
+      </div>
+    </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" data-chapter="联系" data-hue="nbi">
+    <div class="wrap">
+      <div class="finale" data-copy-scope>
+        <div class="finale__scope" aria-hidden="true"><div class="scope__halo"></div><div class="scope__lens" data-scope="finale"></div></div>
+        <p class="finale__cta t-cover" style="--w:5.2" data-split="lines">聊聊<em>研究</em>。</p>
+        <div class="finale__mail lockable">
+          <a class="finale__email" href="mailto:tggq61@durham.ac.uk">tggq61@durham.ac.uk</a>
+          <svg class="lock" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22V0h18M82 0h18v22M100 78v22H82M18 100H0V78"/></svg>
+        </div>
+        <div class="finale__acts">
+          <button class="btn btn--sm" type="button" data-copy="tggq61@durham.ac.uk"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 8.5V5.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg>复制</button>
+          <p class="status-line t-meta" role="status" aria-live="polite" data-copy-status></p>
+        </div>
+      </div>
+      <div class="footer__grid">
+        <div class="footer__id">
+          <p class="footer__name">Jiaxi Wang</p>
+          <p class="footer__txt">杜伦大学工程系。具身智能、视觉-语言-动作模型与医疗机器人。</p>
+          <span class="logo-plate"><img src="../assets/durham-university-logo.png" alt="杜伦大学" width="640" height="264" loading="lazy"></span>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h t-meta">工作</p>
+          <ul class="footer__list"><li><a href="research.html">研究</a></li><li><a href="engineering.html">工程</a></li><li><a href="opensource.html">开源</a></li></ul>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h t-meta">关于</p>
+          <ul class="footer__list"><li><a href="cv.html">简历</a></li><li><a href="certificates.html">证书</a></li><li><a href="contact.html">联系</a></li></ul>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h t-meta">实验室之外</p>
+          <ul class="footer__list"><li><a href="art.html">艺术</a></li><li><a href="sport.html">运动</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul>
+        </div>
+      </div>
+      <div class="spectrum" aria-hidden="true"><span style="--c:var(--c-coil)">线圈</span><span style="--c:var(--c-nbi)">NBI</span><span style="--c:var(--c-icg)">ICG</span><span style="--c:var(--c-disc)">视盘</span><span style="--c:var(--c-fundus)">眼底</span><span style="--c:var(--c-mucosa)">黏膜</span><span style="--c:var(--c-ppix)">PpIX</span></div>
+      <div class="footer__base t-meta"><p>© <span id="year">2026</span> Jiaxi Wang。更新于2026年10月。</p><p>配色取自内镜成像、荧光成像与眼底摄影。</p><p>音乐：肖邦《降E大调夜曲》作品9第2号，Frank Levy演奏（Musopen，公有领域）。</p></div>
+    </div>
+  </footer>
+
+  <script id="jw-i18n" type="application/json">{"theme.switch":"切换日间与夜间主题","theme.toDay":"切换到日间主题（白光）","theme.toNight":"切换到夜间主题（荧光）","theme.day":"日间 · 白光","theme.night":"夜间 · 荧光","menu.open":"打开菜单","menu.close":"关闭菜单","copy.done":"已复制","copy.status":"邮箱地址已复制。","copy.fail":"复制失败，请选中上方地址后手动复制。","explain.show":"图示说明","explain.hide":"关闭说明","cursor.play":"播放","cursor.open":"打开","cursor.drag":"拖动","cursor.steer":"操控","cursor.hold":"按住","video.title":"视频","gallery.of":"第{n}项，共{total}项"}</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/hero-gl.js"></script>
+  <script src="../assets/js/specimens.js"></script>
+  <script src="../assets/js/core.js"></script>
+  <script src="../assets/js/night-fx.js"></script>
+  <script src="../assets/js/music.js"></script>
+  <script src="../assets/js/pages/home.js"></script>
+</body>
+</html>
