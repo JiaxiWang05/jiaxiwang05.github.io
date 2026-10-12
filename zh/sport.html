@@ -7,7 +7,7 @@
   <meta name="description" content="Jiaxi Wang从事极限飞盘运动：代表圣母大学的USA Ultimate大学组注册球员。">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#05050A">
-  <script>(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t='night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
+  <script>(function(d,w){var n=w.navigator||{},c=n.connection,l=false;try{l=!!(w.matchMedia('(pointer: coarse)').matches||w.matchMedia('(max-width: 900px)').matches||(n.hardwareConcurrency||8)<=4||(n.deviceMemory||8)<=4||(c&&c.saveData))}catch(e){}if(l)d.classList.add('jw-lite');w.JW_LITE=l})(document.documentElement,window);(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t='night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
   <script>(function(d){try{if(sessionStorage.getItem('jw-seen'))d.classList.add('jw-seen')}catch(e){}addEventListener('load',function(){setTimeout(function(){if(!window.JW)d.classList.remove('js')},0)})})(document.documentElement)</script>
   <link rel="canonical" href="https://jiaxiwang05.github.io/zh/sport.html">
   <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/sport.html">
@@ -26,10 +26,10 @@
   <link rel="apple-touch-icon" href="../assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;family=Noto+Serif+SC:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;display=swap">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="../assets/css/site.css">
 </head>
 <body>
@@ -174,7 +174,7 @@
         <div class="footer__id">
           <p class="footer__name">Jiaxi Wang</p>
           <p class="footer__txt">杜伦大学工程系。具身智能、视觉-语言-动作模型与医疗机器人。</p>
-          <span class="logo-plate"><img src="../assets/durham-university-logo.png" alt="杜伦大学" width="640" height="264" loading="lazy"></span>
+          <span class="logo-plate"><img src="../assets/durham-university-logo-320.png" alt="杜伦大学" width="320" height="131" loading="lazy" decoding="async"></span>
         </div>
         <div class="footer__col">
           <p class="footer__h t-meta">工作</p>
@@ -201,15 +201,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
   <script src="../assets/js/theme.js"></script>
   <script src="../assets/js/hero-gl.js"></script>
   <script src="../assets/js/specimens.js"></script>
   <script src="../assets/js/core.js"></script>
   <script src="../assets/js/night-fx.js"></script>
+  <script src="../assets/js/day-fx.js"></script>
   <script src="../assets/js/music.js"></script>
   <script src="../assets/js/pages/inner.js"></script>
 </body>

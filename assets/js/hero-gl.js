@@ -1,7 +1,11 @@
 /* hero-gl.js: the endoscopic lumen (raw WebGL1). LIGHT SOURCE, package B.
    Public: window.JWScope
      mount(lens, {role, oct}) -> {setAdvance, setBurst, setTarget, setHold, setDay, setPointer, pause, resume, destroy, live}
-     snapshot({size, adv, time, day}) -> dataURL ("" without WebGL); uses a temporary context and releases it.
+     snapshot({size, adv, time, day}) -> dataURL ("" without WebGL); one shared still context, released 4 s after
+       the last still.
+     snapshotAsync(o, cb) -> cb(blob URL or ""): the same still, rendered in an idle slot and encoded with toBlob.
+   Lite (html.jw-lite / JW_LITE): DPR 1, at most 2 octaves, 30 fps, stills capped at 512 px. The shader links in
+   the background (KHR_parallel_shader_compile), so a mount never blocks on the compile.
    Roles: "hero" (steer over .hero), "head" (steer over .page-head), "finale" (steer inside .finale), "monitor" (no steer).
    Relights on document "themechange" (u_day tween over detail.duration, ease lumen; u_base/u_pool re-read).
    No WebGL or reduced motion: nothing is appended, the CSS poster on .scope__lens shows. */
@@ -13,6 +17,13 @@
   var REDUCED = mq("(prefers-reduced-motion: reduce)");
   var PHONE = mq("(max-width: 760px)");
   var FINE = mq("(pointer: fine)");
+  /* lite mode (phones, tablets, small or slow machines): the head boot script sets html.jw-lite / JW_LITE;
+     the same test runs here when it has not landed. Lite = same scene, DPR 1, 2 octaves, 30 fps, smaller stills. */
+  var LITE = html.classList.contains("jw-lite") || window.JW_LITE === true || (window.JW_LITE !== false && (
+    mq("(pointer: coarse)") || mq("(max-width: 900px)") || (navigator.hardwareConcurrency || 8) <= 4 ||
+    (navigator.deviceMemory || 8) <= 4 || !!(navigator.connection && navigator.connection.saveData)));
+  var LITE_MS = 30;          /* lite frame budget: at most one lens frame per ~33 ms */
+  var LITE_STILL = 512;      /* lite cap for snapshot stills (the CSS scales them to the lens) */
 
   var VERT = "attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}";
   /* Night = fluorescence imaging, pushed hard: hot coral / magenta tissue on a near-black lumen, wet specular
@@ -134,19 +145,39 @@
   function baseColor() { return parseColor(cssVar("--ground"), isDay() ? [0.957, 0.949, 0.933] : [0.043, 0.047, 0.067]); }
   function poolColor() { return parseColor(cssVar("--p-coil"), isDay() ? [0.886, 0.898, 0.973] : [0.153, 0.184, 0.392]); }
 
-  /* ---------- GL program ---------- */
-  function program(gl) {
-    function sh(type, src) {
-      var s = gl.createShader(type);
-      gl.shaderSource(s, src); gl.compileShader(s);
-      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { if (window.console && !gl.isContextLost()) console.warn("[JWScope] shader", gl.getShaderInfoLog(s)); return null; }
-      return s;
-    }
-    var vs = sh(gl.VERTEX_SHADER, VERT), fs = sh(gl.FRAGMENT_SHADER, FRAG);
-    if (!vs || !fs) return null;
+  /* ---------- GL program ----------
+     compile() only queues the work; finish() reads the link status (a blocking round trip to the GPU process
+     while the driver still compiles). programAsync() waits for KHR_parallel_shader_compile to report the link
+     done before finish(), so mounting a lens never stalls the main thread on the shader compile. */
+  function compile(gl) {
+    var vs = gl.createShader(gl.VERTEX_SHADER), fs = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(vs, VERT); gl.compileShader(vs);
+    gl.shaderSource(fs, FRAG); gl.compileShader(fs);
     var prog = gl.createProgram();
     gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null;
+    return { prog: prog, vs: vs, fs: fs };
+  }
+  function program(gl) { return finish(gl, compile(gl)); }
+  function programAsync(gl, cb) {
+    var ext = null;
+    try { ext = gl.getExtension("KHR_parallel_shader_compile"); } catch (e) { ext = null; }
+    var c = compile(gl);
+    if (!ext) { cb(finish(gl, c)); return; }
+    (function poll() {
+      if (gl.isContextLost()) { cb(null); return; }
+      var done = true;
+      try { done = !!gl.getProgramParameter(c.prog, ext.COMPLETION_STATUS_KHR); } catch (e) { done = true; }
+      if (done) cb(finish(gl, c)); else requestAnimationFrame(poll);
+    })();
+  }
+  function finish(gl, c) {
+    var prog = c.prog;
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      if (window.console && !gl.isContextLost()) {
+        [c.vs, c.fs].forEach(function (s) { if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.warn("[JWScope] shader", gl.getShaderInfoLog(s)); });
+      }
+      return null;
+    }
     gl.useProgram(prog);
     var buf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
@@ -178,7 +209,7 @@
 
   /* ---------- scheduler: one rAF loop, at most one lens renders per frame ---------- */
   var instances = [];
-  var rafId = 0;
+  var rafId = 0, lastDraw = 0;
   function schedule() { if (!rafId) rafId = requestAnimationFrame(tick); }
   function tick(now) {
     rafId = 0;
@@ -186,10 +217,13 @@
     var best = null;
     for (var i = 0; i < instances.length; i++) {
       var it = instances[i];
-      if (it.dead || it.paused || !it.visible) continue;
+      if (it.dead || it.paused || !it.visible || !it.ready) continue;
       if (!best || it.ratio > best.ratio + 0.001) best = it;
     }
-    if (!best) return;
+    if (!best) return;     /* a lens still compiling calls schedule() itself once it is linked */
+    /* lite: 30 fps (a 60 Hz display skips every other frame; the time uniform keeps the motion speed) */
+    if (LITE && lastDraw && now - lastDraw < LITE_MS && now >= lastDraw) { schedule(); return; }
+    lastDraw = now;
     best.draw(now);
     schedule();
   }
@@ -205,13 +239,23 @@
      Nothing is appended and nothing moves; the frame is rendered once per theme on a temporary context
      (snapshot) and repainted after a theme change. Without WebGL the CSS poster stays. */
   var stills = {}, stillLenses = [];
+  function applyStill(lens, url) {
+    if (!url) return;
+    lens.style.backgroundImage = 'url("' + url + '")';
+    lens.style.backgroundSize = "cover"; lens.style.backgroundPosition = "center";
+  }
+  /* rendered in an idle slot and encoded off the critical path (toBlob); the CSS poster shows until then */
   function paintStill(lens) {
     var key = isDay() ? "day" : "night";
-    if (!(key in stills)) stills[key] = snapshot({ size: 800, adv: 0, time: 3.7 }) || "";
-    if (stills[key]) {
-      lens.style.backgroundImage = 'url("' + stills[key] + '")';
-      lens.style.backgroundSize = "cover"; lens.style.backgroundPosition = "center";
-    }
+    var s = stills[key];
+    if (typeof s === "string") { applyStill(lens, s); return; }
+    if (s) { s.push(lens); return; }
+    stills[key] = [lens];
+    snapshotAsync({ size: 800, adv: 0, time: 3.7, day: key === "day" ? 1 : 0 }, function (url) {
+      var wait = stills[key];
+      stills[key] = url || "";
+      if (url && wait && wait.forEach) wait.forEach(function (l) { if ((isDay() ? "day" : "night") === key) applyStill(l, url); });
+    });
   }
   document.addEventListener("themechangeend", function () { stillLenses.forEach(paintStill); });
 
@@ -230,19 +274,17 @@
     var gl = context(canvas, {});
     if (!gl) { glOK = false; lens._jwScope = posterApi(role); return lens._jwScope; }
     glOK = true;
-    var P = program(gl);
-    if (!P) { release(gl); lens._jwScope = posterApi(role); return lens._jwScope; }
-    var U = P.U;
+    var U = null;
     lens.appendChild(canvas);
 
     var oct = opts.oct || ROLE_OCT[role] || 3;
-    if (PHONE) oct = Math.min(oct, 2);
-    var dprCap = PHONE ? 1 : 1.5;
+    if (PHONE || LITE) oct = Math.min(oct, 2);
+    var dprCap = PHONE || LITE ? 1 : 1.5;
     var st = {
       adv: 0, burst: 0, hold: 0, day: isDay(), px: 0, py: 0, tx: 0, ty: 0,
       tgx: DEFAULT_TGT[0], tgy: DEFAULT_TGT[1], base: baseColor(), pool: poolColor()
     };
-    var inst = { visible: false, ratio: 0, paused: false, dead: false, role: role, draw: draw };
+    var inst = { visible: false, ratio: 0, paused: false, dead: false, ready: false, role: role, draw: draw };
     var first = true, t0 = performance.now(), lost = false;
 
     function resize() {
@@ -251,16 +293,30 @@
       var d = Math.min(window.devicePixelRatio || 1, dprCap);
       var W = Math.max(2, Math.round(w * d)), H = Math.max(2, Math.round(h * d));
       if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+      if (!U) return;
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform2f(U.u_res, canvas.width, canvas.height);
     }
     resize();
-    gl.uniform1f(U.u_oct, oct);
+    /* the shader compiles in the background; the lens draws (and the canvas fades in) once it is linked */
+    programAsync(gl, function (P) {
+      if (inst.dead || lost) return;
+      if (!P) {
+        inst.dead = true; release(gl);
+        if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+        emitFrame(role);    /* the CSS poster stays; anyone waiting for the first frame is released */
+        return;
+      }
+      U = P.U; inst.ready = true;
+      resize();
+      gl.uniform1f(U.u_oct, oct);
+      schedule();
+    });
     if ("ResizeObserver" in window) new ResizeObserver(function () { resize(); schedule(); }).observe(lens);
     else window.addEventListener("resize", function () { resize(); schedule(); });
 
     function draw(now) {
-      if (lost) return;
+      if (lost || !U) return;
       st.px += (st.tx - st.px) * 0.06; st.py += (st.ty - st.py) * 0.06;
       gl.uniform1f(U.u_time, (now - t0) / 1000);
       gl.uniform1f(U.u_adv, st.adv);
@@ -275,11 +331,11 @@
       if (first) { first = false; canvas.style.opacity = "1"; emitFrame(role); }
     }
 
-    canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); lost = true; canvas.style.opacity = "0"; }, false);
+    canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); lost = true; inst.ready = false; canvas.style.opacity = "0"; }, false);
     canvas.addEventListener("webglcontextrestored", function () {
       var p2 = program(gl);
       if (!p2) return;
-      U = p2.U; lost = false; resize(); gl.uniform1f(U.u_oct, oct); first = true; schedule();
+      U = p2.U; lost = false; inst.ready = true; resize(); gl.uniform1f(U.u_oct, oct); first = true; schedule();
     }, false);
 
     if ("IntersectionObserver" in window) {
@@ -353,40 +409,80 @@
     instances.forEach(function (it) { if (!it.dead && it.api) it.api._settle(); });
   });
 
-  /* ---------- snapshot: one frame on a temporary context ---------- */
+  /* ---------- snapshot: one frame on a shared still context ----------
+     The context and its compiled program are kept for a few seconds after the last still, so a burst of stills
+     (a theme change repaints every one) pays the context and the shader compile once; then it is released. */
+  var snap = null, snapTimer = 0;
+  function dropSnap() { snapTimer = 0; if (snap) { release(snap.gl); snap = null; } }
+  function snapContext() {
+    if (snap && snap.gl.isContextLost()) snap = null;
+    if (!snap) {
+      var c = document.createElement("canvas");
+      c.width = c.height = 64;
+      var gl = context(c, { preserveDrawingBuffer: true });
+      if (!gl) { glOK = false; return null; }
+      glOK = true;
+      var P = null;
+      try { P = program(gl); } catch (e) { P = null; }
+      if (!P) { release(gl); return null; }
+      snap = { c: c, gl: gl, U: P.U };
+    }
+    if (snapTimer) clearTimeout(snapTimer);
+    snapTimer = setTimeout(dropSnap, 4000);
+    return snap;
+  }
+  function stillSize(o) {
+    var size = Math.max(64, Math.min(2048, o.size || 1024));
+    return LITE ? Math.min(size, LITE_STILL) : size;
+  }
+  /* draws the still into the shared canvas and returns it (null without WebGL) */
+  function renderStill(o) {
+    if (glOK === false) return null;
+    var S = snapContext();
+    if (!S) return null;
+    var gl = S.gl, U = S.U, c = S.c, size = stillSize(o), b = baseColor(), p = poolColor();
+    if (c.width !== size || c.height !== size) { c.width = size; c.height = size; }
+    gl.viewport(0, 0, size, size);
+    gl.uniform2f(U.u_res, size, size);
+    gl.uniform1f(U.u_time, o.time != null ? o.time : 3.7);
+    gl.uniform1f(U.u_adv, o.adv != null ? o.adv : 0.35);
+    gl.uniform1f(U.u_burst, 0);
+    gl.uniform1f(U.u_hold, 0);
+    gl.uniform1f(U.u_oct, 4);
+    gl.uniform1f(U.u_day, o.day != null ? o.day : isDay());
+    gl.uniform2f(U.u_ptr, 0, 0);
+    gl.uniform2f(U.u_tgt, o.tgx != null ? o.tgx : DEFAULT_TGT[0], o.tgy != null ? o.tgy : DEFAULT_TGT[1]);
+    gl.uniform3f(U.u_base, b[0], b[1], b[2]);
+    gl.uniform3f(U.u_pool, p[0], p[1], p[2]);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    return c;
+  }
   function snapshot(o) {
     o = o || {};
-    if (glOK === false) return "";
-    var size = Math.max(64, Math.min(2048, o.size || 1024));
-    var c = document.createElement("canvas");
-    c.width = size; c.height = size;
-    var gl = context(c, { preserveDrawingBuffer: true });
-    if (!gl) { glOK = false; return ""; }
-    glOK = true;
-    var url = "";
     try {
-      var P = program(gl);
-      if (P) {
-        var U = P.U, b = baseColor(), p = poolColor();
-        gl.viewport(0, 0, size, size);
-        gl.uniform2f(U.u_res, size, size);
-        gl.uniform1f(U.u_time, o.time != null ? o.time : 3.7);
-        gl.uniform1f(U.u_adv, o.adv != null ? o.adv : 0.35);
-        gl.uniform1f(U.u_burst, 0);
-        gl.uniform1f(U.u_hold, 0);
-        gl.uniform1f(U.u_oct, 4);
-        gl.uniform1f(U.u_day, o.day != null ? o.day : isDay());
-        gl.uniform2f(U.u_ptr, 0, 0);
-        gl.uniform2f(U.u_tgt, o.tgx != null ? o.tgx : DEFAULT_TGT[0], o.tgy != null ? o.tgy : DEFAULT_TGT[1]);
-        gl.uniform3f(U.u_base, b[0], b[1], b[2]);
-        gl.uniform3f(U.u_pool, p[0], p[1], p[2]);
-        gl.drawArrays(gl.TRIANGLES, 0, 3);
-        url = c.toDataURL(o.type || "image/jpeg", 0.9);
+      var c = renderStill(o);
+      return c ? c.toDataURL(o.type || "image/jpeg", 0.9) : "";
+    } catch (e) { return ""; }
+  }
+  /* snapshotAsync(o, cb): the same still, rendered in an idle slot and encoded with toBlob (no long task);
+     cb(url) gets a blob: URL ("" without WebGL). o.timeout caps the idle wait (ms, default 900). */
+  function snapshotAsync(o, cb) {
+    o = o || {}; cb = cb || noop;
+    var run = function () {
+      var c = null;
+      try { c = renderStill(o); } catch (e) { c = null; }
+      if (!c) { cb(""); return; }
+      if (c.toBlob && window.URL && URL.createObjectURL) {
+        try {
+          c.toBlob(function (blob) { cb(blob ? URL.createObjectURL(blob) : ""); }, o.type || "image/jpeg", 0.9);
+          return;
+        } catch (e) { /* tainted or unsupported: fall back */ }
       }
-    } catch (e) { url = ""; }
-    release(gl);
-    return url;
+      try { cb(c.toDataURL(o.type || "image/jpeg", 0.9)); } catch (e) { cb(""); }
+    };
+    if (window.requestIdleCallback) window.requestIdleCallback(run, { timeout: o.timeout || 900 });
+    else setTimeout(run, 60);
   }
 
-  window.JWScope = { mount: mount, snapshot: snapshot, supported: supported };
+  window.JWScope = { mount: mount, snapshot: snapshot, snapshotAsync: snapshotAsync, supported: supported, lite: LITE };
 })();

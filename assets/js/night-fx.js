@@ -7,7 +7,10 @@
    - bloom behind the hovered or keyboard-focused key element;
    - a light ripple on every click or tap.
    Off under prefers-reduced-motion and in the day theme; waits for the loader; paused while the tab is hidden;
-   DPR capped at 1; 30 fps when idle and on phones.
+   DPR capped at 1; 30 fps when idle and on phones. Nothing is built (no canvas, observers or listeners beyond
+   the theme watch) until the theme is first night, and the canvas leaves the DOM while the theme is day.
+   Lite mode (html.jw-lite, see the head boot script): the same light at half resolution (upscaled by the
+   browser), the phone particle counts, 30 fps while scrolling or after a tap and 15 fps at rest.
    Public (QA): window.JWNightFX = {active(), stats(), pause(), resume(), destroy()} */
 (function () {
   "use strict";
@@ -25,7 +28,11 @@
   if (!ctx) return;
 
   var FINE = mq("(pointer: fine)") && mq("(hover: hover)");
-  var PHONE = mq("(max-width: 760px)");
+  var LITE = html.classList.contains("jw-lite") || win.JW_LITE === true || (win.JW_LITE !== false && (
+    mq("(pointer: coarse)") || mq("(max-width: 900px)") || (navigator.hardwareConcurrency || 8) <= 4 ||
+    (navigator.deviceMemory || 8) <= 4 || !!(navigator.connection && navigator.connection.saveData)));
+  var PHONE = mq("(max-width: 760px)") || LITE;   /* lite gets the phone counts (dust, bokeh, one filament) */
+  var RS = LITE ? 0.5 : 1;                         /* canvas resolution scale (CSS stretches it to the viewport) */
   var TAU = Math.PI * 2;
   var BLOOM_SEL = ".btn, .chip, .slide__card, .pane, .index-item, .tally, .gauge, .video, .monitor__screen, .scope__stage, " +
     ".finale__email, .finale__cta, .switcher__btn, .theme-toggle, .card, .doc, [data-tilt], .rs__fig, .fig__stage, .tl, .spec-sheet";
@@ -156,11 +163,11 @@
   function resize() {
     var w = win.innerWidth || html.clientWidth, h = win.innerHeight || html.clientHeight;
     if (!w || !h) return;
-    var d = Math.min(win.devicePixelRatio || 1, 1);
+    var d = Math.min(win.devicePixelRatio || 1, 1) * RS;
     if (w === W && h === H && d === DPR) return;
     var sx = W ? w / W : 1, sy = H ? h / H : 1;
     W = w; H = h; DPR = d;
-    canvas.width = Math.round(w * d); canvas.height = Math.round(h * d);
+    canvas.width = Math.max(2, Math.round(w * d)); canvas.height = Math.max(2, Math.round(h * d));
     for (var i = 0; i < dust.length; i++) { dust[i].x *= sx; dust[i].y *= sy; }
     seed();
     measure();
@@ -176,7 +183,7 @@
     });
   }
   function measure() {
-    var sy = win.scrollY || win.pageYOffset || 0;
+    var sy = readSY();
     for (var i = 0; i < secs.length; i++) {
       var s = secs[i], p = s.el.parentElement;
       var box = p && p.classList && p.classList.contains("pin-spacer") ? p : s.el;
@@ -308,9 +315,13 @@
   }
 
   /* ---------- state ---------- */
-  var running = false, raf = 0, last = 0, paused = false, dead = false, shown = false;
-  var lastSY = win.scrollY || 0, vScroll = 0, curIdx = -1, secP = 0, auroraI = 0.4;
-  var heroLens = null, heroCx = 0, heroCy = 0, heroOn = false, lastAdv = -1, warp = 0, heroBurst = 0;
+  var running = false, raf = 0, last = 0, paused = false, dead = false, shown = false, built = false, fadeIn = 0;
+  /* the scroll position comes from the passive scroll listener (read there, after ScrollTrigger's own read, so
+     style is clean); the frame loop never reads window.scrollY */
+  var curSY = 0;
+  function readSY() { curSY = win.scrollY || win.pageYOffset || 0; return curSY; }
+  var lastSY = 0, vScroll = 0, curIdx = -1, secP = 0, auroraI = 0.4;
+  var heroLens = null, heroVis = true, heroIO = null, heroCx = 0, heroCy = 0, heroOn = false, lastAdv = -1, warp = 0, heroBurst = 0;
   var fpsN = 0, fpsT = 0, fps = 0;
   var t0 = now();
 
@@ -340,10 +351,21 @@
     }
   }
 
+  function watchHero() {
+    if (heroLens || heroIO) return;
+    heroLens = doc.querySelector('.scope__lens[data-scope="hero"]');
+    if (heroLens && "IntersectionObserver" in win) {
+      heroVis = false;
+      heroIO = new IntersectionObserver(function (es) { heroVis = es[es.length - 1].isIntersecting; }, { rootMargin: "40px 0px" });
+      heroIO.observe(heroLens);
+    }
+  }
   function updateHero(dt) {
-    if (!heroLens) heroLens = doc.querySelector('.scope__lens[data-scope="hero"]');
+    if (!heroLens) watchHero();
     heroOn = false;
     if (!heroLens) { warp *= 0.9; return; }
+    /* off screen (most of the page): no layout read at all */
+    if (!heroVis) { warp *= Math.exp(-dt * 4); lastAdv = -1; heroBurst = 0; return; }
     var r = heroLens.getBoundingClientRect();
     if (r.bottom < 0 || r.top > H || !r.width) { warp *= Math.exp(-dt * 4); lastAdv = -1; heroBurst = 0; return; }
     heroOn = true;
@@ -360,7 +382,7 @@
   }
 
   function step(dt, tt) {
-    var sy = win.scrollY || win.pageYOffset || 0;
+    var sy = curSY;
     var dy = sy - lastSY; lastSY = sy;
     if (Math.abs(dy) > H * 1.2) dy = 0;          /* an anchor jump is not a streak */
     vScroll += (dy / dt - vScroll) * Math.min(1, dt * 8);
@@ -590,19 +612,26 @@
 
   /* ---------- loop ---------- */
   function idle(t) {
-    return PHONE || (t - lastInput > 1800 && Math.abs(vScroll) < 10 && !pulses.length && warp < 0.02 &&
-      !blooms.some(function (b) { return Math.abs(b.target - b.a) > 0.02; }));
+    return t - lastInput > 1800 && Math.abs(vScroll) < 10 && !pulses.length && warp < 0.02 &&
+      !blooms.some(function (b) { return Math.abs(b.target - b.a) > 0.02; });
+  }
+  /* minimum ms between drawn frames: desktop 60 fps while something moves, else 30; phones 30; lite 30 / 15 */
+  function gap(t) {
+    var rest = idle(t);
+    if (LITE) return rest ? 60 : 30;
+    return PHONE || rest ? 30 : 0;
   }
   function frame(t) {
     raf = 0;
     if (!running) return;
     raf = requestAnimationFrame(frame);
     if (!shown) {
-      if (loaderBusy()) { last = 0; lastSY = win.scrollY || 0; return; }
-      shown = true; canvas.style.opacity = "1";
+      if (loaderBusy()) { last = 0; lastSY = curSY; return; }
+      shown = true; fadeIn = 2;
     }
+    if (fadeIn && --fadeIn === 0) canvas.style.opacity = "1";   /* fade in once its opacity 0 has been styled */
     var dms = last ? t - last : 16.7;
-    if (last && dms < 30 && idle(t)) return;   /* idle: every other frame */
+    if (last && dms < gap(t)) return;
     last = t;
     var dt = clamp(dms / 1000, 0.001, 0.05);
     var tt = (t - t0) / 1000;
@@ -615,20 +644,38 @@
   function wake() { if (running && !raf) raf = requestAnimationFrame(frame); }
   function start() {
     if (dead || paused || running || doc.hidden || !isNight()) return;
-    running = true; last = 0; lastSY = win.scrollY || 0; vScroll = 0;
+    running = true; last = 0; lastSY = readSY(); vScroll = 0;
     raf = requestAnimationFrame(frame);
   }
   function stop() { running = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
+  var offTimer = 0;
+  function attach() {
+    if (canvas.parentNode) return false;
+    host().appendChild(canvas);
+    if (ro) ro.observe(doc.body);
+    collect(); measure();
+    return true;
+  }
+  function detach() {
+    if (ro) ro.disconnect();
+    if (canvas.parentNode) canvas.parentNode.removeChild(canvas);   /* no layer, no paint while the theme is day */
+  }
   function themeSync() {
     if (dead) return;
     if (isNight()) {
+      if (offTimer) { clearTimeout(offTimer); offTimer = 0; }
+      if (!built) { build(); return; }
       readPalette(); rgbCache = {};
       for (var i = 0; i < blooms.length; i++) blooms[i].rgb = elRgb(blooms[i].el);
-      if (shown) canvas.style.opacity = "1";
+      if (attach()) { canvas.style.opacity = "0"; if (shown) fadeIn = 2; }
+      else if (shown) canvas.style.opacity = "1";
       start();
-    } else {
+    } else if (built) {
       canvas.style.opacity = "0";
-      setTimeout(function () { if (!isNight()) { stop(); ctx.clearRect(0, 0, canvas.width, canvas.height); } }, 900);
+      if (!offTimer) offTimer = setTimeout(function () {
+        offTimer = 0;
+        if (!isNight()) { stop(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, canvas.width, canvas.height); detach(); }
+      }, 900);
     }
   }
 
@@ -638,15 +685,19 @@
 
   function destroy() {
     dead = true; stop();
+    if (offTimer) clearTimeout(offTimer);
     listeners.forEach(function (l) { l[0].removeEventListener(l[1], l[2], l[3]); });
     listeners = [];
     if (mo) mo.disconnect();
     if (ro) ro.disconnect();
+    if (heroIO) heroIO.disconnect();
     if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
   }
 
-  function init() {
-    if (dead) return;
+  /* the light itself: built the first time the theme is night */
+  function build() {
+    if (built || dead) return;
+    built = true;
     readPalette();
     slot[0] = hueRgb("icg").slice(); slot[1] = hueRgb("ppix").slice();
     syncSprites();
@@ -654,14 +705,15 @@
     collect();
     resize();
     measure();
-    updateChapter(win.scrollY || 0);
+    updateChapter(readSY());
     slot[0] = slotT[0].slice(); slot[1] = slotT[1].slice(); syncSprites();
+    watchHero();
 
     on(win, "resize", function () { resize(); measure(); }, { passive: true });
     on(win, "load", function () { collect(); measure(); });
-    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { measure(); });
+    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { if (canvas.parentNode) measure(); });
     if (win.ScrollTrigger && win.ScrollTrigger.addEventListener) {
-      try { win.ScrollTrigger.addEventListener("refresh", measure); } catch (e) { /* older GSAP */ }
+      try { win.ScrollTrigger.addEventListener("refresh", function () { if (canvas.parentNode) measure(); }); } catch (e) { /* older GSAP */ }
     }
     if ("ResizeObserver" in win) { ro = new ResizeObserver(function () { measure(); }); ro.observe(doc.body); }
     if (FINE) {
@@ -675,8 +727,14 @@
     on(doc, "focusout", onFocusOut);
     on(win, "pointerdown", onDown, { passive: true });
     on(win, "pointerup", onUp, { passive: true });
-    on(win, "scroll", function () { lastInput = now(); wake(); }, { passive: true });
+    on(win, "scroll", function () { readSY(); lastInput = now(); wake(); }, { passive: true });
     on(doc, "visibilitychange", function () { if (doc.hidden) stop(); else start(); });
+    start();
+  }
+
+  /* always: watch the theme (and reduced motion); everything else waits for night */
+  function init() {
+    if (dead) return;
     on(doc, "themechange", themeSync);
     on(doc, "themechangeend", themeSync);
     if ("MutationObserver" in win) { mo = new MutationObserver(themeSync); mo.observe(html, { attributes: true, attributeFilter: ["data-theme"] }); }
@@ -684,7 +742,7 @@
       var onRM = function (e) { if (e.matches) destroy(); };
       if (RM.addEventListener) RM.addEventListener("change", onRM); else if (RM.addListener) RM.addListener(onRM);
     }
-    start();
+    if (isNight()) build();
   }
 
   win.JWNightFX = {
@@ -692,7 +750,7 @@
     stats: function () {
       return { running: running, shown: shown, night: isNight(), fps: fps, dust: dust.length, sparks: sparks.length, blooms: blooms.length,
         pulses: pulses.length, trail: trail.length, chapter: curIdx >= 0 && secs[curIdx] ? secs[curIdx].hue : null, warp: +warp.toFixed(3),
-        size: [canvas.width, canvas.height], fine: FINE, phone: PHONE };
+        size: [canvas.width, canvas.height], fine: FINE, phone: PHONE, lite: LITE, built: built, attached: !!canvas.parentNode };
     },
     pause: function () { paused = true; stop(); },
     resume: function () { paused = false; start(); },

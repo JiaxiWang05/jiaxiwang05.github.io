@@ -10,6 +10,13 @@
   var reduced = mq("(prefers-reduced-motion: reduce)");
   var fine = mq("(pointer: fine)");
   var mobile = mq("(max-width: 760px)");
+  /* lite mode (phones, tablets, small or low-power devices): decided once by the head boot script
+     (html.jw-lite / window.JW_LITE); the coarse-pointer / narrow-screen test is the fallback when it is absent */
+  var LITE = html.classList.contains("jw-lite") || window.JW_LITE === true ||
+    (window.JW_LITE !== false && (mq("(pointer: coarse)") || mq("(max-width: 900px)") ||
+      (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4 ||
+      !!(navigator.connection && navigator.connection.saveData)));
+  var touch = !fine && (mq("(pointer: coarse)") || mq("(hover: none)"));
   var lang = /^zh/i.test(html.getAttribute("lang") || "") ? "zh" : "en";
   var gsap = window.gsap || null;
   var ST = gsap && window.ScrollTrigger ? window.ScrollTrigger : null;
@@ -20,6 +27,28 @@
   function smoothstep(a, b, x) { var t = clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); }
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } return null; }
   function safe(fn) { return function () { try { return fn.apply(this, arguments); } catch (e) { if (window.console) console.warn("[JW]", e); } }; }
+  /* run fn when the main thread is idle (with a deadline), so one-off heavy work stays out of scroll frames */
+  function idle(fn, timeout) {
+    if (window.requestIdleCallback) return window.requestIdleCallback(function () { fn(); }, { timeout: timeout || 1200 });
+    return setTimeout(fn, 60);
+  }
+  /* quiet: like idle, but also waits for a pause in scrolling (no scroll event for 400 ms, no finger down), so a
+     one-off long task (a WebGL context, a JPEG encode) does not land in a swipe. `deadline` (absolute ms, or a
+     function returning it) caps the wait. */
+  var lastScrollT = 0, fingers = 0;
+  window.addEventListener("scroll", function () { lastScrollT = performance.now(); }, { passive: true });
+  window.addEventListener("touchstart", function (e) { fingers = e.touches ? e.touches.length : 1; }, { passive: true });
+  window.addEventListener("touchend", function (e) { fingers = e.touches ? e.touches.length : 0; }, { passive: true });
+  window.addEventListener("touchcancel", function () { fingers = 0; }, { passive: true });
+  function quiet(fn, deadline) {
+    var t0 = performance.now();
+    var check = function () {
+      var now = performance.now(), dl = typeof deadline === "function" ? deadline() : deadline;
+      if ((now - lastScrollT > 400 && !fingers) || now >= (dl || t0 + 8000)) idle(fn, 500);
+      else setTimeout(check, 200);
+    };
+    check();
+  }
 
   /* ---------- i18n (§5.6) ---------- */
   var EN = {
@@ -49,7 +78,7 @@
 
   /* ---------- the JW object ---------- */
   var JW = window.JW = window.JW || {};
-  JW.reduced = reduced; JW.fine = fine; JW.mobile = mobile; JW.lang = lang;
+  JW.reduced = reduced; JW.fine = fine; JW.mobile = mobile; JW.lang = lang; JW.lite = LITE; JW.touch = touch; JW.idle = idle; JW.quiet = quiet;
   JW.t = t; JW.smoothstep = smoothstep; JW.clamp01 = clamp01;
   JW.ready = []; JW.started = false;
   JW.onReady = function (fn) { if (JW.started) safe(fn)(); else JW.ready.push(fn); };
@@ -59,14 +88,24 @@
   /* ---------- JW.loop: one ticker, gated to the central 60 % of the viewport (§9.1) ---------- */
   var loops = [];
   var tickerOn = false;
+  /* lite: ambient loops step at ~30 fps (every 2nd frame at 60 Hz, every 4th at 120 Hz) with the summed dt,
+     all on the same frames so the frames in between stay free; opts.fps >= 60 keeps a loop at full rate */
+  var LITE_STEP = 0.028, liteAcc = 0;
   function loopTick(time, deltaMs) {
     if (doc.hidden) return;
     var dt = Math.min(0.05, (deltaMs || 16.7) / 1000);
+    var step = dt, half = true;
+    if (LITE) {
+      liteAcc += dt;
+      if (liteAcc >= LITE_STEP) { step = Math.min(0.1, liteAcc); liteAcc = 0; } else half = false;
+    }
     for (var i = 0; i < loops.length; i++) {
       var L = loops[i];
       if (!L.on || L.dead) continue;
       L.t += dt;
-      try { L.fn(L.t, dt); } catch (e) { L.dead = true; if (window.console) console.warn("[JW.loop]", e); }
+      if (L.full) { try { L.fn(L.t, dt); } catch (e) { L.dead = true; if (window.console) console.warn("[JW.loop]", e); } continue; }
+      if (!half) continue;
+      try { L.fn(L.t, step); } catch (e) { L.dead = true; if (window.console) console.warn("[JW.loop]", e); }
     }
   }
   function ensureTicker() {
@@ -87,7 +126,7 @@
       try { fn(T, 0); } catch (e) { /* static frame */ }
       return { stop: function () {}, set: function () {}, kick: function (n) { for (var i = 0; i < (n || 8); i++) { try { fn(T, 0.25); } catch (e) { return; } } } };
     }
-    var L = { fn: fn, on: false, t: opts.t0 || 0, dead: false, io: null };
+    var L = { fn: fn, on: false, t: opts.t0 || 0, dead: false, io: null, full: !LITE || (opts.fps || 0) >= 60 };
     if (host && "IntersectionObserver" in window) {
       L.io = new IntersectionObserver(function (es) { L.on = es[es.length - 1].isIntersecting; }, { rootMargin: opts.margin || "-20% 0px -20% 0px" });
       L.io.observe(host);
@@ -98,6 +137,89 @@
       stop: function () { L.dead = true; if (L.io) L.io.disconnect(); var i = loops.indexOf(L); if (i >= 0) loops.splice(i, 1); },
       set: function (on) { L.on = !!on; },
       kick: function () { /* the ticker is already running */ }
+    };
+  };
+
+  /* ---------- JW.pathAt: arc-length sampler for a static SVG path, evaluated in JS ----------
+     Replaces per-frame getPointAtLength (which re-measures the path and forces a style recalc). The d string
+     (M L H V C S Q T Z, absolute or relative) is flattened once into a polyline; anything it cannot parse
+     (arcs) is sampled once from the element instead. at(f) -> {x, y} for f = 0..1 of the length (clamped). */
+  function flattenPath(d, N, px, py, mv) {
+    var tok = String(d || "").match(/[MmLlHhVvCcSsQqTtZzAa]|[-+]?(?:\d*\.\d+|\d+\.?)(?:[eE][-+]?\d+)?/g);
+    if (!tok || !tok.length) return false;
+    var i = 0, cmd = "", prev = "", x = 0, y = 0, sx = 0, sy = 0, cx = 0, cy = 0, qx = 0, qy = 0, bad = false;
+    function num() { var v = parseFloat(tok[i++]); if (isNaN(v)) bad = true; return v; }
+    function pt(X, Y, move) { if (move && px.length) mv[px.length] = true; px.push(X); py.push(Y); }
+    function cubic(x1, y1, x2, y2, x3, y3) {
+      for (var s = 1; s <= N; s++) {
+        var t = s / N, u = 1 - t, a = u * u * u, b = 3 * u * u * t, c = 3 * u * t * t, e = t * t * t;
+        pt(a * x + b * x1 + c * x2 + e * x3, a * y + b * y1 + c * y2 + e * y3);
+      }
+      x = x3; y = y3;
+    }
+    function quad(x1, y1, x2, y2) {
+      for (var s = 1; s <= N; s++) {
+        var t = s / N, u = 1 - t;
+        pt(u * u * x + 2 * u * t * x1 + t * t * x2, u * u * y + 2 * u * t * y1 + t * t * y2);
+      }
+      x = x2; y = y2;
+    }
+    while (i < tok.length && !bad) {
+      if (/^[A-Za-z]$/.test(tok[i])) cmd = tok[i++];
+      else if (!cmd) return false;
+      var C = cmd.toUpperCase(), rel = cmd !== C, ox = rel ? x : 0, oy = rel ? y : 0;
+      if (C === "Z") { pt(sx, sy); x = sx; y = sy; prev = "Z"; cmd = ""; continue; }
+      if (C === "M") { x = sx = num() + ox; y = sy = num() + oy; pt(x, y, true); cmd = rel ? "l" : "L"; prev = "L"; continue; }
+      if (C === "L") { x = num() + ox; y = num() + oy; pt(x, y); prev = "L"; continue; }
+      if (C === "H") { x = num() + ox; pt(x, y); prev = "L"; continue; }
+      if (C === "V") { y = num() + oy; pt(x, y); prev = "L"; continue; }
+      if (C === "C" || C === "S") {
+        var x1, y1;
+        if (C === "C") { x1 = num() + ox; y1 = num() + oy; }
+        else if (prev === "C") { x1 = 2 * x - cx; y1 = 2 * y - cy; }
+        else { x1 = x; y1 = y; }
+        var x2 = num() + ox, y2 = num() + oy, x3 = num() + ox, y3 = num() + oy;
+        if (bad) break;
+        cubic(x1, y1, x2, y2, x3, y3); cx = x2; cy = y2; prev = "C"; continue;
+      }
+      if (C === "Q" || C === "T") {
+        var q1, r1;
+        if (C === "Q") { q1 = num() + ox; r1 = num() + oy; }
+        else if (prev === "Q") { q1 = 2 * x - qx; r1 = 2 * y - qy; }
+        else { q1 = x; r1 = y; }
+        var q2 = num() + ox, r2 = num() + oy;
+        if (bad) break;
+        quad(q1, r1, q2, r2); qx = q1; qy = r1; prev = "Q"; continue;
+      }
+      return false;                                   /* arcs and anything unknown: sample the element */
+    }
+    return !bad && px.length > 0;
+  }
+  JW.pathAt = function (src, steps) {
+    var el = src && typeof src === "object" ? src : null;
+    var px = [], py = [], mv = [];
+    if (!flattenPath(el ? el.getAttribute("d") : src, steps || 32, px, py, mv) && el && el.getTotalLength) {
+      px = []; py = []; mv = [];
+      try {
+        var L0 = el.getTotalLength(), M = 64;
+        for (var s = 0; s <= M; s++) { var q = el.getPointAtLength(L0 * s / M); px.push(q.x); py.push(q.y); }
+      } catch (e) { px = []; py = []; }
+    }
+    var n = px.length, acc = [0];
+    for (var j = 1; j < n; j++) acc.push(acc[j - 1] + (mv[j] ? 0 : Math.hypot(px[j] - px[j - 1], py[j] - py[j - 1])));
+    var len = n ? acc[n - 1] : 0, hint = 1;
+    return {
+      len: len,
+      at: function (f) {
+        if (!n) return { x: 0, y: 0 };
+        if (n < 2 || !len) return { x: px[0], y: py[0] };
+        var dd = (f > 0 ? (f < 1 ? f : 1) : 0) * len, k = hint < n ? hint : n - 1;
+        while (k > 1 && acc[k - 1] > dd) k--;
+        while (k < n - 1 && acc[k] < dd) k++;
+        hint = k;
+        var seg = acc[k] - acc[k - 1], u = seg > 0 ? (dd - acc[k - 1]) / seg : 1;
+        return { x: px[k - 1] + (px[k] - px[k - 1]) * u, y: py[k - 1] + (py[k] - py[k - 1]) * u };
+      }
     };
   };
 
@@ -238,7 +360,9 @@
       ":where(.js .explain .explain__x) svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}",
       ":where(.js .explain .explain__k){padding-right:40px}",
       ":where(.pane__art){position:absolute;left:0;right:0;top:15%;height:50%;z-index:0;pointer-events:none;overflow:visible}",
-      ":where(.pane__art) svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}"
+      ":where(.pane__art) svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}",
+      /* infinite CSS loops hold still while their section is off-screen (see pauseOffscreen below) */
+      ".jw-offscreen .slide__card,.jw-offscreen .slide__card::before,.jw-offscreen .slide__card::after,.jw-offscreen .pane__spot::before,.jw-offscreen .live-dot::after{animation-play-state:paused!important}"
     ].join("\n");
     var head = doc.head || doc.documentElement;
     head.insertBefore(st, head.firstChild);
@@ -367,10 +491,26 @@
   JW.explain = Explain;
   safe(Explain.init)();
 
+  /* off-screen sections pause their infinite CSS loops (the spinning gallery rim animates a registered custom
+     property, i.e. style + paint on the main thread every frame, even 5000 px below the viewport) */
+  safe(function pauseOffscreen() {
+    if (!("IntersectionObserver" in window)) return;
+    var hosts = $$(".gallery, .beyond");
+    $$(".live-dot").forEach(function (d) {
+      var h = d.closest("section, header, footer, .rs") || d.parentElement;
+      if (h && hosts.indexOf(h) < 0) hosts.push(h);
+    });
+    if (!hosts.length) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle("jw-offscreen", !e.isIntersecting); });
+    }, { rootMargin: "80px 0px" });
+    hosts.forEach(function (h) { io.observe(h); });
+  })();
+
   /* ---------- pools (§6.7) ---------- */
   var Pool = (function () {
     var backdrop = $(".field-backdrop");
-    var layers = {}, channels = {}, holds = {}, setters = {}, leftOwner = {};
+    var layers = {}, channels = {}, holds = {}, setters = {}, leftOwner = {}, shown = {};
     var factor = mobile ? 0.6 : 1;
     function ensureBackdrop() {
       if (backdrop) return backdrop;
@@ -395,7 +535,13 @@
       var ch = channels[hue], m = 0, owner = null;
       for (var k in ch) { if (ch[k].v > m) { m = ch[k].v; owner = ch[k]; } }
       if (holds[hue]) m = 1;
-      setters[hue](Math.round(clamp01(m) * factor * 1000) / 1000);
+      /* scroll handlers call this every frame; only a changed value reaches the style */
+      var val = Math.round(clamp01(m) * factor * 1000) / 1000;
+      if (shown[hue] !== val) {
+        shown[hue] = val; setters[hue](val);
+        /* lite: an unlit pool leaves the compositor (each one is a full-screen layer) */
+        if (LITE) layers[hue].style.visibility = val > 0 ? "" : "hidden";
+      }
       if (!mobile) {
         var left = !!(owner && owner.left && !holds[hue]);
         if (left !== leftOwner[hue]) { leftOwner[hue] = left; if (left) layers[hue].style.setProperty("--px", "26%"); else layers[hue].style.removeProperty("--px"); }
@@ -448,16 +594,23 @@
   var loaderDone = false, toastShown = false, toastPending = null, toastHideT = 0;
   function shimmer() {
     if (!switcher || reduced) return;
-    switcher.classList.remove("is-shimmer");
-    void switcher.offsetWidth;
-    switcher.classList.add("is-shimmer");
     clearTimeout(switcher._jwT);
-    switcher._jwT = setTimeout(function () { switcher.classList.remove("is-shimmer"); }, 1700);
+    var on = function () {
+      switcher.classList.add("is-shimmer");
+      switcher._jwT = setTimeout(function () { switcher.classList.remove("is-shimmer"); }, 1700);
+    };
+    /* restart without a forced reflow: drop the class, let one frame style without it, then add it back */
+    if (switcher.classList.contains("is-shimmer")) {
+      switcher.classList.remove("is-shimmer");
+      requestAnimationFrame(function () { requestAnimationFrame(on); });
+    } else on();
   }
+  /* html.has-toast keeps the nav in view while the toast shows (replaces an html:has() rule that turned every
+     DOM insertion into a full-document style recalc) */
   function hideToast() {
     if (!toast || toast.hidden) return;
     clearTimeout(toastHideT);
-    var done = function () { toast.hidden = true; if (switcher) switcher.classList.remove("has-toast"); };
+    var done = function () { toast.hidden = true; html.classList.remove("has-toast"); if (switcher) switcher.classList.remove("has-toast"); };
     if (gsap && !reduced) gsap.to(toast, { y: 12, opacity: 0, duration: 0.24, ease: "power2.in", onComplete: done });
     else done();
   }
@@ -466,6 +619,8 @@
     toastShown = true;
     ss("jw-switch-seen", "1");
     toast.hidden = false;
+    html.classList.add("has-toast");
+    if (nav) nav.classList.remove("is-hidden");
     if (switcher) switcher.classList.add("has-toast");
     shimmer();
     if (gsap && !reduced) gsap.fromTo(toast, { y: 16, opacity: 0, scale: 0.97, transformOrigin: "100% 100%" }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: JW.ease.s, clearProps: "transform" });
@@ -527,8 +682,10 @@
   if (ST) ST.config({ ignoreMobileResize: true });
 
   /* ---------- smooth scroll (Lenis) ---------- */
+  /* not on touch: Lenis never smooths touch (syncTouch off), but its non-passive touchmove listener makes every
+     swipe wait for the main thread, and it doubles ScrollTrigger updates. Phones keep native scrolling. */
   var lenis = null;
-  if (!reduced && window.Lenis) {
+  if (!reduced && window.Lenis && !(LITE && touch)) {
     try {
       lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95, touchMultiplier: 1.4 });
       if (ST) lenis.on("scroll", ST.update);
@@ -573,24 +730,33 @@
 
   /* ---------- nav: scrolled / hidden / progress / counter (§6.1) ---------- */
   if (nav) {
-    var lastY = window.scrollY, navRaf = 0;
+    /* the position is read in the scroll event (style is clean there); the rAF only toggles classes */
+    var lastY = window.scrollY, curY = lastY, navRaf = 0, scrolled = null;
+    var setHidden = function (h) { if (nav.classList.contains("is-hidden") !== h) nav.classList.toggle("is-hidden", h); };
     var onScroll = function () {
       navRaf = 0;
-      var y = window.scrollY;
-      nav.classList.toggle("is-scrolled", y > 24);
+      var y = curY;
+      if ((y > 24) !== scrolled) { scrolled = y > 24; nav.classList.toggle("is-scrolled", scrolled); }
       var focusIn = nav.contains(doc.activeElement);
-      if (html.classList.contains("nav-open") || focusIn || y < 600) nav.classList.remove("is-hidden");
-      else if (y > lastY + 4) nav.classList.add("is-hidden");
-      else if (y < lastY - 4) nav.classList.remove("is-hidden");
+      if (html.classList.contains("nav-open") || focusIn || y < 600 || (toast && !toast.hidden)) setHidden(false);
+      else if (y > lastY + 4) setHidden(true);
+      else if (y < lastY - 4) setHidden(false);
       lastY = y;
     };
-    window.addEventListener("scroll", function () { if (!navRaf) navRaf = requestAnimationFrame(onScroll); }, { passive: true });
-    nav.addEventListener("focusin", function () { nav.classList.remove("is-hidden"); });
+    window.addEventListener("scroll", function () { curY = window.scrollY; if (!navRaf) navRaf = requestAnimationFrame(onScroll); }, { passive: true });
+    nav.addEventListener("focusin", function () { setHidden(false); });
     onScroll();
   }
-  var prog = $(".nav__progress");
+  var prog = $(".nav__progress"), progBar = prog && $("i", prog);
   if (prog && ST) {
-    var setP = function (v) { prog.style.setProperty("--p", v.toFixed(4)); };
+    /* the bar's own transform on its own layer: no custom property on the parent, no nav repaint per frame */
+    var lastP = -1;
+    var setP = progBar ? function (v) {
+      var r = Math.round(v * 10000) / 10000;
+      if (r === lastP) return;
+      lastP = r; progBar.style.transform = "scaleX(" + r + ")";
+    } : function (v) { prog.style.setProperty("--p", v.toFixed(4)); };
+    if (progBar) progBar.style.willChange = "transform";
     setP(0);
     ST.create({ start: 0, end: "max", onUpdate: function (s) { setP(s.progress); }, onRefresh: function (s) { setP(s.progress); } });
   }
@@ -722,15 +888,28 @@
   var pending = [];
   var batch = [], batchRaf = 0;
   var ROLE_DELAY = { figure: 0, title: 0.08, meta: 0.2, body: 0.26 };
+  /* lite: at most FLUSH_CAP entrances start per frame (each start reads styles); the rest start on the next
+     frames with the delays of the batch they arrived in, less the time already waited */
+  var FLUSH_CAP = LITE ? 6 : 1e9, startQ = [], startRaf = 0;
+  function drain() {
+    startRaf = 0;
+    var now = performance.now(), n = 0;
+    while (startQ.length && n < FLUSH_CAP) {
+      var it = startQ.shift(); n++;
+      safe(it.fn)(Math.max(0, it.d - (now - it.t0) / 1000));
+    }
+    if (startQ.length) startRaf = requestAnimationFrame(drain);
+  }
   function flush() {
     batchRaf = 0;
     var b = batch; batch = [];
-    var single = b.length === 1, counts = {};
+    var single = b.length === 1, counts = {}, now = performance.now();
     b.forEach(function (it) {
       var k = counts[it.role] = (counts[it.role] || 0) + 1;
       var d = single ? 0 : (ROLE_DELAY[it.role] || 0) + Math.min(k - 1, 5) * 0.06;
-      safe(it.fn)(d + (it.extra || 0));
+      startQ.push({ fn: it.fn, d: d + (it.extra || 0), t0: now });
     });
+    if (!startRaf) drain();
   }
   function enqueue(fn, role, extra) { batch.push({ fn: fn, role: role || "body", extra: extra || 0 }); if (!batchRaf) batchRaf = requestAnimationFrame(flush); }
   function onEnter(el, fn, opts) {
@@ -1054,8 +1233,18 @@
       } else mount();
       return;
     }
+    /* lite: the context + shader compile is a one-off long task, so it runs in an idle period shortly after the
+       intro (the canvas only draws once the lens is on screen), not while the reader is scrolling towards it */
+    var mDue = Infinity, mQueued = false;
+    var mountSoon = !LITE ? mount : function (wait) {
+      mDue = Math.min(mDue, performance.now() + wait);
+      if (mQueued) return;
+      mQueued = true;
+      quiet(mount, function () { return mDue; });
+    };
+    if (LITE) JW.onReady(function () { setTimeout(function () { mountSoon(9000); }, 4000); });
     if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) { io.disconnect(); mount(); } }, { rootMargin: "100% 0px" });
+      var io = new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) { io.disconnect(); mountSoon(1200); } }, { rootMargin: "100% 0px" });
       io.observe(lens);
     } else mount();
     var halo = $(".finale .scope__halo");
@@ -1099,6 +1288,7 @@
       JW.started = true;
       loaderDone = true;
       if (lenis) lenis.start();
+      else if (loader) loader.style.touchAction = "";
       var list = JW.ready.slice(); JW.ready.length = 0;
       safe(initEntrances)();
       list.forEach(function (f) { safe(f)(); });
@@ -1124,6 +1314,7 @@
   }
   function runLoader() {
     if (lenis) lenis.stop();
+    else if (loader) loader.style.touchAction = "none";     /* native scrolling: a swipe on the loader does not scroll the page under it */
     var pct = $(".loader__pct", loader);
     var shown = { v: 0 }, target = 0, finished = false, t0 = performance.now();
     var write = function () { if (pct) pct.textContent = Math.round(shown.v) + "%"; };

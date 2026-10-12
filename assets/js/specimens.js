@@ -10,6 +10,10 @@
   function mq(q) { try { return window.matchMedia(q).matches; } catch (e) { return false; } }
   var REDUCED = mq("(prefers-reduced-motion: reduce)");
   var FINE = mq("(pointer: fine)");
+  /* lite mode (see the head boot script): loops at 30 fps, no SVG blur filters on the night glows */
+  var LITE = document.documentElement.classList.contains("jw-lite") || window.JW_LITE === true || (window.JW_LITE !== false && (
+    mq("(pointer: coarse)") || mq("(max-width: 900px)") || (navigator.hardwareConcurrency || 8) <= 4 ||
+    (navigator.deviceMemory || 8) <= 4 || !!(navigator.connection && navigator.connection.saveData)));
   var ZH = /^zh/i.test(document.documentElement.getAttribute("lang") || "");
   var TXT = ZH ? {
     space: "共享动作空间", three: "3种具身形态", cams: "3台相机", n: "n = ", target: "目标", phantom: "ERCP体模",
@@ -49,18 +53,46 @@
     return t;
   }
   function setText(t, s) { if (t && t.textContent !== s) t.textContent = s; }
+  /* loop-owned attributes: skip the DOM write (and its style invalidation) when the value did not change */
+  function sa(e, k, v) { var c = e._jwA || (e._jwA = {}); if (c[k] === v) return; c[k] = v; e.setAttribute(k, v); }
+  /* lite: the figure advances at ~30 fps; skipped ticks bank their dt, so the motion keeps its speed.
+     opts.fps = 60 tells JW.loop that this loop paces itself (no second throttle in core.js). */
+  function paced(fn) {
+    if (!LITE || REDUCED) return fn;
+    var acc = -1;
+    return function (t, dt) {
+      if (acc < 0) { acc = 0; fn(t, dt); return; }     /* the first frame draws at once */
+      acc += dt || 0;
+      if (acc < 0.026) return;
+      var d = Math.min(0.1, acc); acc = 0;
+      fn(t, d);
+    };
+  }
   function loop(ctx, fn, opts) {
     opts = opts || {};
     if (ctx.mini) opts.margin = "0px";
     var J = window.JW;
-    var h;
-    if (J && J.loop) h = J.loop(ctx.host, fn, opts);
+    var h, run = paced(fn);
+    if (LITE) opts.fps = 60;
+    if (J && J.loop) h = J.loop(ctx.host, run, opts);
     else if (REDUCED) { fn(1.2, 0); h = { stop: function () {}, kick: function (n) { for (var i = 0; i < (n || 8); i++) fn(1.2, 0.25); } }; }
     else {
-      var on = true, dead = false, t = 0, last = performance.now();
-      var raf = function (now) { if (dead) return; var dt = Math.min(0.05, (now - last) / 1000); last = now; if (on && !document.hidden) { t += dt; fn(t, dt); } requestAnimationFrame(raf); };
-      requestAnimationFrame(raf);
-      h = { stop: function () { dead = true; } };
+      /* no JW engine: own rAF, still paused while the figure is off screen or the tab is hidden */
+      var on = !("IntersectionObserver" in window), dead = false, t = 0, last = performance.now(), io = null, rid = 0;
+      var raf = function (now) {
+        rid = 0;
+        if (dead || !on) return;
+        var dt = Math.min(0.05, (now - last) / 1000); last = now;
+        if (!document.hidden) { t += dt; run(t, dt); }
+        rid = requestAnimationFrame(raf);
+      };
+      var go = function () { if (!rid && !dead && on) { last = performance.now(); rid = requestAnimationFrame(raf); } };
+      if (!on) {
+        io = new IntersectionObserver(function (es) { on = es[es.length - 1].isIntersecting; go(); }, { rootMargin: opts.margin || "-20% 0px -20% 0px" });
+        io.observe(ctx.host);
+      }
+      go();
+      h = { stop: function () { dead = true; if (io) io.disconnect(); if (rid) cancelAnimationFrame(rid); } };
     }
     ctx.cleanups.push(function () { h.stop(); });
     ctx.kick = function (n) { if (REDUCED && h.kick) h.kick(n); };
@@ -105,10 +137,106 @@
     ctx.fig._jwBusy = !!on;
     if (on && window.JW && window.JW.explain) window.JW.explain.close(ctx.fig);
   }
-  /* path point by arc length on a polyline sample (cheap and independent of pathLength) */
+  /* path point by arc length, from a polyline flattened once when the figure is built: no DOM access per frame
+     (getPointAtLength in a loop re-measures the path and forces a style recalc after the loop's own writes).
+     The d attribute is flattened in JS (M L H V C S Q T Z, absolute and relative); a path with arcs, or one that
+     will not parse, is sampled once through getPointAtLength instead. Independent of pathLength, as before. */
+  var TOK = /[MmLlHhVvCcSsQqTtAaZz]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/g;
+  function flattenD(d) {
+    var tk = String(d || "").match(TOK);
+    if (!tk || !/^[Mm]$/.test(tk[0])) return null;
+    var pts = [], i = 0, cmd = "", x = 0, y = 0, sx = 0, sy = 0, cx = 0, cy = 0, qx = 0, qy = 0, prev = "", N = 24;
+    function num() { var v = parseFloat(tk[i++]); if (isNaN(v)) throw 0; return v; }
+    function lineTo(nx, ny) { pts.push([nx, ny, 0]); x = nx; y = ny; }
+    function cubic(x1, y1, x2, y2, x3, y3) {
+      var x0 = x, y0 = y;
+      for (var k = 1; k <= N; k++) {
+        var t = k / N, u = 1 - t;
+        pts.push([u * u * u * x0 + 3 * u * u * t * x1 + 3 * u * t * t * x2 + t * t * t * x3,
+                  u * u * u * y0 + 3 * u * u * t * y1 + 3 * u * t * t * y2 + t * t * t * y3, 0]);
+      }
+      x = x3; y = y3; cx = x2; cy = y2;
+    }
+    function quad(x1, y1, x2, y2) {
+      var x0 = x, y0 = y;
+      for (var k = 1; k <= N; k++) {
+        var t = k / N, u = 1 - t;
+        pts.push([u * u * x0 + 2 * u * t * x1 + t * t * x2, u * u * y0 + 2 * u * t * y1 + t * t * y2, 0]);
+      }
+      x = x2; y = y2; qx = x1; qy = y1;
+    }
+    try {
+      while (i < tk.length) {
+        if (/[A-Za-z]/.test(tk[i])) cmd = tk[i++];
+        else if (!cmd) return null;
+        var rel = cmd === cmd.toLowerCase(), C = cmd.toUpperCase(), ox = rel ? x : 0, oy = rel ? y : 0;
+        if (C === "M") {
+          x = num() + ox; y = num() + oy; sx = x; sy = y;
+          pts.push([x, y, 1]);                      /* a move starts a subpath: no length across the jump */
+          cmd = rel ? "l" : "L";                      /* implicit pairs after a move are lines */
+          prev = "M"; continue;
+        }
+        if (C === "Z") { lineTo(sx, sy); prev = "Z"; cmd = ""; continue; }
+        if (C === "A") return null;
+        if (C === "L") lineTo(num() + ox, num() + oy);
+        else if (C === "H") lineTo(num() + ox, y);
+        else if (C === "V") lineTo(x, num() + oy);
+        else if (C === "C") { var a1 = num() + ox, b1 = num() + oy, a2 = num() + ox, b2 = num() + oy; cubic(a1, b1, a2, b2, num() + ox, num() + oy); }
+        else if (C === "S") {
+          var r1x = prev === "C" || prev === "S" ? 2 * x - cx : x, r1y = prev === "C" || prev === "S" ? 2 * y - cy : y;
+          var s2x = num() + ox, s2y = num() + oy; cubic(r1x, r1y, s2x, s2y, num() + ox, num() + oy);
+        }
+        else if (C === "Q") { var q1x = num() + ox, q1y = num() + oy; quad(q1x, q1y, num() + ox, num() + oy); }
+        else if (C === "T") {
+          var t1x = prev === "Q" || prev === "T" ? 2 * x - qx : x, t1y = prev === "Q" || prev === "T" ? 2 * y - qy : y;
+          quad(t1x, t1y, num() + ox, num() + oy);
+        }
+        else return null;
+        prev = C;
+      }
+    } catch (e) { return null; }
+    return pts.length > 1 ? pts : null;
+  }
+  function lutOf(pts) {
+    var cum = [0], len = 0;
+    for (var i = 1; i < pts.length; i++) {
+      if (!pts[i][2]) len += Math.sqrt((pts[i][0] - pts[i - 1][0]) * (pts[i][0] - pts[i - 1][0]) + (pts[i][1] - pts[i - 1][1]) * (pts[i][1] - pts[i - 1][1]));
+      cum.push(len);
+    }
+    return {
+      len: len,
+      at: function (f) {
+        var s = ((f % 1) + 1) % 1 * len, lo = 0, hi = cum.length - 1;
+        if (!(len > 0)) return { x: pts[0][0], y: pts[0][1] };
+        while (hi - lo > 1) { var m = (lo + hi) >> 1; if (cum[m] < s) lo = m; else hi = m; }
+        var a = pts[lo], b = pts[hi], seg = cum[hi] - cum[lo], k = seg > 1e-9 ? (s - cum[lo]) / seg : 1;
+        return { x: a[0] + (b[0] - a[0]) * k, y: a[1] + (b[1] - a[1]) * k };
+      }
+    };
+  }
   function sampler(pathEl) {
-    var len = pathEl.getTotalLength();
-    return { len: len, at: function (f) { var p = pathEl.getPointAtLength(((f % 1) + 1) % 1 * len); return { x: p.x, y: p.y }; } };
+    var pts = flattenD(pathEl.getAttribute("d"));
+    if (!pts) {
+      /* fallback: 96 samples through the DOM, once, here at build time */
+      var L = pathEl.getTotalLength(), n = 96;
+      pts = [];
+      for (var i = 0; i <= n; i++) { var p = pathEl.getPointAtLength(L * i / n); pts.push([p.x, p.y, 0]); }
+    }
+    return lutOf(pts);
+  }
+  /* point at arc-length fraction u on the quadratic (x0,y0) (x1,y1) (x2,y2): 12 chords, no DOM */
+  var QB = new Float64Array(26);
+  function quadAt(x0, y0, x1, y1, x2, y2, u) {
+    var n = 12, i, len = 0, px = x0, py = y0;
+    QB[0] = 0;
+    for (i = 1; i <= n; i++) {
+      var t = i / n, v = 1 - t, nx = v * v * x0 + 2 * v * t * x1 + t * t * x2, ny = v * v * y0 + 2 * v * t * y1 + t * t * y2;
+      len += Math.sqrt((nx - px) * (nx - px) + (ny - py) * (ny - py)); QB[i] = len; px = nx; py = ny;
+    }
+    var s = clamp(u, 0, 1) * len, j = 1;
+    while (j < n && QB[j] < s) j++;
+    var seg = QB[j] - QB[j - 1], tt = (j - 1 + (seg > 1e-9 ? (s - QB[j - 1]) / seg : 0)) / n, w = 1 - tt;
+    return { x: w * w * x0 + 2 * w * tt * x1 + tt * tt * x2, y: w * w * y0 + 2 * w * tt * y1 + tt * tt * y2, len: len };
   }
   function drawFrac(p, a, b) {
     var v = Math.max(0, b - a);
@@ -125,7 +253,7 @@
   var NEON_ID = "jw-neon", neonGroups = [], nightEls = [];
   function isNight() { return document.documentElement.getAttribute("data-theme") !== "day"; }
   function ensureNeonDefs() {
-    if (document.getElementById(NEON_ID)) return;
+    if (LITE || document.getElementById(NEON_ID)) return;
     var holder = el("svg", { width: 0, height: 0, "aria-hidden": "true", focusable: "false" });
     holder.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;pointer-events:none";
     var defs = el("defs", {}, holder);
@@ -136,7 +264,9 @@
     ["b2", "b2", "b1", "SourceGraphic"].forEach(function (n) { el("feMergeNode", { "in": n }, m); });
     (document.body || document.documentElement).appendChild(holder);
   }
-  function applyNeon(g, night) { g.style.filter = night ? "url(#" + NEON_ID + ")" : ""; }
+  /* lite: no blur filter at all (the SVG bloom and the CSS drop-shadow both re-blur the figure on every frame it
+     animates); the accent strokes keep their night colours */
+  function applyNeon(g, night) { g.style.filter = LITE ? "none" : night ? "url(#" + NEON_ID + ")" : ""; }
   function neon(g) {
     if (!g || g._jwNeon) return;
     g._jwNeon = true;
@@ -320,8 +450,9 @@
       if (flowG.style.display !== "none") {
         var vis = clamp((vesselP - 0.8) / 0.2, 0, 1);
         flows.forEach(function (f, i) {
-          f.setAttribute("stroke-dashoffset", (-((t * 0.42 + i * 0.17) % 1)).toFixed(3));
-          f.setAttribute("opacity", (vis * (i < 4 ? 0.95 : 0.6)).toFixed(2));
+          var fo = (vis * (i < 4 ? 0.95 : 0.6)).toFixed(2);
+          sa(f, "opacity", fo);
+          if (fo !== "0.00") f.setAttribute("stroke-dashoffset", (-((t * 0.42 + i * 0.17) % 1)).toFixed(3));
         });
       }
       if (ctx.mini) { var k = Math.floor(t / 1.3) % 4; if (STEPS[k] !== cur) setStep(STEPS[k]); }
@@ -461,8 +592,8 @@
       if (k !== play) { var old = play; play = k; if (old >= 0) paint(old); if (k >= 0) paint(k); }
       if (scan.style.display !== "none") {
         var rows = Math.max(1, Math.ceil(n / 10)), u = (t * 0.32) % 1;
-        scan.setAttribute("y", f1(20 + u * rows * 23));
-        scan.setAttribute("opacity", (n ? 0.85 * Math.sin(Math.PI * u) : 0).toFixed(2));
+        sa(scan, "y", f1(20 + u * rows * 23));
+        sa(scan, "opacity", (n ? 0.85 * Math.sin(Math.PI * u) : 0).toFixed(2));
       }
     });
     return {};
@@ -538,23 +669,25 @@
           if (c.lab) c.lab.setAttribute("class", "sp-label" + (on ? " sp-label--acc" : ""));
         }
         var ta = c.face.a + Math.PI / 2;
+        if (!c.geo) c.geo = [];
         c.lines.forEach(function (l, j) {
           var off = (j - 1) * 13, sx = c.face.x + Math.cos(ta) * off, sy = c.face.y + Math.sin(ta) * off;
           var ex = p.x + Math.cos(ta) * off * 0.4, ey = p.y + Math.sin(ta) * off * 0.4;
           var mx = (sx + ex) / 2 + Math.cos(ta) * off * 1.6, my = (sy + ey) / 2 + Math.sin(ta) * off * 1.6;
+          /* the sparks ride the same rounded curve the path draws (kept here, so no getPointAtLength per frame) */
+          c.geo[j] = [+f1(sx), +f1(sy), +f1(mx), +f1(my), +f1(ex), +f1(ey)];
           l.setAttribute("d", "M" + f1(sx) + " " + f1(sy) + "Q" + f1(mx) + " " + f1(my) + " " + f1(ex) + " " + f1(ey));
           l.setAttribute("stroke-dashoffset", f1(-t * (on ? 28 : 8)));
         });
       });
       if (sparkG.style.display !== "none") {
-        var ls = coils[best].lines;
+        var gs = coils[best].geo;
         sparks.forEach(function (sp, j) {
-          var line = ls[j % ls.length], len = 0;
-          try { len = line.getTotalLength(); } catch (e) { len = 0; }
-          if (!len) { sp.setAttribute("opacity", "0"); return; }
-          var u = (t * (dragging ? 1.3 : 0.8) + j * 0.37) % 1, q = line.getPointAtLength(u * len);
-          sp.setAttribute("cx", f1(q.x)); sp.setAttribute("cy", f1(q.y));
-          sp.setAttribute("opacity", (Math.sin(Math.PI * u) * 0.95).toFixed(2));
+          var G2 = gs[j % gs.length];
+          var u = (t * (dragging ? 1.3 : 0.8) + j * 0.37) % 1, q = quadAt(G2[0], G2[1], G2[2], G2[3], G2[4], G2[5], u);
+          if (!(q.len > 0)) { sa(sp, "opacity", "0"); return; }
+          sa(sp, "cx", f1(q.x)); sa(sp, "cy", f1(q.y));
+          sa(sp, "opacity", (Math.sin(Math.PI * u) * 0.95).toFixed(2));
         });
       }
       var aim = Math.atan2(coils[best].face.y - p.y, coils[best].face.x - p.x);
@@ -711,9 +844,9 @@
       if (ring) ring.setAttribute("transform", "rotate(" + f1(t * (16 + near * 30)) + " 200 190)");
       waves.forEach(function (w, i) {
         var age = (t - births[i]) / 1.3;
-        if (age < 0 || age > 1) { w.setAttribute("opacity", "0"); return; }
-        w.setAttribute("r", f1(54 + age * 70));
-        w.setAttribute("opacity", ((1 - age) * (0.45 + near * 0.4)).toFixed(3));
+        if (age < 0 || age > 1) { sa(w, "opacity", "0"); return; }
+        sa(w, "r", f1(54 + age * 70));
+        sa(w, "opacity", ((1 - age) * (0.45 + near * 0.4)).toFixed(3));
       });
       if (ecg.length) {
         var f = (phase * 0.5) % 1, k = f < 0.5 ? 0 : 1, u = (f % 0.5) * 2;
@@ -779,15 +912,15 @@
       else pairs = RING.map(function (from, i) { return [from, RING[(i + dir) % 4]]; });
       packets.forEach(function (pk, i) {
         var pr = pairs[i];
-        if (!pr) { pk.setAttribute("opacity", "0"); return; }
+        if (!pr) { sa(pk, "opacity", "0"); return; }
         var a = C[pr[0]], b = C[pr[1]];
-        pk.setAttribute("cx", f1(a.x + (b.x - a.x) * e)); pk.setAttribute("cy", f1(a.y + (b.y - a.y) * e));
-        pk.setAttribute("opacity", (u < 0.75 ? 1 : 1 - (u - 0.75) / 0.25).toFixed(2));
+        sa(pk, "cx", f1(a.x + (b.x - a.x) * e)); sa(pk, "cy", f1(a.y + (b.y - a.y) * e));
+        sa(pk, "opacity", (u < 0.75 ? 1 : 1 - (u - 0.75) / 0.25).toFixed(2));
         if (u >= 0.7) flash[pr[1]] = Math.max(flash[pr[1]], 1);
       });
       glows.forEach(function (g, i) {
         flash[i] = Math.max(0, flash[i] - (dt || 0) * 2.2);
-        g.setAttribute("opacity", ((i === hot ? 0.16 : 0) + flash[i] * 0.2).toFixed(3));
+        sa(g, "opacity", ((i === hot ? 0.16 : 0) + flash[i] * 0.2).toFixed(3));
       });
     });
   };
@@ -854,7 +987,7 @@
     if (window.ScrollTrigger && window.gsap) { try { window.ScrollTrigger.refresh(); } catch (e) { /* ignore */ } }
   }
 
-  window.JWSpec = { build: build, buildAll: buildAll, schem: schem, neon: neon, nightOnly: nightOnly, relight: relight };
+  window.JWSpec = { build: build, buildAll: buildAll, schem: schem, neon: neon, nightOnly: nightOnly, relight: relight, sampler: sampler, lite: LITE };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", buildAll);
   else setTimeout(buildAll, 0);
 })();

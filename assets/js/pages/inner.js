@@ -66,6 +66,9 @@
       host.addEventListener("pointerdown", function () { pressW = 1; });
       window.addEventListener("pointerup", function () { pressW = 0; });
     }
+    /* without a fine pointer nothing steers or presses the lens: the target already sits at rest and the scroll
+       advance is written by the trigger above, so no per-frame loop is needed */
+    if (!fine) { scope.setTarget(T.x, T.y); return; }
     if (JW.loop) JW.loop(host, function (t, dt) {
       var k = 1 - Math.exp(-(dt || 0.016) * (inside ? 6 : 2.2));
       T.x += (W.x - T.x) * k; T.y += (W.y - T.y) * k;
@@ -108,9 +111,11 @@
   function initDisc() {
     var path = $(".disc-path"), disc = $(".disc");
     if (!path || !disc) return;
-    var len = 0;
-    try { len = path.getTotalLength(); } catch (e) { len = 0; }
+    /* the flight path is static: sampled once in JS, so placing the disc never calls getPointAtLength per frame */
+    var len = 0, pAt = null;
+    try { if (JW.pathAt) { pAt = JW.pathAt(path); len = pAt.len; } else len = path.getTotalLength(); } catch (e) { len = 0; }
     if (!len) return;
+    var at = function (l) { return pAt ? pAt.at(l / len) : path.getPointAtLength(l); };
     /* a light trail behind the disc and a mark on its rim that shows the spin (night: neon bloom) */
     var NS = "http://www.w3.org/2000/svg";
     var trail = doc.createElementNS(NS, "path");
@@ -125,7 +130,7 @@
     var lastP = 0, spin = 0;
     var place = function (p) {
       p = clamp01(p);
-      var pt = path.getPointAtLength(p * len), ahead = path.getPointAtLength(Math.min(len, p * len + 2));
+      var pt = at(p * len), ahead = at(Math.min(len, p * len + 2));
       var ang = Math.atan2(ahead.y - pt.y, ahead.x - pt.x) * 180 / Math.PI;
       disc.setAttribute("transform", "translate(" + pt.x.toFixed(1) + " " + pt.y.toFixed(1) + ") rotate(" + (ang * 0.4).toFixed(1) + ") scale(" + (0.6 + p * 0.6).toFixed(2) + ")");
       var a = Math.max(0, p - 0.28);

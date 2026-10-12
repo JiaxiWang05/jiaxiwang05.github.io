@@ -7,7 +7,7 @@
   <meta name="description" content="Jiaxi Wang is an undergraduate researcher at Durham University working on embodied AI, vision–language–action models and medical robotics.">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#05050A">
-  <script>(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t='night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
+  <script>(function(d,w){var n=w.navigator||{},c=n.connection,l=false;try{l=!!(w.matchMedia('(pointer: coarse)').matches||w.matchMedia('(max-width: 900px)').matches||(n.hardwareConcurrency||8)<=4||(n.deviceMemory||8)<=4||(c&&c.saveData))}catch(e){}if(l)d.classList.add('jw-lite');w.JW_LITE=l})(document.documentElement,window);(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t='night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
   <script>(function(d){try{if(sessionStorage.getItem('jw-seen'))d.classList.add('jw-seen')}catch(e){}addEventListener('load',function(){setTimeout(function(){if(!window.JW)d.classList.remove('js')},0)})})(document.documentElement)</script>
   <link rel="canonical" href="https://jiaxiwang05.github.io/">
   <link rel="alternate" hreflang="en" href="https://jiaxiwang05.github.io/">
@@ -26,11 +26,11 @@
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&amp;text=%E4%B8%AD%E6%96%87&amp;display=swap">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="assets/css/site.css">
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "Person", "name": "Jiaxi Wang", "url": "https://jiaxiwang05.github.io/",
@@ -144,7 +144,7 @@
     <section class="hero" data-hue="mucosa" data-pool="none" data-chapter="Intro" aria-labelledby="hero-name">
       <div class="hero__grid">
         <div class="hero__text">
-          <p class="hero__aff"><a class="logo-plate" href="https://www.durham.ac.uk/departments/academic/engineering/" target="_blank" rel="noopener noreferrer"><img src="assets/durham-university-logo.png" alt="Durham University, Department of Engineering" width="640" height="264"></a><span>Department of Engineering</span></p>
+          <p class="hero__aff"><a class="logo-plate" href="https://www.durham.ac.uk/departments/academic/engineering/" target="_blank" rel="noopener noreferrer"><img src="assets/durham-university-logo-320.png" alt="Durham University, Department of Engineering" width="320" height="131"></a><span>Department of Engineering</span></p>
           <h1 id="hero-name" class="hero__name" data-split="chars" data-split-manual>Jiaxi <span class="line2">Wang</span></h1>
           <p class="hero__role t-subtitle">Embodied AI and medical robotics.</p>
           <p class="hero__fact t-lead">Final-year BEng Electronics Engineering, Durham University. Department of Engineering.</p>
@@ -245,7 +245,7 @@
           <p class="pub__authors t-small" data-reveal="up">Jinsong Lin, Zikang Pan, Wanhao Liu, Chi Kit Ng, Liangjing Shao, Zihang Yu, Ziyu Wang, Yin Wang, <b>Jiaxi Wang</b>, Jeremy Yuen-Chun Teoh, Zhiyong Xiong, Huxin Gao, Hongliang Ren</p>
           <p class="pub__abstract t-body" data-reveal="up">A video world model predicts where task-relevant target regions will appear in future frames, and a lightweight action expert shares that predictive representation to choose navigation actions in a single denoising pass. Trained on EndoMotion, a robotic endoscopy dataset spanning ureteroscopy, oesophagoscopy and ERCP, it generalises zero-shot to unseen viewpoints, environments and targets.</p>
           <p class="links"><a class="tlink" href="https://arxiv.org/abs/2608.01221" target="_blank" rel="noopener noreferrer">arXiv:2608.01221<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://openreview.net/forum?id=tMKXzwa7tP" target="_blank" rel="noopener noreferrer">OpenReview<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://www.youtube.com/watch?v=TT5MsdQ0pKI" target="_blank" rel="noopener noreferrer">Video on YouTube<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
-          <div data-reveal="mask"><div class="video" data-video="TT5MsdQ0pKI" data-title="EndoWAM demo: grounded world-action model for endoscopic navigation" data-cursor=""><button class="video__btn" type="button" aria-label="Play video: EndoWAM demo: grounded world-action model for endoscopic navigation"><img src="https://i.ytimg.com/vi/TT5MsdQ0pKI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="video__label"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z"/></svg>Play demo</span></button></div></div>
+          <div data-reveal="mask"><div class="video" data-video="TT5MsdQ0pKI" data-title="EndoWAM demo: grounded world-action model for endoscopic navigation" data-cursor=""><button class="video__btn" type="button" aria-label="Play video: EndoWAM demo: grounded world-action model for endoscopic navigation"><img src="https://i.ytimg.com/vi/TT5MsdQ0pKI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" decoding="async"><span class="video__label"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z"/></svg>Play demo</span></button></div></div>
         </div>
         <div class="pubstage__sticky">
           <figure class="monitor fig" data-explain data-hue="icg">
@@ -541,7 +541,7 @@
         <div class="footer__id">
           <p class="footer__name">Jiaxi Wang</p>
           <p class="footer__txt">Department of Engineering, Durham University. Embodied AI, vision–language–action models and medical robotics.</p>
-          <span class="logo-plate"><img src="assets/durham-university-logo.png" alt="Durham University" width="640" height="264" loading="lazy"></span>
+          <span class="logo-plate"><img src="assets/durham-university-logo-320.png" alt="Durham University" width="320" height="131" loading="lazy" decoding="async"></span>
         </div>
         <div class="footer__col">
           <p class="footer__h t-meta">Work</p>
@@ -568,7 +568,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrambleTextPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/DrawSVGPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/CustomEase.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Flip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
@@ -577,6 +576,7 @@
   <script src="assets/js/specimens.js"></script>
   <script src="assets/js/core.js"></script>
   <script src="assets/js/night-fx.js"></script>
+  <script src="assets/js/day-fx.js"></script>
   <script src="assets/js/music.js"></script>
   <script src="assets/js/pages/home.js"></script>
 </body>

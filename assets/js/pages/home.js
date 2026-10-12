@@ -11,6 +11,8 @@
   var reduced = JW.reduced, fine = JW.fine;
   var E = JW.ease || { s: "expo.out", l: "expo.inOut", v: "back.out(1.6)" };
   var doc = document;
+  var LITE = JW.lite != null ? !!JW.lite : (doc.documentElement.classList.contains("jw-lite") || window.JW_LITE === true ||
+    (window.JW_LITE !== false && (mq("(pointer: coarse)") || mq("(max-width: 900px)") || (navigator.hardwareConcurrency || 8) <= 4)));
 
   function $(s, r) { return (r || doc).querySelector(s); }
   function $$(s, r) { return Array.prototype.slice.call((r || doc).querySelectorAll(s)); }
@@ -22,9 +24,13 @@
   function noop() {}
   var NOSCOPE = { live: false, setAdvance: noop, setBurst: noop, setTarget: noop, setHold: noop, setDay: noop, setPointer: noop, pause: noop, resume: noop };
   function mountScope(lens, opts) { return lens && window.JWScope ? window.JWScope.mount(lens, opts) : NOSCOPE; }
+  /* called every scroll frame: a path whose dash did not change is not touched (no style invalidation) */
   function drawFrac(p, a, b) {
     if (!p) return;
     var v = Math.max(0, b - a);
+    var key = v <= 0.0005 ? "off" : v.toFixed(4) + " " + a.toFixed(4);
+    if (p._jwDF === key) return;
+    p._jwDF = key;
     if (v <= 0.0005) { p.style.opacity = "0"; return; }
     p.style.opacity = "";
     p.style.strokeDasharray = v.toFixed(4) + " 2";
@@ -112,10 +118,14 @@
       handle.style.left = (50 + (px - (sr.left + sr.width / 2)) / sr.width * 100).toFixed(3) + "%";
       handle.style.top = (50 + (py - (sr.top + sr.height / 2)) / sr.height * 100).toFixed(3) + "%";
     }
+    var wpV = [];
     function renderPlan() {
       plan.forEach(function (p) { drawFrac(p, S.consumed, S.drawn); });
       wps.forEach(function (w, i) {
         var v = pop(clamp01((S.drawn - FR[i]) / 0.14)) * clamp01((FR[i] - S.consumed) / 0.05);
+        v = Math.round(v * 1000) / 1000;
+        if (wpV[i] === v) return;                 /* most pin frames leave the waypoints as they are */
+        wpV[i] = v;
         gsap.set(w, { scale: v, opacity: v > 0.01 ? 1 : 0 });
       });
     }
@@ -161,7 +171,15 @@
       ripple(big);
     }
     placeTarget(S.x, S.y, true);
-    window.addEventListener("resize", function () { placeHandle(); });
+    /* one measure per frame at most; on a phone the address bar showing / hiding (height only) leaves the
+       svh-sized hero as it is, so it is skipped */
+    var rzRaf = 0, rzW = window.innerWidth, rzH = window.innerHeight;
+    window.addEventListener("resize", function () {
+      var w = window.innerWidth, h = window.innerHeight;
+      if (LITE && w === rzW && Math.abs(h - rzH) < 200) return;
+      rzW = w; rzH = h;
+      if (!rzRaf) rzRaf = requestAnimationFrame(function () { rzRaf = 0; placeHandle(); });
+    });
 
     /* ---- intro (on JW.onReady; same choreography, plus the HUD lock-on so the first frame is complete) ---- */
     var chars = [];
@@ -608,15 +626,26 @@
       if (lens && window.JWScope && window.JWScope.snapshot) {
         var paintStill = function () {
           measure();
-          var o = { size: 720, adv: 1.4, time: 3.7 };
+          /* lite: a 512 px frame (the shader is soft, the lens is small on a phone) halves the render + encode */
+          var o = { size: LITE ? 512 : 720, adv: 1.4, time: 3.7 };
           if (geo) { o.tgx = (K[2].x - geo.cx) / geo.w; o.tgy = -(K[2].y - geo.cy) / geo.w; }
-          var url = window.JWScope.snapshot(o);
-          if (url) { lens.style.backgroundImage = 'url("' + url + '")'; lens.style.backgroundSize = "cover"; lens.style.backgroundPosition = "center"; }
+          var put = function (url) { if (url) { lens.style.backgroundImage = 'url("' + url + '")'; lens.style.backgroundSize = "cover"; lens.style.backgroundPosition = "center"; } };
+          if (LITE && window.JWScope.snapshotAsync) window.JWScope.snapshotAsync(o, put);   /* toBlob, off the frame */
+          else put(window.JWScope.snapshot(o));
         };
         var stillDone = false;
-        var stillNow = function () { if (!stillDone) { stillDone = true; paintStill(); } };
+        /* the still is a one-off WebGL context + shader compile + JPEG encode: on lite it waits for an idle period
+           (the observer fires well before the monitor is in view) instead of landing in a scroll frame */
+        var stillDue = Infinity;
+        var stillNow = function (wait) {
+          if (LITE && JW.quiet) stillDue = Math.min(stillDue, performance.now() + (wait || 0));
+          if (stillDone) return;
+          stillDone = true;
+          if (LITE && JW.quiet) JW.quiet(paintStill, function () { return stillDue; }); else paintStill();
+        };
+        if (LITE) JW.onReady(function () { setTimeout(function () { stillNow(9000); }, 2800); });   /* after the hero intro, in a scroll pause */
         if ("IntersectionObserver" in window) {
-          var sio = new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) { sio.disconnect(); stillNow(); } }, { rootMargin: "60% 0px" });
+          var sio = new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) { sio.disconnect(); stillNow(1200); } }, { rootMargin: LITE ? "150% 0px" : "60% 0px" });
           sio.observe(lens);
         } else stillNow();
         doc.addEventListener("themechangeend", function () { if (stillDone) paintStill(); });
@@ -792,27 +821,35 @@
       /* native snap carousel: the ruler and pools follow the nearest slide; neighbours are dimmed (not hidden,
          so the swipe stays discoverable) */
       if (!vp) return;
-      var centres = [];
-      var measureN = function () { centres = slides.map(function (s) { return s.offsetLeft + s.offsetWidth / 2; }); };
+      var centres = [], widths = [], ops = [];
+      var measureN = function () {
+        centres = slides.map(function (s) { return s.offsetLeft + s.offsetWidth / 2; });
+        widths = slides.map(function (s) { return s.offsetWidth || 1; });
+      };
       var raf = 0;
       var onScroll = function () {
         raf = 0;
         if (!centres.length) measureN();
         var mid = vp.scrollLeft + vp.clientWidth / 2, best = 0, bd = Infinity;
         centres.forEach(function (cx, i) {
-          var d = Math.abs(cx - mid); dists[i] = d / (slides[i].offsetWidth || 1);
-          if (!reduced) slides[i].style.opacity = (0.32 + 0.68 * (1 - smoothstep(0.15, 0.8, dists[i]))).toFixed(3);
+          var d = Math.abs(cx - mid); dists[i] = d / widths[i];
+          if (!reduced) {
+            var o = (0.32 + 0.68 * (1 - smoothstep(0.15, 0.8, dists[i]))).toFixed(3);
+            if (ops[i] !== o) { ops[i] = o; slides[i].style.opacity = o; }
+          }
           if (d < bd) { bd = d; best = i; }
         });
         setActive(best); pools();
       };
       var sc = function () { if (!raf) raf = requestAnimationFrame(onScroll); };
-      var rs = function () { measureN(); onScroll(); };
+      /* slide positions depend on the width only: the phone address bar (height) does not re-measure */
+      var rsW = -1;
+      var rs = function () { var w = window.innerWidth; if (w === rsW) return; rsW = w; measureN(); onScroll(); };
       vp.addEventListener("scroll", sc, { passive: true });
       window.addEventListener("resize", rs);
       rs();
       var presN = presenceTrigger(0.2);
-      return function () { if (presN) presN.kill(); vp.removeEventListener("scroll", sc); window.removeEventListener("resize", rs); slides.forEach(function (s) { s.style.opacity = ""; }); };
+      return function () { if (presN) presN.kill(); vp.removeEventListener("scroll", sc); window.removeEventListener("resize", rs); ops = []; slides.forEach(function (s) { s.style.opacity = ""; }); };
     });
   }
 
@@ -1002,7 +1039,8 @@
       var acc = sv("g", { class: "sp-glow" }, svg);
       var stroke = sv("path", { class: "sp-acc", d: "M40 214C96 168 132 236 190 200S292 150 360 186", "stroke-width": 2.2, "stroke-linecap": "round", pathLength: 1 }, acc);
       var tip = sv("circle", { class: "sp-acc-fill", r: 3.4 }, acc);
-      var len = 0; try { len = stroke.getTotalLength(); } catch (e) { len = 0; }
+      var len = 0, sAt = null;      /* the stroke is static: sampled once in JS (no getPointAtLength per frame) */
+      try { if (JW.pathAt) { sAt = JW.pathAt(stroke); len = sAt.len; } else len = stroke.getTotalLength(); } catch (e) { len = 0; }
       var ptr = null, off = { x: 0, y: 0 };
       return {
         pointer: function (p) { ptr = p; },
@@ -1019,7 +1057,7 @@
           var ph = (t % 4.2) / 4.2, draw = Math.min(1, ph / 0.55), fade = ph > 0.8 ? 1 - (ph - 0.8) / 0.2 : 1;
           stroke.style.strokeDasharray = draw.toFixed(4) + " 2";
           stroke.setAttribute("opacity", fade.toFixed(2));
-          if (len) { var q = stroke.getPointAtLength(draw * len); tip.setAttribute("cx", q.x.toFixed(1)); tip.setAttribute("cy", q.y.toFixed(1)); }
+          if (len) { var q = sAt ? sAt.at(draw) : stroke.getPointAtLength(draw * len); tip.setAttribute("cx", q.x.toFixed(1)); tip.setAttribute("cy", q.y.toFixed(1)); }
           tip.setAttribute("opacity", (fade * (draw < 1 ? 1 : 0.4)).toFixed(2));
         }
       };
@@ -1034,7 +1072,9 @@
       sv("ellipse", { class: "sp-acc", rx: 26, ry: 8, "stroke-width": 1.5 }, disc);
       sv("ellipse", { class: "sp-acc", rx: 15, ry: 4.2, "stroke-width": 1.1, opacity: 0.7 }, disc);
       var mark = sv("circle", { class: "sp-acc-fill", r: 2.4 }, disc);
-      var len = 0; try { len = path.getTotalLength(); } catch (e) { len = 0; }
+      var len = 0, pAt = null;
+      try { if (JW.pathAt) { pAt = JW.pathAt(path); len = pAt.len; } else len = path.getTotalLength(); } catch (e) { len = 0; }
+      var at = function (l) { return pAt ? pAt.at(l / len) : path.getPointAtLength(l); };
       var p = 0, phase = 0, spin = 0;
       return {
         pointer: function () {},
@@ -1051,7 +1091,7 @@
           trail.style.strokeDashoffset = (-a).toFixed(4);
           trail.setAttribute("opacity", (phase > fl ? Math.max(0, 1 - (phase - fl) / rest) : 0.95).toFixed(2));
           if (!len) return;
-          var q = path.getPointAtLength(p * len), q2 = path.getPointAtLength(Math.min(len, p * len + 2));
+          var q = at(p * len), q2 = at(Math.min(len, p * len + 2));
           var ang = Math.atan2(q2.y - q.y, q2.x - q.x) * 180 / Math.PI;
           disc.setAttribute("transform", "translate(" + q.x.toFixed(1) + " " + q.y.toFixed(1) + ") rotate(" + (ang * 0.35).toFixed(1) + ") scale(" + (0.75 + p * 0.45).toFixed(3) + ")");
           mark.setAttribute("cx", (Math.cos(spin) * 22).toFixed(1)); mark.setAttribute("cy", (Math.sin(spin) * 6.8).toFixed(1));

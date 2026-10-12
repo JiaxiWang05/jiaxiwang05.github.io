@@ -14,7 +14,7 @@
    6  Nav, language switch, menu, progress, cursor                15 Footer, finale, switcher, toast
    7  Theme toggle and view transitions (§4.3, verbatim)          16 Responsive (1100 / 1000 / 760 / 420)
    8  Backdrop, pools, grain                                      17 Reveal states, reduced motion, no-JS, print
-   9  Loader and curtain
+   9  Loader and curtain                                          18 Night FX   19 Day FX   20 Lite mode (phones)
    ===================================================================================================== */
 
 /* =====================================================================================================
@@ -1614,7 +1614,8 @@ html:not(.js) :is(.explain__x, .explain__close, [data-explain-close]) { display:
    the reading column or a figure: it covers chrome only. shell.py renders it outside .switcher (its own layer, z 92);
    core.js still finds it by #switch-toast, shows it (hidden = false) and hides it at 10 s, but the island retires
    itself after 6.5 s (CSS life + countdown hairline), paused while hovered or focused. While it is up the nav is
-   kept in place so the island never lands on content. */
+   kept in place so the island never lands on content: core.js sets html.has-toast for that time (a class, not an
+   html:has() rule, which turned every DOM insertion on the page into a full-document style recalc). */
 .switcher__toast {
   position: fixed; z-index: 92; top: 4px; left: 0; right: 0;
   width: fit-content; max-width: calc(100vw - 2 * var(--gutter)); margin-inline: auto;
@@ -1646,7 +1647,7 @@ html:not(.js) :is(.explain__x, .explain__close, [data-explain-close]) { display:
 .switcher__acts { flex: none; display: flex; align-items: center; gap: 6px; }
 .switcher__x .ico { display: none; width: 16px; height: 16px; }
 .nav-open .switcher__toast { visibility: hidden; opacity: 0; }
-html:has(#switch-toast:not([hidden])) .nav.is-hidden { transform: none; }
+html.has-toast .nav.is-hidden { transform: none; }
 
 
 /* =====================================================================================================
@@ -2122,6 +2123,10 @@ html:has(#switch-toast:not([hidden])) .nav.is-hidden { transform: none; }
   .switcher__toast-in { animation: toast-life 6.5s steps(1, end) forwards !important; }
   .switcher__toast-in::after { animation: none !important; }
 }
+/* ---- 18.11 off-screen: the slow loops of a set piece stop while it is out of view (pages/home.js toggles
+   .is-offscreen on .gallery and .beyond with an IntersectionObserver); nothing changes on screen ---- */
+.is-offscreen .slide__card, .is-offscreen .card, .is-offscreen .live-dot::after,
+.is-offscreen .fig::after, .is-offscreen .pane__spot::before { animation-play-state: paused; }
 
 /* No JS: everything visible, toggle and menu button hidden, links wrap under the brand */
 html:not(.js) .nav__menu { display: none !important; }
@@ -2160,17 +2165,19 @@ html:not(.js) .nav { position: absolute; }   /* no scroll states without JS: let
   transition: border-color .2s var(--ui-ease), box-shadow .3s var(--ui-ease); }
 .music-btn:hover { border-color: var(--ink-3); }
 .music-btn__bars { display: flex; align-items: center; gap: 2px; height: 16px; }
-.music-btn__bars i { display: block; width: 2px; height: 4px; border-radius: 2px; background: currentColor; opacity: .55;
-  transform-origin: 50% 50%; transition: height .4s var(--ui-ease), opacity .4s var(--ui-ease); }
-.music-btn__bars i:nth-child(2), .music-btn__bars i:nth-child(4) { height: 7px; }
-.music-btn__bars i:nth-child(3) { height: 10px; }
+/* the bars are 15px tall and scaled (resting 4 / 7 / 10px, playing 3..15px): a transform runs on the compositor,
+   where animating height re-laid out and repainted the page on every frame for as long as the music played */
+.music-btn__bars i { display: block; width: 2px; height: 15px; border-radius: 2px; background: currentColor; opacity: .55;
+  transform: scaleY(.2667); transform-origin: 50% 50%; transition: transform .4s var(--ui-ease), opacity .4s var(--ui-ease); }
+.music-btn__bars i:nth-child(2), .music-btn__bars i:nth-child(4) { transform: scaleY(.4667); }
+.music-btn__bars i:nth-child(3) { transform: scaleY(.6667); }
 .music-on .music-btn__bars i { opacity: 1; animation: music-eq 1.1s ease-in-out infinite; }
 .music-on .music-btn__bars i:nth-child(1) { animation-delay: -.2s; }
 .music-on .music-btn__bars i:nth-child(2) { animation-delay: -.55s; }
 .music-on .music-btn__bars i:nth-child(3) { animation-delay: -.9s; }
 .music-on .music-btn__bars i:nth-child(4) { animation-delay: -.35s; }
 .music-on .music-btn__bars i:nth-child(5) { animation-delay: -.7s; }
-@keyframes music-eq { 0%, 100% { height: 3px; } 50% { height: 15px; } }
+@keyframes music-eq { 0%, 100% { transform: scaleY(.2); } 50% { transform: scaleY(1); } }
 :root[data-theme="night"] .music-on .music-btn { border-color: color-mix(in srgb, var(--acc, var(--c-ppix)) 70%, transparent);
   box-shadow: 0 0 18px -2px color-mix(in srgb, var(--acc, var(--c-ppix)) 55%, transparent); }
 :root[data-theme="night"] .music-on .music-btn__bars i { background: var(--acc, var(--c-ppix)); box-shadow: 0 0 6px var(--acc, var(--c-ppix)); }
@@ -2184,10 +2191,238 @@ html:not(.js) .nav { position: absolute; }   /* no scroll states without JS: let
 .music-note.is-in { opacity: 1; transform: none; }
 .music-note[hidden] { display: none; }
 .music-note__bars { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
-.music-note__bars i { width: 2px; height: 4px; background: var(--acc, var(--ink)); animation: music-eq 1s ease-in-out infinite; }
+.music-note__bars i { width: 2px; height: 15px; background: var(--acc, var(--ink)); transform: scaleY(.2667); transform-origin: 50% 100%; animation: music-eq 1s ease-in-out infinite; }
 .music-note__bars i:nth-child(2) { animation-delay: -.4s; } .music-note__bars i:nth-child(3) { animation-delay: -.75s; }
 :root[data-theme="night"] .music-note { box-shadow: 0 0 24px -6px color-mix(in srgb, var(--acc, var(--c-ppix)) 60%, transparent); }
 html:not(.js) .music-btn { display: none; }
 @media (max-width: 760px) { .music-btn { width: 44px; height: 44px; } .music-note { top: 70px; right: 12px; } }
 @media (prefers-reduced-motion: reduce) { .music-on .music-btn__bars i, .music-note__bars i { animation: none; } }
 @media print { .music-btn, .music-note { display: none !important; } }
+
+
+/* =====================================================================================================
+   19. DAY FX (owner DAY-css): white-light imaging, a hand-coloured anatomical plate in sunlight.
+   The calm counterpart to §18: paper, ink and daylight instead of neon. Every rule is scoped to
+   [data-theme="day"] and to screen, so night and print are untouched. No loops: motion is a one-off ink press when
+   a heading is revealed, a spectral sweep on hover / focus, and a scroll-linked etch on specimens. Reduced motion
+   keeps every end state and drops the motion (19.6). The ambient layer (pigment cursor, sun shafts, caustics,
+   motes) is assets/js/day-fx.js; nothing here depends on it.
+   19.1 tokens  19.2 paper  19.3 letterpress  19.4 prism hovers  19.5 engraved specimens  19.6 reduced motion
+   ===================================================================================================== */
+@property --etch { syntax: "<number>"; inherits: false; initial-value: 1; }
+@keyframes day-press {
+  0%   { text-shadow: 0 0 .06em color-mix(in srgb, var(--acc) 0%, transparent), 0 1px 0 rgb(255 255 255 / 0), 0 0 0 rgb(22 23 28 / 0); }
+  30%  { text-shadow: 0 .02em .3em color-mix(in srgb, var(--acc) 30%, transparent), 0 1px 0 rgb(255 255 255 / .25), 0 0 3px rgb(22 23 28 / .4); }
+  100% { text-shadow: 0 0 0 color-mix(in srgb, var(--acc) 0%, transparent), 0 1px 0 rgb(255 255 255 / .9), 0 0 1px rgb(22 23 28 / .24); }
+}
+@keyframes day-etch { from { --etch: 0; } to { --etch: 1; } }
+
+@media screen {
+  /* ---- 19.1 tokens ---- */
+  :root[data-theme="day"] {
+    scrollbar-color: #CFC5B3 var(--ground);
+    /* letterpress at rest = the last frame of day-press */
+    --press: 0 0 0 color-mix(in srgb, var(--acc) 0%, transparent), 0 1px 0 rgb(255 255 255 / .9), 0 0 1px rgb(22 23 28 / .24);
+    /* daylight through glass: a narrow spectral band plus a faint ghost band, both inside the middle third of a
+       300%-wide image, so background-position 100% -> 0 carries them across the element and both ends are clear */
+    --prism-sweep: linear-gradient(104deg,
+      transparent 0 43.5%,
+      rgb(255 128 152 / 0) 44%, rgb(255 128 152 / .55) 45.4%, rgb(255 178 106 / .55) 47%, rgb(255 226 102 / .55) 48.6%,
+      rgb(134 218 140 / .55) 50.2%, rgb(100 200 232 / .55) 51.8%, rgb(132 142 255 / .55) 53.4%, rgb(200 132 250 / .5) 55%,
+      rgb(200 132 250 / 0) 56.4%,
+      transparent 57.4%, rgb(255 196 222 / .24) 58.6%, rgb(160 214 255 / .24) 59.8%, transparent 61% 100%);
+    --prism-ease: cubic-bezier(.45, .05, .25, 1);
+  }
+
+  /* ---- 19.2 paper: laid fibres over the ground, warm light from the top left, a soft shade at the far edges ---- */
+  [data-theme="day"] .field-backdrop::before,
+  [data-theme="day"] .field-backdrop::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+  [data-theme="day"] .field-backdrop::after {   /* under the pool, grain and ambient canvas (z -1: painted with the
+                                                   backdrop itself, not as one more full-screen layer over the pools) */
+    z-index: -1;
+    background:
+      radial-gradient(90vmax 70vmax at 6% -16%, rgb(255 246 222 / .6), transparent 62%),
+      radial-gradient(150% 120% at 50% 38%, transparent 60%, rgb(112 92 60 / .07) 100%);
+  }
+  [data-theme="day"] .field-backdrop::before {   /* fibres sit in the sheet, above the pigment: seamless 440px tile from dayfx_css/fibres.py */
+    z-index: 3; opacity: .8;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='440' height='440' fill='none' stroke-linecap='round'><path stroke='%23785E3E' stroke-opacity='.11' stroke-width='.6' d='M216 218q2 2 4 5M303 310q-5 3 -8 7M266 378q1 3 1 6M391 107q7 6 15 11M268 7q5 4 8 9M323 134q-6 2 -12 6M303 30q-5 3 -10 4M141 385q-3 3 -7 5M101 273q8 5 13 13M378 133q3 6 9 11M95 175q1 7 6 13M45 273q-1 5 1 9M270 229q-8 1 -16 4M119 429q-2 3 -2 7M267 271q-8 2 -16 5M286 3q-4 1 -7 3M364 199q2 10 8 18M195 137q-2 7 -1 14M200 368q-1 8 -4 16M433 45q-1 8 -1 16M21 263q-4 3 -6 7M398 132q-1 3 -3 6M5 386q8 -0 16 2M149 25q3 6 6 13M385 401q8 3 15 7M330 275q1 8 6 14M389 246q-3 9 -4 18M240 212q-3 10 -0 20M162 283q2 5 1 10M180 319q-8 5 -16 11M384 105q-8 5 -13 13M372 75q-1 4 -3 8M368 238q6 6 10 14M79 251q-2 7 -0 14M239 145q8 5 15 12M84 145q-1 5 0 9M303 146q-4 5 -5 11M235 436q1 4 2 7M235 -4q1 4 2 7M157 106q-6 4 -12 10M121 434q3 8 4 17M121 -6q3 8 4 17M206 94q-2 2 -3 6M355 366q7 1 13 7M408 240q-0 9 4 17M409 129q-6 2 -11 3M187 423q-1 3 -2 6M195 282q-5 2 -9 4M15 82q10 3 20 2M200 6q-7 2 -13 2M90 22q0 5 -2 9M168 359q6 7 15 10M386 61q-3 9 -6 19M421 219q-4 9 -5 19M162 15q-7 2 -13 6M320 2q-5 9 -11 17M35 58q-9 -1 -18 2M414 413q3 1 5 4M421 233q10 0 18 6M402 237q1 6 4 11M343 61q3 7 4 14M35 42q1 8 -0 16M153 260q0 7 2 14M32 267q-4 2 -7 5M125 13q-4 3 -7 6M268 117q-7 3 -14 7M113 100q4 6 9 10M52 6q-0 7 2 14M62 236q4 2 9 2M267 290q2 7 6 13M210 231q2 4 6 6M39 400q-5 2 -10 4M40 358q-2 3 -5 6M221 122q7 6 11 14M10 147q2 2 4 5M252 386q4 5 8 10M67 145q-8 1 -15 5M240 201q5 -1 11 0M362 309q6 2 11 0M40 176q3 1 7 2M293 342q0 7 3 13M415 148q2 5 5 9M383 285q-3 6 -4 12M16 39q7 0 13 2M224 263q9 -1 18 1M269 93q7 3 14 7M115 183q-4 1 -7 3M202 81q5 6 13 8M156 291q1 6 -0 11M42 253q4 1 7 1M144 270q2 10 9 18M239 370q0 3 2 7'/><path stroke='%23FFFFFF' stroke-opacity='.55' stroke-width='.8' d='M188 50q-0 4 1 8M102 10q-3 1 -6 1M401 237q-4 2 -9 5M193 5q-8 5 -17 10M210 268q2 6 2 12M379 330q2 6 2 12M130 61q-3 2 -7 3M122 27q5 5 12 8M102 378q8 4 13 12M136 55q-6 4 -14 3M70 44q4 2 9 3M215 49q-0 4 -3 8M202 235q9 1 16 6M373 291q-1 10 4 18M412 83q4 3 8 6M102 1q6 1 11 5M128 388q6 3 11 8M121 40q-6 2 -10 7M434 230q-3 6 -6 13M264 168q-3 9 -10 14M218 283q6 8 14 14M368 166q7 5 15 7M163 97q3 8 4 17M356 302q-3 5 -5 11M295 239q-3 4 -6 7M148 144q-6 3 -13 3M285 31q-7 5 -15 8M318 168q6 5 9 13M154 177q-6 4 -13 7M177 110q-2 5 -0 10M83 419q-2 7 0 13M304 265q-0 9 4 16M227 437q8 4 17 6M227 -3q8 4 17 6M47 375q-6 7 -7 16M291 91q-9 4 -17 9M297 436q-3 8 -4 17M297 -4q-3 8 -4 17M5 239q7 4 13 9M79 351q-4 4 -8 8M296 125q-1 8 -6 14M356 286q2 7 3 14M300 421q8 2 17 1M151 62q-5 5 -12 6M368 294q0 5 -2 9M87 409q-4 7 -3 15M148 39q-3 8 -5 16M391 6q-2 3 -4 5M304 73q-7 5 -15 6M2 417q6 5 9 12M349 435q-7 8 -8 18M349 -5q-7 8 -8 18M381 68q5 2 11 3M187 438q-6 1 -13 1M197 204q-3 2 -7 4M402 394q0 8 -3 15M89 57q-1 8 -0 15M327 248q3 8 7 17M357 385q-8 -1 -16 0M280 26q-4 7 -10 13M382 233q-5 2 -9 5M215 78q-3 7 -1 13M169 279q-2 4 -2 8M303 72q-4 6 -10 12M55 125q7 6 16 8M49 258q4 5 6 11M324 161q-4 9 -13 14M412 259q-6 0 -11 1M430 328q2 6 5 10M2 26q5 0 10 2M105 433q-5 3 -10 6M245 288q-2 3 -4 5M309 41q9 -0 17 5'/><path stroke='%23604A30' stroke-opacity='.26' stroke-width='1.4' d='M172 397h1.0M128 76h0.7M174 286h1.1M247 200h0.8M333 226h0.7M423 247h1.0M31 19h0.8M268 328h0.8M165 56h0.9M130 167h1.0M20 165h0.9M283 300h1.0M287 247h1.0M192 348h0.8M283 115h0.7M38 303h1.1M57 389h0.7M97 238h0.9M148 154h1.0M116 48h0.8M357 35h0.7M162 127h0.7M370 335h1.1M101 157h0.9M330 21h0.8M343 52h0.9M118 48h0.9M147 258h0.9'/></svg>");
+    background-size: 440px 440px;
+  }
+
+  /* ---- 19.3 letterpress: display type pressed into the sheet; on reveal the ink spreads in the chapter hue, then sets ---- */
+  [data-theme="day"] :is(.hero__name, .t-cover, .t-display, .t-title, .statement, .finale__cta, .index-item__title, .xp__title,
+    .cv-sec__t, .footer__name, .gallery__count, .marquee__track span, .gauge__v, .tally__v, .metric__v, .explain__t) { text-shadow: var(--press); }
+  @media (prefers-reduced-motion: no-preference) {
+    .js[data-theme="day"] [data-split].is-split { animation: day-press 1.6s cubic-bezier(.2, .7, .2, 1) .45s both; }
+  }
+  /* blind-embossed numerals: the outline figures are stamped without ink */
+  [data-theme="day"] :is(.ghost, .slide__num),
+  [data-theme="day"] .pane__spot::after {
+    -webkit-text-stroke-color: color-mix(in srgb, var(--line-strong) 38%, transparent);
+    text-shadow: 1px 1px 0 rgb(255 255 255 / .95), -1px -1px 0 rgb(112 92 60 / .07);
+  }
+
+  /* ---- 19.4 prism hovers: plates, cards, media and buttons catch a spectral streak, like daylight through glass ---- */
+  [data-theme="day"] :is(.btn, .fig__controls button) { position: relative; isolation: isolate; }
+  [data-theme="day"] :is(.btn, .fig__controls button, .card, [data-tilt], .slide__card, .video, .monitor__screen)::after,
+  [data-theme="day"] .fig:not(.scope):not(.monitor):not(.slide__fig .fig)::after,
+  [data-theme="day"] :is(.index-item, .pane__spot)::before {
+    content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
+    background: var(--prism-sweep) 100% 0 / 300% 100% no-repeat;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity .3s var(--ui-ease), background-position 0s linear .3s;   /* fade out, then park the band off the left edge */
+    animation: none;
+  }
+  [data-theme="day"] .monitor__screen::after { z-index: 3; }
+  /* tilt plates (cards, certificates) also disperse a small spectrum round the pointer (B writes --gx / --gy) */
+  [data-theme="day"] [data-tilt]::after {
+    background:
+      var(--prism-sweep) 100% 0 / 300% 100% no-repeat,
+      radial-gradient(circle at calc(var(--gx, 50%) - 5%) calc(var(--gy, 50%) + 2%), rgb(255 130 160 / .3), transparent 24%),
+      radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgb(255 226 110 / .28), transparent 22%),
+      radial-gradient(circle at calc(var(--gx, 50%) + 5%) calc(var(--gy, 50%) - 2%), rgb(110 190 255 / .3), transparent 24%);
+  }
+  [data-theme="day"] :is(.btn, .fig__controls button, .card, [data-tilt], .slide__card):is(:hover, :focus-visible)::after,
+  [data-theme="day"] .slide.is-active .slide__card::after,
+  [data-theme="day"] .monitor:is(:hover, :focus-within) .monitor__screen::after,
+  [data-theme="day"] .fig:not(.scope):not(.monitor):not(.slide__fig .fig):is(:hover, :focus-within)::after,
+  [data-theme="day"] .index-item:is(:hover, :focus-visible)::before,
+  [data-theme="day"] .pane:is(:hover, :focus-visible, .is-open) .pane__spot::before {
+    opacity: 1; background-position: 0 0;
+    transition: opacity .2s var(--ui-ease), background-position 1.25s var(--prism-ease);
+  }
+  /* on its own: a browser without :has() drops only this selector, not the whole hover list above */
+  [data-theme="day"] .video:not(:has(iframe)):hover::after {
+    opacity: 1; background-position: 0 0;
+    transition: opacity .2s var(--ui-ease), background-position 1.25s var(--prism-ease);
+  }
+  [data-theme="day"] .btn:hover { border-color: var(--acc); }
+  [data-theme="day"] .btn--solid:is(:hover, :focus-visible) { box-shadow: 0 10px 26px -14px color-mix(in srgb, var(--acc) 70%, transparent); }
+
+  /* links: the hairline becomes a printed spectrum that runs in from the left */
+  [data-theme="day"] :is(.tlink, .link, .footer__list a, :is(.t-body, .t-lead, .t-small, .bullets, .spec-sheet, .cv-entry__body, .cv-sub, .explain__d) a:not([class])) {
+    background-image: var(--ramp); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 2px;
+    transition: background-size .55s var(--scalpel), text-decoration-color .2s var(--ui-ease);
+  }
+  [data-theme="day"] :is(.tlink, .link, .footer__list a, :is(.t-body, .t-lead, .t-small, .bullets, .spec-sheet, .cv-entry__body, .cv-sub, .explain__d) a:not([class])):is(:hover, :focus-visible) {
+    background-size: 100% 2px; text-decoration-color: transparent;
+  }
+  [data-theme="day"] .nav__links a {
+    background: var(--ramp) 0 100% / 0% 1.5px no-repeat; background-origin: content-box;
+    transition: color .2s var(--ui-ease), background-size .5s var(--scalpel);
+  }
+  [data-theme="day"] .nav__links a:not([aria-current]):is(:hover, :focus-visible) { background-size: 100% 1.5px; }
+  [data-theme="day"] :is(.pub__title a, .finale__email) { background-image: var(--ramp); }
+  [data-theme="day"] :is(.pub__title a:hover, .finale__email:is(:hover, :focus-visible)) { background-size: 100% 2px; }
+  [data-theme="day"] .pane__go { transition: text-decoration-color .3s var(--ui-ease), background-size .55s var(--scalpel); background: var(--ramp) 0 100% / 0% 2px no-repeat; }
+  [data-theme="day"] .pane:is(:hover, :focus-visible, .is-open) .pane__go { text-decoration-color: transparent; background-size: 100% 2px; }
+
+  /* ---- 19.5 engraved specimens: each plate is an intaglio print, hand-coloured, with an etched ground ---- */
+  /* the platemark (a debossed rule 8px in from the edge) and an uneven hand-laid wash in the plate's hue */
+  [data-theme="day"] .fig:not(.scope):not(.monitor):not(.slide__fig .fig) {
+    background:
+      radial-gradient(60% 46% at 26% 22%, color-mix(in srgb, var(--acc) 7%, transparent), transparent 72%),
+      radial-gradient(52% 58% at 80% 76%, color-mix(in srgb, var(--acc) 6%, transparent), transparent 70%),
+      color-mix(in srgb, var(--acc-deep) var(--plate-mix), var(--surface));
+    outline: 1px solid color-mix(in srgb, var(--line-strong) 30%, transparent); outline-offset: -8px;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / .85), inset 0 -1px 0 rgb(112 92 60 / .06), 0 1px 0 rgb(255 255 255 / .9), 0 22px 44px -34px rgb(60 44 24 / .32);
+  }
+  /* the etched ground: a hatched tone under the drawing, densest at the centre */
+  [data-theme="day"] .fig__stage::before {
+    content: ""; position: absolute; inset: 4%; z-index: 0; pointer-events: none; border-radius: 50%;
+    background: repeating-linear-gradient(-42deg, color-mix(in srgb, var(--acc) 24%, transparent) 0 1px, transparent 1px 6px);
+    -webkit-mask-image: radial-gradient(closest-side, rgb(0 0 0 / .7), rgb(0 0 0 / .3) 58%, transparent);
+            mask-image: radial-gradient(closest-side, rgb(0 0 0 / .7), rgb(0 0 0 / .3) 58%, transparent);
+  }
+  /* plate lettering: engraved italic captions instead of instrument capitals */
+  [data-theme="day"] .fig__stage .sp-label { font-family: var(--f-display); font-style: italic; font-weight: 500; font-size: 13px; letter-spacing: .01em; text-transform: none; }
+  [data-theme="day"]:lang(zh) .fig__stage .sp-label { font-style: normal; letter-spacing: .04em; }
+  /* the etch: the drawing inks in as widening hatch lines (each 4px period fills from 0 to 4px). Plates in the reading
+     column are scroll-linked where the browser has view timelines (elsewhere they are simply printed); the page-head
+     plate etches on load and whenever day arrives; in the gallery the arriving slide inks in while the others wait
+     as a light hatch. */
+  @media (prefers-reduced-motion: no-preference) {
+    .js[data-theme="day"] :is(.page-head__art > svg, .page-head__art .fig__stage > svg, .slide .fig__stage > svg) {
+      -webkit-mask-image: repeating-linear-gradient(-42deg, #000 0 calc(var(--etch) * 4px), transparent calc(var(--etch) * 4px) 4px);
+              mask-image: repeating-linear-gradient(-42deg, #000 0 calc(var(--etch) * 4px), transparent calc(var(--etch) * 4px) 4px);
+    }
+    .js[data-theme="day"] :is(.page-head__art > svg, .page-head__art .fig__stage > svg) { animation: day-etch 1.5s cubic-bezier(.3, .1, .2, 1) .35s both; }
+    .js[data-theme="day"] .slide .fig__stage > svg { --etch: .3; transition: --etch .5s var(--ui-ease); }
+    .js[data-theme="day"] .slide.is-active .fig__stage > svg { --etch: 1; transition: --etch 1.4s cubic-bezier(.3, .1, .2, 1) .15s; }
+    @supports (animation-timeline: view()) {
+      .js[data-theme="day"] .fig__stage:not(.slide .fig__stage):not(.page-head__art .fig__stage) > svg {
+        -webkit-mask-image: repeating-linear-gradient(-42deg, #000 0 calc(var(--etch) * 4px), transparent calc(var(--etch) * 4px) 4px);
+                mask-image: repeating-linear-gradient(-42deg, #000 0 calc(var(--etch) * 4px), transparent calc(var(--etch) * 4px) 4px);
+        animation: day-etch linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 42%;
+      }
+    }
+  }
+
+  /* ---- 19.6 reduced motion: end states only ---- */
+  @media (prefers-reduced-motion: reduce) {
+    [data-theme="day"] :is(.btn, .fig__controls button, .card, [data-tilt], .slide__card, .video, .monitor__screen, .fig)::after,
+    [data-theme="day"] :is(.index-item, .pane__spot)::before,
+    [data-theme="day"] :is(.tlink, .link, .footer__list a, .nav__links a, .pub__title a, .finale__email, .pane__go),
+    [data-theme="day"] :is(.t-body, .t-lead, .t-small, .bullets, .spec-sheet, .cv-entry__body, .cv-sub, .explain__d) a:not([class]) { transition: none !important; }
+  }
+}
+
+
+/* =====================================================================================================
+   20. LITE MODE (phones): same design and colours, cheaper techniques.
+   The head boot script sets html.jw-lite once per load (coarse pointer, <= 900px, <= 4 cores, <= 4 GB, Save-Data).
+   Every rule here is scoped to html.jw-lite, so a desktop (fine pointer, wide, fast) never matches it.
+   - backdrop: one painted fixed layer plus the chapter pools; no soft-light grain, no extra full-screen layers
+   - glass: opaque fills instead of backdrop-filter
+   - loops: no infinite CSS animation; each loop rests on a still frame of itself (one-off sweeps stay)
+   - glows: no blur filters; the switcher halo is the same conic light faded by a radial mask
+   - day: the letterpress and etch end states without their motion
+   20.1 backdrop  20.2 glass  20.3 loops  20.4 glows  20.5 day
+   ===================================================================================================== */
+
+/* ---- 20.1 backdrop: the noise blend goes; the vignette (night), the fibres and the daylight (day) are painted with
+   the backdrop itself, under the pools, instead of as full-screen layers composited over them every frame ---- */
+html.jw-lite .grain { display: none; }
+html.jw-lite .field-backdrop::before,
+html.jw-lite .field-backdrop::after { z-index: -1; }
+
+/* ---- 20.2 glass: no backdrop-filter (it re-blurs whatever scrolls underneath on every frame) ---- */
+html.jw-lite:not(.nav-open) .nav.is-scrolled {
+  background: color-mix(in srgb, var(--ground) 96%, transparent);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+html.jw-lite .explain,
+html.jw-lite .switcher__toast-in { background-color: var(--raised); -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* ---- 20.3 loops: rims, breathing lights, the pulse and the switcher spin hold still (the rims keep their spectral
+   gradient at its starting angle); the one-off shimmer, the explain sweep and the loader stay ---- */
+html.jw-lite .slide__card,
+html.jw-lite .card,
+html.jw-lite .fig::after,
+html.jw-lite .pane__spot::before,
+html.jw-lite .live-dot::after,
+html.jw-lite .switcher:not(.is-shimmer) .switcher__btn::before,
+html.jw-lite .switcher:not(.is-shimmer) .switcher__btn::after { animation: none !important; }
+html.jw-lite .live-dot::after { transform: scale(1.9); opacity: .22; }            /* a still halo round the lit dot */
+html.jw-lite[data-theme="night"] .pane__spot::before { opacity: .75; }             /* the breath's mean light */
+
+/* ---- 20.4 glows ---- */
+/* the switcher halo: the same conic light, faded by a radial mask instead of a 24px blur */
+html.jw-lite .switcher__btn::after {
+  inset: -28px -32px; filter: none;
+  -webkit-mask-image: radial-gradient(closest-side, rgb(0 0 0 / .75) 40%, transparent);
+          mask-image: radial-gradient(closest-side, rgb(0 0 0 / .75) 40%, transparent);
+}
+/* specimen accent groups: no drop-shadow blur (it re-blurs the figure on every animated frame); the strokes keep
+   their night colours */
+html.jw-lite .sp-glow { filter: none !important; }
+
+/* ---- 20.5 day: the letterpress is set without the ink spread, and the plates are printed without the etch mask ---- */
+html.jw-lite[data-theme="day"] [data-split].is-split { animation: none; text-shadow: var(--press); }
+html.jw-lite[data-theme="day"] :is(.fig__stage, .page-head__art) > svg {
+  -webkit-mask-image: none !important; mask-image: none !important; animation: none !important; transition: none !important;
+}
