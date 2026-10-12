@@ -1364,4 +1364,23 @@
     if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { ST.refresh(); });
     window.addEventListener("load", function () { ST.refresh(); });
   }
+
+  /* ---------- desktop extras: ⌘K palette, endoscope mode, night HUD ----------
+     Loaded after the page has settled, only on a fine pointer at desktop width; phones (jw-lite) request nothing. */
+  var EXTRAS = ["palette", "scope", "hud"];
+  function loadExtras() {
+    if (LITE || !fine || window.innerWidth < 900) return;
+    var core = doc.querySelector('script[src*="assets/js/core.js"]');
+    var base = core ? core.src.replace(/assets\/js\/core\.js.*$/, "") : "";
+    EXTRAS.forEach(function (name) {
+      var l = doc.createElement("link");
+      l.rel = "stylesheet"; l.href = base + "assets/css/x-" + name + ".css";
+      doc.head.appendChild(l);
+      var s = doc.createElement("script");
+      s.src = base + "assets/js/x-" + name + ".js"; s.async = false;
+      doc.body.appendChild(s);
+    });
+  }
+  var extrasOnLoad = function () { idle(loadExtras, 2500); };
+  if (doc.readyState === "complete") extrasOnLoad(); else window.addEventListener("load", extrasOnLoad);
 })();

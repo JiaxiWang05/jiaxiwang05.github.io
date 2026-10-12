@@ -1,0 +1,169 @@
+/* x-hud.css: NIGHT HUD TELEMETRY (assets/js/x-hud.js). Night theme, viewport >= 1200 px, fine pointer, never on
+   html.jw-lite / in print. One fixed layer (contain: strict, pointer-events: none, aria-hidden) with two margin
+   panels; each panel has a wide face (horizontal text, used when the margin is wide enough) and a narrow face
+   (a 22 px strip with vertical text). x-hud.js sets the geometry (--pw panel width, --rt ruler top, --rh ruler
+   height, --tk tick pitch) on resize only, and the classes is-w / is-n / is-x, is-scan, is-off on its own nodes.
+   Motion: marker transforms (eased between the ~10 Hz updates), the dial rotation and the scanline, all
+   transform / opacity on small composited elements. */
+.jwx-hud {
+  --hud-acc: var(--c-nbi);
+  --hud-k: color-mix(in srgb, var(--ink-3) 66%, transparent);
+  --hud-v: color-mix(in srgb, var(--ink-2) 88%, transparent);
+  --hud-line: color-mix(in srgb, var(--ink-3) 36%, transparent);
+  --hud-tick: color-mix(in srgb, var(--ink-3) 24%, transparent);
+  --hud-ease: var(--ui-ease, cubic-bezier(.2, 0, 0, 1));
+  position: fixed; inset: 0; z-index: 55;
+  contain: strict; pointer-events: none;
+  font: 450 10px/1.35 var(--f-mono); letter-spacing: .06em; font-variant-numeric: tabular-nums;
+  color: var(--hud-k); white-space: nowrap;
+  -webkit-user-select: none; user-select: none; -webkit-font-smoothing: antialiased;
+  opacity: 0; transition: opacity 1.2s var(--hud-ease);
+}
+.jwx-hud.is-in { opacity: .92; }
+.jwx-hud.is-off, .jwx-hud.is-sizing, html.nav-open .jwx-hud { opacity: 0 !important; visibility: hidden; transition: none; }
+.jwx-hud[hidden], :root[data-theme="day"] .jwx-hud, html.jw-lite .jwx-hud { display: none !important; }
+@media (max-width: 1199.98px), (pointer: coarse) { .jwx-hud { display: none !important; } }
+@media print { .jwx-hud { display: none !important; } }
+
+/* the chapter hue lights the markers, the chapter name and the scanline */
+.jwx-hud--coil { --hud-acc: var(--c-coil); }
+.jwx-hud--nbi { --hud-acc: var(--c-nbi); }
+.jwx-hud--icg { --hud-acc: var(--c-icg); }
+.jwx-hud--disc { --hud-acc: var(--c-disc); }
+.jwx-hud--fundus { --hud-acc: var(--c-fundus); }
+.jwx-hud--mucosa { --hud-acc: var(--c-mucosa); }
+.jwx-hud--ppix { --hud-acc: var(--c-ppix); }
+
+/* ---- panels and faces ---- */
+.jwx-hud__p { position: absolute; top: 0; height: 0; width: 0; contain: layout paint style; }
+.jwx-hud__p--l { left: 0; }
+.jwx-hud__p--r { right: 0; }
+.jwx-hud__f {
+  position: absolute; top: 0; bottom: 0;
+  opacity: 0; visibility: hidden;
+  transition: opacity .28s var(--hud-ease), visibility 0s linear .28s;
+}
+.jwx-hud__p--l .jwx-hud__f--w { left: 16px; width: var(--pw); }
+.jwx-hud__p--r .jwx-hud__f--w { right: 16px; width: var(--pw); }
+.jwx-hud__p--l .jwx-hud__f--n { left: 12px; width: 22px; }
+.jwx-hud__p--r .jwx-hud__f--n { right: 12px; width: 22px; }
+.jwx-hud__p.is-w .jwx-hud__f--w, .jwx-hud__p.is-n .jwx-hud__f--n {
+  opacity: 1; visibility: visible;
+  transition: opacity .6s var(--hud-ease), visibility 0s;
+}
+.jwx-hud__part { position: absolute; transition: opacity .5s var(--hud-ease); }
+.jwx-hud__part.is-off { opacity: 0; transition: opacity .12s linear; }
+
+/* ---- text ---- */
+.jwx-hud__k { color: var(--hud-k); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
+.jwx-hud__v { color: var(--hud-v); font-size: 11px; letter-spacing: .04em; }
+.jwx-hud b { font-weight: 500; color: var(--hud-v); }
+.jwx-hud__ch {
+  color: var(--hud-acc); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+  overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--hud-acc) 45%, transparent);
+}
+.jwx-hud--zh .jwx-hud__k { font-size: 10px; letter-spacing: .1em; }
+.jwx-hud--zh .jwx-hud__ch { font-size: 10.5px; letter-spacing: .08em; }
+
+/* wide face: head (label + value), ruler, foot; every part spans the face, so a clear wide face is a clear box */
+.jwx-hud__f--w .jwx-hud__head, .jwx-hud__f--w .jwx-hud__foot {
+  left: 0; right: 0; display: flex; flex-direction: column; gap: 4px; overflow: hidden;
+}
+.jwx-hud__f--w .jwx-hud__head { top: 0; }
+.jwx-hud__f--w .jwx-hud__foot { bottom: 0; }
+.jwx-hud__p--l .jwx-hud__f--w :is(.jwx-hud__head, .jwx-hud__foot) { align-items: flex-start; }
+.jwx-hud__p--r .jwx-hud__f--w :is(.jwx-hud__head, .jwx-hud__foot) { align-items: flex-end; text-align: right; }
+.jwx-hud__f--w .jwx-hud__ch { max-width: 100%; }
+.jwx-hud__row { display: block; }
+.jwx-hud__u { color: var(--hud-k); font-size: 9px; letter-spacing: .08em; }
+
+/* ---- rulers ---- */
+.jwx-hud__rule { top: var(--rt); height: calc(var(--rh) + 1px); left: 0; right: 0; }
+.jwx-hud__rule::before { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--hud-line); }
+.jwx-hud__p--l .jwx-hud__rule::before { left: 0; }
+.jwx-hud__p--r .jwx-hud__rule::before { right: 0; }
+.jwx-hud__ticks {
+  position: absolute; top: 0; bottom: 0; width: 8px;
+  background:
+    repeating-linear-gradient(to bottom, var(--hud-line) 0 1px, transparent 1px calc(var(--tk) * 5)) 0 0 / 8px 100% no-repeat,
+    repeating-linear-gradient(to bottom, var(--hud-tick) 0 1px, transparent 1px var(--tk)) 0 0 / 4px 100% no-repeat;
+}
+.jwx-hud__p--l .jwx-hud__ticks { left: 1px; }
+.jwx-hud__p--r .jwx-hud__ticks {          /* cursor ruler: majors at 0, 0.5 and 1.0 */
+  right: 1px;
+  background:
+    repeating-linear-gradient(to bottom, var(--hud-line) 0 1px, transparent 1px calc(var(--tk) * 21)) 100% 0 / 8px 100% no-repeat,
+    repeating-linear-gradient(to bottom, var(--hud-tick) 0 1px, transparent 1px var(--tk)) 100% 0 / 4px 100% no-repeat;
+}
+.jwx-hud__f--n .jwx-hud__ticks { width: 6px; background-size: 6px 100%, 3px 100%; }
+.jwx-hud__lbl { position: absolute; font-size: 8px; line-height: 1; letter-spacing: .06em; color: var(--hud-k); transform: translateY(-50%); }
+.jwx-hud__p--l .jwx-hud__lbl { left: 13px; }
+.jwx-hud__p--r .jwx-hud__lbl { right: 13px; }
+
+/* marker: the wrapper is the ruler's height, so translateY(p * 100%) puts its top edge at p of the ruler */
+.jwx-hud__mk {
+  position: absolute; left: 0; right: 0; top: 0; height: calc(100% - 1px);
+  will-change: transform; transition: transform .14s linear;
+}
+.jwx-hud__mk i { position: absolute; top: 0; width: 11px; height: 1px; }
+.jwx-hud__mk i::before {
+  content: ""; position: absolute; top: -2px; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--hud-acc); box-shadow: 0 0 8px var(--hud-acc);
+}
+.jwx-hud__p--l .jwx-hud__mk i { left: -2px; background: linear-gradient(90deg, var(--hud-acc), transparent); }
+.jwx-hud__p--l .jwx-hud__mk i::before { left: 0; }
+.jwx-hud__p--r .jwx-hud__mk i { right: -2px; background: linear-gradient(270deg, var(--hud-acc), transparent); }
+.jwx-hud__p--r .jwx-hud__mk i::before { right: 0; }
+.jwx-hud__p--r .jwx-hud__mk i, .jwx-hud__p--r .jwx-hud__mk i::before { --hud-acc: var(--hud-target, var(--c-icg)); }
+.jwx-hud__f--n .jwx-hud__mk i { width: 9px; }
+
+/* narrow face: vertical runs beside the ruler (CJK upright, Latin turned) */
+.jwx-hud__vt {
+  writing-mode: vertical-rl; text-orientation: mixed;
+  font-size: 9px; line-height: 11px; width: 11px; letter-spacing: .12em;
+  max-height: calc(var(--rh) * .5 - 6px); overflow: hidden; text-overflow: ellipsis;
+}
+.jwx-hud__vt .jwx-hud__k { font-size: inherit; letter-spacing: inherit; }
+.jwx-hud__vt .jwx-hud__ch { font-size: inherit; }
+.jwx-hud__vt--a { top: var(--rt); }
+.jwx-hud__vt--b { bottom: calc(100% - var(--rt) - var(--rh) - 1px); }
+.jwx-hud__p--l .jwx-hud__vt { left: 11px; }
+.jwx-hud__p--r .jwx-hud__vt { right: 11px; }
+.jwx-hud--zh .jwx-hud__vt { letter-spacing: .08em; }
+
+/* ---- lumen-phase dial (rotation synced to the readout by x-hud.js through animation-delay) ---- */
+.jwx-hud__ring {
+  position: relative; display: inline-block; vertical-align: -1px; width: 9px; height: 9px;
+  border: 1px solid color-mix(in srgb, var(--c-ppix) 55%, transparent); border-radius: 50%;
+  animation: jwx-hud-dial 3.125s linear infinite;
+}
+.jwx-hud__ring::after {
+  content: ""; position: absolute; left: 3px; top: 0; width: 1px; height: 4px;
+  background: var(--c-ppix); box-shadow: 0 0 4px var(--c-ppix);
+}
+.jwx-hud__vt .jwx-hud__ring { margin: 0 0 3px; }
+@keyframes jwx-hud-dial { to { transform: rotate(360deg); } }
+
+/* ---- scanline: one 1 px sweep down both margins every 6 s (only while the whole panel is clear) ---- */
+.jwx-hud__scan { position: absolute; top: var(--rt); height: calc(var(--rh) + 1px); visibility: hidden; opacity: 0; }
+.jwx-hud__p--l .jwx-hud__scan { left: 0; width: calc(16px + var(--pw)); }
+.jwx-hud__p--r .jwx-hud__scan { right: 0; width: calc(16px + var(--pw)); }
+.jwx-hud__p.is-n .jwx-hud__scan { width: 36px; }
+.jwx-hud__scan::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; }
+.jwx-hud__p--l .jwx-hud__scan::before { background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--hud-acc) 70%, transparent) 22%, transparent); }
+.jwx-hud__p--r .jwx-hud__scan::before { background: linear-gradient(270deg, transparent, color-mix(in srgb, var(--hud-acc) 70%, transparent) 22%, transparent); }
+.jwx-hud__p.is-scan .jwx-hud__scan { visibility: visible; will-change: transform, opacity; animation: jwx-hud-scan 6s linear infinite; }
+@keyframes jwx-hud-scan {
+  0% { transform: translateY(0); opacity: 0; }
+  5% { opacity: .85; }
+  40% { opacity: .85; }
+  46% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jwx-hud__scan { display: none !important; }
+  .jwx-hud__ring { animation: none; }
+  .jwx-hud__mk { transition: none; }
+}

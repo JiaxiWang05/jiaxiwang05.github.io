@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Page not found — Jiaxi Wang</title>
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#05050A">
+  <script>(function(d,w){var n=w.navigator||{},c=n.connection,l=false;try{l=!!(w.matchMedia('(pointer: coarse)').matches||w.matchMedia('(max-width: 900px)').matches||(n.hardwareConcurrency||8)<=4||(n.deviceMemory||8)<=4||(c&&c.saveData))}catch(e){}if(l)d.classList.add('jw-lite');w.JW_LITE=l})(document.documentElement,window);(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t='night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400..600&amp;display=swap">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    body { min-height: 100vh; min-height: 100dvh; margin: 0; display: grid; place-items: center; background: var(--ground); color: var(--ink); }
+    .lost { width: min(560px, calc(100% - 32px)); text-align: center; padding: 48px 0; }
+    .lost__lens { width: min(260px, 62vw); aspect-ratio: 1; margin: 0 auto 36px; border-radius: 50%; position: relative;
+      background: radial-gradient(circle at 50% 46%, #2BFFB2 0 5%, rgb(43 255 178 / .25) 9%, transparent 22%),
+        conic-gradient(from 20deg, #3a0d18, #d8314a, #5c0f22, #ff6a5c, #3a0d18, #ff55cd, #2a0a14, #d8314a, #3a0d18);
+      box-shadow: 0 0 0 1px rgb(255 255 255 / .12), 0 0 80px -10px rgb(255 85 205 / .45), inset 0 0 60px 20px rgb(0 0 0 / .65); }
+    .lost__lens::after { content: ""; position: absolute; inset: 40% 40%; border: 1.5px solid #2BFFB2; border-radius: 3px; }
+    .lost__code { font: 500 12px/1 var(--f-mono); letter-spacing: .18em; color: var(--ink-3); margin: 0 0 18px; }
+    .lost__title { font: 400 clamp(36px, 7vw, 64px)/1.05 var(--f-display); margin: 0 0 16px; }
+    .lost__title i { font-style: italic; }
+    .lost__txt { font: 400 17px/1.6 var(--f-body); color: var(--ink-2); margin: 0 0 6px; }
+    .lost__links { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: center; margin-top: 30px; font: 500 15px/1.4 var(--f-body); }
+    .lost__links a { color: var(--ink); text-underline-offset: 4px; }
+    [data-theme="day"] .lost__lens { box-shadow: 0 0 0 1px rgb(22 23 28 / .14), 0 20px 50px -20px rgb(22 23 28 / .35), inset 0 0 60px 20px rgb(0 0 0 / .45); }
+  </style>
+</head>
+<body>
+  <main class="lost">
+    <div class="lost__lens" aria-hidden="true"></div>
+    <p class="lost__code">404 · OFF THE MAP</p>
+    <h1 class="lost__title">Lost in the <i>lumen</i></h1>
+    <p class="lost__txt">This page is not on the map.</p>
+    <p class="lost__txt" lang="zh-CN">在管腔中迷路了。这个页面不在地图上。</p>
+    <nav class="lost__links" aria-label="Way back">
+      <a href="/">Home</a>
+      <a href="/zh/" lang="zh-CN">首页</a>
+      <a href="/research-version/">Research version</a>
+    </nav>
+  </main>
+</body>
+</html>

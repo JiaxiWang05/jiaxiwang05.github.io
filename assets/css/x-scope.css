@@ -1,0 +1,173 @@
+/* x-scope.css: ENDOSCOPE MODE (easter egg, desktop only; loaded with x-scope.js by the core.js loader).
+   Every rule is scoped to nodes x-scope.js creates, so the file costs nothing while the mode is off.
+   Layers (z): page < nav 90 < .xscope 93 (dark surround, lens, HUD) < x-palette 94 < .cursor 95 < .xscope-toast 97.
+   The surround is dark in both themes, as on an endoscopy monitor; day = white light, night = fluorescence. */
+
+.xscope {
+  position: fixed; inset: 0; z-index: 93; pointer-events: none;
+  contain: strict; overflow: hidden;
+  --xs-r: clamp(128px, 21vmin, 232px);
+  --xs-dk: 3 4 9; --xs-op: .88;                 /* surround */
+  --xs-ink: 236 240 248;                        /* readout on the surround */
+  --xs-rim: #1FE6FF; --xs-mode: #2BFFB2; --xs-nbi: #3FE6CF;
+  --xs-glow: drop-shadow(0 0 2px rgb(31 230 255 / .85)) drop-shadow(0 0 10px rgb(31 230 255 / .45));
+}
+:root[data-theme="day"] .xscope {
+  --xs-dk: 22 18 15; --xs-op: .82;
+  --xs-ink: 246 242 236;
+  --xs-rim: #F6EBDC; --xs-mode: #FFD9A6; --xs-nbi: #7FE3D3;
+  --xs-glow: drop-shadow(0 0 6px rgb(255 226 190 / .35));
+}
+.xscope[hidden] { display: none; }
+
+.xscope__iris { position: absolute; inset: 0; }
+.xscope__lens, .xscope__vig, .xscope__hud, .xscope__tgt, .xscope__wp {
+  position: absolute; left: 0; top: 0; will-change: transform;
+}
+
+/* dark surround: one radial gradient, 2 x the viewport, centred on the lens by transform */
+.xscope__vig {
+  width: 200vw; height: 200vh; margin: -100vh 0 0 -100vw;
+  background: radial-gradient(circle at 50% 50%,
+    rgb(var(--xs-dk) / 0) calc(var(--xs-r) - 1px),
+    rgb(var(--xs-dk) / .8) calc(var(--xs-r) + .5px),
+    rgb(var(--xs-dk) / var(--xs-op)) calc(var(--xs-r) + 22px));
+}
+
+/* the lens: optical treatment on the circle only (same filter-function order in every state so it can tween) */
+.xscope__lens {
+  width: calc(2 * var(--xs-r)); height: calc(2 * var(--xs-r));
+  margin: calc(-1 * var(--xs-r)) 0 0 calc(-1 * var(--xs-r));
+  border-radius: 50%;
+  -webkit-backdrop-filter: contrast(1.06) sepia(0) hue-rotate(0deg) saturate(1.28) brightness(1.1);
+  backdrop-filter: contrast(1.06) sepia(0) hue-rotate(0deg) saturate(1.28) brightness(1.1);
+  background: radial-gradient(circle closest-side, rgb(43 255 178 / .045) 0 46%, rgb(31 230 255 / .05) 80%, rgb(0 0 0 / .44) 100%);
+  box-shadow: inset 0 0 38px rgb(31 230 255 / .14);
+  transition: -webkit-backdrop-filter .28s var(--ui-ease), backdrop-filter .28s var(--ui-ease), box-shadow .28s var(--ui-ease);
+}
+:root[data-theme="day"] .xscope__lens {   /* white light: warm, a touch more contrast, optical fall-off at the rim */
+  -webkit-backdrop-filter: contrast(1.06) sepia(.05) hue-rotate(0deg) saturate(1.18) brightness(1.02);
+  backdrop-filter: contrast(1.06) sepia(.05) hue-rotate(0deg) saturate(1.18) brightness(1.02);
+  background: radial-gradient(circle closest-side, rgb(255 250 244 / .04) 0 52%, rgb(255 226 196 / .08) 80%, rgb(58 32 18 / .3) 100%);
+  box-shadow: inset 0 0 26px rgb(58 32 18 / .14);
+}
+.xscope__lens::after {   /* NBI tint, faded in with opacity */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0;
+  background: radial-gradient(circle closest-side, rgb(120 64 34 / .08) 0 55%, rgb(0 70 64 / .16) 86%, rgb(0 20 18 / .4) 100%);
+  transition: opacity .28s var(--ui-ease);
+}
+.xscope.is-nbi .xscope__lens {   /* narrow-band imaging: cyan / green-brown */
+  -webkit-backdrop-filter: contrast(1.2) sepia(.85) hue-rotate(128deg) saturate(1.75) brightness(.98);
+  backdrop-filter: contrast(1.2) sepia(.85) hue-rotate(128deg) saturate(1.75) brightness(.98);
+  box-shadow: inset 0 0 38px rgb(63 230 207 / .2);
+}
+:root[data-theme="night"] .xscope.is-nbi .xscope__lens {
+  -webkit-backdrop-filter: contrast(1.2) sepia(.85) hue-rotate(128deg) saturate(1.75) brightness(1.12);
+  backdrop-filter: contrast(1.2) sepia(.85) hue-rotate(128deg) saturate(1.75) brightness(1.12);
+}
+.xscope.is-nbi .xscope__lens::after { opacity: 1; }
+
+/* HUD: rim, ticks, notch, crosshair, readout (SVG in px, sized by x-scope.js) */
+.xscope__hud { overflow: visible; }
+.xscope__hud .xs-g { transform-box: view-box; transform-origin: 0 0; }
+.xs-rim { fill: none; stroke: var(--xs-rim); stroke-width: 1.5; filter: var(--xs-glow); transition: stroke .28s var(--ui-ease); }
+.xs-rim2 { fill: none; stroke: rgb(var(--xs-ink) / .3); stroke-width: 1; stroke-dasharray: 2 6; }
+.xs-tick { fill: none; stroke: rgb(var(--xs-ink) / .5); stroke-width: 1.2; }
+.xs-tick--major { stroke: rgb(var(--xs-ink) / .88); }
+.xs-notch { fill: var(--xs-rim); filter: var(--xs-glow); transition: fill .28s var(--ui-ease); }
+.xs-cross { fill: none; stroke: var(--hud-path); stroke-width: 1.25; stroke-linecap: round; filter: var(--hud-glow-path); }
+.xs-dot { fill: var(--hud-path); }
+.xs-txt {
+  font-family: var(--f-mono); font-weight: 500; font-size: 10.5px; letter-spacing: .16em;
+  font-variant-numeric: tabular-nums; fill: rgb(var(--xs-ink) / .84);
+}
+.xs-mode { font-size: 11px; letter-spacing: .26em; fill: var(--xs-mode); transition: fill .28s var(--ui-ease); }
+:lang(zh) .xs-txt { font-size: 11.5px; letter-spacing: .08em; }
+:lang(zh) .xs-mode { font-size: 12px; letter-spacing: .3em; }
+.xscope.is-nbi :is(.xs-rim, .xs-notch) { stroke: var(--xs-nbi); }
+.xscope.is-nbi .xs-notch { fill: var(--xs-nbi); }
+.xscope.is-nbi .xs-mode { fill: var(--xs-nbi); }
+
+/* future target bracket (lags behind the hand like a prediction) and the predicted action path */
+.xscope__tgt { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+.xscope__tgt svg { display: block; overflow: visible; }
+.xs-case { fill: none; stroke: var(--hud-case); stroke-opacity: var(--hud-case-op); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+.xs-bracket { fill: none; stroke: var(--hud-target); stroke-width: 2; stroke-linecap: square; filter: var(--hud-glow-target); }
+.xscope__tag {
+  position: absolute; left: 44px; top: -2px;
+  font: 500 10px/1 var(--f-mono); letter-spacing: .12em; white-space: nowrap;
+  color: var(--hud-target);
+  text-shadow: 0 0 3px var(--hud-case), 0 0 3px var(--hud-case), 0 0 8px var(--hud-case);
+}
+:lang(zh) .xscope__tag { font-size: 11px; letter-spacing: .06em; }
+.xscope__wp {
+  width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; box-sizing: border-box; border-radius: 50%;
+  background: var(--hud-case); border: 1.5px solid var(--hud-path);
+}
+:root[data-theme="night"] .xscope__wp { box-shadow: 0 0 6px rgb(31 230 255 / .55); }
+.xscope__tgt.is-flip .xscope__tag { left: auto; right: 44px; }
+.xscope.is-reduced .xscope__wp { display: none; }
+
+/* hint toast (visual only; x-scope.js announces through .xscope-sr) */
+.xscope-toast {
+  position: fixed; left: 50%; bottom: max(28px, env(safe-area-inset-bottom)); z-index: 97; pointer-events: none;
+  display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px);
+  padding: 10px 18px 10px 14px; border-radius: 999px;
+  background: rgb(8 9 15 / .84); color: #EEF0F6;
+  border: 1px solid rgb(255 255 255 / .14);
+  box-shadow: 0 18px 50px -20px rgb(0 0 0 / .8);
+  font: 450 12.5px/1.3 var(--f-mono); letter-spacing: .02em; white-space: nowrap;
+  opacity: 0; visibility: hidden; transform: translate(-50%, 12px);
+  transition: opacity .3s var(--ui-ease), transform .45s var(--scalpel), visibility 0s linear .45s;
+}
+.xscope-toast.is-on { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition: opacity .3s var(--ui-ease), transform .45s var(--scalpel), visibility 0s; }
+.xscope-toast i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: #2BFFB2; box-shadow: 0 0 8px rgb(43 255 178 / .7); }
+:root[data-theme="day"] .xscope-toast { background: rgb(26 22 19 / .86); }
+:root[data-theme="day"] .xscope-toast i { background: #FFD9A6; box-shadow: 0 0 8px rgb(255 217 166 / .6); }
+.xscope-toast kbd {
+  font: inherit; font-size: 11.5px; padding: 1px 6px; border-radius: 4px;
+  border: 1px solid rgb(255 255 255 / .3); background: rgb(255 255 255 / .06);
+}
+:lang(zh) .xscope-toast { letter-spacing: .04em; }
+
+.xscope-sr {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* the footer button: a small, slightly forbidden switch */
+.xscope-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin: -5px 0; padding: 4px 6px 4px 10px;
+  border: 1px dashed var(--line-strong); border-radius: 999px;
+  background: transparent; color: var(--ink-3);
+  font: 450 12px/1.3 var(--f-mono); letter-spacing: .04em;
+  cursor: pointer;
+  transition: color .2s var(--ui-ease), border-color .2s var(--ui-ease), background-color .2s var(--ui-ease);
+}
+.xscope-btn__led {
+  flex: none; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--c-mucosa);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--c-mucosa) 22%, transparent);
+  transition: background-color .2s var(--ui-ease), box-shadow .2s var(--ui-ease);
+}
+.xscope-btn__k {
+  font: 500 10.5px/1 var(--f-mono); padding: 3px 5px; border-radius: 4px;
+  border: 1px solid var(--line); color: var(--ink-3);
+}
+.xscope-btn:hover, .xscope-btn:focus-visible {
+  color: var(--ink); border-style: solid; border-color: var(--c-mucosa);
+  background: color-mix(in srgb, var(--c-mucosa) 8%, transparent);
+}
+.xscope-btn:hover .xscope-btn__led { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-mucosa) 26%, transparent), 0 0 10px var(--c-mucosa); }
+.xscope-btn[aria-pressed="true"] { color: var(--ink); border-style: solid; border-color: var(--c-icg); }
+.xscope-btn[aria-pressed="true"] .xscope-btn__led { background: var(--c-icg); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-icg) 26%, transparent), 0 0 10px var(--c-icg); }
+:root[data-theme="day"] .xscope-btn:hover .xscope-btn__led { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-mucosa) 20%, transparent); }
+:root[data-theme="day"] .xscope-btn[aria-pressed="true"] .xscope-btn__led { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-icg) 20%, transparent); }
+:lang(zh) .xscope-btn { letter-spacing: .06em; }
+@media (pointer: coarse), (max-width: 900px) { .xscope-btn { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .xscope__lens, .xscope__lens::after, .xs-rim, .xs-notch, .xs-mode, .xscope-toast, .xscope-toast.is-on, .xscope-btn, .xscope-btn__led { transition: none; }
+}
+@media print { .xscope, .xscope-toast, .xscope-btn { display: none !important; } }

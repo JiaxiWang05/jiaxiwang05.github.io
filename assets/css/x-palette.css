@@ -1,0 +1,217 @@
+/* x-palette.css: the ⌘K command palette (desktop showpiece, loaded with x-palette.js; never on html.jw-lite).
+   A centred, glass-free panel on a solid --raised fill. Night: a thin spectral conic rim and accent highlights.
+   Day: a quiet ink line and a paper highlighter. Motion is transform/opacity only; GSAP drives it when present
+   (.is-gsap), the CSS transitions below are the fallback; reduced motion shows and hides without movement. */
+
+/* ---------------------------------------------------------------- nav button */
+.xpal-btn {
+  position: relative; flex: none; display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 7px 0 12px;
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  background: var(--surface); color: var(--ink-2); cursor: pointer;
+  font: 500 13px/1 var(--f-body); letter-spacing: .01em; white-space: nowrap;
+  transition: border-color .2s var(--ui-ease), color .2s var(--ui-ease), box-shadow .3s var(--ui-ease);
+}
+.xpal-btn:hover, .xpal-btn[aria-expanded="true"] { border-color: var(--ink-3); color: var(--ink); }
+.xpal-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.xpal-btn__i { width: 16px; height: 16px; flex: none; }
+.xpal-btn__k { margin-left: 2px; }
+:root[data-theme="night"] .xpal-btn:hover, :root[data-theme="night"] .xpal-btn[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--c-nbi) 70%, transparent);
+  box-shadow: 0 0 18px -4px color-mix(in srgb, var(--c-nbi) 55%, transparent);
+}
+:root[data-theme="night"] .xpal-btn:focus-visible { outline-color: var(--c-nbi); }
+@media (max-width: 1279px) { .xpal-btn { padding: 0 7px 0 11px; gap: 6px; } .xpal-btn__t { display: none; } }
+@media (max-width: 999px) { .xpal-btn { display: none; } }
+html.jw-lite .xpal-btn { display: none; }
+
+/* shared key cap */
+.xpal-kbd {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 5px;
+  border: 1px solid var(--line); border-radius: 5px; background: var(--sunken); color: var(--ink-3);
+  font: 500 11px/1 var(--f-mono); letter-spacing: .02em; font-variant-numeric: tabular-nums; white-space: nowrap;
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--line) 80%, transparent);
+}
+
+/* ---------------------------------------------------------------- overlay + panel */
+.xpal { position: fixed; inset: 0; z-index: 94; contain: layout paint style; }
+.xpal[hidden] { display: none !important; }
+.xpal.is-closing { pointer-events: none; }
+.xpal__scrim {
+  position: absolute; inset: 0;
+  background: color-mix(in srgb, var(--sunken) 62%, transparent);
+  opacity: 0; transition: opacity .26s var(--ui-ease);
+}
+:root[data-theme="day"] .xpal__scrim { background: rgb(22 23 28 / .2); }
+.xpal__panel {
+  --pal-r: 16px;
+  position: absolute; left: 0; right: 0; top: max(72px, 13vh); margin: 0 auto;
+  width: min(680px, calc(100vw - 32px)); max-height: min(620px, calc(100vh - max(72px, 13vh) - 32px));
+  display: flex; flex-direction: column;
+  border-radius: var(--pal-r); background: var(--raised); color: var(--body);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 14%, transparent), var(--shadow-card), 0 60px 140px -60px rgb(0 0 0 / .45);
+  opacity: 0; transform: translateY(-10px) scale(.985); transform-origin: 50% 0;
+  transition: opacity .2s var(--ui-ease), transform .38s var(--scalpel);
+}
+.xpal.is-in .xpal__scrim, .xpal.is-in .xpal__panel { opacity: 1; transform: none; }
+.xpal.is-out .xpal__panel { transform: translateY(-6px) scale(.99); transition-duration: .16s, .18s; transition-timing-function: ease-in; }
+.xpal.is-gsap .xpal__scrim, .xpal.is-gsap .xpal__panel { transition: none; }
+
+/* night: the spectral rim (1px ring outside the fill; its gradient turns on the compositor) and a coloured lift */
+.xpal__rim { display: none; }
+:root[data-theme="night"] .xpal__panel {
+  box-shadow: 0 0 0 1px rgb(255 255 255 / .04), 0 40px 120px -40px rgb(0 0 0 / .95),
+    0 0 90px -34px color-mix(in srgb, var(--c-nbi) 50%, transparent), 0 30px 110px -50px color-mix(in srgb, var(--c-ppix) 55%, transparent);
+}
+:root[data-theme="night"] .xpal__rim {
+  display: block; position: absolute; inset: -1px; z-index: 0; pointer-events: none;
+  border-radius: calc(var(--pal-r) + 1px); padding: 1px; overflow: hidden;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: .9;
+}
+.xpal__spin {
+  position: absolute; left: 50%; top: 50%; width: 150%; aspect-ratio: 1; margin: -75% 0 0 -75%;
+  background: conic-gradient(from 210deg, var(--c-coil), var(--c-nbi), var(--c-icg), var(--c-disc), var(--c-fundus), var(--c-mucosa), var(--c-ppix), var(--c-coil));
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-theme="night"] .xpal.is-in .xpal__spin { animation: xpal-turn 14s linear infinite; }
+}
+@keyframes xpal-turn { to { transform: rotate(1turn); } }
+
+/* ---------------------------------------------------------------- head: input */
+.xpal__head {
+  position: relative; z-index: 1; flex: none; display: flex; align-items: center; gap: 12px;
+  height: 62px; padding: 0 14px 0 20px; border-bottom: 1px solid var(--line);
+}
+.xpal__glass { width: 19px; height: 19px; flex: none; color: var(--ink-3); }
+:root[data-theme="night"] .xpal__glass { color: var(--c-nbi); filter: drop-shadow(0 0 6px color-mix(in srgb, var(--c-nbi) 60%, transparent)); }
+.xpal__input {
+  flex: 1; min-width: 0; height: 100%; margin: 0; padding: 0; border: 0; outline: 0; background: transparent;
+  color: var(--ink); caret-color: var(--ink);
+  font: 400 18px/1.3 var(--f-body); letter-spacing: -.005em;
+}
+:root[data-theme="night"] .xpal__input { caret-color: var(--c-nbi); }
+.xpal__input::placeholder { color: var(--ink-3); opacity: 1; }
+:root .xpal .xpal__input:focus, :root .xpal .xpal__input:focus-visible { outline: none; box-shadow: none; }
+.xpal__input::-webkit-search-cancel-button { display: none; }
+.xpal__x { flex: none; display: inline-grid; place-items: center; padding: 4px; border-radius: 8px; cursor: pointer; }
+.xpal__x:hover .xpal-kbd { color: var(--ink); border-color: var(--line-strong); }
+:root .xpal .xpal__x:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; box-shadow: none; }
+:root[data-theme="night"] .xpal .xpal__x:focus-visible { outline-color: var(--c-nbi); box-shadow: 0 0 14px -2px color-mix(in srgb, var(--c-nbi) 60%, transparent); }
+
+/* ---------------------------------------------------------------- list */
+.xpal__list {
+  position: relative; z-index: 1; flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  padding: 6px 8px 8px; scroll-padding: 8px;
+  scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;
+}
+.xpal__group + .xpal__group { margin-top: 4px; }
+.xpal__gh {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding: 12px 12px 6px;
+  font: 500 10.5px/1.2 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+}
+:root:lang(zh) .xpal__gh { letter-spacing: .06em; font-size: 11.5px; }
+.xpal__gn { letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.xpal__opt {
+  position: relative; display: grid; grid-template-columns: 30px minmax(0, 1fr) auto auto; align-items: center; gap: 12px;
+  min-height: 52px; padding: 8px 12px; border-radius: 10px; cursor: pointer; user-select: none;
+  transition: background-color .14s var(--ui-ease);
+}
+.xpal__opt[aria-selected="true"] { background: color-mix(in srgb, var(--ink) 6.5%, transparent); }
+.xpal__opt::before {
+  content: ""; position: absolute; left: 0; top: 12px; bottom: 12px; width: 2px; border-radius: 2px;
+  background: var(--acc); opacity: 0; transform: scaleY(.4); transition: opacity .16s var(--ui-ease), transform .26s var(--scalpel);
+}
+.xpal__opt[aria-selected="true"]::before { opacity: 1; transform: none; }
+:root[data-theme="day"] .xpal__opt::before { background: var(--ink); }
+:root[data-theme="night"] .xpal__opt[aria-selected="true"] { background: color-mix(in srgb, var(--acc) 11%, var(--raised)); }
+:root[data-theme="night"] .xpal__opt[aria-selected="true"]::before { box-shadow: 0 0 10px 1px color-mix(in srgb, var(--acc) 75%, transparent); }
+
+.xpal__ico {
+  width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
+  transition: color .16s var(--ui-ease), border-color .16s var(--ui-ease);
+}
+.xpal__svg { width: 16px; height: 16px; display: block; }
+.xpal__opt[aria-selected="true"] .xpal__ico { color: var(--ink); border-color: var(--line-strong); }
+:root[data-theme="night"] .xpal__ico { color: color-mix(in srgb, var(--acc) 82%, var(--ink)); border-color: color-mix(in srgb, var(--acc) 22%, var(--line)); }
+:root[data-theme="night"] .xpal__opt[aria-selected="true"] .xpal__ico {
+  color: var(--acc); border-color: color-mix(in srgb, var(--acc) 55%, transparent);
+  box-shadow: 0 0 14px -3px color-mix(in srgb, var(--acc) 60%, transparent);
+}
+
+.xpal__main { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.xpal__t {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font: 500 14.5px/1.35 var(--f-body); color: var(--ink); letter-spacing: .002em;
+}
+.xpal__c { display: flex; align-items: baseline; gap: 10px; min-width: 0; overflow: hidden; white-space: nowrap; }
+.xpal__crumb { flex: none; max-width: 60%; overflow: hidden; text-overflow: ellipsis; font: 450 11px/1.35 var(--f-mono); letter-spacing: .02em; color: var(--ink-3); }
+.xpal__sep { color: var(--line-strong); }
+.xpal__s { min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 400 12.5px/1.35 var(--f-body); color: var(--ink-2); }
+.xpal__m {
+  justify-self: end; font: 450 11px/1.2 var(--f-mono); letter-spacing: .02em; color: var(--ink-3);
+  font-variant-numeric: tabular-nums; white-space: nowrap; max-width: 16ch; overflow: hidden; text-overflow: ellipsis;
+}
+.xpal__go { width: 22px; height: 22px; display: grid; place-items: center; color: var(--ink-3); opacity: 0; transform: translateX(-4px);
+  transition: opacity .16s var(--ui-ease), transform .24s var(--scalpel); }
+.xpal__go .xpal__svg { width: 15px; height: 15px; }
+.xpal__opt[aria-selected="true"] .xpal__go { opacity: 1; transform: none; color: var(--ink-2); }
+:root[data-theme="night"] .xpal__opt[aria-selected="true"] .xpal__go { color: var(--acc); }
+
+/* match highlights: night = fluorescent accent, day = a paper highlighter */
+.xpal__opt mark { background: none; color: inherit; font-weight: 600; }
+:root[data-theme="night"] .xpal__t mark { color: var(--c-nbi); text-shadow: 0 0 12px color-mix(in srgb, var(--c-nbi) 45%, transparent); }
+:root[data-theme="night"] .xpal__opt[data-hue] .xpal__t mark { color: var(--acc); text-shadow: 0 0 12px color-mix(in srgb, var(--acc) 45%, transparent); }
+:root[data-theme="night"] .xpal__c mark { color: var(--ink); }
+:root[data-theme="day"] .xpal__opt mark {
+  color: var(--ink);
+  background: linear-gradient(transparent 58%, color-mix(in srgb, var(--acc) 22%, transparent) 58%, color-mix(in srgb, var(--acc) 22%, transparent) 94%, transparent 94%);
+}
+
+/* empty + loading */
+.xpal__empty { padding: 34px 20px 38px; text-align: center; }
+.xpal__empty-t { font: 500 15px/1.4 var(--f-body); color: var(--ink); }
+.xpal__empty-d { margin-top: 6px; font: 400 13px/1.5 var(--f-body); color: var(--ink-3); }
+.xpal__note { padding: 10px 12px 4px; font: 450 11.5px/1.4 var(--f-mono); color: var(--ink-3); letter-spacing: .02em; }
+
+/* ---------------------------------------------------------------- foot */
+.xpal__foot {
+  position: relative; z-index: 1; flex: none; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 10px 16px 11px 18px; border-top: 1px solid var(--line);
+  font: 450 11px/1 var(--f-mono); letter-spacing: .02em; color: var(--ink-3);
+}
+.xpal__keys { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.xpal__keys > span { display: inline-flex; align-items: center; gap: 4px; }
+.xpal__keys .xpal-kbd { height: 18px; min-width: 18px; font-size: 10.5px; padding: 0 4px; }
+.xpal__keys .xpal-kbd + .xpal-kbd { margin-left: -1px; }
+.xpal__keys > span > .xpal-kbd:last-of-type { margin-right: 3px; }
+.xpal__count { font-variant-numeric: tabular-nums; white-space: nowrap; }
+:root[data-theme="night"] .xpal__count:not(:empty) { color: var(--ink-2); }
+
+/* ---------------------------------------------------------------- toast (copy confirmation) */
+.xpal-toast {
+  position: fixed; left: 50%; bottom: 32px; z-index: 94; display: inline-flex; align-items: center; gap: 10px;
+  max-width: calc(100vw - 32px); padding: 10px 16px; border-radius: 999px;
+  background: var(--raised); border: 1px solid var(--line); color: var(--ink);
+  font: 450 12.5px/1.3 var(--f-mono); letter-spacing: .02em; white-space: nowrap;
+  box-shadow: var(--shadow-card); pointer-events: none; contain: layout paint style;
+  opacity: 0; transform: translate(-50%, 10px); transition: opacity .3s var(--ui-ease), transform .45s var(--scalpel);
+}
+.xpal-toast.is-in { opacity: 1; transform: translate(-50%, 0); }
+.xpal-toast__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-icg); flex: none; }
+:root[data-theme="night"] .xpal-toast { box-shadow: var(--shadow-card), 0 0 30px -8px color-mix(in srgb, var(--c-icg) 50%, transparent); }
+:root[data-theme="night"] .xpal-toast__dot { box-shadow: 0 0 8px var(--c-icg); }
+
+/* ---------------------------------------------------------------- reduced motion, small windows, print */
+@media (prefers-reduced-motion: reduce) {
+  .xpal__scrim, .xpal__panel, .xpal__opt, .xpal__opt::before, .xpal__go, .xpal-toast { transition: none !important; }
+  .xpal__panel, .xpal.is-out .xpal__panel, .xpal-toast { transform: none; }
+  .xpal-toast { transform: translate(-50%, 0); }
+  .xpal__spin { animation: none !important; }
+}
+@media (max-height: 640px) { .xpal__panel { top: 56px; max-height: calc(100vh - 80px); } }
+@media (max-width: 640px) { .xpal__m { display: none; } .xpal__foot .xpal__keys > span:nth-child(3) { display: none; } }
+@media print { .xpal, .xpal-btn, .xpal-toast { display: none !important; } }
