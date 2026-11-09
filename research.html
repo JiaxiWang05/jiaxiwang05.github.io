@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Research — Jiaxi Wang</title>
-  <meta name="description" content="Research by Jiaxi Wang: EndoWAM, cross-embodiment learning, small-data transfer learning for retinal images, BiliVLA, a teleoperated endoscopy benchmark, Trileg-ESD and motion-to-sound interaction.">
+  <meta name="description" content="Research by Jiaxi Wang: EndoWAM, an interactive Open Day robot, small-data transfer learning for retinal images, BiliVLA, a teleoperated endoscopy benchmark, Trileg-ESD and motion-to-sound interaction.">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#05050A">
   <script>(function(d,w){var n=w.navigator||{},c=n.connection,l=false;try{l=!!(w.matchMedia('(pointer: coarse)').matches||w.matchMedia('(max-width: 900px)').matches||(n.hardwareConcurrency||8)<=4||(n.deviceMemory||8)<=4||(c&&c.saveData))}catch(e){}if(l)d.classList.add('jw-lite');w.JW_LITE=l})(document.documentElement,window);(function(d){var t=d.getAttribute('data-force-theme');if(t!=='day'&&t!=='night'){t=null;try{t=localStorage.getItem('jw-theme')}catch(e){}if(t!=='day'&&t!=='night'){t='night'}}else{d.classList.add('theme-forced')}d.setAttribute('data-theme',t);d.classList.add('js');var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='day'?'#F4F2EE':'#05050A')})(document.documentElement)</script>
@@ -18,7 +18,7 @@
   <meta property="og:locale" content="en_GB">
   <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="Research — Jiaxi Wang">
-  <meta property="og:description" content="Research by Jiaxi Wang: EndoWAM, cross-embodiment learning, small-data transfer learning for retinal images, BiliVLA, a teleoperated endoscopy benchmark, Trileg-ESD and motion-to-sound interaction.">
+  <meta property="og:description" content="Research by Jiaxi Wang: EndoWAM, an interactive Open Day robot, small-data transfer learning for retinal images, BiliVLA, a teleoperated endoscopy benchmark, Trileg-ESD and motion-to-sound interaction.">
   <meta property="og:url" content="https://jiaxiwang05.github.io/research.html">
   <meta property="og:image" content="https://jiaxiwang05.github.io/assets/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -144,7 +144,7 @@
       <span class="ghost" aria-hidden="true">Lumen</span>
       <div class="page-head__inner">
         <h1 class="page-head__title t-cover" style="--w:4.48" data-split="chars">Research</h1>
-        <p class="page-head__lead t-lead" data-reveal="up">Robots that act in deformable, partially observed environments: vision–language–action and world-action models for endoscopy, policies that transfer across embodiments, and learning from small medical datasets.</p>
+        <p class="page-head__lead t-lead" data-reveal="up">Robots that act in deformable, partially observed environments: vision–language–action and world-action models for endoscopy, a humanoid robot that starts conversations at the university open day, and learning from small medical datasets.</p>
         <p class="page-head__interests t-small" data-reveal="up">Interests: embodied AI, vision–language–action systems, cross-embodiment learning, autonomous surgical robotics, transfer learning under limited data, human–computer interaction.</p>
       </div>
       <div class="page-head__art" aria-hidden="true"><div class="scope scope--head"><div class="scope__halo"></div><div class="scope__lens" data-scope="head"></div></div></div>
@@ -155,7 +155,7 @@
         <p class="toc__k t-meta">Contents</p>
         <ol>
           <li><a href="#publication" data-hue="icg"><span class="toc__n" aria-hidden="true">01</span>EndoWAM</a></li>
-          <li><a href="#embodied" data-hue="disc"><span class="toc__n" aria-hidden="true">02</span>Cross-embodiment</a></li>
+          <li><a href="#open-day" data-hue="disc"><span class="toc__n" aria-hidden="true">02</span>Open Day robot</a></li>
           <li><a href="#dissertation" data-hue="fundus"><span class="toc__n" aria-hidden="true">03</span>Dissertation</a></li>
           <li><a href="#bilivla" data-hue="mucosa"><span class="toc__n" aria-hidden="true">04</span>BiliVLA</a></li>
           <li><a href="#benchmark" data-hue="nbi"><span class="toc__n" aria-hidden="true">05</span>Benchmark</a></li>
@@ -179,27 +179,17 @@
         </div>
       </section>
 
-      <section class="rs" id="embodied" data-hue="disc" data-chapter="Cross-embodiment" aria-labelledby="rs-embodied">
+      <section class="rs" id="open-day" data-hue="disc" data-chapter="Open Day robot" aria-labelledby="rs-open-day">
         <div class="rs__text">
-            <dl class="meta-row" data-reveal="up"><div><dt>Lab</dt><dd>Durham University</dd></div><div><dt>Dates</dt><dd><span class="chip chip--live"><span class="live-dot" aria-hidden="true"></span>Ongoing</span></dd></div><div><dt>Status</dt><dd>Early stage</dd></div><div><dt>Supervisors</dt><dd>Dr Amir Atapour-Abarghouei, Dr Chris Chen</dd></div></dl>
-            <h2 id="rs-embodied" class="rs__title t-title" data-split="lines">Cross-embodiment learning and vision–language–action systems</h2>
-            <p class="t-lead" data-reveal="up">Robot policies are usually trained for a single platform. This project studies what lets a policy or a learned representation carry over from one robot to another.</p>
-            <ul class="bullets" data-reveal="up"><li>How policies and learned representations generalise across different robotic platforms.</li><li>How vision–language-conditioned information can be integrated with action and state information.</li><li>Transferable action representations and multimodal robot policies.</li><li>Predictive representations for control, building on the world-action modelling in EndoWAM.</li></ul>
-            <p class="t-meta" data-reveal="up">Keywords: embodied AI, VLA, cross-embodiment learning, action representations, world models</p>
+            <dl class="meta-row" data-reveal="up"><div><dt>Lab</dt><dd>Durham University</dd></div><div><dt>Dates</dt><dd><span class="chip chip--live"><span class="live-dot" aria-hidden="true"></span>Ongoing</span></dd></div><div><dt>Status</dt><dd>Software prototype</dd></div><div><dt>Supervisors</dt><dd>Dr Amir Atapour-Abarghouei, Dr Chris Chen</dd></div></dl>
+            <h2 id="rs-open-day" class="rs__title t-title" data-split="lines">Interactive Open Day robot</h2>
+            <p class="t-lead" data-reveal="up">A Unitree G1 humanoid that starts conversations at the Durham University open day. It notices visitors, decides when to speak, invites them over by naming something they wear, and chats with them, using what its camera sees.</p>
+            <ul class="bullets" data-reveal="up"><li>Separates when to speak from what to say: on-robot person tracking (YOLO26n-pose with BoT-SORT) reads distance, facing, speed and groups, and a realtime speech model with vision (OpenAI gpt-realtime-2.1) writes the opening line and holds the conversation.</li><li>Grounded in a literature review of small vision–language models, realtime speech models, streaming video models that decide when to respond, and studies of how robots should start interactions in public spaces.</li><li>The program runs as one process on the robot's Jetson Orin NX and reaches the speech model online through a pocket 4G/5G router. It never moves the robot, and it refers only to clothing and objects, never to appearance.</li><li>Version 0.7 (November 2026): 170 tests pass on a laptop; not yet run on the robot.</li></ul>
+            <p class="t-meta" data-reveal="up">Keywords: human–robot interaction, proactive dialogue, vision–language models, realtime speech, humanoid robots</p>
+            <p class="links" data-reveal="up"><a class="tlink" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-scene.html" target="_blank" rel="noopener noreferrer">Interactive Open Day scene<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-animation.html" target="_blank" rel="noopener noreferrer">Full-screen animation<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://github.com/JiaxiWang05/Unitree" target="_blank" rel="noopener noreferrer">Code on GitHub<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://adaptive-intelligence.co.uk/jiaxi-wang/" target="_blank" rel="noopener noreferrer">Research profile<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="engineering.html#g1-greeter">Engineering details<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
         </div>
         <div class="rs__fig" data-reveal="figure">
-        <figure class="fig" data-explain data-hue="disc">
-          <div class="fig__stage" data-specimen="embodiment" data-cursor=""></div>
-          <button class="fig__info" type="button" aria-expanded="false" aria-controls="ex-embodiment"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/><path d="M8 7.2v4.4M8 4.7v.2"/></svg><span class="vh">What this shows</span></button>
-          <figcaption class="explain" id="ex-embodiment">
-            <button class="explain__x explain__close" type="button" aria-label="Close" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
-            <p class="explain__k">What this shows</p>
-            <p class="explain__t">Three robots, one target</p>
-            <p class="explain__d">Three different kinematic chains reach for the same moving target in a shared action space: the question of whether a policy or learned representation can carry over between embodiments.</p>
-            <p class="explain__try"><span class="explain__try--fine">Move the pointer over the figure to set the shared target.</span><span class="explain__try--coarse">Tap the figure to set the target.</span></p>
-            <p class="explain__n">Schematic, not a trained policy.</p>
-          </figcaption>
-        </figure>
+          <div class="video" data-embed="https://jiaxiwang05.github.io/Unitree/g1-open-day-animation.html" data-title="Open Day animation: one visit to the robot, simulated in 3D" data-cursor=""><a class="video__btn" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-animation.html" target="_blank" rel="noopener noreferrer" aria-label="Play the Open Day animation"><img src="assets/thumbs/open-day-animation.jpg" alt="" loading="lazy" width="960" height="540" decoding="async"><span class="video__label"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z"/></svg>Play animation</span></a></div>
         </div>
       </section>
 
@@ -384,7 +374,7 @@
         </div>
         <div class="footer__col">
           <p class="footer__h t-meta">Beyond the lab</p>
-          <ul class="footer__list"><li><a href="art.html">Art</a></li><li><a href="sport.html">Sport</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul>
+          <ul class="footer__list"><li><a href="art.html">Art</a></li><li><a href="sport.html">Sport</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a href="https://adaptive-intelligence.co.uk/jiaxi-wang/" target="_blank" rel="noopener noreferrer">Research profile</a></li></ul>
         </div>
       </div>
       <div class="spectrum" aria-hidden="true"><span style="--c:var(--c-coil)">Coil</span><span style="--c:var(--c-nbi)">NBI</span><span style="--c:var(--c-icg)">ICG</span><span style="--c:var(--c-disc)">Disc</span><span style="--c:var(--c-fundus)">Fundus</span><span style="--c:var(--c-mucosa)">Mucosa</span><span style="--c:var(--c-ppix)">PpIX</span></div>

@@ -138,21 +138,21 @@
       <span class="ghost" aria-hidden="true">构建</span>
       <div class="page-head__inner">
         <h1 class="page-head__title t-cover" style="--w:2" data-split="chars">工程</h1>
-        <p class="page-head__lead t-lead" data-reveal="up">杜伦大学期间的硬件项目：Unitree G1 人形机器人开放日迎宾程序、自主叉车、无线供电的人工心脏、可重复执行任务的自主车辆，以及高性能计算培训。</p>
+        <p class="page-head__lead t-lead" data-reveal="up">杜伦大学期间的硬件项目：Unitree G1人形机器人开放日迎宾程序、自主叉车、无线供电的人工心脏、可重复执行任务的自主车辆，以及高性能计算培训。</p>
       </div>
       <div class="page-head__art" aria-hidden="true"><svg class="schem schem--head" viewBox="0 0 400 400" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-draw="enter"><g class="sp-soft" data-speed=".06"><path d="M40 330H360" stroke-dasharray="10 8"/><path d="M60 360c60-30 220-30 300 0"/></g><g class="sp-acc sp-glow" data-speed=".12"><path d="M90 300V170h120l30 40v90"/><path d="M240 210h70v90"/><path d="M310 120v180"/><path d="M310 250h60"/><path d="M310 290h60"/><circle cx="120" cy="310" r="20"/><circle cx="210" cy="310" r="20"/><circle cx="290" cy="316" r="14"/><path d="M110 170v-40h80v40"/></g></svg></div>
     </header>
 
     <div class="reader reader--single">
       <div class="reader__main">
-      <section class="rs" id="g1-greeter" data-hue="icg" data-chapter="G1 迎宾机器人" aria-labelledby="rs-g1-greeter">
+      <section class="rs" id="g1-greeter" data-hue="icg" data-chapter="G1迎宾机器人" aria-labelledby="rs-g1-greeter">
         <div class="rs__text">
-            <dl class="meta-row" data-reveal="up"><div><dt>时间</dt><dd>2026</dd></div><div><dt>机器人</dt><dd>Unitree G1 EDU（23 自由度）</dd></div><div><dt>状态</dt><dd>进行中</dd></div></dl>
+            <dl class="meta-row" data-reveal="up"><div><dt>时间</dt><dd>2026</dd></div><div><dt>机器人</dt><dd>Unitree G1 EDU（23自由度）</dd></div><div><dt>状态</dt><dd>进行中</dd></div></dl>
             <h2 id="rs-g1-greeter" class="rs__title t-title" data-split="lines">开放日迎宾机器人</h2>
-            <p class="t-lead" data-reveal="up">为杜伦大学开放日编写的 Unitree G1 人形机器人软件：机器人发现访客后，点名对方身上的衣物或物品邀请过来，再通过实时语音模型和对方聊天。</p>
-            <dl class="spec-sheet" data-reveal="up"><dt>感知</dt><dd>胸前 USB 摄像头的画面交给 YOLO26n-pose 和 BoT-SORT 跟踪，在机器人的 Jetson Orin NX 上用 TensorRT 运行。根据距离、朝向、速度和是否成群判断何时邀请；默认邀请看起来感兴趣的人，也可以只邀请穿绿色衣服的人。机器人头部自带的深度相机负责判断对话点上有没有人。</dd><dt>对话</dt><dd>通过机器人自带的麦克风和扬声器接入 OpenAI Realtime API（gpt-realtime-2.1）。访客走近时就开始生成开场白，访客每说一轮都附带一帧新画面。</dd><dt>安全</dt><dd>程序从不让机器人动：没有手臂、腰部或行走指令。它只说话、听、看和控制灯带；只提衣物和物品，从不评论长相。</dd><dt>部署</dt><dd>单个进程运行在 Jetson 上，通过 SSH 安装，经便携 4G/5G 路由器联网；摄像头由 3D 打印的胸前支架和头顶支架固定。</dd><dt>进度</dt><dd>v0.7（2026 年 11 月）：笔记本上 170 个测试全部通过，尚未在真机上运行；头顶支架已按 Unitree 官方模型校核，尚未打印。</dd></dl>
+            <p class="t-lead" data-reveal="up">为杜伦大学开放日编写的Unitree G1人形机器人软件：机器人发现访客后，借对方的衣着或随身物品打招呼，把人邀请过来，再通过实时语音模型和对方聊天。</p>
+            <dl class="spec-sheet" data-reveal="up"><dt>感知</dt><dd>胸前USB摄像头的画面交给YOLO26n-pose和BoT-SORT跟踪，在机器人的Jetson Orin NX上用TensorRT运行。根据距离、朝向、速度和是否结伴判断何时邀请；默认邀请看起来感兴趣的人，也可以只邀请穿绿色衣服的人。机器人头部自带的深度相机负责判断对话点上有没有人。</dd><dt>对话</dt><dd>通过机器人自带的麦克风和扬声器接入OpenAI Realtime API（gpt-realtime-2.1）。访客走近时就开始生成开场白，访客每说一轮都附带一帧新画面。</dd><dt>安全</dt><dd>程序从不让机器人动：没有手臂、腰部或行走指令。它只说话、听、看和控制灯带；只提衣物和物品，从不评论长相。</dd><dt>部署</dt><dd>单个进程运行在Jetson上，通过SSH安装，经便携4G/5G路由器联网；摄像头由3D打印的胸前支架和头顶支架固定。</dd><dt>进度</dt><dd>v0.7（2026年11月）：笔记本上170个测试全部通过，尚未在真机上运行；头顶支架已按Unitree官方模型校核，尚未打印。</dd></dl>
             <p class="t-meta" data-reveal="up">工具：Python、Ultralytics YOLO、TensorRT、OpenAI Realtime API、Unitree SDK 2</p>
-            <p class="links" data-reveal="up"><a class="tlink" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-scene.html" target="_blank" rel="noopener noreferrer">交互式开放日场景<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-animation.html" target="_blank" rel="noopener noreferrer">开放日动画<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://github.com/JiaxiWang05/Unitree" target="_blank" rel="noopener noreferrer">GitHub 代码<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
+            <p class="links" data-reveal="up"><a class="tlink" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-scene.html" target="_blank" rel="noopener noreferrer">交互式开放日场景<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-animation.html" target="_blank" rel="noopener noreferrer">开放日动画<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://github.com/JiaxiWang05/Unitree" target="_blank" rel="noopener noreferrer">GitHub代码<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://adaptive-intelligence.co.uk/jiaxi-wang/" target="_blank" rel="noopener noreferrer">研究主页<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
         </div>
       </section>
 
@@ -281,7 +281,7 @@
         </div>
         <div class="footer__col">
           <p class="footer__h t-meta">实验室之外</p>
-          <ul class="footer__list"><li><a href="art.html">艺术</a></li><li><a href="sport.html">运动</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul>
+          <ul class="footer__list"><li><a href="art.html">艺术</a></li><li><a href="sport.html">运动</a></li><li><a href="https://github.com/JiaxiWang05" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/-jiaxi-wang/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a href="https://adaptive-intelligence.co.uk/jiaxi-wang/" target="_blank" rel="noopener noreferrer">研究主页</a></li></ul>
         </div>
       </div>
       <div class="spectrum" aria-hidden="true"><span style="--c:var(--c-coil)">线圈</span><span style="--c:var(--c-nbi)">NBI</span><span style="--c:var(--c-icg)">ICG</span><span style="--c:var(--c-disc)">视盘</span><span style="--c:var(--c-fundus)">眼底</span><span style="--c:var(--c-mucosa)">黏膜</span><span style="--c:var(--c-ppix)">PpIX</span></div>

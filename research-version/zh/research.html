@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>研究 — Jiaxi Wang</title>
-  <meta name="description" content="Jiaxi Wang的研究：跨具身学习、面向视网膜图像的小数据迁移学习、EndoWAM、BiliVLA、遥操作内镜基准、Trileg-ESD与动作-声音交互。">
+  <meta name="description" content="Jiaxi Wang的研究：开放日互动机器人、面向视网膜图像的小数据迁移学习、EndoWAM、BiliVLA、遥操作内镜基准、Trileg-ESD与动作-声音交互。">
   <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1214" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://jiaxiwang05.github.io/research-version/zh/research.html">
@@ -85,7 +85,7 @@
     <header class="page-head">
       <div class="wrap">
         <h1 class="page-head__title">研究</h1>
-        <p class="page-head__lead">在可形变、部分可观测环境中行动的机器人：面向内镜的视觉-语言-动作模型与世界-动作模型、可跨具身形态迁移的策略，以及基于小规模医学数据集的学习。</p>
+        <p class="page-head__lead">在可形变、部分可观测环境中行动的机器人：面向内镜的视觉-语言-动作模型与世界-动作模型、在大学开放日主动与访客搭话的人形机器人，以及基于小规模医学数据集的学习。</p>
         <p class="section__note" style="margin-top: 14px;">研究兴趣：具身智能、视觉-语言-动作系统、跨具身学习、自主手术机器人、有限数据下的迁移学习、人机交互。</p>
       </div>
     </header>
@@ -125,19 +125,25 @@
           <p class="section__note">杜伦大学，2026–27学年。</p>
         </header>
         <div>
-          <article id="embodied" class="study study--text">
+          <article id="open-day" class="study study--text">
             <div class="study__body">
-              <p class="study__meta">学生研究者，进行中 <span class="status">初期阶段</span></p>
-              <h3 class="study__title">跨具身学习与视觉-语言-动作系统</h3>
+              <p class="study__meta">学生研究者，进行中 <span class="status">软件原型</span></p>
+              <h3 class="study__title">开放日互动机器人</h3>
               <p class="study__people">指导：Amir Atapour-Abarghouei博士、Chris Chen博士</p>
-              <p class="study__desc">机器人策略通常针对单一平台训练。本项目研究哪些因素使策略或习得表征能够从一个机器人迁移到另一个机器人。</p>
+              <p class="study__desc">一台在杜伦大学开放日主动与访客搭话的Unitree G1人形机器人：它会发现访客、判断何时开口，借对方的衣着或随身物品打招呼，把人邀请过来，再结合看到的画面与对方交谈。</p>
               <ul class="study__list">
-                <li>策略与习得表征如何在不同机器人平台间泛化。</li>
-                <li>视觉-语言条件信息如何与动作和状态信息相融合。</li>
-                <li>可迁移的动作表征与多模态机器人策略。</li>
-                <li>面向控制的预测性表征，以EndoWAM中的世界-动作建模为基础。</li>
+                <li>把“何时开口”和“说什么”分开处理：机载人体跟踪（YOLO26n-pose与BoT-SORT）判断距离、朝向、速度以及是否结伴；带视觉输入的实时语音模型（OpenAI gpt-realtime-2.1）生成开场白并进行对话。</li>
+                <li>设计以一篇文献综述为基础，综述涵盖小型视觉-语言模型、实时语音模型、能判断何时回应的流式视频模型，以及机器人应如何在公共场所发起交互的研究。</li>
+                <li>程序作为单个进程在机器人的Jetson Orin NX上运行，经便携4G/5G路由器在线调用语音模型。程序从不让机器人做任何动作；对话中只提及衣着和物品，从不评论长相。</li>
+                <li>v0.7版本（2026年11月）：笔记本上170个测试全部通过，尚未在真机上运行。</li>
               </ul>
-              <p class="study__keys"><b>关键词</b> 具身智能、VLA、跨具身学习、动作表征、世界模型</p>
+              <p class="study__keys"><b>关键词</b> 人机交互、主动对话、视觉-语言模型、实时语音、人形机器人</p>
+              <p class="links">
+                <a class="link" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-scene.html" target="_blank" rel="noopener noreferrer">交互式开放日场景</a>
+                <a class="link" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-animation.html" target="_blank" rel="noopener noreferrer">全屏动画</a>
+                <a class="link" href="https://github.com/JiaxiWang05/Unitree" target="_blank" rel="noopener noreferrer">GitHub代码</a>
+                <a class="link" href="https://adaptive-intelligence.co.uk/jiaxi-wang/" target="_blank" rel="noopener noreferrer">研究主页</a>
+              </p>
             </div>
           </article>
 

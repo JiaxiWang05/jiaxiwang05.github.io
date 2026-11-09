@@ -230,12 +230,16 @@
 
   /* videos */
   safe(function () {
-    $$("[data-video]").forEach(function (wrap) {
+    $$("[data-video], [data-embed]").forEach(function (wrap) {
       var btn = $(".video__btn", wrap) || $("button", wrap);
       if (!btn) return;
-      btn.addEventListener("click", function () {
+      btn.addEventListener("click", function (e) {
+        var page = wrap.getAttribute("data-embed");
+        /* data-embed: the button is a real link to the page, so phones (and taps before this runs) open it in a new tab */
+        if (page && (LITE || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0)) return;
+        if (page) e.preventDefault();
         var f = doc.createElement("iframe");
-        f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(wrap.getAttribute("data-video")) + "?autoplay=1&rel=0";
+        f.src = page || "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(wrap.getAttribute("data-video")) + "?autoplay=1&rel=0";
         f.title = wrap.getAttribute("data-title") || t("video.title");
         f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
         f.setAttribute("allowfullscreen", "");
