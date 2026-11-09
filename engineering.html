@@ -139,13 +139,24 @@
       <span class="ghost" aria-hidden="true">Build</span>
       <div class="page-head__inner">
         <h1 class="page-head__title t-cover" style="--w:6.16" data-split="chars">Engineering</h1>
-        <p class="page-head__lead t-lead" data-reveal="up">Hardware projects from Durham University: an autonomous forklift, a wireless-powered artificial heart, a repeatable autonomous vehicle, and training in high-performance computing.</p>
+        <p class="page-head__lead t-lead" data-reveal="up">Hardware projects from Durham University: an open-day greeter for a Unitree G1 humanoid, an autonomous forklift, a wireless-powered artificial heart, a repeatable autonomous vehicle, and training in high-performance computing.</p>
       </div>
       <div class="page-head__art" aria-hidden="true"><svg class="schem schem--head" viewBox="0 0 400 400" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-draw="enter"><g class="sp-soft" data-speed=".06"><path d="M40 330H360" stroke-dasharray="10 8"/><path d="M60 360c60-30 220-30 300 0"/></g><g class="sp-acc sp-glow" data-speed=".12"><path d="M90 300V170h120l30 40v90"/><path d="M240 210h70v90"/><path d="M310 120v180"/><path d="M310 250h60"/><path d="M310 290h60"/><circle cx="120" cy="310" r="20"/><circle cx="210" cy="310" r="20"/><circle cx="290" cy="316" r="14"/><path d="M110 170v-40h80v40"/></g></svg></div>
     </header>
 
     <div class="reader reader--single">
       <div class="reader__main">
+      <section class="rs" id="g1-greeter" data-hue="icg" data-chapter="G1 greeter" aria-labelledby="rs-g1-greeter">
+        <div class="rs__text">
+            <dl class="meta-row" data-reveal="up"><div><dt>Dates</dt><dd>2026</dd></div><div><dt>Robot</dt><dd>Unitree G1 EDU (23 DoF)</dd></div><div><dt>Status</dt><dd>In progress</dd></div></dl>
+            <h2 id="rs-g1-greeter" class="rs__title t-title" data-split="lines">Open Day greeter robot</h2>
+            <p class="t-lead" data-reveal="up">Software for a Unitree G1 humanoid at a Durham University open day: it notices visitors, invites them over by naming something they wear, and chats with them through a realtime voice model.</p>
+            <dl class="spec-sheet" data-reveal="up"><dt>Perception</dt><dd>A chest-mounted USB webcam feeds YOLO26n-pose with BoT-SORT tracking, run with TensorRT on the robot's Jetson Orin NX. Distance, facing, speed and group cues decide when to invite someone; by default anyone who looks interested, or only people wearing green. The robot's own head depth camera checks whether someone is standing on the talk spot.</dd><dt>Conversation</dt><dd>The OpenAI Realtime API (gpt-realtime-2.1) through the robot's microphone and speaker. The opening line is generated while a visitor approaches, and each visitor turn carries a fresh camera frame.</dd><dt>Safety</dt><dd>The program never moves the robot: there are no arm, waist or walking commands. It only talks, listens, looks and drives the LED strip, and it refers to clothing and objects, never to appearance.</dd><dt>Deployment</dt><dd>One process on the Jetson, installed over SSH and online through a pocket 4G/5G router. A 3D-printed chest bracket and head-top arch hold the camera.</dd><dt>Status</dt><dd>v0.7 (November 2026): 170 tests pass on a laptop; not yet run on the robot. The head arch is checked against Unitree's official model but not printed yet.</dd></dl>
+            <p class="t-meta" data-reveal="up">Tools: Python, Ultralytics YOLO, TensorRT, OpenAI Realtime API, Unitree SDK 2</p>
+            <p class="links" data-reveal="up"><a class="tlink" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-scene.html" target="_blank" rel="noopener noreferrer">Interactive Open Day scene<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://jiaxiwang05.github.io/Unitree/g1-open-day-animation.html" target="_blank" rel="noopener noreferrer">Open Day animation<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a><a class="tlink" href="https://github.com/JiaxiWang05/Unitree" target="_blank" rel="noopener noreferrer">Code on GitHub<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></p>
+        </div>
+      </section>
+
       <section class="rs" id="material-mover" data-hue="disc" data-chapter="Material mover" aria-labelledby="rs-material-mover">
         <div class="rs__text">
             <dl class="meta-row" data-reveal="up"><div><dt>Dates</dt><dd>2024–2025</dd></div><div><dt>Group</dt><dd>19-AIBM4</dd></div><div><dt>Supervisors</dt><dd>Dr Aissa Ikhlef, Mr Bill Maxwell</dd></div></dl>
