@@ -206,10 +206,10 @@
         <div class="rs__text">
             <dl class="meta-row" data-reveal="up"><div><dt>项目</dt><dd>工学学士毕业研发项目</dd></div><div><dt>时间</dt><dd>2026–27</dd></div><div><dt>导师</dt><dd>Raheleh Kafieh博士</dd></div></dl>
             <h2 id="rs-dissertation" class="rs__title t-title" data-split="lines">小数据，大模型： <span class="rs__sub t-subtitle">面向医学图像分类的迁移学习</span></h2>
-            <p class="t-lead" data-reveal="up">临床数据集规模较小。本项目衡量在标注数据稀缺时，哪种预训练图像编码器能提供最有用的视网膜表征，以及与通用模型相比，眼科专用基础模型是否值得采用。</p>
-            <p class="t-body" data-reveal="up">所有编码器参数均冻结，仅用作特征提取器；实验采用在所提取特征上训练的简单分类器。</p>
-            <dl class="spec-sheet" data-reveal="up"><dt>编码器</dt><dd>将视网膜基础模型RETFound与通用及生物医学编码器进行比较：DINOv2、DINOv3、BiomedCLIP、ImageNet ResNet-50与SwinV2-tiny。</dd><dt>基于PAPILA的青光眼检测</dt><dd>由于PAPILA包含每位患者的双眼图像，采用患者层面的数据划分，并以PAPILA的临床测量指标作为非图像基线。</dd><dt>数据效率曲线</dt><dd>训练图像数量为25、50、100和200张，每种规模进行十次随机抽样，并给出每个编码器带误差棒的准确率。</dd><dt>外部验证</dt><dd>将在PAPILA上训练的分类器无需重新训练直接应用于Chákṣu（由三种相机在另一人群中采集），并按相机报告性能下降幅度。</dd><dt>时间允许时</dt><dd>使用AIROGS-light将曲线扩展至数千张图像，并通过显著性图检查模型关注的是视盘而非伪影。</dd></dl>
-            <p class="t-body" data-reveal="up"><b>预期成果：</b>模型对比表、数据效率图与外部验证结果表。</p>
+            <p class="t-lead" data-reveal="up">临床数据集规模较小。本项目衡量在仅有数百张标注图像时，视网膜基础模型从彩色眼底照片检测青光眼的效果，以及该结果在新相机与新数据集上能否保持。</p>
+            <p class="t-body" data-reveal="up">RETFound-Green是一种计算高效的视网膜基础模型，可将每张图像转换为384维特征。先在冻结特征上训练简单分类器，再对编码器进行部分微调。</p>
+            <dl class="spec-sheet" data-reveal="up"><dt>数据</dt><dd>Chákṣu：1,345张图像，来自三种相机，每张由五位专家分级（以多数意见判定青光眼）；PAPILA用于外部验证。数据按眼或按患者划分；此前的检查发现，RETFound公开的PAPILA划分使244位患者中121位的双眼分处不同子集。</dd><dt>方法</dt><dd>以Optuna和5折交叉验证（1,141张图像）调优逻辑回归、支持向量机、k近邻与多层感知机；按事先确定的规则，在与最优模型并列的模型中选择最简单者；独立测试集只使用一次。</dd><dt>当前结果</dt><dd>冻结特征上的逻辑回归在204张独立测试图像上的AUROC为0.872（95%置信区间0.810–0.923）；在按90%灵敏度设定的阈值下，找出了全部28张青光眼图像，特异度为0.51。对多层感知机加以正则化减轻了过拟合，但未提高AUROC，说明限制来自冻结表征或标注本身。</dd><dt>下一步</dt><dd>编码器的部分微调；向PAPILA以及训练中未使用的相机迁移，包括决策阈值能否迁移；以及专家一致性和训练集规模对性能的限制。</dd></dl>
+            <p class="t-body" data-reveal="up"><b>成果：</b>代码、数据划分与结果已在<a class="tlink" href="https://github.com/JiaxiWang05/dissertation-" target="_blank" rel="noopener noreferrer">GitHub<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>公开；随后将给出微调对比、外部验证结果表与数据效率图。</p>
         </div>
         <div class="rs__fig" data-reveal="figure">
         <figure class="fig" data-explain data-hue="fundus">
@@ -220,9 +220,9 @@
             <button class="explain__x explain__close" type="button" aria-label="关闭" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
             <p class="explain__k">图示说明</p>
             <p class="explain__t">标注稀缺下的视网膜</p>
-            <p class="explain__d">视网膜眼底图像，含视盘与血管树。圆点依次填充数据效率曲线的四种训练集规模（25、50、100和200张图像）；三个圆环代表外部测试集的三种相机。</p>
+            <p class="explain__d">视网膜眼底图像，含视盘与血管树。圆点依次填充计划中数据效率曲线的训练集规模（25、50、100和200张图像）；三个圆环代表Chákṣu的三种相机，每种相机轮流不参与训练。</p>
             <p class="explain__try"><span class="explain__try--fine">使用步进按钮或滚动页面，改变训练集规模。</span><span class="explain__try--coarse">轻触任一档位。</span></p>
-            <p class="explain__n">示意图。该研究尚无结果。</p>
+            <p class="explain__n">示意图，并非结果；初步结果见正文。</p>
           </figcaption>
         </figure>
         </div>

@@ -140,15 +140,14 @@
               <p class="study__meta">BEng Research and Development Project, 2026–27</p>
               <h3 class="study__title">Small data, large models: transfer learning for medical image classification</h3>
               <p class="study__people">Supervised by Dr Raheleh Kafieh</p>
-              <p class="study__desc">Clinical datasets are small. This project measures which pre-trained image encoder gives the most useful retinal representations when labelled data are scarce, and whether an eye-specific foundation model is worth it compared with general-purpose ones. Every encoder is frozen and used only as a feature extractor; the experiments are simple classifiers trained on the extracted features.</p>
+              <p class="study__desc">Clinical datasets are small. This project measures how well a retinal foundation model detects glaucoma from colour fundus photographs when only a few hundred labelled images exist, and whether the result holds on new cameras and datasets. RETFound-Green, a compute-efficient retinal foundation model, turns each image into 384 features; simple classifiers are trained on these frozen features first, and partial fine-tuning of the encoder follows.</p>
               <ul class="study__list">
-                <li><b>Encoders.</b> RETFound, a retinal foundation model, against general-purpose and biomedical encoders: DINOv2, DINOv3, BiomedCLIP, ImageNet ResNet-50 and SwinV2-tiny.</li>
-                <li><b>Glaucoma detection on PAPILA.</b> Patient-level splits, since PAPILA includes both eyes of each patient, with PAPILA's clinical measurements as a non-image baseline.</li>
-                <li><b>Data-efficiency curve.</b> 25, 50, 100 and 200 training images, ten random draws at each size, accuracy with error bars for every encoder.</li>
-                <li><b>External validation.</b> Classifiers trained on PAPILA are applied without retraining to Chákṣu, captured on three cameras in a different population, and the drop is reported per camera.</li>
-                <li><b>If time allows.</b> AIROGS-light to extend the curve to a few thousand images, and saliency maps to check that the models attend to the optic disc rather than artefacts.</li>
+                <li><b>Data.</b> Chákṣu: 1,345 images from three cameras, each graded by five experts (glaucoma by majority); PAPILA for external validation. Splits are grouped by eye or patient, after a check found that RETFound's released PAPILA split puts the two eyes of 121 of 244 patients on different sides.</li>
+                <li><b>Method.</b> Logistic regression, SVM, k-nearest neighbours and an MLP, tuned with Optuna by 5-fold cross-validation on 1,141 images; a rule fixed in advance picks the simplest model tied with the best, and the held-out test set is used once.</li>
+                <li><b>Results so far.</b> Logistic regression on frozen features: test AUROC 0.872 (95% CI 0.810–0.923) on 204 held-out images; at a threshold set for 90% sensitivity it found all 28 glaucoma images, at a specificity of 0.51. Regularising the MLP reduced its overfitting but did not raise AUROC, which points to the frozen representation or the labels as the limit.</li>
+                <li><b>Next.</b> Partial fine-tuning of the encoder; transfer to PAPILA and to a camera left out of training, including whether the decision threshold transfers; and how expert agreement and training-set size limit performance.</li>
               </ul>
-              <p class="callout"><b>Planned outputs:</b> a model comparison table, the data-efficiency figure and an external-validation table.</p>
+              <p class="callout"><b>Outputs:</b> code, data splits and results are public on <a class="link" href="https://github.com/JiaxiWang05/dissertation-" target="_blank" rel="noopener noreferrer">GitHub</a>; a fine-tuning comparison, an external-validation table and a data-efficiency figure follow.</p>
             </div>
           </article>
         </div>
